@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- From: file:/home/timroes/code/EnhancedListView/EnhancedListView/src/main/res/values/colors.xml -->
+    <eat-comment />
+
+    <color name="elv_btn_focused">#ff0099cc</color>
+    <color name="elv_btn_normal">#00000000</color>
+    <color name="elv_btn_pressed">#ff33b5e5</color>
+    <color name="elv_popup_bg_color">#EE666666</color>
+    <color name="elv_popup_text_color">#FFFFFF</color>
+    <color name="elv_separator_color">#BBBBBB</color>
+    <!-- From: file:/home/timroes/code/EnhancedListView/EnhancedListView/src/main/res/values/dimens.xml -->
+    <eat-comment />
+
+    <dimen name="elv_touch_slop">32dp</dimen>
+    <dimen name="elv_undo_bottom_offset">15dp</dimen>
+    <!-- From: file:/home/timroes/code/EnhancedListView/EnhancedListView/src/main/res/values/strings.xml -->
+    <eat-comment />
+
+    <string name="elv_item_deleted">Item deleted</string>
+    <string name="elv_n_items_deleted">%1$s items deleted</string>
+    <string name="elv_undo">Undo</string>
+    <string name="elv_undo_all">Undo All</string>
+    <!-- From: file:/home/timroes/code/EnhancedListView/EnhancedListView/src/main/res/values/styles.xml -->
+    <eat-comment />
+
+    <style name="elv_fade_animation">
+        <item name="@android:windowEnterAnimation">@anim/elv_popup_show</item>
+        <item name="@android:windowExitAnimation">@anim/elv_popup_hide</item>
+    </style>
+
+</resources>

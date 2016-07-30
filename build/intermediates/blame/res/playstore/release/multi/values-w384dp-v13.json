@@ -1,0 +1,26 @@
+[
+    {
+        "outputFile": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\values-w384dp-v13\\values-w384dp-v13.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endColumn": 60,
+                    "endOffset": 111
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\values-w384dp\\dimens.xml",
+                    "position": {
+                        "startLine": 1,
+                        "startColumn": 1,
+                        "startOffset": 13,
+                        "endColumn": 57,
+                        "endOffset": 69
+                    }
+                }
+            }
+        ]
+    }
+]

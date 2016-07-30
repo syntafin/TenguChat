@@ -1,0 +1,1601 @@
+[
+    {
+        "outputFile": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\values-v21\\values-v21.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endColumn": 56,
+                    "endOffset": 107
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.soundcloud.android\\android-crop\\1.0.1\\res\\values-v21\\values-v21.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 170,
+                        "endColumn": 56,
+                        "endOffset": 222
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 3,
+                    "startColumn": 4,
+                    "startOffset": 112,
+                    "endColumn": 53,
+                    "endOffset": 161
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\values-v21\\dimens.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 1,
+                        "startOffset": 52,
+                        "endColumn": 50,
+                        "endOffset": 101
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 4,
+                    "startColumn": 4,
+                    "startOffset": 166,
+                    "endColumn": 51,
+                    "endOffset": 213
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\values-v21\\dimens.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 1,
+                        "startOffset": 124,
+                        "endColumn": 48,
+                        "endOffset": 171
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 5,
+                    "startColumn": 4,
+                    "startOffset": 218,
+                    "endColumn": 90,
+                    "endOffset": 304
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-v21\\values.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 56,
+                        "endColumn": 91,
+                        "endOffset": 143
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 6,
+                    "startColumn": 4,
+                    "startOffset": 309,
+                    "endColumn": 102,
+                    "endOffset": 407
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-v21\\values.xml",
+                    "position": {
+                        "startLine": 5,
+                        "startColumn": 4,
+                        "startOffset": 149,
+                        "endColumn": 103,
+                        "endOffset": 248
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 7,
+                    "startColumn": 4,
+                    "startOffset": 412,
+                    "endColumn": 102,
+                    "endOffset": 510
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-v21\\values.xml",
+                    "position": {
+                        "startLine": 7,
+                        "startColumn": 4,
+                        "startOffset": 254,
+                        "endColumn": 103,
+                        "endOffset": 353
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 8,
+                    "startColumn": 4,
+                    "startOffset": 515,
+                    "endColumn": 104,
+                    "endOffset": 615
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-v21\\values.xml",
+                    "position": {
+                        "startLine": 9,
+                        "startColumn": 4,
+                        "startOffset": 359,
+                        "endColumn": 105,
+                        "endOffset": 460
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 9,
+                    "startColumn": 4,
+                    "startOffset": 620,
+                    "endColumn": 106,
+                    "endOffset": 722
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-v21\\values.xml",
+                    "position": {
+                        "startLine": 11,
+                        "startColumn": 4,
+                        "startOffset": 466,
+                        "endColumn": 107,
+                        "endOffset": 569
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 10,
+                    "startColumn": 4,
+                    "startOffset": 727,
+                    "endColumn": 108,
+                    "endOffset": 831
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-v21\\values.xml",
+                    "position": {
+                        "startLine": 13,
+                        "startColumn": 4,
+                        "startOffset": 575,
+                        "endColumn": 109,
+                        "endOffset": 680
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 11,
+                    "startColumn": 4,
+                    "startOffset": 836,
+                    "endColumn": 108,
+                    "endOffset": 940
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-v21\\values.xml",
+                    "position": {
+                        "startLine": 15,
+                        "startColumn": 4,
+                        "startOffset": 686,
+                        "endColumn": 109,
+                        "endOffset": 791
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 12,
+                    "startColumn": 4,
+                    "startOffset": 945,
+                    "endColumn": 108,
+                    "endOffset": 1049
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-v21\\values.xml",
+                    "position": {
+                        "startLine": 17,
+                        "startColumn": 4,
+                        "startOffset": 797,
+                        "endColumn": 109,
+                        "endOffset": 902
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 13,
+                    "startColumn": 4,
+                    "startOffset": 1054,
+                    "endColumn": 108,
+                    "endOffset": 1158
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-v21\\values.xml",
+                    "position": {
+                        "startLine": 19,
+                        "startColumn": 4,
+                        "startOffset": 908,
+                        "endColumn": 109,
+                        "endOffset": 1013
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 14,
+                    "startColumn": 4,
+                    "startOffset": 1163,
+                    "endColumn": 108,
+                    "endOffset": 1267
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-v21\\values.xml",
+                    "position": {
+                        "startLine": 21,
+                        "startColumn": 4,
+                        "startOffset": 1019,
+                        "endColumn": 109,
+                        "endOffset": 1124
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 15,
+                    "startColumn": 4,
+                    "startOffset": 1272,
+                    "endColumn": 106,
+                    "endOffset": 1374
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-v21\\values.xml",
+                    "position": {
+                        "startLine": 23,
+                        "startColumn": 4,
+                        "startOffset": 1130,
+                        "endColumn": 107,
+                        "endOffset": 1233
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 16,
+                    "startColumn": 4,
+                    "startOffset": 1379,
+                    "endColumn": 102,
+                    "endOffset": 1477
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-v21\\values.xml",
+                    "position": {
+                        "startLine": 25,
+                        "startColumn": 4,
+                        "startOffset": 1239,
+                        "endColumn": 103,
+                        "endOffset": 1338
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 17,
+                    "startColumn": 4,
+                    "startOffset": 1482,
+                    "endColumn": 118,
+                    "endOffset": 1596
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-v21\\values.xml",
+                    "position": {
+                        "startLine": 27,
+                        "startColumn": 4,
+                        "startOffset": 1344,
+                        "endColumn": 119,
+                        "endOffset": 1459
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 18,
+                    "startColumn": 4,
+                    "startOffset": 1601,
+                    "endColumn": 142,
+                    "endOffset": 1739
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-v21\\values.xml",
+                    "position": {
+                        "startLine": 29,
+                        "startColumn": 4,
+                        "startOffset": 1465,
+                        "endColumn": 149,
+                        "endOffset": 1610
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 19,
+                    "startColumn": 4,
+                    "startOffset": 1744,
+                    "endColumn": 142,
+                    "endOffset": 1882
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-v21\\values.xml",
+                    "position": {
+                        "startLine": 31,
+                        "startColumn": 4,
+                        "startOffset": 1616,
+                        "endColumn": 149,
+                        "endOffset": 1761
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 20,
+                    "startColumn": 4,
+                    "startOffset": 1887,
+                    "endColumn": 104,
+                    "endOffset": 1987
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-v21\\values.xml",
+                    "position": {
+                        "startLine": 33,
+                        "startColumn": 4,
+                        "startOffset": 1767,
+                        "endColumn": 105,
+                        "endOffset": 1868
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 21,
+                    "startColumn": 4,
+                    "startOffset": 1992,
+                    "endColumn": 120,
+                    "endOffset": 2108
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-v21\\values.xml",
+                    "position": {
+                        "startLine": 35,
+                        "startColumn": 4,
+                        "startOffset": 1874,
+                        "endColumn": 121,
+                        "endOffset": 1991
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 22,
+                    "startColumn": 4,
+                    "startOffset": 2113,
+                    "endColumn": 100,
+                    "endOffset": 2209
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-v21\\values.xml",
+                    "position": {
+                        "startLine": 37,
+                        "startColumn": 4,
+                        "startOffset": 1997,
+                        "endColumn": 101,
+                        "endOffset": 2094
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 23,
+                    "startColumn": 4,
+                    "startOffset": 2214,
+                    "endColumn": 135,
+                    "endOffset": 2345
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-v21\\values.xml",
+                    "position": {
+                        "startLine": 39,
+                        "startColumn": 4,
+                        "startOffset": 2100,
+                        "endColumn": 142,
+                        "endOffset": 2238
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 24,
+                    "startColumn": 4,
+                    "startOffset": 2350,
+                    "endColumn": 129,
+                    "endOffset": 2475
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-v21\\values.xml",
+                    "position": {
+                        "startLine": 41,
+                        "startColumn": 4,
+                        "startOffset": 2244,
+                        "endColumn": 136,
+                        "endOffset": 2376
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 25,
+                    "startColumn": 4,
+                    "startOffset": 2480,
+                    "endColumn": 102,
+                    "endOffset": 2578
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-v21\\values.xml",
+                    "position": {
+                        "startLine": 43,
+                        "startColumn": 4,
+                        "startOffset": 2382,
+                        "endColumn": 103,
+                        "endOffset": 2481
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 26,
+                    "startColumn": 4,
+                    "startOffset": 2583,
+                    "endColumn": 118,
+                    "endOffset": 2697
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-v21\\values.xml",
+                    "position": {
+                        "startLine": 45,
+                        "startColumn": 4,
+                        "startOffset": 2487,
+                        "endColumn": 119,
+                        "endOffset": 2602
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 27,
+                    "startColumn": 4,
+                    "startOffset": 2702,
+                    "endColumn": 106,
+                    "endOffset": 2804
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-v21\\values.xml",
+                    "position": {
+                        "startLine": 47,
+                        "startColumn": 4,
+                        "startOffset": 2608,
+                        "endColumn": 107,
+                        "endOffset": 2711
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 28,
+                    "startColumn": 4,
+                    "startOffset": 2809,
+                    "endColumn": 102,
+                    "endOffset": 2907
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-v21\\values.xml",
+                    "position": {
+                        "startLine": 49,
+                        "startColumn": 4,
+                        "startOffset": 2717,
+                        "endColumn": 103,
+                        "endOffset": 2816
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 29,
+                    "startColumn": 4,
+                    "startOffset": 2912,
+                    "endColumn": 134,
+                    "endOffset": 3042
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-v21\\values.xml",
+                    "position": {
+                        "startLine": 51,
+                        "startColumn": 4,
+                        "startOffset": 2822,
+                        "endColumn": 141,
+                        "endOffset": 2959
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 30,
+                    "startColumn": 4,
+                    "startOffset": 3047,
+                    "endColumn": 142,
+                    "endOffset": 3185
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-v21\\values.xml",
+                    "position": {
+                        "startLine": 53,
+                        "startColumn": 4,
+                        "startOffset": 2965,
+                        "endColumn": 149,
+                        "endOffset": 3110
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 31,
+                    "startColumn": 4,
+                    "startOffset": 3190,
+                    "endColumn": 158,
+                    "endOffset": 3344
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-v21\\values.xml",
+                    "position": {
+                        "startLine": 55,
+                        "startColumn": 4,
+                        "startOffset": 3116,
+                        "endColumn": 165,
+                        "endOffset": 3277
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 32,
+                    "startColumn": 4,
+                    "startOffset": 3349,
+                    "endColumn": 136,
+                    "endOffset": 3481
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-v21\\values.xml",
+                    "position": {
+                        "startLine": 57,
+                        "startColumn": 4,
+                        "startOffset": 3283,
+                        "endColumn": 143,
+                        "endOffset": 3422
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 33,
+                    "startColumn": 4,
+                    "startOffset": 3486,
+                    "endColumn": 152,
+                    "endOffset": 3634
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-v21\\values.xml",
+                    "position": {
+                        "startLine": 59,
+                        "startColumn": 4,
+                        "startOffset": 3428,
+                        "endColumn": 159,
+                        "endOffset": 3583
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 34,
+                    "startColumn": 4,
+                    "startOffset": 3639,
+                    "endColumn": 144,
+                    "endOffset": 3779
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-v21\\values.xml",
+                    "position": {
+                        "startLine": 61,
+                        "startColumn": 4,
+                        "startOffset": 3589,
+                        "endColumn": 151,
+                        "endOffset": 3736
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 35,
+                    "startColumn": 4,
+                    "startOffset": 3784,
+                    "endColumn": 138,
+                    "endOffset": 3918
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-v21\\values.xml",
+                    "position": {
+                        "startLine": 63,
+                        "startColumn": 4,
+                        "startOffset": 3742,
+                        "endColumn": 145,
+                        "endOffset": 3883
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 36,
+                    "startColumn": 4,
+                    "startOffset": 3923,
+                    "endColumn": 136,
+                    "endOffset": 4055
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-v21\\values.xml",
+                    "position": {
+                        "startLine": 65,
+                        "startColumn": 4,
+                        "startOffset": 3889,
+                        "endColumn": 143,
+                        "endOffset": 4028
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 37,
+                    "startColumn": 4,
+                    "startOffset": 4060,
+                    "endColumn": 136,
+                    "endOffset": 4192
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-v21\\values.xml",
+                    "position": {
+                        "startLine": 67,
+                        "startColumn": 4,
+                        "startOffset": 4034,
+                        "endColumn": 143,
+                        "endOffset": 4173
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 38,
+                    "startColumn": 4,
+                    "startOffset": 4197,
+                    "endColumn": 111,
+                    "endOffset": 4304
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-v21\\values.xml",
+                    "position": {
+                        "startLine": 69,
+                        "startColumn": 4,
+                        "startOffset": 4179,
+                        "endColumn": 112,
+                        "endOffset": 4287
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 39,
+                    "startColumn": 4,
+                    "startOffset": 4309,
+                    "endColumn": 140,
+                    "endOffset": 4445
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-v21\\values.xml",
+                    "position": {
+                        "startLine": 71,
+                        "startColumn": 4,
+                        "startOffset": 4293,
+                        "endColumn": 147,
+                        "endOffset": 4436
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 40,
+                    "startColumn": 4,
+                    "startOffset": 4450,
+                    "endColumn": 134,
+                    "endOffset": 4580
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-v21\\values.xml",
+                    "position": {
+                        "startLine": 73,
+                        "startColumn": 4,
+                        "startOffset": 4442,
+                        "endColumn": 141,
+                        "endOffset": 4579
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 41,
+                    "startColumn": 4,
+                    "startOffset": 4585,
+                    "endColumn": 74,
+                    "endOffset": 4655
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-v21\\values.xml",
+                    "position": {
+                        "startLine": 75,
+                        "startColumn": 4,
+                        "startOffset": 4585,
+                        "endColumn": 75,
+                        "endOffset": 4656
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 42,
+                    "startColumn": 4,
+                    "startOffset": 4660,
+                    "endColumn": 88,
+                    "endOffset": 4744
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-v21\\values.xml",
+                    "position": {
+                        "startLine": 77,
+                        "startColumn": 4,
+                        "startOffset": 4662,
+                        "endColumn": 89,
+                        "endOffset": 4747
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 43,
+                    "startColumn": 4,
+                    "startOffset": 4749,
+                    "endColumn": 86,
+                    "endOffset": 4831
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-v21\\values.xml",
+                    "position": {
+                        "startLine": 79,
+                        "startColumn": 4,
+                        "startOffset": 4753,
+                        "endColumn": 87,
+                        "endOffset": 4836
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 44,
+                    "startColumn": 4,
+                    "startOffset": 4836,
+                    "endColumn": 100,
+                    "endOffset": 4932
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-v21\\values.xml",
+                    "position": {
+                        "startLine": 81,
+                        "startColumn": 4,
+                        "startOffset": 4842,
+                        "endColumn": 101,
+                        "endOffset": 4939
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 45,
+                    "startColumn": 4,
+                    "startOffset": 4937,
+                    "endColumn": 86,
+                    "endOffset": 5019
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-v21\\values.xml",
+                    "position": {
+                        "startLine": 83,
+                        "startColumn": 4,
+                        "startOffset": 4945,
+                        "endColumn": 93,
+                        "endOffset": 5034
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 46,
+                    "startColumn": 4,
+                    "startOffset": 5024,
+                    "endLine": 48,
+                    "endColumn": 12,
+                    "endOffset": 5216
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-v21\\values.xml",
+                    "position": {
+                        "startLine": 85,
+                        "startColumn": 4,
+                        "startOffset": 5040,
+                        "endLine": 87,
+                        "endColumn": 12,
+                        "endOffset": 5232
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 49,
+                    "startColumn": 4,
+                    "startOffset": 5221,
+                    "endLine": 54,
+                    "endColumn": 12,
+                    "endOffset": 5488
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-v21\\values.xml",
+                    "position": {
+                        "startLine": 89,
+                        "startColumn": 4,
+                        "startOffset": 5238,
+                        "endLine": 94,
+                        "endColumn": 12,
+                        "endOffset": 5505
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 55,
+                    "startColumn": 4,
+                    "startOffset": 5493,
+                    "endLine": 61,
+                    "endColumn": 12,
+                    "endOffset": 5858
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-v21\\values.xml",
+                    "position": {
+                        "startLine": 96,
+                        "startColumn": 4,
+                        "startOffset": 5511,
+                        "endLine": 102,
+                        "endColumn": 12,
+                        "endOffset": 5876
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 62,
+                    "startColumn": 4,
+                    "startOffset": 5863,
+                    "endLine": 67,
+                    "endColumn": 12,
+                    "endOffset": 6132
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-v21\\values.xml",
+                    "position": {
+                        "startLine": 104,
+                        "startColumn": 4,
+                        "startOffset": 5882,
+                        "endLine": 109,
+                        "endColumn": 12,
+                        "endOffset": 6151
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 68,
+                    "startColumn": 4,
+                    "startOffset": 6137,
+                    "endLine": 104,
+                    "endColumn": 12,
+                    "endOffset": 8705
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-v21\\values.xml",
+                    "position": {
+                        "startLine": 111,
+                        "startColumn": 4,
+                        "startOffset": 6157,
+                        "endLine": 147,
+                        "endColumn": 12,
+                        "endOffset": 8725
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 105,
+                    "startColumn": 4,
+                    "startOffset": 8710,
+                    "endLine": 141,
+                    "endColumn": 12,
+                    "endOffset": 11293
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-v21\\values.xml",
+                    "position": {
+                        "startLine": 149,
+                        "startColumn": 4,
+                        "startOffset": 8731,
+                        "endLine": 185,
+                        "endColumn": 12,
+                        "endOffset": 11314
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 142,
+                    "startColumn": 4,
+                    "startOffset": 11298,
+                    "endLine": 178,
+                    "endColumn": 12,
+                    "endOffset": 13878
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-v21\\values.xml",
+                    "position": {
+                        "startLine": 187,
+                        "startColumn": 4,
+                        "startOffset": 11320,
+                        "endLine": 223,
+                        "endColumn": 12,
+                        "endOffset": 13900
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 179,
+                    "startColumn": 4,
+                    "startOffset": 13883,
+                    "endLine": 215,
+                    "endColumn": 12,
+                    "endOffset": 16478
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-v21\\values.xml",
+                    "position": {
+                        "startLine": 225,
+                        "startColumn": 4,
+                        "startOffset": 13906,
+                        "endLine": 261,
+                        "endColumn": 12,
+                        "endOffset": 16501
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 216,
+                    "startColumn": 4,
+                    "startOffset": 16483,
+                    "endColumn": 110,
+                    "endOffset": 16589
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-v21\\values.xml",
+                    "position": {
+                        "startLine": 263,
+                        "startColumn": 4,
+                        "startOffset": 16507,
+                        "endColumn": 117,
+                        "endOffset": 16620
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 217,
+                    "startColumn": 4,
+                    "startOffset": 16594,
+                    "endColumn": 110,
+                    "endOffset": 16700
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-v21\\values.xml",
+                    "position": {
+                        "startLine": 265,
+                        "startColumn": 4,
+                        "startOffset": 16626,
+                        "endColumn": 117,
+                        "endOffset": 16739
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 218,
+                    "startColumn": 4,
+                    "startOffset": 16705,
+                    "endColumn": 100,
+                    "endOffset": 16801
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-v21\\values.xml",
+                    "position": {
+                        "startLine": 267,
+                        "startColumn": 4,
+                        "startOffset": 16745,
+                        "endColumn": 107,
+                        "endOffset": 16848
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 219,
+                    "startColumn": 4,
+                    "startOffset": 16806,
+                    "endColumn": 120,
+                    "endOffset": 16922
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-v21\\values.xml",
+                    "position": {
+                        "startLine": 269,
+                        "startColumn": 4,
+                        "startOffset": 16854,
+                        "endColumn": 127,
+                        "endOffset": 16977
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 220,
+                    "startColumn": 4,
+                    "startOffset": 16927,
+                    "endColumn": 118,
+                    "endOffset": 17041
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-v21\\values.xml",
+                    "position": {
+                        "startLine": 271,
+                        "startColumn": 4,
+                        "startOffset": 16983,
+                        "endColumn": 125,
+                        "endOffset": 17104
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 221,
+                    "startColumn": 4,
+                    "startOffset": 17046,
+                    "endLine": 227,
+                    "endColumn": 12,
+                    "endOffset": 17439
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-v21\\values.xml",
+                    "position": {
+                        "startLine": 273,
+                        "startColumn": 4,
+                        "startOffset": 17110,
+                        "endLine": 279,
+                        "endColumn": 12,
+                        "endOffset": 17503
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 228,
+                    "startColumn": 4,
+                    "startOffset": 17444,
+                    "endColumn": 116,
+                    "endOffset": 17556
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-v21\\values.xml",
+                    "position": {
+                        "startLine": 281,
+                        "startColumn": 4,
+                        "startOffset": 17509,
+                        "endColumn": 117,
+                        "endOffset": 17622
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 229,
+                    "startColumn": 4,
+                    "startOffset": 17561,
+                    "endColumn": 116,
+                    "endOffset": 17673
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-v21\\values.xml",
+                    "position": {
+                        "startLine": 283,
+                        "startColumn": 4,
+                        "startOffset": 17628,
+                        "endColumn": 117,
+                        "endOffset": 17741
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 230,
+                    "startColumn": 4,
+                    "startOffset": 17678,
+                    "endColumn": 122,
+                    "endOffset": 17796
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-v21\\values.xml",
+                    "position": {
+                        "startLine": 285,
+                        "startColumn": 4,
+                        "startOffset": 17747,
+                        "endColumn": 129,
+                        "endOffset": 17872
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 231,
+                    "startColumn": 4,
+                    "startOffset": 17801,
+                    "endColumn": 130,
+                    "endOffset": 17927
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-v21\\values.xml",
+                    "position": {
+                        "startLine": 287,
+                        "startColumn": 4,
+                        "startOffset": 17878,
+                        "endColumn": 137,
+                        "endOffset": 18011
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 232,
+                    "startColumn": 4,
+                    "startOffset": 17932,
+                    "endColumn": 122,
+                    "endOffset": 18050
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-v21\\values.xml",
+                    "position": {
+                        "startLine": 289,
+                        "startColumn": 4,
+                        "startOffset": 18017,
+                        "endColumn": 129,
+                        "endOffset": 18142
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 233,
+                    "startColumn": 4,
+                    "startOffset": 18055,
+                    "endColumn": 122,
+                    "endOffset": 18173
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-v21\\values.xml",
+                    "position": {
+                        "startLine": 291,
+                        "startColumn": 4,
+                        "startOffset": 18148,
+                        "endColumn": 123,
+                        "endOffset": 18267
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 234,
+                    "startColumn": 4,
+                    "startOffset": 18178,
+                    "endColumn": 106,
+                    "endOffset": 18280
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-v21\\values.xml",
+                    "position": {
+                        "startLine": 293,
+                        "startColumn": 4,
+                        "startOffset": 18273,
+                        "endColumn": 113,
+                        "endOffset": 18382
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 235,
+                    "startColumn": 4,
+                    "startOffset": 18285,
+                    "endLine": 238,
+                    "endColumn": 12,
+                    "endOffset": 18481
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-v21\\values.xml",
+                    "position": {
+                        "startLine": 295,
+                        "startColumn": 4,
+                        "startOffset": 18388,
+                        "endLine": 298,
+                        "endColumn": 12,
+                        "endOffset": 18584
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 239,
+                    "startColumn": 4,
+                    "startOffset": 18486,
+                    "endColumn": 106,
+                    "endOffset": 18588
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-v21\\values.xml",
+                    "position": {
+                        "startLine": 300,
+                        "startColumn": 4,
+                        "startOffset": 18590,
+                        "endColumn": 113,
+                        "endOffset": 18699
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 240,
+                    "startColumn": 4,
+                    "startOffset": 18593,
+                    "endColumn": 110,
+                    "endOffset": 18699
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-v21\\values.xml",
+                    "position": {
+                        "startLine": 302,
+                        "startColumn": 4,
+                        "startOffset": 18705,
+                        "endColumn": 111,
+                        "endOffset": 18812
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 241,
+                    "startColumn": 4,
+                    "startOffset": 18704,
+                    "endColumn": 97,
+                    "endOffset": 18797
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-v21\\values.xml",
+                    "position": {
+                        "startLine": 304,
+                        "startColumn": 4,
+                        "startOffset": 18818,
+                        "endColumn": 98,
+                        "endOffset": 18912
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 242,
+                    "startColumn": 4,
+                    "startOffset": 18802,
+                    "endColumn": 94,
+                    "endOffset": 18892
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-v21\\values.xml",
+                    "position": {
+                        "startLine": 306,
+                        "startColumn": 4,
+                        "startOffset": 18918,
+                        "endColumn": 101,
+                        "endOffset": 19015
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 243,
+                    "startColumn": 4,
+                    "startOffset": 18897,
+                    "endLine": 246,
+                    "endColumn": 12,
+                    "endOffset": 19087
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-v21\\values.xml",
+                    "position": {
+                        "startLine": 308,
+                        "startColumn": 4,
+                        "startOffset": 19021,
+                        "endLine": 311,
+                        "endColumn": 12,
+                        "endOffset": 19211
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 247,
+                    "startColumn": 4,
+                    "startOffset": 19092,
+                    "endColumn": 98,
+                    "endOffset": 19186
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-v21\\values.xml",
+                    "position": {
+                        "startLine": 313,
+                        "startColumn": 4,
+                        "startOffset": 19217,
+                        "endColumn": 105,
+                        "endOffset": 19318
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 248,
+                    "startColumn": 4,
+                    "startOffset": 19191,
+                    "endColumn": 120,
+                    "endOffset": 19307
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-v21\\values.xml",
+                    "position": {
+                        "startLine": 315,
+                        "startColumn": 4,
+                        "startOffset": 19324,
+                        "endColumn": 127,
+                        "endOffset": 19447
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 249,
+                    "startColumn": 4,
+                    "startOffset": 19312,
+                    "endColumn": 90,
+                    "endOffset": 19398
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-v21\\values.xml",
+                    "position": {
+                        "startLine": 317,
+                        "startColumn": 4,
+                        "startOffset": 19453,
+                        "endColumn": 91,
+                        "endOffset": 19540
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 250,
+                    "startColumn": 4,
+                    "startOffset": 19403,
+                    "endLine": 254,
+                    "endColumn": 12,
+                    "endOffset": 19707
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-v21\\values.xml",
+                    "position": {
+                        "startLine": 319,
+                        "startColumn": 4,
+                        "startOffset": 19546,
+                        "endLine": 323,
+                        "endColumn": 12,
+                        "endOffset": 19850
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 255,
+                    "startColumn": 4,
+                    "startOffset": 19712,
+                    "endColumn": 126,
+                    "endOffset": 19834
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-v21\\values.xml",
+                    "position": {
+                        "startLine": 325,
+                        "startColumn": 4,
+                        "startOffset": 19856,
+                        "endColumn": 133,
+                        "endOffset": 19985
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 256,
+                    "startColumn": 4,
+                    "startOffset": 19839,
+                    "endLine": 317,
+                    "endColumn": 12,
+                    "endOffset": 23775
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\values-v21\\themes.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 56,
+                        "endLine": 64,
+                        "endColumn": 12,
+                        "endOffset": 3992
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 318,
+                    "startColumn": 4,
+                    "startOffset": 23780,
+                    "endLine": 379,
+                    "endColumn": 12,
+                    "endOffset": 27734
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\values-v21\\themes.xml",
+                    "position": {
+                        "startLine": 66,
+                        "startColumn": 4,
+                        "startOffset": 3998,
+                        "endLine": 127,
+                        "endColumn": 12,
+                        "endOffset": 7952
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 380,
+                    "startColumn": 4,
+                    "startOffset": 27739,
+                    "endLine": 383,
+                    "endColumn": 12,
+                    "endOffset": 27930
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-v21\\values.xml",
+                    "position": {
+                        "startLine": 327,
+                        "startColumn": 4,
+                        "startOffset": 19991,
+                        "endLine": 330,
+                        "endColumn": 12,
+                        "endOffset": 20182
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 384,
+                    "startColumn": 4,
+                    "startOffset": 27935,
+                    "endLine": 387,
+                    "endColumn": 12,
+                    "endOffset": 28140
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-v21\\values.xml",
+                    "position": {
+                        "startLine": 332,
+                        "startColumn": 4,
+                        "startOffset": 20188,
+                        "endLine": 335,
+                        "endColumn": 12,
+                        "endOffset": 20393
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 388,
+                    "startColumn": 4,
+                    "startOffset": 28145,
+                    "endLine": 391,
+                    "endColumn": 12,
+                    "endOffset": 28348
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-v21\\values.xml",
+                    "position": {
+                        "startLine": 337,
+                        "startColumn": 4,
+                        "startOffset": 20399,
+                        "endLine": 340,
+                        "endColumn": 12,
+                        "endOffset": 20602
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 392,
+                    "startColumn": 4,
+                    "startOffset": 28353,
+                    "endLine": 395,
+                    "endColumn": 12,
+                    "endOffset": 28570
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-v21\\values.xml",
+                    "position": {
+                        "startLine": 342,
+                        "startColumn": 4,
+                        "startOffset": 20608,
+                        "endLine": 345,
+                        "endColumn": 12,
+                        "endOffset": 20825
+                    }
+                }
+            }
+        ]
+    }
+]

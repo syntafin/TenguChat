@@ -1,0 +1,82 @@
+[
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\free\\debug\\menu\\manageaccounts_context.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\menu\\manageaccounts_context.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\free\\debug\\menu\\start_conversation.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\menu\\start_conversation.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\free\\debug\\menu\\conference_context.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\menu\\conference_context.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\free\\debug\\menu\\muc_details_context.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\menu\\muc_details_context.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\free\\debug\\menu\\verification_choices.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\menu\\verification_choices.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\free\\debug\\menu\\message_context.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\menu\\message_context.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\free\\debug\\menu\\share_with.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\menu\\share_with.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\free\\debug\\menu\\change_presence.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\menu\\change_presence.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\free\\debug\\menu\\contact_details.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\menu\\contact_details.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\free\\debug\\menu\\attachment_choices.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\menu\\attachment_choices.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\free\\debug\\menu\\select_multiple.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\menu\\select_multiple.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\free\\debug\\menu\\publish_avatar.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\menu\\publish_avatar.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\free\\debug\\menu\\contact_context.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\menu\\contact_context.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\free\\debug\\menu\\muc_details.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\menu\\muc_details.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\free\\debug\\menu\\conversations.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\menu\\conversations.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\free\\debug\\menu\\manageaccounts.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\menu\\manageaccounts.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\free\\debug\\menu\\editaccount.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\menu\\editaccount.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\free\\debug\\menu\\choose_contact.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\menu\\choose_contact.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\free\\debug\\menu\\encryption_choices.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\menu\\encryption_choices.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\free\\debug\\menu\\verify_otr.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\menu\\verify_otr.xml"
+    }
+]

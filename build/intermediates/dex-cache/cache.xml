@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="D:\AndroidSDK\extras\android\m2repository\com\android\support\support-annotations\23.2.0\support-annotations-23.2.0.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="c5bf571bb10462bd90e5419ade67793f71acbc87">
+        <dex dex="E:\Projekt Daten\TenguChatApp\build\intermediates\pre-dexed\playstore\release\support-annotations-23.2.0_0ac6a933ccde1a939f417791c65bceecd6352f80.jar" />
+    </item>
+    <item
+        jar="E:\Projekt Daten\TenguChatApp\build\intermediates\exploded-aar\de.timroes.android\EnhancedListView\0.3.4\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="9cc616134ef0652ce7c534f27dbdc56115d5703c">
+        <dex dex="E:\Projekt Daten\TenguChatApp\build\intermediates\pre-dexed\playstore\release\de.timroes.android-EnhancedListView-0.3.4_e48a924b4a6751f64faa19b8b38e9970789d06e4.jar" />
+    </item>
+    <item
+        jar="E:\Projekt Daten\TenguChatApp\build\intermediates\exploded-aar\com.google.firebase\firebase-iid\9.0.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="ea4b54dcbfe5ac05efb0a314105f07258118d3a7">
+        <dex dex="E:\Projekt Daten\TenguChatApp\build\intermediates\pre-dexed\playstore\release\com.google.firebase-firebase-iid-9.0.0_2f1ee69af91578b3d6d4b0fac3ab040d026fd1c0.jar" />
+    </item>
+    <item
+        jar="C:\Users\Syntafin\.gradle\caches\modules-2\files-2.1\org.jitsi\org.otr4j\0.22\751feeb838c4a5d3499b55bbe887aebc38a4572b\org.otr4j-0.22.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="751feeb838c4a5d3499b55bbe887aebc38a4572b">
+        <dex dex="E:\Projekt Daten\TenguChatApp\build\intermediates\pre-dexed\playstore\release\org.otr4j-0.22_e0fab049703a628b3f43ae23919639f6a7059063.jar" />
+    </item>
+    <item
+        jar="C:\Users\Syntafin\.gradle\caches\modules-2\files-2.1\com.nineoldandroids\library\2.4.0\e9b63380f3a242dbdbf103a2355ad7e43bad17cb\library-2.4.0.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="e9b63380f3a242dbdbf103a2355ad7e43bad17cb">
+        <dex dex="E:\Projekt Daten\TenguChatApp\build\intermediates\pre-dexed\playstore\release\library-2.4.0_8f2fb81a601dcb052e71cc1d894c439701405424.jar" />
+    </item>
+    <item
+        jar="E:\Projekt Daten\TenguChatApp\build\intermediates\exploded-aar\org.sufficientlysecure\openpgp-api\10.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="6b2e3602300712aae3ca0a509d1cec3b0045b6f7">
+        <dex dex="E:\Projekt Daten\TenguChatApp\build\intermediates\pre-dexed\playstore\release\org.sufficientlysecure-openpgp-api-10.0_1985ff99e04468ff1745c3aad1c4be7a80a22ddf.jar" />
+    </item>
+    <item
+        jar="E:\Projekt Daten\TenguChatApp\build\intermediates\exploded-aar\com.google.android.gms\play-services-tasks\9.0.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="1941832901fc4e7a93300b53762e9f65d7650b99">
+        <dex dex="E:\Projekt Daten\TenguChatApp\build\intermediates\pre-dexed\playstore\release\com.google.android.gms-play-services-tasks-9.0.0_f5d4ed97304aa03f15be0cc8f523af6e89e4f11b.jar" />
+    </item>
+    <item
+        jar="C:\Users\Syntafin\.gradle\caches\modules-2\files-2.1\org.bouncycastle\bcmail-jdk15on\1.52\4995a870400e1554d1c7ed2afcb5d198fae12db9\bcmail-jdk15on-1.52.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="4995a870400e1554d1c7ed2afcb5d198fae12db9">
+        <dex dex="E:\Projekt Daten\TenguChatApp\build\intermediates\pre-dexed\playstore\release\bcmail-jdk15on-1.52_0865a3a6f5be38e776c824288772507028158d3d.jar" />
+    </item>
+    <item
+        jar="E:\Projekt Daten\TenguChatApp\build\intermediates\exploded-aar\com.google.firebase\firebase-common\9.0.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="42df48c7305b08b14fa0e84561091b0c24d70d26">
+        <dex dex="E:\Projekt Daten\TenguChatApp\build\intermediates\pre-dexed\playstore\release\com.google.firebase-firebase-common-9.0.0_5c40180681b6adc7a6bf39f0723f0d387fcbf2e5.jar" />
+    </item>
+    <item
+        jar="E:\Projekt Daten\TenguChatApp\build\intermediates\exploded-aar\com.android.support\support-v13\23.2.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="f3a3189a228a65d03b3ea92a1b58a2b44bc7366e">
+        <dex dex="E:\Projekt Daten\TenguChatApp\build\intermediates\pre-dexed\playstore\release\com.android.support-support-v13-23.2.0_70fe70fcd01647afcbbf5ccd87e88a5860823bd7.jar" />
+    </item>
+    <item
+        jar="E:\Projekt Daten\TenguChatApp\build\intermediates\exploded-aar\com.google.android.gms\play-services-iid\9.0.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="379d1834afa3c08f43be23a23b103053537b65b5">
+        <dex dex="E:\Projekt Daten\TenguChatApp\build\intermediates\pre-dexed\playstore\release\com.google.android.gms-play-services-iid-9.0.0_b9ff24cb7a9277b6ef41574cde96f1e7a4883fb2.jar" />
+    </item>
+    <item
+        jar="E:\Projekt Daten\TenguChatApp\build\intermediates\exploded-aar\com.google.android.gms\play-services-gcm\9.0.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="4caf75b2cfb7ec6e80a57d0ee64fc102ad3578b8">
+        <dex dex="E:\Projekt Daten\TenguChatApp\build\intermediates\pre-dexed\playstore\release\com.google.android.gms-play-services-gcm-9.0.0_1280e2ff86aa58efcb170a63664d172ff4c5124d.jar" />
+    </item>
+    <item
+        jar="C:\Users\Syntafin\.gradle\caches\modules-2\files-2.1\org.whispersystems\axolotl-java\1.3.4\dba6947dd7f5f712052e1b54f3992b45e7642242\axolotl-java-1.3.4.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="dba6947dd7f5f712052e1b54f3992b45e7642242">
+        <dex dex="E:\Projekt Daten\TenguChatApp\build\intermediates\pre-dexed\playstore\release\axolotl-java-1.3.4_18a5b993db7692d25c59817d86ab28467efeffef.jar" />
+    </item>
+    <item
+        jar="E:\Projekt Daten\TenguChatApp\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\9.0.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="cc178928721f3222b3b06bdfbd9497378ccb9792">
+        <dex dex="E:\Projekt Daten\TenguChatApp\build\intermediates\pre-dexed\playstore\release\com.google.android.gms-play-services-basement-9.0.0_bf803560f7f980f9fd052247c152b75c9f5083c4.jar" />
+    </item>
+    <item
+        jar="C:\Users\Syntafin\.gradle\caches\modules-2\files-2.1\org.bouncycastle\bcpkix-jdk15on\1.52\b8ffac2bbc6626f86909589c8cc63637cc936504\bcpkix-jdk15on-1.52.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="b8ffac2bbc6626f86909589c8cc63637cc936504">
+        <dex dex="E:\Projekt Daten\TenguChatApp\build\intermediates\pre-dexed\playstore\release\bcpkix-jdk15on-1.52_a907c03caa010b4a1c5384c47cd3208a50f7afef.jar" />
+    </item>
+    <item
+        jar="C:\Users\Syntafin\.gradle\caches\modules-2\files-2.1\org.gnu.inet\libidn\1.15\b5bede3c1c031a827b604da31768ddaf833495c6\libidn-1.15.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="b5bede3c1c031a827b604da31768ddaf833495c6">
+        <dex dex="E:\Projekt Daten\TenguChatApp\build\intermediates\pre-dexed\playstore\release\libidn-1.15_27eaef459e65a6c73a060bb78c33353d5b787fff.jar" />
+    </item>
+    <item
+        jar="E:\Projekt Daten\TenguChatApp\build\intermediates\exploded-aar\com.kyleduo.switchbutton\library\1.2.8\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="ba391b1093df0505d6f0c56689c28384a4dafcc4">
+        <dex dex="E:\Projekt Daten\TenguChatApp\build\intermediates\pre-dexed\playstore\release\com.kyleduo.switchbutton-library-1.2.8_3e1c74b3aa3d8dda64d0b9fe9728feb7ea976f83.jar" />
+    </item>
+    <item
+        jar="E:\Projekt Daten\TenguChatApp\build\intermediates\exploded-aar\com.android.support\support-v4\23.2.0\jars\libs\internal_impl-23.2.0.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="6e239441500605809818997dd63b62a947195f8c">
+        <dex dex="E:\Projekt Daten\TenguChatApp\build\intermediates\pre-dexed\playstore\release\internal_impl-23.2.0_7ed6b99e498bfea4491665fc09e88b087729873d.jar" />
+    </item>
+    <item
+        jar="E:\Projekt Daten\TenguChatApp\build\intermediates\exploded-aar\com.android.support\support-v13\23.2.0\jars\libs\internal_impl-23.2.0.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="58d0010cb4373696cfdc5894c4b23649af58ed18">
+        <dex dex="E:\Projekt Daten\TenguChatApp\build\intermediates\pre-dexed\playstore\release\internal_impl-23.2.0_d67399deac0c53e4a1cbff3aefd7e9dbe2509775.jar" />
+    </item>
+    <item
+        jar="C:\Users\Syntafin\.gradle\caches\modules-2\files-2.1\com.google.zxing\core\3.2.1\2287494d4f5f9f3a9a2bb6980e3f32053721b315\core-3.2.1.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="2287494d4f5f9f3a9a2bb6980e3f32053721b315">
+        <dex dex="E:\Projekt Daten\TenguChatApp\build\intermediates\pre-dexed\playstore\release\core-3.2.1_3f4063ced2f68c91ddc6616f10a9ac0866de9252.jar" />
+    </item>
+    <item
+        jar="E:\Projekt Daten\TenguChatApp\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\9.0.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="6f65c144283b31b4b9a70e6e7aa4c4a1c897d4b8">
+        <dex dex="E:\Projekt Daten\TenguChatApp\build\intermediates\pre-dexed\playstore\release\com.google.android.gms-play-services-base-9.0.0_c112e818f0493532fe076822be31277adcf86eac.jar" />
+    </item>
+    <item
+        jar="E:\Projekt Daten\TenguChatApp\build\intermediates\exploded-aar\TenguChat.libs\MemorizingTrustManager\unspecified\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="1f9a9e968ac641dac860e2d0c743d6cf98fcfcbc">
+        <dex dex="E:\Projekt Daten\TenguChatApp\build\intermediates\pre-dexed\playstore\release\TenguChat.libs-MemorizingTrustManager-unspecified_8a8fbc3f751ddcc696f521ccebc25bcfb34e0c09.jar" />
+    </item>
+    <item
+        jar="C:\Users\Syntafin\.gradle\caches\modules-2\files-2.1\de.measite.minidns\minidns\0.1.7\993582d1455b93a5723d2af4b39d8679735b3550\minidns-0.1.7.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="993582d1455b93a5723d2af4b39d8679735b3550">
+        <dex dex="E:\Projekt Daten\TenguChatApp\build\intermediates\pre-dexed\playstore\release\minidns-0.1.7_50e17a7498e4cd0d318d96d40df28a1ac8ef5e83.jar" />
+    </item>
+    <item
+        jar="E:\Projekt Daten\TenguChatApp\build\intermediates\exploded-aar\me.leolin\ShortcutBadger\1.1.4\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="b346a5d3fc5d6d1d36c6262c8cc865b76df9f40c">
+        <dex dex="E:\Projekt Daten\TenguChatApp\build\intermediates\pre-dexed\playstore\release\me.leolin-ShortcutBadger-1.1.4_7f2d3f1b03fc0cfc51b15b80656fa69afcd316fb.jar" />
+    </item>
+    <item
+        jar="E:\Projekt Daten\TenguChatApp\build\intermediates\exploded-aar\com.android.support\support-v4\23.2.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="e5f32fa48a3eb2de0c987025c11b6e3864b634d9">
+        <dex dex="E:\Projekt Daten\TenguChatApp\build\intermediates\pre-dexed\playstore\release\com.android.support-support-v4-23.2.0_327955dabc4ab684b6ed714df2b9f65a1ee8f227.jar" />
+    </item>
+    <item
+        jar="E:\Projekt Daten\TenguChatApp\build\intermediates\exploded-aar\com.google.firebase\firebase-analytics-impl\9.0.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="0dc8ab07eeceda5e99b305c8069765056b6e5c9d">
+        <dex dex="E:\Projekt Daten\TenguChatApp\build\intermediates\pre-dexed\playstore\release\com.google.firebase-firebase-analytics-impl-9.0.0_6c620c4baabf8a22da2893eb3b594b380069b29c.jar" />
+    </item>
+    <item
+        jar="E:\Projekt Daten\TenguChatApp\build\intermediates\exploded-aar\org.whispersystems\curve25519-android\0.2.4\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="6f8070d4d60e8d8cbb1e75243a0085076916473d">
+        <dex dex="E:\Projekt Daten\TenguChatApp\build\intermediates\pre-dexed\playstore\release\org.whispersystems-curve25519-android-0.2.4_758ccc50df0ffa41e17e39091bfd7e157a6d4a91.jar" />
+    </item>
+    <item
+        jar="E:\Projekt Daten\TenguChatApp\build\intermediates\exploded-aar\com.makeramen\roundedimageview\2.2.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="149d269764e1ad8d24e18e8cb71cd6b95062f3d1">
+        <dex dex="E:\Projekt Daten\TenguChatApp\build\intermediates\pre-dexed\playstore\release\com.makeramen-roundedimageview-2.2.0_572cf2b7589f6fdc6547b80b802fa23fd4ee0ac2.jar" />
+    </item>
+    <item
+        jar="E:\Projekt Daten\TenguChatApp\build\intermediates\exploded-aar\com.google.firebase\firebase-analytics\9.0.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="4ef8ab5fee042023018249474bc93bd4b2b9c17e">
+        <dex dex="E:\Projekt Daten\TenguChatApp\build\intermediates\pre-dexed\playstore\release\com.google.firebase-firebase-analytics-9.0.0_c87bd491af7b9bd56aadbd10de6f2474cebb1580.jar" />
+    </item>
+    <item
+        jar="C:\Users\Syntafin\.gradle\caches\modules-2\files-2.1\org.whispersystems\curve25519-java\0.2.4\7fa461e047c17f96ac6c6d85e66bfb399b9ab887\curve25519-java-0.2.4.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="7fa461e047c17f96ac6c6d85e66bfb399b9ab887">
+        <dex dex="E:\Projekt Daten\TenguChatApp\build\intermediates\pre-dexed\playstore\release\curve25519-java-0.2.4_e6a565220b5034224f1f0166fddeddf071b26104.jar" />
+    </item>
+    <item
+        jar="E:\Projekt Daten\TenguChatApp\build\intermediates\exploded-aar\com.android.support\appcompat-v7\21.0.3\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
+        <dex dex="E:\Projekt Daten\TenguChatApp\build\intermediates\pre-dexed\playstore\release\com.android.support-appcompat-v7-21.0.3_30f0046e5a3dab3ec6e616a1cb321c01fc45fd01.jar" />
+    </item>
+    <item
+        jar="E:\Projekt Daten\TenguChatApp\build\intermediates\exploded-aar\org.whispersystems\axolotl-android\1.3.4\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="4c2ad7bdcaf2c0a22a29897db269c51544c74434">
+        <dex dex="E:\Projekt Daten\TenguChatApp\build\intermediates\pre-dexed\playstore\release\org.whispersystems-axolotl-android-1.3.4_43a899e8b31c84c69cb598f0b94f74dd1a1ec751.jar" />
+    </item>
+    <item
+        jar="C:\Users\Syntafin\.gradle\caches\modules-2\files-2.1\com.google.protobuf\protobuf-java\2.5.0\a10732c76bfacdbd633a7eb0f7968b1059a65dfa\protobuf-java-2.5.0.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="a10732c76bfacdbd633a7eb0f7968b1059a65dfa">
+        <dex dex="E:\Projekt Daten\TenguChatApp\build\intermediates\pre-dexed\playstore\release\protobuf-java-2.5.0_8e0a8b52ceef031dabe9c867225f61d11de1bbe7.jar" />
+    </item>
+    <item
+        jar="C:\Users\Syntafin\.gradle\caches\modules-2\files-2.1\org.bouncycastle\bcprov-jdk15on\1.52\88a941faf9819d371e3174b5ed56a3f3f7d73269\bcprov-jdk15on-1.52.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="88a941faf9819d371e3174b5ed56a3f3f7d73269">
+        <dex dex="E:\Projekt Daten\TenguChatApp\build\intermediates\pre-dexed\playstore\release\bcprov-jdk15on-1.52_3fcb52ac9c127db3be58d80f8e03e1892b384a4d.jar" />
+    </item>
+    <item
+        jar="C:\Users\Syntafin\.gradle\caches\modules-2\files-2.1\com.google.zxing\android-integration\3.2.1\87a3d7da33a6c633fb1ff30023dbf0d05e8ea74c\android-integration-3.2.1.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="87a3d7da33a6c633fb1ff30023dbf0d05e8ea74c">
+        <dex dex="E:\Projekt Daten\TenguChatApp\build\intermediates\pre-dexed\playstore\release\android-integration-3.2.1_a054aeb505384db52e07b99672b3062a5dd3cc52.jar" />
+    </item>
+    <item
+        jar="E:\Projekt Daten\TenguChatApp\build\intermediates\exploded-aar\com.soundcloud.android\android-crop\1.0.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="11a65cf2b30c192b38a881d626fa771a78a2293d">
+        <dex dex="E:\Projekt Daten\TenguChatApp\build\intermediates\pre-dexed\playstore\release\com.soundcloud.android-android-crop-1.0.1_a0b861a0099f8708354a9708bf13319f9c737d52.jar" />
+    </item>
+
+</items>

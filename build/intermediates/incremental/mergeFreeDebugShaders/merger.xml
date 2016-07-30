@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="3"><dataSet config="main"><source path="E:\Projekt Daten\TenguChatApp\src\main\shaders"/></dataSet><dataSet config="free"><source path="E:\Projekt Daten\TenguChatApp\src\free\shaders"/></dataSet><dataSet config="debug"><source path="E:\Projekt Daten\TenguChatApp\src\debug\shaders"/></dataSet><dataSet config="freeDebug"><source path="E:\Projekt Daten\TenguChatApp\src\freeDebug\shaders"/></dataSet></merger>

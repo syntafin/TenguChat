@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="3"><dataSet config="main"><source path="E:\Projekt Daten\TenguChatApp\src\main\jniLibs"/></dataSet><dataSet config="playstore"><source path="E:\Projekt Daten\TenguChatApp\src\playstore\jniLibs"/></dataSet><dataSet config="release"><source path="E:\Projekt Daten\TenguChatApp\src\release\jniLibs"/></dataSet><dataSet config="playstoreRelease"><source path="E:\Projekt Daten\TenguChatApp\src\playstoreRelease\jniLibs"/></dataSet></merger>

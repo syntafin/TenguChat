@@ -1,0 +1,262 @@
+[
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\layout\\enter_jid_dialog.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\layout\\enter_jid_dialog.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\layout\\fragment_conversation.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\layout\\fragment_conversation.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\layout\\form_text.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\layout\\form_text.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\layout\\abc_activity_chooser_view_list_item.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\layout\\abc_activity_chooser_view_list_item.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\layout\\conversation_list_row.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\layout\\conversation_list_row.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\layout\\abc_list_menu_item_checkbox.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\layout\\abc_list_menu_item_checkbox.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\layout\\simple_list_item.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\layout\\simple_list_item.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\layout\\support_simple_spinner_dropdown_item.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\layout\\support_simple_spinner_dropdown_item.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\layout\\abc_action_mode_bar.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\layout\\abc_action_mode_bar.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\layout\\dialog_show_password.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\layout\\dialog_show_password.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\layout\\account_row.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\layout\\account_row.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\layout\\share_with.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\layout\\share_with.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\layout\\create_conference_dialog.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\layout\\create_conference_dialog.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\layout\\abc_screen_toolbar.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\layout\\abc_screen_toolbar.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\layout\\magic_create.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\layout\\magic_create.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\layout\\abc_search_dropdown_item_icons_2line.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\layout\\abc_search_dropdown_item_icons_2line.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\layout\\contact_key.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\layout\\contact_key.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\layout\\abc_search_view.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\layout\\abc_search_view.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\layout\\abc_action_bar_up_container.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\layout\\abc_action_bar_up_container.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\layout\\abc_popup_menu_item_layout.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\layout\\abc_popup_menu_item_layout.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\layout\\abc_simple_dropdown_hint.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\layout\\abc_simple_dropdown_hint.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\layout\\abc_action_mode_close_item_material.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\layout\\abc_action_mode_close_item_material.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\layout\\activity_set_presence.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\layout\\activity_set_presence.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\layout\\activity_verify_otr.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\layout\\activity_verify_otr.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\layout\\list_item_tag.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\layout\\list_item_tag.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\layout\\activity_edit_account.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\layout\\activity_edit_account.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\layout\\manage_accounts.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\layout\\manage_accounts.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\layout\\activity_change_password.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\layout\\activity_change_password.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\layout\\abc_action_menu_layout.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\layout\\abc_action_menu_layout.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\layout\\fragment_conversations_overview.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\layout\\fragment_conversations_overview.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\layout\\elv_undo_popup.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\de.timroes.android\\EnhancedListView\\0.3.4\\res\\layout\\elv_undo_popup.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\layout\\activity_contact_details.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\layout\\activity_contact_details.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\layout\\form_boolean.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\layout\\form_boolean.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\layout\\captcha.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\layout\\captcha.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\layout\\message_received.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\layout\\message_received.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\layout\\dialog_clear_history.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\layout\\dialog_clear_history.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\layout\\abc_screen_simple_overlay_action_mode.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\layout\\abc_screen_simple_overlay_action_mode.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\layout\\abc_expanded_menu_layout.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\layout\\abc_expanded_menu_layout.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\layout\\activity_choose_contact.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\layout\\activity_choose_contact.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\layout\\abc_list_menu_item_layout.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\layout\\abc_list_menu_item_layout.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\layout\\abc_action_bar_view_list_nav_layout.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\layout\\abc_action_bar_view_list_nav_layout.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\layout\\abc_screen_simple.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\layout\\abc_screen_simple.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\layout\\abc_action_menu_item_layout.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\layout\\abc_action_menu_item_layout.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\layout\\activity_about.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\layout\\activity_about.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\layout\\abc_activity_chooser_view_include.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\layout\\abc_activity_chooser_view_include.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\layout\\crop__activity_crop.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.soundcloud.android\\android-crop\\1.0.1\\res\\layout\\crop__activity_crop.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\layout\\actionview_search.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\layout\\actionview_search.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\layout\\activity_start_conversation.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\layout\\activity_start_conversation.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\layout\\join_conference_dialog.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\layout\\join_conference_dialog.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\layout\\keys_card.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\layout\\keys_card.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\layout\\abc_activity_chooser_view.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\layout\\abc_activity_chooser_view.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\layout\\certificate_information.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\layout\\certificate_information.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\layout\\abc_list_menu_item_icon.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\layout\\abc_list_menu_item_icon.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\layout\\welcome.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\layout\\welcome.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\layout\\activity_trust_keys.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\layout\\activity_trust_keys.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\layout\\message_sent.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\layout\\message_sent.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\layout\\activity_publish_profile_picture.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\layout\\activity_publish_profile_picture.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\layout\\crop__layout_done_cancel.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.soundcloud.android\\android-crop\\1.0.1\\res\\layout\\crop__layout_done_cancel.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\layout\\contact.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\layout\\contact.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\layout\\abc_action_bar_title_item.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\layout\\abc_action_bar_title_item.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\layout\\presence_template.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\layout\\presence_template.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\layout\\quickedit.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\layout\\quickedit.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\layout\\abc_list_menu_item_radio.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\layout\\abc_list_menu_item_radio.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\layout\\message_status.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\layout\\message_status.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\layout\\activity_muc_details.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\layout\\activity_muc_details.xml"
+    }
+]
