@@ -64,5 +64,6 @@ run your own XMPP server for you and your friends. These XEP's are:
 * [Sebastian Anderie](https://github.com/syntafin)
 
 #### Logo
+
 * [Telasra](http://telasra.deviantart.com) (Original)
 * [fiaxh](https://github.com/fiaxh) (OMEMO)
