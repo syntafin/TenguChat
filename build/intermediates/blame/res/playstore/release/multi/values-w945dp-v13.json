@@ -1,5 +1,29 @@
 [
     {
+        "outputFile": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\values-w945dp-v13\\values-w945dp-v13.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endColumn": 57,
+                    "endOffset": 108
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\values-w945dp\\dimens.xml",
+                    "position": {
+                        "startLine": 1,
+                        "startColumn": 4,
+                        "startOffset": 16,
+                        "endColumn": 57,
+                        "endOffset": 69
+                    }
+                }
+            }
+        ]
+    },
+    {
         "outputFile": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\values-w945dp-v13\\values-w945dp-v13.xml",
         "map": [
             {

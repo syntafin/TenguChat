@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="E:\Projekt Daten\TenguChatApp\src\androidTest\assets"/><source path="E:\Projekt Daten\TenguChatApp\build\generated\assets\shaders\androidTest\free\debug"/></dataSet><dataSet config="free"><source path="E:\Projekt Daten\TenguChatApp\src\androidTestFree\assets"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="E:\Projekt Daten\TenguChatApp\TenguChat\src\androidTest\assets"/><source path="E:\Projekt Daten\TenguChatApp\TenguChat\build\generated\assets\shaders\androidTest\free\debug"/></dataSet><dataSet config="free"><source path="E:\Projekt Daten\TenguChatApp\TenguChat\src\androidTestFree\assets"/></dataSet></merger>

@@ -1,5 +1,29 @@
 [
     {
+        "outputFile": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\values-v19\\values-v19.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endColumn": 51,
+                    "endOffset": 102
+                },
+                "from": {
+                    "file": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\exploded-aar\\de.timroes.android\\EnhancedListView\\0.3.4\\res\\values-v19\\values.xml",
+                    "position": {
+                        "startLine": 6,
+                        "startColumn": 4,
+                        "startOffset": 189,
+                        "endColumn": 51,
+                        "endOffset": 236
+                    }
+                }
+            }
+        ]
+    },
+    {
         "outputFile": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\values-v19\\values-v19.xml",
         "map": [
             {

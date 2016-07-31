@@ -2,5 +2,9 @@
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\free\\debug\\layout-v11\\abc_screen_content_include.xml",
         "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\layout-v11\\abc_screen_content_include.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\free\\debug\\layout-v11\\abc_screen_content_include.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\layout-v11\\abc_screen_content_include.xml"
     }
 ]
