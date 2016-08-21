@@ -80,14 +80,14 @@
 	<string name="delete_messages">Delete messages</string>
 	<string name="also_end_conversation">End this conversation afterwards</string>
 	<string name="choose_presence">Choose presence to contact</string>
-	<string name="send_unencrypted_message">Send unencrypted message</string>
+	<string name="send_unencrypted_message">Write a message</string>
 	<string name="send_message_to_x">Send message to %s</string>
 	<string name="send_otr_message">Send OTR encrypted message</string>
 	<string name="send_omemo_message">Send OMEMO encrypted message</string>
 	<string name="send_omemo_x509_message">Send v\\OMEMO encrypted message</string>
 	<string name="send_pgp_message">Send OpenPGP encrypted message</string>
 	<string name="your_nick_has_been_changed">Your nickname has been changed</string>
-	<string name="send_unencrypted">Send unencrypted</string>
+	<string name="send_unencrypted">Send message</string>
 	<string name="decryption_failed">Decryption failed. Maybe you don’t have the proper private key.</string>
 	<string name="openkeychain_required">OpenKeychain</string>
 	<string name="openkeychain_required_long">TenguChat utilizes a third party app called <b>OpenKeychain</b> to encrypt and decrypt messages and to manage your public keys.\n\nOpenKeychain is licensed under GPLv3 and available on F-Droid and Google Play.\n\n<small>(Please restart TenguChat afterwards.)</small></string>
@@ -159,7 +159,7 @@
 	<string name="account_status_regis_not_sup">Server does not support registration</string>
 	<string name="account_status_security_error">Encryption error</string>
 	<string name="account_status_incompatible_server">Incompatible server</string>
-	<string name="encryption_choice_unencrypted">Unencrypted</string>
+	<string name="encryption_choice_unencrypted">Normal</string>
 	<string name="encryption_choice_otr">OTR</string>
 	<string name="encryption_choice_pgp">OpenPGP</string>
 	<string name="encryption_choice_omemo">OMEMO</string>
@@ -301,7 +301,7 @@
 	<string name="pref_about_conversations_summary">Build and licensing information</string>
 	<string name="pref_about_message" translatable="false">
 			TenguChat • the very last word in instant messaging.
-			\n\nCopyright © 2014-2016 Daniel Gultsch
+			\n\nCopyright © 2016 TenguSystems
 			\n\nThis program is free software: you can redistribute it and/or modify
 			it under the terms of the GNU General Public License as published by
 			the Free Software Foundation, either version 3 of the License, or
@@ -312,7 +312,7 @@
 			GNU General Public License for more details.
 			\n\nYou should have received a copy of the GNU General Public License
 			along with this program. If not, see https://www.gnu.org/licenses
-			\n\nDownload the full source code at https://github.com/siacs/TenguChat
+			\n\nDownload the full source code at https://github.com/syntafin/TenguChat
 			\n\n\nLibraries
 			\n\nhttps://www.bouncycastle.org\n(The MIT License (MIT))
 			\n\nhttps://www.gnu.org/software/libidn\n(Apache License, Version 2.0)

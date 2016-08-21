@@ -249,7 +249,7 @@
     <string name="encryption_choice_omemo">OMEMO</string>
     <string name="encryption_choice_otr">OTR</string>
     <string name="encryption_choice_pgp">OpenPGP</string>
-    <string name="encryption_choice_unencrypted">Unverschlüsselt</string>
+    <string name="encryption_choice_unencrypted">Normal</string>
     <string name="enter_contact">Kontakt eingeben</string>
     <string name="enter_password">Passwort eingeben</string>
     <string name="error">Ein Fehler ist aufgetreten</string>
@@ -580,8 +580,8 @@
     <string name="send_private_message">Private Nachricht senden</string>
     <string name="send_private_message_to">Private Nachricht an %s senden…</string>
     <string name="send_rejected">abgelehnt</string>
-    <string name="send_unencrypted">Unverschlüsselt senden</string>
-    <string name="send_unencrypted_message">Unverschlüsselt schreiben…</string>
+    <string name="send_unencrypted">Nachricht senden</string>
+    <string name="send_unencrypted_message">Nachricht schreiben…</string>
     <string name="sending">senden…</string>
     <string name="sending_file">Senden (%1$d%% abgeschlossen)</string>
     <string name="sending_x_file">%s wird gesendet</string>

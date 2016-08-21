@@ -79,14 +79,14 @@
   <string name="delete_messages">Nachrichten löschen</string>
   <string name="also_end_conversation">Diese Unterhaltung danach beenden</string>
   <string name="choose_presence">Ressource des Kontakts auswählen</string>
-  <string name="send_unencrypted_message">Unverschlüsselt schreiben…</string>
+  <string name="send_unencrypted_message">Nachricht schreiben…</string>
   <string name="send_message_to_x">Sende Nachricht an %s</string>
   <string name="send_otr_message">OTR-verschlüsselt schreiben…</string>
   <string name="send_omemo_message">OMEMO-verschlüsselt schreiben…</string>
   <string name="send_omemo_x509_message">v\\OMEMO-verschlüsselte Nachricht senden</string>
   <string name="send_pgp_message">OpenPGP-verschlüsselt schreiben…</string>
   <string name="your_nick_has_been_changed">Dein Nickname wurde geändert</string>
-  <string name="send_unencrypted">Unverschlüsselt senden</string>
+  <string name="send_unencrypted">Nachricht senden</string>
   <string name="decryption_failed">Entschlüsselung fehlgeschlagen. Vielleicht hast du nicht den richtigen privaten Schlüssel.</string>
   <string name="openkeychain_required">OpenKeychain</string>
   <string name="openkeychain_required_long">TenguChat benutzt eine Drittanwendung namens <b>OpenKeychain</b>, um Nachrichten zu ver- und entschlüsseln und um deine Schlüssel zu verwalten.\n\nOpenKeychain ist GPLv3-lizenziert und kann über F-Droid oder Google Play bezogen werden.\n\n<small>(Bitte starte TenguChat danach neu.)</small></string>
@@ -158,7 +158,7 @@
   <string name="account_status_regis_not_sup">Der Server unterstützt keine Registrierung</string>
   <string name="account_status_security_error">Verschlüsselungsfehler</string>
   <string name="account_status_incompatible_server">Inkompatibler Server</string>
-  <string name="encryption_choice_unencrypted">Unverschlüsselt</string>
+  <string name="encryption_choice_unencrypted">Normal</string>
   <string name="encryption_choice_otr">OTR</string>
   <string name="encryption_choice_pgp">OpenPGP</string>
   <string name="encryption_choice_omemo">OMEMO</string>

@@ -596,7 +596,7 @@
     <string name="encryption_choice_omemo">OMEMO</string>
     <string name="encryption_choice_otr">OTR</string>
     <string name="encryption_choice_pgp">OpenPGP</string>
-    <string name="encryption_choice_unencrypted">Unencrypted</string>
+    <string name="encryption_choice_unencrypted">Normal</string>
     <string name="enter_contact">Enter Contact</string>
     <string name="enter_password">Enter password</string>
     <string name="error">An error has occurred</string>
@@ -780,7 +780,7 @@
     <string name="pref_about_conversations_summary">Build and licensing information</string>
     <string name="pref_about_message" translatable="false">
 			TenguChat • the very last word in instant messaging.
-			\n\nCopyright © 2014-2016 Daniel Gultsch
+			\n\nCopyright © 2016 TenguSystems
 			\n\nThis program is free software: you can redistribute it and/or modify
 			it under the terms of the GNU General Public License as published by
 			the Free Software Foundation, either version 3 of the License, or
@@ -791,7 +791,7 @@
 			GNU General Public License for more details.
 			\n\nYou should have received a copy of the GNU General Public License
 			along with this program. If not, see https://www.gnu.org/licenses
-			\n\nDownload the full source code at https://github.com/siacs/TenguChat
+			\n\nDownload the full source code at https://github.com/syntafin/TenguChat
 			\n\n\nLibraries
 			\n\nhttps://www.bouncycastle.org\n(The MIT License (MIT))
 			\n\nhttps://www.gnu.org/software/libidn\n(Apache License, Version 2.0)
@@ -973,8 +973,8 @@
     <string name="send_private_message">Send private message</string>
     <string name="send_private_message_to">Send private message to %s</string>
     <string name="send_rejected">rejected</string>
-    <string name="send_unencrypted">Send unencrypted</string>
-    <string name="send_unencrypted_message">Send unencrypted message</string>
+    <string name="send_unencrypted">Send message</string>
+    <string name="send_unencrypted_message">Write a message</string>
     <string name="sending">sending…</string>
     <string name="sending_file">sending (%1$d%% completed)</string>
     <string name="sending_x_file">Sending %s</string>

@@ -24,24 +24,24 @@
         "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable\\abc_list_selector_background_transition_holo_dark.xml"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable\\common_google_signin_btn_icon_light.xml",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.0.0\\res\\drawable\\common_google_signin_btn_icon_light.xml"
-    },
-    {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable\\abc_edit_text_material.xml",
         "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable\\abc_edit_text_material.xml"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable\\abc_item_background_holo_dark.xml",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable\\abc_item_background_holo_dark.xml"
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable\\common_google_signin_btn_icon_light.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.0.0\\res\\drawable\\common_google_signin_btn_icon_light.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable\\abc_cab_background_top_material.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable\\abc_cab_background_top_material.xml"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable\\elv_popup_bg.xml",
         "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\de.timroes.android\\EnhancedListView\\0.3.4\\res\\drawable\\elv_popup_bg.xml"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable\\abc_cab_background_top_material.xml",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable\\abc_cab_background_top_material.xml"
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable\\abc_item_background_holo_dark.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable\\abc_item_background_holo_dark.xml"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable\\elv_undo_btn_bg.xml",
@@ -68,24 +68,24 @@
         "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable\\es_slidingpane_shadow.xml"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable\\grey.xml",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable\\grey.xml"
-    },
-    {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable\\abc_item_background_holo_dark.xml",
         "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable\\abc_item_background_holo_dark.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable\\grey.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable\\grey.xml"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable\\common_google_signin_btn_text_light.xml",
         "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.0.0\\res\\drawable\\common_google_signin_btn_text_light.xml"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable\\snackbar.xml",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable\\snackbar.xml"
-    },
-    {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable\\elv_undo_btn_bg_pressed.xml",
         "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\exploded-aar\\de.timroes.android\\EnhancedListView\\0.3.4\\res\\drawable\\elv_undo_btn_bg_pressed.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable\\snackbar.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable\\snackbar.xml"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable\\switch_thumb.xml",
@@ -104,24 +104,24 @@
         "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable\\actionbar_tab_indicator.xml"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable\\abc_item_background_holo_light.xml",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable\\abc_item_background_holo_light.xml"
-    },
-    {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable\\account_image_border.xml",
         "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable\\account_image_border.xml"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable\\abc_edit_text_material.xml",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable\\abc_edit_text_material.xml"
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable\\abc_item_background_holo_light.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable\\abc_item_background_holo_light.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable\\common_plus_signin_btn_text_light.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.0.0\\res\\drawable\\common_plus_signin_btn_text_light.xml"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable\\abc_list_selector_background_transition_holo_dark.xml",
         "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable\\abc_list_selector_background_transition_holo_dark.xml"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable\\common_plus_signin_btn_text_light.xml",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.0.0\\res\\drawable\\common_plus_signin_btn_text_light.xml"
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable\\abc_edit_text_material.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable\\abc_edit_text_material.xml"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable\\greybackground.xml",
@@ -144,20 +144,20 @@
         "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable\\grey.xml"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable\\infocard_border_dark.xml",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable\\infocard_border_dark.xml"
-    },
-    {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable\\common_plus_signin_btn_icon_light.xml",
         "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.0.0\\res\\drawable\\common_plus_signin_btn_icon_light.xml"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable\\common_plus_signin_btn_text_light.xml",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.0.0\\res\\drawable\\common_plus_signin_btn_text_light.xml"
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable\\infocard_border_dark.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable\\infocard_border_dark.xml"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable\\md_back_off.xml",
         "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.kyleduo.switchbutton\\library\\1.2.8\\res\\drawable\\md_back_off.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable\\common_plus_signin_btn_text_light.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.0.0\\res\\drawable\\common_plus_signin_btn_text_light.xml"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable\\switch_back_on.xml",
@@ -168,12 +168,12 @@
         "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable\\abc_item_background_holo_light.xml"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable\\abc_list_selector_holo_light.xml",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable\\abc_list_selector_holo_light.xml"
-    },
-    {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable\\switch_back_off.xml",
         "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable\\switch_back_off.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable\\abc_list_selector_holo_light.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable\\abc_list_selector_holo_light.xml"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable\\md_back_off.xml",
@@ -284,12 +284,12 @@
         "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable\\abc_cab_background_internal_bg.xml"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable\\common_plus_signin_btn_icon_light.xml",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.0.0\\res\\drawable\\common_plus_signin_btn_icon_light.xml"
-    },
-    {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable\\abc_tab_indicator_material.xml",
         "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable\\abc_tab_indicator_material.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable\\common_plus_signin_btn_icon_light.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.0.0\\res\\drawable\\common_plus_signin_btn_icon_light.xml"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable\\abc_list_selector_holo_dark.xml",
@@ -316,23 +316,23 @@
         "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable\\abc_btn_radio_material.xml"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable\\abc_list_selector_holo_dark.xml",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable\\abc_list_selector_holo_dark.xml"
-    },
-    {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable\\infocard_border_dark.xml",
         "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable\\infocard_border_dark.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable\\abc_list_selector_holo_dark.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable\\abc_list_selector_holo_dark.xml"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable\\crop__texture.xml",
         "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\exploded-aar\\com.soundcloud.android\\android-crop\\1.0.1\\res\\drawable\\crop__texture.xml"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable\\common_google_signin_btn_icon_dark.xml",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.0.0\\res\\drawable\\common_google_signin_btn_icon_dark.xml"
-    },
-    {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable\\infocard_border.xml",
         "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable\\infocard_border.xml"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable\\common_google_signin_btn_icon_dark.xml",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.0.0\\res\\drawable\\common_google_signin_btn_icon_dark.xml"
     }
 ]

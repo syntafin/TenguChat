@@ -1,27 +1,27 @@
 [
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\tab_unselected_pressed_conversations.9.png",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable-mdpi\\tab_unselected_pressed_conversations.9.png"
-    },
-    {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\switch_thumb_disable.png",
         "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\switch_thumb_disable.png"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_notifications_white_24dp.png",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\ic_notifications_white_24dp.png"
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\tab_unselected_pressed_conversations.9.png",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable-mdpi\\tab_unselected_pressed_conversations.9.png"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\switch_thumb_off_normal.png",
         "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\switch_thumb_off_normal.png"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\main_logo.png",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable-mdpi\\main_logo.png"
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_notifications_white_24dp.png",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\ic_notifications_white_24dp.png"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\abc_ab_share_pack_holo_light.9.png",
         "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ab_share_pack_holo_light.9.png"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\main_logo.png",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable-mdpi\\main_logo.png"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\common_google_signin_btn_text_dark_focused.9.png",
@@ -44,12 +44,12 @@
         "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\ic_send_picture_offline_dark.png"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_mode_edit_white_18dp.png",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable-mdpi\\ic_mode_edit_white_18dp.png"
-    },
-    {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_action_share.png",
         "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\ic_action_share.png"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_mode_edit_white_18dp.png",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable-mdpi\\ic_mode_edit_white_18dp.png"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\common_google_signin_btn_text_light_pressed.9.png",
@@ -64,12 +64,12 @@
         "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.0.0\\res\\drawable-mdpi-v4\\common_full_open_on_phone.png"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_send_voice_offline.png",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable-mdpi\\ic_send_voice_offline.png"
-    },
-    {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\abc_textfield_search_activated_mtrl_alpha.9.png",
         "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_textfield_search_activated_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_send_voice_offline.png",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable-mdpi\\ic_send_voice_offline.png"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\common_google_signin_btn_icon_light_focused.9.png",
@@ -104,12 +104,12 @@
         "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.0.0\\res\\drawable-mdpi-v4\\common_google_signin_btn_text_light_focused.9.png"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\message_bubble_received_grey.9.png",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\message_bubble_received_grey.9.png"
-    },
-    {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_action_copy.png",
         "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\ic_action_copy.png"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\message_bubble_received_grey.9.png",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\message_bubble_received_grey.9.png"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_action_edit.png",
@@ -124,16 +124,16 @@
         "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\ic_account_box_white_24dp.png"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\abc_ic_menu_selectall_mtrl_alpha.png",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ic_menu_selectall_mtrl_alpha.png"
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_send_photo_offline.png",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\ic_send_photo_offline.png"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\abc_ic_menu_paste_mtrl_am_alpha.png",
         "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ic_menu_paste_mtrl_am_alpha.png"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_send_photo_offline.png",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\ic_send_photo_offline.png"
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\abc_ic_menu_selectall_mtrl_alpha.png",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ic_menu_selectall_mtrl_alpha.png"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_action_cancel.png",
@@ -196,16 +196,16 @@
         "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.0.0\\res\\drawable-mdpi-v4\\common_plus_signin_btn_icon_light_pressed.9.png"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_notifications_none_white_24dp.png",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable-mdpi\\ic_notifications_none_white_24dp.png"
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\abc_spinner_mtrl_am_alpha.9.png",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_spinner_mtrl_am_alpha.9.png"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\tab_selected_pressed_conversations.9.png",
         "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable-mdpi\\tab_selected_pressed_conversations.9.png"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\abc_spinner_mtrl_am_alpha.9.png",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_spinner_mtrl_am_alpha.9.png"
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_notifications_none_white_24dp.png",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable-mdpi\\ic_notifications_none_white_24dp.png"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\elv_ic_action_undo.png",
@@ -220,12 +220,12 @@
         "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ic_menu_moreoverflow_mtrl_alpha.png"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\abc_ic_search_api_mtrl_alpha.png",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ic_search_api_mtrl_alpha.png"
-    },
-    {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_action_settings_white.png",
         "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\ic_action_settings_white.png"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\abc_ic_search_api_mtrl_alpha.png",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ic_search_api_mtrl_alpha.png"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_send_picture_online.png",
@@ -248,16 +248,16 @@
         "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_textfield_search_default_mtrl_alpha.9.png"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\common_plus_signin_btn_icon_light_normal.9.png",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.0.0\\res\\drawable-mdpi-v4\\common_plus_signin_btn_icon_light_normal.9.png"
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_send_cancel_offline_dark.png",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\ic_send_cancel_offline_dark.png"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_stat_communication_import_export.png",
         "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\ic_stat_communication_import_export.png"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_send_cancel_offline_dark.png",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\ic_send_cancel_offline_dark.png"
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\common_plus_signin_btn_icon_light_normal.9.png",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.0.0\\res\\drawable-mdpi-v4\\common_plus_signin_btn_icon_light_normal.9.png"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\common_google_signin_btn_icon_light_normal.9.png",
@@ -284,12 +284,12 @@
         "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.0.0\\res\\drawable-mdpi-v4\\common_plus_signin_btn_text_dark_disabled.9.png"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\abc_list_pressed_holo_light.9.png",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_list_pressed_holo_light.9.png"
-    },
-    {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_action_refresh.png",
         "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable-mdpi\\ic_action_refresh.png"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\abc_list_pressed_holo_light.9.png",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_list_pressed_holo_light.9.png"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\message_bubble_received_dark.9.png",
@@ -388,12 +388,12 @@
         "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\ic_action_not_secure.png"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_send_location_dnd.png",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\ic_send_location_dnd.png"
-    },
-    {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\abc_list_pressed_holo_dark.9.png",
         "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_list_pressed_holo_dark.9.png"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_send_location_dnd.png",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\ic_send_location_dnd.png"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_attach_file_white_24dp.png",
@@ -408,12 +408,12 @@
         "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable-mdpi\\ic_send_cancel_offline_dark.png"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\message_bubble_received_white.9.png",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\message_bubble_received_white.9.png"
-    },
-    {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\message_bubble_sent.9.png",
         "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\message_bubble_sent.9.png"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\message_bubble_received_white.9.png",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\message_bubble_received_white.9.png"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_mode_edit_white_18dp.png",
@@ -456,48 +456,48 @@
         "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable-mdpi\\ic_file_download_white_24dp.png"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\common_plus_signin_btn_icon_light_pressed.9.png",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.0.0\\res\\drawable-mdpi-v4\\common_plus_signin_btn_icon_light_pressed.9.png"
-    },
-    {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_block_white_24dp.png",
         "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\ic_block_white_24dp.png"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_autorenew_white_24dp.png",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable-mdpi\\ic_autorenew_white_24dp.png"
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\common_plus_signin_btn_icon_light_pressed.9.png",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.0.0\\res\\drawable-mdpi-v4\\common_plus_signin_btn_icon_light_pressed.9.png"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\message_bubble_received.9.png",
         "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable-mdpi\\message_bubble_received.9.png"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\abc_tab_indicator_mtrl_alpha.9.png",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_tab_indicator_mtrl_alpha.9.png"
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_autorenew_white_24dp.png",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable-mdpi\\ic_autorenew_white_24dp.png"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_action_discard.png",
         "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\ic_action_discard.png"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\abc_ic_menu_moreoverflow_mtrl_alpha.png",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ic_menu_moreoverflow_mtrl_alpha.png"
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\abc_tab_indicator_mtrl_alpha.9.png",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_tab_indicator_mtrl_alpha.9.png"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_send_text_offline.png",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\ic_send_text_offline.png"
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\abc_ic_menu_moreoverflow_mtrl_alpha.png",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ic_menu_moreoverflow_mtrl_alpha.png"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\abc_ic_commit_search_api_mtrl_alpha.png",
         "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ic_commit_search_api_mtrl_alpha.png"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\common_plus_signin_btn_text_dark_normal.9.png",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.0.0\\res\\drawable-mdpi-v4\\common_plus_signin_btn_text_dark_normal.9.png"
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_send_text_offline.png",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\ic_send_text_offline.png"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\switch_thumb_off_pressed.png",
         "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable-mdpi\\switch_thumb_off_pressed.png"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\common_plus_signin_btn_text_dark_normal.9.png",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.0.0\\res\\drawable-mdpi-v4\\common_plus_signin_btn_text_dark_normal.9.png"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\abc_ab_share_pack_holo_dark.9.png",
@@ -516,28 +516,28 @@
         "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\ic_delete_black_24dp.png"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_attach_file_white_24dp.png",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable-mdpi\\ic_attach_file_white_24dp.png"
-    },
-    {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_action_refresh_white.png",
         "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\ic_action_refresh_white.png"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_send_cancel_offline.png",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\ic_send_cancel_offline.png"
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_attach_file_white_24dp.png",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable-mdpi\\ic_attach_file_white_24dp.png"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\common_google_signin_btn_text_dark_pressed.9.png",
         "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.0.0\\res\\drawable-mdpi-v4\\common_google_signin_btn_text_dark_pressed.9.png"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_send_voice_away.png",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable-mdpi\\ic_send_voice_away.png"
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_send_cancel_offline.png",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\ic_send_cancel_offline.png"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_action_new.png",
         "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable-mdpi\\ic_action_new.png"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_send_voice_away.png",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable-mdpi\\ic_send_voice_away.png"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_notifications_off_white80.png",
@@ -632,12 +632,12 @@
         "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.0.0\\res\\drawable-mdpi-v4\\common_plus_signin_btn_text_dark_pressed.9.png"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\abc_btn_check_to_on_mtrl_015.png",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_btn_check_to_on_mtrl_015.png"
-    },
-    {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_lock_white_18dp.png",
         "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\ic_lock_white_18dp.png"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\abc_btn_check_to_on_mtrl_015.png",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_btn_check_to_on_mtrl_015.png"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_announcement_white_24dp.png",
@@ -704,12 +704,12 @@
         "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\ic_settings_black_24dp.png"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_person_add_white_24dp.png",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable-mdpi\\ic_person_add_white_24dp.png"
-    },
-    {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\common_plus_signin_btn_text_light_pressed.9.png",
         "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.0.0\\res\\drawable-mdpi-v4\\common_plus_signin_btn_text_light_pressed.9.png"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_person_add_white_24dp.png",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable-mdpi\\ic_person_add_white_24dp.png"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_notifications_white_24dp.png",
@@ -728,12 +728,12 @@
         "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\ic_action_new.png"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\common_google_signin_btn_text_light_pressed.9.png",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.0.0\\res\\drawable-mdpi-v4\\common_google_signin_btn_text_light_pressed.9.png"
-    },
-    {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_send_photo_dnd.png",
         "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\ic_send_photo_dnd.png"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\common_google_signin_btn_text_light_pressed.9.png",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.0.0\\res\\drawable-mdpi-v4\\common_google_signin_btn_text_light_pressed.9.png"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_lock_white_24dp.png",
@@ -780,12 +780,12 @@
         "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ic_voice_search_api_mtrl_alpha.png"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\abc_ab_share_pack_holo_light.9.png",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ab_share_pack_holo_light.9.png"
-    },
-    {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_send_location_offline.png",
         "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\ic_send_location_offline.png"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\abc_ab_share_pack_holo_light.9.png",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ab_share_pack_holo_light.9.png"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_send_photo_offline_dark.png",
@@ -820,12 +820,12 @@
         "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\ic_notifications_none_black_24dp.png"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_send_text_online.png",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable-mdpi\\ic_send_text_online.png"
-    },
-    {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_group_white_24dp.png",
         "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\ic_group_white_24dp.png"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_send_text_online.png",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable-mdpi\\ic_send_text_online.png"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\message_bubble_received_warning.9.png",
@@ -836,44 +836,44 @@
         "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\exploded-aar\\com.soundcloud.android\\android-crop\\1.0.1\\res\\drawable-mdpi\\crop__ic_cancel.png"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_search_white_24dp.png",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\ic_search_white_24dp.png"
-    },
-    {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_lock_open_white_24dp.png",
         "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\ic_lock_open_white_24dp.png"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_search_white_24dp.png",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\ic_search_white_24dp.png"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_send_location_away.png",
         "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable-mdpi\\ic_send_location_away.png"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\abc_ic_menu_share_mtrl_alpha.png",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ic_menu_share_mtrl_alpha.png"
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\message_bubble_received_grey.9.png",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable-mdpi\\message_bubble_received_grey.9.png"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_action_copy_white.png",
         "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable-mdpi\\ic_action_copy_white.png"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\message_bubble_received_grey.9.png",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable-mdpi\\message_bubble_received_grey.9.png"
-    },
-    {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\tab_selected_conversations.9.png",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\tab_selected_conversations.9.png"
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\abc_ic_menu_share_mtrl_alpha.png",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ic_menu_share_mtrl_alpha.png"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\abc_btn_switch_to_on_mtrl_00012.9.png",
         "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_btn_switch_to_on_mtrl_00012.9.png"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\common_google_signin_btn_icon_dark_disabled.9.png",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.0.0\\res\\drawable-mdpi-v4\\common_google_signin_btn_icon_dark_disabled.9.png"
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\tab_selected_conversations.9.png",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\tab_selected_conversations.9.png"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\common_google_signin_btn_text_dark_disabled.9.png",
         "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.0.0\\res\\drawable-mdpi-v4\\common_google_signin_btn_text_dark_disabled.9.png"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\common_google_signin_btn_icon_dark_disabled.9.png",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.0.0\\res\\drawable-mdpi-v4\\common_google_signin_btn_icon_dark_disabled.9.png"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_profile.png",
@@ -896,12 +896,12 @@
         "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable-mdpi\\ic_action_settings_white.png"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\abc_list_focused_holo.9.png",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_list_focused_holo.9.png"
-    },
-    {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\common_google_signin_btn_icon_light_pressed.9.png",
         "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.0.0\\res\\drawable-mdpi-v4\\common_google_signin_btn_icon_light_pressed.9.png"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\abc_list_focused_holo.9.png",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_list_focused_holo.9.png"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\switch_thumb_on_normal.png",
@@ -968,20 +968,20 @@
         "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\ic_action_new_attachment.png"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_action_settings.png",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable-mdpi\\ic_action_settings.png"
-    },
-    {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\crop__ic_done.png",
         "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\exploded-aar\\com.soundcloud.android\\android-crop\\1.0.1\\res\\drawable-mdpi\\crop__ic_done.png"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_action_discard.png",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable-mdpi\\ic_action_discard.png"
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_action_settings.png",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable-mdpi\\ic_action_settings.png"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\crop__ic_cancel.png",
         "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.soundcloud.android\\android-crop\\1.0.1\\res\\drawable-mdpi\\crop__ic_cancel.png"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_action_discard.png",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable-mdpi\\ic_action_discard.png"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_notifications_off_white_24dp.png",
@@ -992,12 +992,12 @@
         "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.0.0\\res\\drawable-mdpi-v4\\common_plus_signin_btn_icon_dark_pressed.9.png"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_notifications_off_black54_24dp.png",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\ic_notifications_off_black54_24dp.png"
-    },
-    {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_action_edit_dark.png",
         "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\ic_action_edit_dark.png"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_notifications_off_black54_24dp.png",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\ic_notifications_off_black54_24dp.png"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\common_google_signin_btn_icon_light_focused.9.png",
@@ -1096,12 +1096,12 @@
         "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable-mdpi\\switch_thumb_on_pressed.png"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_send_picture_dnd.png",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\ic_send_picture_dnd.png"
-    },
-    {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\common_google_signin_btn_icon_light_disabled.9.png",
         "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.0.0\\res\\drawable-mdpi-v4\\common_google_signin_btn_icon_light_disabled.9.png"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_send_picture_dnd.png",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\ic_send_picture_dnd.png"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\common_plus_signin_btn_text_light_focused.9.png",
@@ -1116,12 +1116,12 @@
         "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.0.0\\res\\drawable-mdpi-v4\\common_plus_signin_btn_icon_light_disabled.9.png"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\abc_ic_menu_selectall_mtrl_alpha.png",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ic_menu_selectall_mtrl_alpha.png"
-    },
-    {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_send_photo_away.png",
         "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable-mdpi\\ic_send_photo_away.png"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\abc_ic_menu_selectall_mtrl_alpha.png",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ic_menu_selectall_mtrl_alpha.png"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_group_white_24dp.png",
@@ -1296,24 +1296,24 @@
         "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_btn_switch_to_on_mtrl_00012.9.png"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_send_cancel_offline_white.png",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable-mdpi\\ic_send_cancel_offline_white.png"
-    },
-    {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_send_picture_away.png",
         "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable-mdpi\\ic_send_picture_away.png"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_send_cancel_offline_white.png",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable-mdpi\\ic_send_cancel_offline_white.png"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\common_plus_signin_btn_text_dark_focused.9.png",
         "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.0.0\\res\\drawable-mdpi-v4\\common_plus_signin_btn_text_dark_focused.9.png"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\common_google_signin_btn_text_light_disabled.9.png",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.0.0\\res\\drawable-mdpi-v4\\common_google_signin_btn_text_light_disabled.9.png"
-    },
-    {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_send_voice_dnd.png",
         "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable-mdpi\\ic_send_voice_dnd.png"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\common_google_signin_btn_text_light_disabled.9.png",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.0.0\\res\\drawable-mdpi-v4\\common_google_signin_btn_text_light_disabled.9.png"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_settings_black_24dp.png",
@@ -1336,20 +1336,20 @@
         "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable-mdpi\\ic_send_location_dnd.png"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\common_plus_signin_btn_icon_light_normal.9.png",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.0.0\\res\\drawable-mdpi-v4\\common_plus_signin_btn_icon_light_normal.9.png"
-    },
-    {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\common_google_signin_btn_icon_dark_focused.9.png",
         "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.0.0\\res\\drawable-mdpi-v4\\common_google_signin_btn_icon_dark_focused.9.png"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\common_plus_signin_btn_text_light_normal.9.png",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.0.0\\res\\drawable-mdpi-v4\\common_plus_signin_btn_text_light_normal.9.png"
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\common_plus_signin_btn_icon_light_normal.9.png",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.0.0\\res\\drawable-mdpi-v4\\common_plus_signin_btn_icon_light_normal.9.png"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_send_location_offline_dark.png",
         "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable-mdpi\\ic_send_location_offline_dark.png"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\common_plus_signin_btn_text_light_normal.9.png",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.0.0\\res\\drawable-mdpi-v4\\common_plus_signin_btn_text_light_normal.9.png"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_notifications_off_black_24dp.png",
@@ -1368,36 +1368,36 @@
         "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable-mdpi\\tab_unselected_focused_conversations.9.png"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\common_plus_signin_btn_icon_dark_normal.9.png",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.0.0\\res\\drawable-mdpi-v4\\common_plus_signin_btn_icon_dark_normal.9.png"
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\abc_ic_go_search_api_mtrl_alpha.png",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ic_go_search_api_mtrl_alpha.png"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_received_indicator.png",
         "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\ic_received_indicator.png"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\abc_ic_go_search_api_mtrl_alpha.png",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ic_go_search_api_mtrl_alpha.png"
-    },
-    {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_lock_white_24dp.png",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\ic_lock_white_24dp.png"
-    },
-    {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\tab_unselected_conversations.9.png",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\tab_unselected_conversations.9.png"
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\common_plus_signin_btn_icon_dark_normal.9.png",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.0.0\\res\\drawable-mdpi-v4\\common_plus_signin_btn_icon_dark_normal.9.png"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\switch_thumb_on_pressed.png",
         "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\switch_thumb_on_pressed.png"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_send_photo_offline_white.png",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\ic_send_photo_offline_white.png"
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\tab_unselected_conversations.9.png",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\tab_unselected_conversations.9.png"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_lock_white_24dp.png",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\ic_lock_white_24dp.png"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\tab_selected_focused_conversations.9.png",
         "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\tab_selected_focused_conversations.9.png"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_send_photo_offline_white.png",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\ic_send_photo_offline_white.png"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_action_settings.png",
@@ -1428,12 +1428,12 @@
         "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\ic_send_cancel_away.png"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_stat_alert_warning.png",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable-mdpi\\ic_stat_alert_warning.png"
-    },
-    {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\abc_cab_background_top_mtrl_alpha.9.png",
         "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_cab_background_top_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_stat_alert_warning.png",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable-mdpi\\ic_stat_alert_warning.png"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_send_picture_offline_dark.png",
@@ -1456,16 +1456,16 @@
         "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable-mdpi\\ic_send_voice_online.png"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_send_location_offline.png",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable-mdpi\\ic_send_location_offline.png"
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\abc_switch_track_mtrl_alpha.9.png",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_switch_track_mtrl_alpha.9.png"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_file_download_white_24dp.png",
         "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\ic_file_download_white_24dp.png"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\abc_switch_track_mtrl_alpha.9.png",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_switch_track_mtrl_alpha.9.png"
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_send_location_offline.png",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable-mdpi\\ic_send_location_offline.png"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_notifications_white80.png",
@@ -1476,24 +1476,24 @@
         "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\ic_send_text_dnd.png"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_lock_black_18dp.png",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\ic_lock_black_18dp.png"
-    },
-    {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\common_google_signin_btn_text_dark_disabled.9.png",
         "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.0.0\\res\\drawable-mdpi-v4\\common_google_signin_btn_text_dark_disabled.9.png"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\switch_thumb_off_normal.png",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable-mdpi\\switch_thumb_off_normal.png"
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_lock_black_18dp.png",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\ic_lock_black_18dp.png"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_room_white_24dp.png",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\ic_room_white_24dp.png"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_content_copy_black_24dp.png",
         "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\ic_content_copy_black_24dp.png"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_room_white_24dp.png",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\ic_room_white_24dp.png"
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\switch_thumb_off_normal.png",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable-mdpi\\switch_thumb_off_normal.png"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_notifications_paused_white_24dp.png",
@@ -1504,32 +1504,32 @@
         "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable-mdpi\\ic_action_group.png"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\crop__ic_done.png",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.soundcloud.android\\android-crop\\1.0.1\\res\\drawable-mdpi\\crop__ic_done.png"
-    },
-    {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_send_text_online.png",
         "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\ic_send_text_online.png"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_send_location_offline_white.png",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable-mdpi\\ic_send_location_offline_white.png"
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\crop__ic_done.png",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.soundcloud.android\\android-crop\\1.0.1\\res\\drawable-mdpi\\crop__ic_done.png"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_send_picture_online.png",
         "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable-mdpi\\ic_send_picture_online.png"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_send_location_online.png",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable-mdpi\\ic_send_location_online.png"
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_send_location_offline_white.png",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable-mdpi\\ic_send_location_offline_white.png"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\message_bubble_received_warning.9.png",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable-mdpi\\message_bubble_received_warning.9.png"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\common_google_signin_btn_icon_light_disabled.9.png",
         "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.0.0\\res\\drawable-mdpi-v4\\common_google_signin_btn_icon_light_disabled.9.png"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\message_bubble_received_warning.9.png",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable-mdpi\\message_bubble_received_warning.9.png"
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_send_location_online.png",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable-mdpi\\ic_send_location_online.png"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_content_copy_white_24dp.png",
@@ -1540,24 +1540,24 @@
         "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable-mdpi\\ic_launcher.png"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\abc_ic_menu_cut_mtrl_alpha.png",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ic_menu_cut_mtrl_alpha.png"
-    },
-    {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\tab_unselected_focused_conversations.9.png",
         "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\tab_unselected_focused_conversations.9.png"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\abc_ic_menu_cut_mtrl_alpha.png",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ic_menu_cut_mtrl_alpha.png"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_refresh_white_24dp.png",
         "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\ic_refresh_white_24dp.png"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\common_google_signin_btn_icon_light_pressed.9.png",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.0.0\\res\\drawable-mdpi-v4\\common_google_signin_btn_icon_light_pressed.9.png"
-    },
-    {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\abc_textfield_search_activated_mtrl_alpha.9.png",
         "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_textfield_search_activated_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\common_google_signin_btn_icon_light_pressed.9.png",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.0.0\\res\\drawable-mdpi-v4\\common_google_signin_btn_icon_light_pressed.9.png"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_action_cancel_launchersize_light.png",
@@ -1568,36 +1568,36 @@
         "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable-mdpi\\ic_send_voice_offline_dark.png"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\tab_selected_focused_conversations.9.png",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable-mdpi\\tab_selected_focused_conversations.9.png"
-    },
-    {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_autorenew_white_24dp.png",
         "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\ic_autorenew_white_24dp.png"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\tab_selected_focused_conversations.9.png",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable-mdpi\\tab_selected_focused_conversations.9.png"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_action_search.png",
         "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\ic_action_search.png"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\common_google_signin_btn_icon_dark_focused.9.png",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.0.0\\res\\drawable-mdpi-v4\\common_google_signin_btn_icon_dark_focused.9.png"
-    },
-    {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_action_remove_white.png",
         "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\ic_action_remove_white.png"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\common_google_signin_btn_icon_dark_focused.9.png",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.0.0\\res\\drawable-mdpi-v4\\common_google_signin_btn_icon_dark_focused.9.png"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\abc_ic_voice_search_api_mtrl_alpha.png",
         "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ic_voice_search_api_mtrl_alpha.png"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\common_plus_signin_btn_text_dark_normal.9.png",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.0.0\\res\\drawable-mdpi-v4\\common_plus_signin_btn_text_dark_normal.9.png"
-    },
-    {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_group_add_white_24dp.png",
         "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\ic_group_add_white_24dp.png"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\common_plus_signin_btn_text_dark_normal.9.png",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.0.0\\res\\drawable-mdpi-v4\\common_plus_signin_btn_text_dark_normal.9.png"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_notifications_paused_white_24dp.png",
@@ -1624,83 +1624,83 @@
         "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.0.0\\res\\drawable-mdpi-v4\\common_google_signin_btn_icon_dark_normal.9.png"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_send_voice_online.png",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\ic_send_voice_online.png"
-    },
-    {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_action_secure.png",
         "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\ic_action_secure.png"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_block_white_24dp.png",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable-mdpi\\ic_block_white_24dp.png"
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_send_voice_online.png",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\ic_send_voice_online.png"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\message_bubble_sent_grey.9.png",
         "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable-mdpi\\message_bubble_sent_grey.9.png"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_send_text_offline_dark.png",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable-mdpi\\ic_send_text_offline_dark.png"
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_block_white_24dp.png",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable-mdpi\\ic_block_white_24dp.png"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_share_white_24dp.png",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable-mdpi\\ic_share_white_24dp.png"
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_send_text_offline_dark.png",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable-mdpi\\ic_send_text_offline_dark.png"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\abc_btn_check_to_on_mtrl_000.png",
         "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_btn_check_to_on_mtrl_000.png"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_search_white_24dp.png",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable-mdpi\\ic_search_white_24dp.png"
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_share_white_24dp.png",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable-mdpi\\ic_share_white_24dp.png"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_send_text_away.png",
         "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\ic_send_text_away.png"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_send_photo_away.png",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\ic_send_photo_away.png"
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_search_white_24dp.png",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable-mdpi\\ic_search_white_24dp.png"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\abc_textfield_activated_mtrl_alpha.9.png",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_textfield_activated_mtrl_alpha.9.png"
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_send_photo_away.png",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\ic_send_photo_away.png"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\tab_selected_conversations.9.png",
         "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable-mdpi\\tab_selected_conversations.9.png"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_notifications_black54_24dp.png",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable-mdpi\\ic_notifications_black54_24dp.png"
-    },
-    {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\common_plus_signin_btn_text_dark_focused.9.png",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.0.0\\res\\drawable-mdpi-v4\\common_plus_signin_btn_text_dark_focused.9.png"
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\abc_textfield_activated_mtrl_alpha.9.png",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_textfield_activated_mtrl_alpha.9.png"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\abc_popup_background_mtrl_mult.9.png",
         "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_popup_background_mtrl_mult.9.png"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\abc_tab_indicator_mtrl_alpha.9.png",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_tab_indicator_mtrl_alpha.9.png"
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\common_plus_signin_btn_text_dark_focused.9.png",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.0.0\\res\\drawable-mdpi-v4\\common_plus_signin_btn_text_dark_focused.9.png"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_crop_white_24dp.png",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\ic_crop_white_24dp.png"
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_notifications_black54_24dp.png",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\src\\main\\res\\drawable-mdpi\\ic_notifications_black54_24dp.png"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\common_plus_signin_btn_icon_dark_pressed.9.png",
         "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.0.0\\res\\drawable-mdpi-v4\\common_plus_signin_btn_icon_dark_pressed.9.png"
     },
     {
-        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_action_cancel_launchersize.png",
-        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\exploded-aar\\org.sufficientlysecure\\openpgp-api\\10.0\\res\\drawable-mdpi\\ic_action_cancel_launchersize.png"
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_crop_white_24dp.png",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\src\\main\\res\\drawable-mdpi\\ic_crop_white_24dp.png"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\abc_tab_indicator_mtrl_alpha.9.png",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_tab_indicator_mtrl_alpha.9.png"
     },
     {
         "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\common_ic_googleplayservices.png",
         "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.0.0\\res\\drawable-mdpi-v4\\common_ic_googleplayservices.png"
+    },
+    {
+        "merged": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\res\\merged\\playstore\\release\\drawable-mdpi-v4\\ic_action_cancel_launchersize.png",
+        "source": "E:\\Projekt Daten\\TenguChatApp\\TenguChat\\build\\intermediates\\exploded-aar\\org.sufficientlysecure\\openpgp-api\\10.0\\res\\drawable-mdpi\\ic_action_cancel_launchersize.png"
     }
 ]
