@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <dimen name="conversations_overview_width">304dp</dimen>
-    <integer name="abc_max_action_buttons">3</integer>
-</resources>

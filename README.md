@@ -4,6 +4,9 @@ A new way of communication!
 
 [![Google Play](https://conversations.im/images/en-play-badge.png)](https://play.google.com/store/apps/details?id=de.tengu.chat&referrer=utm_source%3Dgithub)
 
+Original creator/Forked from:
+* [siacs.eu] (https://github.com/siacs/Conversations)
+
 ## Design principles
 
 * Be as beautiful and easy to use as possible without sacrificing security or
