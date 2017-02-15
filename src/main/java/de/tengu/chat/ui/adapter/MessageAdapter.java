@@ -11,8 +11,11 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
+import android.support.v4.content.FileProvider;
 import android.text.Spannable;
 import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.RelativeSizeSpan;
@@ -41,6 +44,7 @@ import java.util.regex.Pattern;
 
 import de.tengu.chat.Config;
 import de.tengu.chat.R;
+import de.tengu.chat.crypto.axolotl.FingerprintStatus;
 import de.tengu.chat.crypto.axolotl.XmppAxolotlSession;
 import de.tengu.chat.entities.Account;
 import de.tengu.chat.entities.Conversation;
@@ -48,12 +52,16 @@ import de.tengu.chat.entities.DownloadableFile;
 import de.tengu.chat.entities.Message;
 import de.tengu.chat.entities.Message.FileParams;
 import de.tengu.chat.entities.Transferable;
+import de.tengu.chat.persistance.FileBackend;
 import de.tengu.chat.ui.ConversationActivity;
+import de.tengu.chat.ui.widget.ClickableMovementMethod;
+import de.tengu.chat.ui.widget.CopyTextView;
+import de.tengu.chat.ui.widget.ListSelectionManager;
 import de.tengu.chat.utils.CryptoHelper;
 import de.tengu.chat.utils.GeoHelper;
 import de.tengu.chat.utils.UIHelper;
 
-public class MessageAdapter extends ArrayAdapter<Message> {
+public class MessageAdapter extends ArrayAdapter<Message> implements CopyTextView.CopyHandler {
 
 	private static final int SENT = 0;
 	private static final int RECEIVED = 1;
@@ -71,16 +79,10 @@ public class MessageAdapter extends ArrayAdapter<Message> {
 	private OnContactPictureClicked mOnContactPictureClickedListener;
 	private OnContactPictureLongClicked mOnContactPictureLongClickedListener;
 
-	private OnLongClickListener openContextMenu = new OnLongClickListener() {
-
-		@Override
-		public boolean onLongClick(View v) {
-			v.showContextMenu();
-			return true;
-		}
-	};
 	private boolean mIndicateReceived = false;
 	private boolean mUseGreenBackground = false;
+
+	private final ListSelectionManager listSelectionManager = new ListSelectionManager();
 
 	public MessageAdapter(ConversationActivity activity, List<Message> messages) {
 		super(activity, 0, messages);
@@ -126,7 +128,7 @@ public class MessageAdapter extends ArrayAdapter<Message> {
 		}
 	}
 
-	private void displayStatus(ViewHolder viewHolder, Message message, int type, boolean darkBackground) {
+	private void displayStatus(ViewHolder viewHolder, Message message, int type, boolean darkBackground, boolean inValidSession) {
 		String filesize = null;
 		String info = null;
 		boolean error = false;
@@ -202,12 +204,12 @@ public class MessageAdapter extends ArrayAdapter<Message> {
 			viewHolder.indicator.setImageResource(darkBackground ? R.drawable.ic_lock_white_18dp : R.drawable.ic_lock_black_18dp);
 			viewHolder.indicator.setVisibility(View.VISIBLE);
 			if (message.getEncryption() == Message.ENCRYPTION_AXOLOTL) {
-				XmppAxolotlSession.Trust trust = message.getConversation()
+				FingerprintStatus status = message.getConversation()
 						.getAccount().getAxolotlService().getFingerprintTrust(
 								message.getFingerprint());
 
-				if(trust == null || (!trust.trusted() && !trust.trustedInactive())) {
-					viewHolder.indicator.setColorFilter(activity.getWarningTextColor());
+				if(status == null || (type == SENT ? !status.isTrusted() : (!status.isVerified() && inValidSession))) {
+					viewHolder.indicator.setColorFilter(0xffc64545);
 					viewHolder.indicator.setAlpha(1.0f);
 				} else {
 					viewHolder.indicator.clearColorFilter();
@@ -303,36 +305,30 @@ public class MessageAdapter extends ArrayAdapter<Message> {
 		viewHolder.messageBody.setIncludeFontPadding(true);
 		if (message.getBody() != null) {
 			final String nick = UIHelper.getMessageDisplayName(message);
-			String body;
-			try {
-				body = message.getMergedBody().replaceAll("^" + Message.ME_COMMAND, nick + " ");
-			} catch (ArrayIndexOutOfBoundsException e) {
-				body = message.getMergedBody();
+			SpannableStringBuilder body = message.getMergedBody();
+			boolean hasMeCommand = message.hasMeCommand();
+			if (hasMeCommand) {
+				body = body.replace(0, Message.ME_COMMAND.length(), nick + " ");
 			}
 			if (body.length() > Config.MAX_DISPLAY_MESSAGE_CHARS) {
-				body = body.substring(0, Config.MAX_DISPLAY_MESSAGE_CHARS)+"\u2026";
+				body = new SpannableStringBuilder(body, 0, Config.MAX_DISPLAY_MESSAGE_CHARS);
+				body.append("\u2026");
 			}
-			final SpannableString formattedBody = new SpannableString(body);
-			int i = body.indexOf(Message.MERGE_SEPARATOR);
-			while(i >= 0) {
-				final int end = i + Message.MERGE_SEPARATOR.length();
-				formattedBody.setSpan(new RelativeSizeSpan(0.3f),i,end,Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-				i = body.indexOf(Message.MERGE_SEPARATOR,end);
+			Message.MergeSeparator[] mergeSeparators = body.getSpans(0, body.length(), Message.MergeSeparator.class);
+			for (Message.MergeSeparator mergeSeparator : mergeSeparators) {
+				int start = body.getSpanStart(mergeSeparator);
+				int end = body.getSpanEnd(mergeSeparator);
+				body.setSpan(new RelativeSizeSpan(0.3f), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 			}
 			if (message.getType() != Message.TYPE_PRIVATE) {
-				if (message.hasMeCommand()) {
-					final Spannable span = new SpannableString(formattedBody);
-					span.setSpan(new StyleSpan(Typeface.BOLD_ITALIC), 0, nick.length(),
+				if (hasMeCommand) {
+					body.setSpan(new StyleSpan(Typeface.BOLD_ITALIC), 0, nick.length(),
 							Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-					viewHolder.messageBody.setText(span);
-				} else {
-					viewHolder.messageBody.setText(formattedBody);
 				}
 			} else {
 				String privateMarker;
 				if (message.getStatus() <= Message.STATUS_RECEIVED) {
-					privateMarker = activity
-						.getString(R.string.private_message);
+					privateMarker = activity.getString(R.string.private_message);
 				} else {
 					final String to;
 					if (message.getCounterpart() != null) {
@@ -342,46 +338,26 @@ public class MessageAdapter extends ArrayAdapter<Message> {
 					}
 					privateMarker = activity.getString(R.string.private_message_to, to);
 				}
-				final Spannable span = new SpannableString(privateMarker + " "
-						+ formattedBody);
-				span.setSpan(new ForegroundColorSpan(getMessageTextColor(darkBackground,false)), 0, privateMarker
-						.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-				span.setSpan(new StyleSpan(Typeface.BOLD), 0,
-						privateMarker.length(),
-						Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-				if (message.hasMeCommand()) {
-					span.setSpan(new StyleSpan(Typeface.BOLD_ITALIC), privateMarker.length() + 1,
-							privateMarker.length() + 1 + nick.length(),
-							Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-				}
-				viewHolder.messageBody.setText(span);
-			}
-			int urlCount = 0;
-			final Matcher matcher = Patterns.WEB_URL.matcher(body);
-			int beginWebURL = Integer.MAX_VALUE;
-			int endWebURL = 0;
-			while (matcher.find()) {
-				MatchResult result = matcher.toMatchResult();
-				beginWebURL = result.start();
-				endWebURL = result.end();
-				urlCount++;
-			}
-			final Matcher geoMatcher = GeoHelper.GEO_URI.matcher(body);
-			while (geoMatcher.find()) {
-				urlCount++;
-			}
-			final Matcher xmppMatcher = XMPP_PATTERN.matcher(body);
-			while (xmppMatcher.find()) {
-				MatchResult result = xmppMatcher.toMatchResult();
-				if (beginWebURL < result.start() || endWebURL > result.end()) {
-					urlCount++;
+				body.insert(0, privateMarker);
+				int privateMarkerIndex = privateMarker.length();
+				body.insert(privateMarkerIndex, " ");
+				body.setSpan(new ForegroundColorSpan(getMessageTextColor(darkBackground, false)),
+						0, privateMarkerIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+				body.setSpan(new StyleSpan(Typeface.BOLD),
+						0, privateMarkerIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+				if (hasMeCommand) {
+					body.setSpan(new StyleSpan(Typeface.BOLD_ITALIC), privateMarkerIndex + 1,
+							privateMarkerIndex + 1 + nick.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 				}
 			}
-			viewHolder.messageBody.setTextIsSelectable(urlCount <= 1);
+			Linkify.addLinks(body, Linkify.WEB_URLS);
+			Linkify.addLinks(body, XMPP_PATTERN, "xmpp");
+			Linkify.addLinks(body, GeoHelper.GEO_URI, "geo");
 			viewHolder.messageBody.setAutoLinkMask(0);
-			Linkify.addLinks(viewHolder.messageBody, Linkify.WEB_URLS);
-			Linkify.addLinks(viewHolder.messageBody, XMPP_PATTERN, "xmpp");
-			Linkify.addLinks(viewHolder.messageBody, GeoHelper.GEO_URI, "geo");
+			viewHolder.messageBody.setText(body);
+			viewHolder.messageBody.setTextIsSelectable(true);
+			viewHolder.messageBody.setMovementMethod(ClickableMovementMethod.getInstance());
+			listSelectionManager.onUpdate(viewHolder.messageBody, message);
 		} else {
 			viewHolder.messageBody.setText("");
 			viewHolder.messageBody.setTextIsSelectable(false);
@@ -390,7 +366,6 @@ public class MessageAdapter extends ArrayAdapter<Message> {
 		viewHolder.messageBody.setLinkTextColor(this.getMessageTextColor(darkBackground, true));
 		viewHolder.messageBody.setHighlightColor(activity.getResources().getColor(darkBackground ? (type == SENT || !mUseGreenBackground ? R.color.black26 : R.color.grey800) : R.color.grey500));
 		viewHolder.messageBody.setTypeface(null, Typeface.NORMAL);
-		viewHolder.messageBody.setOnLongClickListener(openContextMenu);
 	}
 
 	private void displayDownloadableMessage(ViewHolder viewHolder,
@@ -406,7 +381,6 @@ public class MessageAdapter extends ArrayAdapter<Message> {
 				activity.startDownloadable(message);
 			}
 		});
-		viewHolder.download_button.setOnLongClickListener(openContextMenu);
 	}
 
 	private void displayOpenableMessage(ViewHolder viewHolder,final Message message) {
@@ -421,7 +395,6 @@ public class MessageAdapter extends ArrayAdapter<Message> {
 				openDownloadable(message);
 			}
 		});
-		viewHolder.download_button.setOnLongClickListener(openContextMenu);
 	}
 
 	private void displayLocationMessage(ViewHolder viewHolder, final Message message) {
@@ -436,7 +409,6 @@ public class MessageAdapter extends ArrayAdapter<Message> {
 				showLocation(message);
 			}
 		});
-		viewHolder.download_button.setOnLongClickListener(openContextMenu);
 	}
 
 	private void displayImageMessage(ViewHolder viewHolder,
@@ -448,16 +420,22 @@ public class MessageAdapter extends ArrayAdapter<Message> {
 		viewHolder.image.setVisibility(View.VISIBLE);
 		FileParams params = message.getFileParams();
 		double target = metrics.density * 288;
-		int scalledW;
-		int scalledH;
-		if (params.width <= params.height) {
-			scalledW = (int) (params.width / ((double) params.height / target));
-			scalledH = (int) target;
+		int scaledW;
+		int scaledH;
+		if (Math.max(params.height, params.width) * metrics.density <= target) {
+			scaledW = (int) (params.width * metrics.density);
+			scaledH = (int) (params.height * metrics.density);
+		} else if (Math.max(params.height,params.width) <= target) {
+			scaledW = params.width;
+			scaledH = params.height;
+		} else if (params.width <= params.height) {
+			scaledW = (int) (params.width / ((double) params.height / target));
+			scaledH = (int) target;
 		} else {
-			scalledW = (int) target;
-			scalledH = (int) (params.height / ((double) params.width / target));
+			scaledW = (int) target;
+			scaledH = (int) (params.height / ((double) params.width / target));
 		}
-		LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(scalledW, scalledH);
+		LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(scaledW, scaledH);
 		layoutParams.setMargins(0, (int) (metrics.density * 4), 0, (int) (metrics.density * 4));
 		viewHolder.image.setLayoutParams(layoutParams);
 		activity.loadBitmap(message, viewHolder.image);
@@ -468,11 +446,11 @@ public class MessageAdapter extends ArrayAdapter<Message> {
 				openDownloadable(message);
 			}
 		});
-		viewHolder.image.setOnLongClickListener(openContextMenu);
 	}
 
 	private void loadMoreMessages(Conversation conversation) {
 		conversation.setLastClearHistory(0);
+		activity.xmppConnectionService.updateConversation(conversation);
 		conversation.setHasMessagesLeftOnServer(true);
 		conversation.setFirstMamReference(null);
 		long timestamp = conversation.getLastMessageTransmitted();
@@ -487,7 +465,8 @@ public class MessageAdapter extends ArrayAdapter<Message> {
 	@Override
 	public View getView(int position, View view, ViewGroup parent) {
 		final Message message = getItem(position);
-		final boolean isInValidSession = message.isValidInSession();
+		final boolean omemoEncryption = message.getEncryption() == Message.ENCRYPTION_AXOLOTL;
+		final boolean isInValidSession = message.isValidInSession() && (!omemoEncryption || message.isTrusted());
 		final Conversation conversation = message.getConversation();
 		final Account account = conversation.getAccount();
 		final int type = getItemViewType(position);
@@ -509,7 +488,7 @@ public class MessageAdapter extends ArrayAdapter<Message> {
 					viewHolder.edit_indicator = (ImageView) view.findViewById(R.id.edit_indicator);
 					viewHolder.image = (ImageView) view
 						.findViewById(R.id.message_image);
-					viewHolder.messageBody = (TextView) view
+					viewHolder.messageBody = (CopyTextView) view
 						.findViewById(R.id.message_body);
 					viewHolder.time = (TextView) view
 						.findViewById(R.id.message_time);
@@ -530,7 +509,7 @@ public class MessageAdapter extends ArrayAdapter<Message> {
 					viewHolder.edit_indicator = (ImageView) view.findViewById(R.id.edit_indicator);
 					viewHolder.image = (ImageView) view
 						.findViewById(R.id.message_image);
-					viewHolder.messageBody = (TextView) view
+					viewHolder.messageBody = (CopyTextView) view
 						.findViewById(R.id.message_body);
 					viewHolder.time = (TextView) view
 						.findViewById(R.id.message_time);
@@ -547,6 +526,10 @@ public class MessageAdapter extends ArrayAdapter<Message> {
 				default:
 					viewHolder = null;
 					break;
+			}
+			if (viewHolder.messageBody != null) {
+				listSelectionManager.onCreate(viewHolder.messageBody);
+				viewHolder.messageBody.setCopyHandler(this);
 			}
 			view.setTag(viewHolder);
 		} else {
@@ -689,13 +672,29 @@ public class MessageAdapter extends ArrayAdapter<Message> {
 			} else {
 				viewHolder.message_box.setBackgroundResource(R.drawable.message_bubble_received_warning);
 				viewHolder.encryption.setVisibility(View.VISIBLE);
-				viewHolder.encryption.setText(CryptoHelper.encryptionTypeToText(message.getEncryption()));
+				if (omemoEncryption && !message.isTrusted()) {
+					viewHolder.encryption.setText(R.string.not_trusted);
+				} else {
+					viewHolder.encryption.setText(CryptoHelper.encryptionTypeToText(message.getEncryption()));
+				}
 			}
 		}
 
-		displayStatus(viewHolder, message, type, darkBackground);
+		displayStatus(viewHolder, message, type, darkBackground, isInValidSession);
 
 		return view;
+	}
+
+	@Override
+	public void notifyDataSetChanged() {
+		listSelectionManager.onBeforeNotifyDataSetChanged();
+		super.notifyDataSetChanged();
+		listSelectionManager.onAfterNotifyDataSetChanged();
+	}
+
+	@Override
+	public String transformTextForCopy(CharSequence text, int start, int end) {
+		return text.toString().substring(start, end);
 	}
 
 	public void openDownloadable(Message message) {
@@ -709,19 +708,34 @@ public class MessageAdapter extends ArrayAdapter<Message> {
 		if (mime == null) {
 			mime = "*/*";
 		}
-		openIntent.setDataAndType(Uri.fromFile(file), mime);
+		Uri uri;
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N || Config.ONLY_INTERNAL_STORAGE) {
+			try {
+				uri = FileBackend.getUriForFile(activity, file);
+			} catch (IllegalArgumentException e) {
+				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+					Toast.makeText(activity, activity.getString(R.string.no_permission_to_access_x, file.getAbsolutePath()), Toast.LENGTH_SHORT).show();
+					return;
+				} else {
+					uri = Uri.fromFile(file);
+				}
+			}
+			openIntent.setDataAndType(uri, mime);
+			openIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+		} else {
+			uri = Uri.fromFile(file);
+		}
+		openIntent.setDataAndType(uri, mime);
 		PackageManager manager = activity.getPackageManager();
-		List<ResolveInfo> infos = manager.queryIntentActivities(openIntent, 0);
-		if (infos.size() == 0) {
+		List<ResolveInfo> info = manager.queryIntentActivities(openIntent, 0);
+		if (info.size() == 0) {
 			openIntent.setDataAndType(Uri.fromFile(file),"*/*");
 		}
 		try {
 			getContext().startActivity(openIntent);
-			return;
 		}  catch (ActivityNotFoundException e) {
-			//ignored
+			Toast.makeText(activity,R.string.no_application_found_to_open_file,Toast.LENGTH_SHORT).show();
 		}
-		Toast.makeText(activity,R.string.no_application_found_to_open_file,Toast.LENGTH_SHORT).show();
 	}
 
 	public void showLocation(Message message) {
@@ -737,6 +751,15 @@ public class MessageAdapter extends ArrayAdapter<Message> {
 	public void updatePreferences() {
 		this.mIndicateReceived = activity.indicateReceived();
 		this.mUseGreenBackground = activity.useGreenBackground();
+	}
+
+	public TextView getMessageBody(View view) {
+		final Object tag = view.getTag();
+		if (tag instanceof ViewHolder) {
+			final ViewHolder viewHolder = (ViewHolder) tag;
+			return viewHolder.messageBody;
+		}
+		return null;
 	}
 
 	public interface OnContactPictureClicked {
@@ -755,7 +778,7 @@ public class MessageAdapter extends ArrayAdapter<Message> {
 		protected ImageView indicator;
 		protected ImageView indicatorReceived;
 		protected TextView time;
-		protected TextView messageBody;
+		protected CopyTextView messageBody;
 		protected ImageView contact_picture;
 		protected TextView status_message;
 		protected TextView encryption;

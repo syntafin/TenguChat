@@ -3,6 +3,8 @@ package de.tengu.chat.entities;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.net.Uri;
+import android.provider.ContactsContract;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -116,10 +118,10 @@ public class Contact implements ListItem, Blockable {
 			return this.systemName;
 		} else if (this.serverName != null) {
 			return this.serverName;
-		} else if (this.presenceName != null && trusted()) {
+		} else if (this.presenceName != null && mutualPresenceSubscription()) {
 			return this.presenceName;
 		} else if (jid.hasLocalpart()) {
-			return jid.getLocalpart();
+			return jid.getUnescapedLocalpart();
 		} else {
 			return jid.getDomainpart();
 		}
@@ -194,7 +196,7 @@ public class Contact implements ListItem, Blockable {
 			values.put(ACCOUNT, accountUuid);
 			values.put(SYSTEMNAME, systemName);
 			values.put(SERVERNAME, serverName);
-			values.put(JID, jid.toString());
+			values.put(JID, jid.toPreppedString());
 			values.put(OPTIONS, subscription);
 			values.put(SYSTEMACCOUNT, systemAccount);
 			values.put(PHOTOURI, photoUri);
@@ -205,10 +207,6 @@ public class Contact implements ListItem, Blockable {
 			values.put(GROUPS, groups.toString());
 			return values;
 		}
-	}
-
-	public int getSubscription() {
-		return this.subscription;
 	}
 
 	public Account getAccount() {
@@ -265,8 +263,18 @@ public class Contact implements ListItem, Blockable {
 		this.presenceName = presenceName;
 	}
 
-	public String getSystemAccount() {
-		return systemAccount;
+	public Uri getSystemAccount() {
+		if (systemAccount == null) {
+			return null;
+		} else {
+			String[] parts = systemAccount.split("#");
+			if (parts.length != 2) {
+				return null;
+			} else {
+				long id = Long.parseLong(parts[0]);
+				return ContactsContract.Contacts.getLookupUri(id, parts[1]);
+			}
+		}
 	}
 
 	public void setSystemAccount(String account) {
@@ -293,7 +301,7 @@ public class Contact implements ListItem, Blockable {
 					for (int i = 0; i < prints.length(); ++i) {
 						final String print = prints.isNull(i) ? null : prints.getString(i);
 						if (print != null && !print.isEmpty()) {
-							fingerprints.add(prints.getString(i));
+							fingerprints.add(prints.getString(i).toLowerCase(Locale.US));
 						}
 					}
 				}
@@ -475,7 +483,7 @@ public class Contact implements ListItem, Blockable {
 		}
 	}
 
-	public boolean trusted() {
+	public boolean mutualPresenceSubscription() {
 		return getOption(Options.FROM) && getOption(Options.TO);
 	}
 
@@ -526,11 +534,11 @@ public class Contact implements ListItem, Blockable {
 		return this.mLastseen;
 	}
 
-	public void setLastPresence(String presence) {
-		this.mLastPresence = presence;
+	public void setLastResource(String resource) {
+		this.mLastPresence = resource;
 	}
 
-	public String getLastPresence() {
+	public String getLastResource() {
 		return this.mLastPresence;
 	}
 

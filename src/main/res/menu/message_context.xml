@@ -5,6 +5,10 @@
         android:id="@+id/copy_text"
         android:title="@string/copy_text"
         android:visible="false"/>
+     <item
+        android:id="@+id/select_text"
+        android:title="@string/select_text"
+        android:visible="false"/>
     <item
         android:id="@+id/retry_decryption"
         android:title="Retry decryption"
@@ -20,6 +24,10 @@
     <item
         android:id="@+id/copy_url"
         android:title="@string/copy_original_url"
+        android:visible="false"/>
+    <item
+        android:id="@+id/show_error_message"
+        android:title="@string/show_error_message"
         android:visible="false"/>
     <item
         android:id="@+id/send_again"

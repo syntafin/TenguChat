@@ -163,7 +163,13 @@
             android:key="expert"
             android:summary="@string/pref_expert_options_summary"
             android:title="@string/pref_expert_options">
-            <PreferenceCategory android:title="@string/pref_security_settings">
+            <PreferenceCategory android:title="@string/pref_security_settings"
+                android:key="security_options">
+                <CheckBoxPreference
+                    android:defaultValue="true"
+                    android:key="btbv"
+                    android:title="@string/pref_blind_trust_before_verification"
+                    android:summary="@string/pref_blind_trust_before_verification_summary"/>
                 <CheckBoxPreference
                     android:defaultValue="false"
                     android:key="dont_save_encrypted"
@@ -179,10 +185,22 @@
                     android:summary="@string/pref_remove_trusted_certificates_summary"
                     android:title="@string/pref_remove_trusted_certificates_title"/>
                 <CheckBoxPreference
-                    android:defaultValue="false"
+                    android:defaultValue="true"
                     android:key="allow_message_correction"
                     android:title="@string/pref_allow_message_correction"
                     android:summary="@string/pref_allow_message_correction_summary"/>
+                <Preference
+                    android:key="clean_cache"
+                    android:summary="@string/pref_clean_cache_summary"
+                    android:title="@string/pref_clean_cache"/>
+                <Preference
+                    android:key="clean_private_storage"
+                    android:summary="@string/pref_clean_private_storage_summary"
+                    android:title="@string/pref_clean_private_storage"/>
+                <Preference
+                    android:key="delete_omemo_identities"
+                    android:title="@string/pref_delete_omemo_identities"
+                    android:summary="@string/pref_delete_omemo_identities_summary"/>
             </PreferenceCategory>
             <PreferenceCategory
                 android:key="connection_options"
@@ -250,10 +268,10 @@
                     android:title="@string/pref_use_indicate_received"/>
                 <CheckBoxPreference
                     android:defaultValue="false"
-                    android:key="keep_foreground_service"
+                    android:key="enable_foreground_service"
                     android:summary="@string/pref_keep_foreground_service_summary"
                     android:title="@string/pref_keep_foreground_service"/>
-                <de.tengu.chat.ui.ExportLogsPreference
+                <Preference
                     android:key="export_logs"
                     android:summary="@string/pref_export_logs_summary"
                     android:title="@string/pref_export_logs"/>

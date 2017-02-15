@@ -21,9 +21,11 @@ import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.regex.Pattern;
 
 import de.tengu.chat.Config;
 import de.tengu.chat.R;
+import de.tengu.chat.entities.Account;
 import de.tengu.chat.entities.Message;
 import de.tengu.chat.xmpp.jid.InvalidJidException;
 import de.tengu.chat.xmpp.jid.Jid;
@@ -31,6 +33,8 @@ import de.tengu.chat.xmpp.jid.Jid;
 public final class CryptoHelper {
 	public static final String FILETRANSFER = "?FILETRANSFERv1:";
 	private final static char[] hexArray = "0123456789abcdef".toCharArray();
+
+	public static final Pattern UUID_PATTERN = Pattern.compile("[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}");
 	final public static byte[] ONE = new byte[] { 0, 0, 0, 1 };
 
 	public static String bytesToHex(byte[] bytes) {
@@ -199,6 +203,19 @@ public final class CryptoHelper {
 		MessageDigest md = MessageDigest.getInstance("SHA-1");
 		byte[] fingerprint = md.digest(input);
 		return prettifyFingerprintCert(bytesToHex(fingerprint));
+	}
+
+	public static String getAccountFingerprint(Account account) {
+		return getFingerprint(account.getJid().toBareJid().toString());
+	}
+
+	public static String getFingerprint(String value) {
+		try {
+			MessageDigest md = MessageDigest.getInstance("SHA-256");
+			return bytesToHex(md.digest(value.getBytes("UTF-8")));
+		} catch (Exception e) {
+			return "";
+		}
 	}
 
 	public static int encryptionTypeToText(int encryption) {

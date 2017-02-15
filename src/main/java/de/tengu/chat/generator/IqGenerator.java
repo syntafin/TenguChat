@@ -15,8 +15,10 @@ import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.TimeZone;
 
 import de.tengu.chat.Config;
+import de.tengu.chat.R;
 import de.tengu.chat.crypto.axolotl.AxolotlService;
 import de.tengu.chat.entities.Account;
 import de.tengu.chat.entities.Conversation;
@@ -45,7 +47,7 @@ public class IqGenerator extends AbstractGenerator {
 		query.setAttribute("node", request.query().getAttribute("node"));
 		final Element identity = query.addChild("identity");
 		identity.setAttribute("category", "client");
-		identity.setAttribute("type", IDENTITY_TYPE);
+		identity.setAttribute("type", getIdentityType());
 		identity.setAttribute("name", getIdentityName());
 		for (final String feature : getFeatures()) {
 			query.addChild("feature").setAttribute("var", feature);
@@ -56,8 +58,26 @@ public class IqGenerator extends AbstractGenerator {
 	public IqPacket versionResponse(final IqPacket request) {
 		final IqPacket packet = request.generateResponse(IqPacket.TYPE.RESULT);
 		Element query = packet.query("jabber:iq:version");
-		query.addChild("name").setContent(IDENTITY_NAME);
+		query.addChild("name").setContent(mXmppConnectionService.getString(R.string.app_name));
 		query.addChild("version").setContent(getIdentityVersion());
+		if ("chromium".equals(android.os.Build.BRAND)) {
+			query.addChild("os").setContent("Chrome OS");
+		} else{
+			query.addChild("os").setContent("Android");
+		}
+		return packet;
+	}
+
+	public IqPacket entityTimeResponse(IqPacket request) {
+		final IqPacket packet = request.generateResponse(IqPacket.TYPE.RESULT);
+		Element time = packet.addChild("time","urn:xmpp:time");
+		final long now = System.currentTimeMillis();
+		time.addChild("utc").setContent(getTimestamp(now));
+		TimeZone ourTimezone = TimeZone.getDefault();
+		long offsetSeconds = ourTimezone.getOffset(now) / 1000;
+		long offsetMinutes = offsetSeconds % (60 * 60);
+		long offsetHours = offsetSeconds / (60 * 60);
+		time.addChild("tzo").setContent(String.format("%02d",offsetHours)+":"+String.format("%02d",offsetMinutes));
 		return packet;
 	}
 
@@ -234,10 +254,14 @@ public class IqGenerator extends AbstractGenerator {
 		return iq;
 	}
 
-	public IqPacket generateSetBlockRequest(final Jid jid) {
+	public IqPacket generateSetBlockRequest(final Jid jid, boolean reportSpam) {
 		final IqPacket iq = new IqPacket(IqPacket.TYPE.SET);
 		final Element block = iq.addChild("block", Xmlns.BLOCKING);
-		block.addChild("item").setAttribute("jid", jid.toBareJid().toString());
+		final Element item = block.addChild("item").setAttribute("jid", jid.toBareJid().toString());
+		if (reportSpam) {
+			item.addChild("report", "urn:xmpp:reporting:0").addChild("spam");
+		}
+		Log.d(Config.LOGTAG,iq.toString());
 		return iq;
 	}
 
@@ -301,7 +325,7 @@ public class IqGenerator extends AbstractGenerator {
 
 	public IqPacket generateCreateAccountWithCaptcha(Account account, String id, Data data) {
 		final IqPacket register = new IqPacket(IqPacket.TYPE.SET);
-
+		register.setFrom(account.getJid().toBareJid());
 		register.setTo(account.getServer());
 		register.setId(id);
 		Element query = register.query("jabber:iq:register");

@@ -271,6 +271,15 @@ public class ConferenceDetailsActivity extends XmppActivity implements OnConvers
 	}
 
 	@Override
+	protected void onStart() {
+		super.onStart();
+		final int theme = findTheme();
+		if (this.mTheme != theme) {
+			recreate();
+		}
+	}
+
+	@Override
 	public boolean onOptionsItemSelected(MenuItem menuItem) {
 		switch (menuItem.getItemId()) {
 			case android.R.id.home:
@@ -371,7 +380,7 @@ public class ConferenceDetailsActivity extends XmppActivity implements OnConvers
 				MenuItem invite = menu.findItem(R.id.invite);
 				startConversation.setVisible(true);
 				if (contact != null) {
-					showContactDetails.setVisible(true);
+					showContactDetails.setVisible(!contact.isSelf());
 				}
 				if (user.getRole() == MucOptions.Role.NONE) {
 					invite.setVisible(true);
@@ -637,12 +646,10 @@ public class ConferenceDetailsActivity extends XmppActivity implements OnConvers
 	private void viewPgpKey(User user) {
 		PgpEngine pgp = xmppConnectionService.getPgpEngine();
 		if (pgp != null) {
-			PendingIntent intent = pgp.getIntentForKey(
-					mConversation.getAccount(), user.getPgpKeyId());
+			PendingIntent intent = pgp.getIntentForKey(user.getPgpKeyId());
 			if (intent != null) {
 				try {
-					startIntentSenderForResult(intent.getIntentSender(), 0,
-							null, 0, 0, 0);
+					startIntentSenderForResult(intent.getIntentSender(), 0, null, 0, 0, 0);
 				} catch (SendIntentException ignored) {
 
 				}

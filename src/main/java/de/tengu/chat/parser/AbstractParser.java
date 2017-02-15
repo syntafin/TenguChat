@@ -62,7 +62,7 @@ public abstract class AbstractParser {
 
 	protected void updateLastseen(final Account account, final Jid from) {
 		final Contact contact = account.getRoster().getContact(from);
-		contact.setLastPresence(from.isBareJid() ? "" : from.getResourcepart());
+		contact.setLastResource(from.isBareJid() ? "" : from.getResourcepart());
 	}
 
 	protected String avatarData(Element items) {
@@ -74,22 +74,41 @@ public abstract class AbstractParser {
 	}
 
 	public static MucOptions.User parseItem(Conversation conference, Element item) {
+		return parseItem(conference,item, null);
+	}
+
+	public static MucOptions.User parseItem(Conversation conference, Element item, Jid fullJid) {
 		final String local = conference.getJid().getLocalpart();
 		final String domain = conference.getJid().getDomainpart();
 		String affiliation = item.getAttribute("affiliation");
 		String role = item.getAttribute("role");
 		String nick = item.getAttribute("nick");
-		Jid fullJid;
-		try {
-			fullJid = nick != null ? Jid.fromParts(local, domain, nick) : null;
-		} catch (InvalidJidException e) {
-			fullJid = null;
+		if (nick != null && fullJid == null) {
+			try {
+				fullJid = Jid.fromParts(local, domain, nick);
+			} catch (InvalidJidException e) {
+				fullJid = null;
+			}
 		}
 		Jid realJid = item.getAttributeAsJid("jid");
-		MucOptions.User user = new MucOptions.User(conference.getMucOptions(), nick == null ? null : fullJid);
+		MucOptions.User user = new MucOptions.User(conference.getMucOptions(), fullJid);
 		user.setRealJid(realJid);
 		user.setAffiliation(affiliation);
 		user.setRole(role);
 		return user;
+	}
+
+	public static String extractErrorMessage(Element packet) {
+		final Element error = packet.findChild("error");
+		if (error != null && error.getChildren().size() > 0) {
+			final String text = error.findChildContent("text");
+			if (text != null && !text.trim().isEmpty()) {
+				return text;
+			} else {
+				return error.getChildren().get(0).getName().replace("-"," ");
+			}
+		} else {
+			return null;
+		}
 	}
 }

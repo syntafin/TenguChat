@@ -2,13 +2,15 @@ package de.tengu.chat.entities;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.text.SpannableStringBuilder;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Arrays;
 
 import de.tengu.chat.Config;
+import de.tengu.chat.crypto.axolotl.FingerprintStatus;
 import de.tengu.chat.crypto.axolotl.XmppAxolotlSession;
+import de.tengu.chat.utils.CryptoHelper;
 import de.tengu.chat.utils.GeoHelper;
 import de.tengu.chat.utils.MimeUtils;
 import de.tengu.chat.utils.UIHelper;
@@ -18,8 +20,6 @@ import de.tengu.chat.xmpp.jid.Jid;
 public class Message extends AbstractEntity {
 
 	public static final String TABLENAME = "messages";
-
-	public static final String MERGE_SEPARATOR = "\n\u200B\n";
 
 	public static final int STATUS_RECEIVED = 0;
 	public static final int STATUS_UNSEND = 1;
@@ -59,6 +59,7 @@ public class Message extends AbstractEntity {
 	public static final String RELATIVE_FILE_PATH = "relativeFilePath";
 	public static final String FINGERPRINT = "axolotl_fingerprint";
 	public static final String READ = "read";
+	public static final String ERROR_MESSAGE = "errorMsg";
 	public static final String ME_COMMAND = "/me ";
 
 
@@ -84,6 +85,7 @@ public class Message extends AbstractEntity {
 	private Message mNextMessage = null;
 	private Message mPreviousMessage = null;
 	private String axolotlFingerprint = null;
+	private String errorMessage = null;
 
 	private Message() {
 
@@ -110,7 +112,8 @@ public class Message extends AbstractEntity {
 				null,
 				true,
 				null,
-				false);
+				false,
+				null);
 		this.conversation = conversation;
 	}
 
@@ -119,12 +122,12 @@ public class Message extends AbstractEntity {
 					final int encryption, final int status, final int type, final boolean carbon,
 					final String remoteMsgId, final String relativeFilePath,
 					final String serverMsgId, final String fingerprint, final boolean read,
-					final String edited, final boolean oob) {
+					final String edited, final boolean oob, final String errorMessage) {
 		this.uuid = uuid;
 		this.conversationUuid = conversationUUid;
 		this.counterpart = counterpart;
 		this.trueCounterpart = trueCounterpart;
-		this.body = body;
+		this.body = body == null ? "" : body;
 		this.timeSent = timeSent;
 		this.encryption = encryption;
 		this.status = status;
@@ -137,6 +140,7 @@ public class Message extends AbstractEntity {
 		this.read = read;
 		this.edited = edited;
 		this.oob = oob;
+		this.errorMessage = errorMessage;
 	}
 
 	public static Message fromCursor(Cursor cursor) {
@@ -178,7 +182,8 @@ public class Message extends AbstractEntity {
 				cursor.getString(cursor.getColumnIndex(FINGERPRINT)),
 				cursor.getInt(cursor.getColumnIndex(READ)) > 0,
 				cursor.getString(cursor.getColumnIndex(EDITED)),
-				cursor.getInt(cursor.getColumnIndex(OOB)) > 0);
+				cursor.getInt(cursor.getColumnIndex(OOB)) > 0,
+				cursor.getString(cursor.getColumnIndex(ERROR_MESSAGE)));
 	}
 
 	public static Message createStatusMessage(Conversation conversation, String body) {
@@ -205,12 +210,12 @@ public class Message extends AbstractEntity {
 		if (counterpart == null) {
 			values.putNull(COUNTERPART);
 		} else {
-			values.put(COUNTERPART, counterpart.toString());
+			values.put(COUNTERPART, counterpart.toPreppedString());
 		}
 		if (trueCounterpart == null) {
 			values.putNull(TRUE_COUNTERPART);
 		} else {
-			values.put(TRUE_COUNTERPART, trueCounterpart.toString());
+			values.put(TRUE_COUNTERPART, trueCounterpart.toPreppedString());
 		}
 		values.put(BODY, body);
 		values.put(TIME_SENT, timeSent);
@@ -225,6 +230,7 @@ public class Message extends AbstractEntity {
 		values.put(READ,read ? 1 : 0);
 		values.put(EDITED, edited);
 		values.put(OOB, oob ? 1 : 0);
+		values.put(ERROR_MESSAGE,errorMessage);
 		return values;
 	}
 
@@ -266,7 +272,21 @@ public class Message extends AbstractEntity {
 	}
 
 	public void setBody(String body) {
+		if (body == null) {
+			throw new Error("You should not set the message body to null");
+		}
 		this.body = body;
+	}
+
+	public String getErrorMessage() {
+		return errorMessage;
+	}
+
+	public boolean setErrorMessage(String message) {
+		boolean changed = (message != null && !message.equals(errorMessage))
+				|| (message == null && errorMessage != null);
+		this.errorMessage = message;
+		return changed;
 	}
 
 	public long getTimeSent() {
@@ -378,7 +398,7 @@ public class Message extends AbstractEntity {
 	}
 
 	public boolean similar(Message message) {
-		if (this.serverMsgId != null && message.getServerMsgId() != null) {
+		if (type != TYPE_PRIVATE && this.serverMsgId != null && message.getServerMsgId() != null) {
 			return this.serverMsgId.equals(message.getServerMsgId());
 		} else if (this.body == null || this.counterpart == null) {
 			return false;
@@ -396,7 +416,7 @@ public class Message extends AbstractEntity {
 						&& this.counterpart.equals(message.getCounterpart())
 						&& (body.equals(otherBody)
 						||(message.getEncryption() == Message.ENCRYPTION_PGP
-						&&  message.getRemoteMsgId().matches("[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}"))) ;
+						&& CryptoHelper.UUID_PATTERN.matcher(message.getRemoteMsgId()).matches()));
 			} else {
 				return this.remoteMsgId == null
 						&& this.counterpart.equals(message.getCounterpart())
@@ -473,7 +493,7 @@ public class Message extends AbstractEntity {
 						!this.getBody().startsWith(ME_COMMAND) &&
 						!this.bodyIsHeart() &&
 						!message.bodyIsHeart() &&
-						this.isTrusted() == message.isTrusted()
+						((this.axolotlFingerprint == null && message.axolotlFingerprint == null) || this.axolotlFingerprint.equals(message.getFingerprint()))
 				);
 	}
 
@@ -488,22 +508,26 @@ public class Message extends AbstractEntity {
 		);
 	}
 
-	public String getMergedBody() {
-		StringBuilder body = new StringBuilder(this.body.trim());
+	public static class MergeSeparator {}
+
+	public SpannableStringBuilder getMergedBody() {
+		SpannableStringBuilder body = new SpannableStringBuilder(this.body.trim());
 		Message current = this;
-		while(current.mergeable(current.next())) {
+		while (current.mergeable(current.next())) {
 			current = current.next();
 			if (current == null) {
 				break;
 			}
-			body.append(MERGE_SEPARATOR);
+			body.append("\n\n");
+			body.setSpan(new MergeSeparator(), body.length() - 2, body.length(),
+					SpannableStringBuilder.SPAN_EXCLUSIVE_EXCLUSIVE);
 			body.append(current.getBody().trim());
 		}
-		return body.toString();
+		return body;
 	}
 
 	public boolean hasMeCommand() {
-		return getMergedBody().startsWith(ME_COMMAND);
+		return this.body.trim().startsWith(ME_COMMAND);
 	}
 
 	public int getMergedStatus() {
@@ -539,7 +563,7 @@ public class Message extends AbstractEntity {
 
 	public boolean trusted() {
 		Contact contact = this.getContact();
-		return (status > STATUS_RECEIVED || (contact != null && contact.trusted()));
+		return (status > STATUS_RECEIVED || (contact != null && contact.mutualPresenceSubscription()));
 	}
 
 	public boolean fixCounterpart() {
@@ -550,7 +574,7 @@ public class Message extends AbstractEntity {
 			try {
 				counterpart = Jid.fromParts(conversation.getJid().getLocalpart(),
 						conversation.getJid().getDomainpart(),
-						presences.asStringArray()[0]);
+						presences.toResourceArray()[0]);
 				return true;
 			} catch (InvalidJidException e) {
 				counterpart = null;
@@ -589,7 +613,7 @@ public class Message extends AbstractEntity {
 		if (path == null || path.isEmpty()) {
 			return null;
 		}
-		
+
 		String filename = path.substring(path.lastIndexOf('/') + 1).toLowerCase();
 		int dotPosition = filename.lastIndexOf(".");
 
@@ -788,8 +812,8 @@ public class Message extends AbstractEntity {
 	}
 
 	public boolean isTrusted() {
-		XmppAxolotlSession.Trust t = conversation.getAccount().getAxolotlService().getFingerprintTrust(axolotlFingerprint);
-		return t != null && t.trusted();
+		FingerprintStatus s = conversation.getAccount().getAxolotlService().getFingerprintTrust(axolotlFingerprint);
+		return s != null && s.isTrusted();
 	}
 
 	private  int getPreviousEncryption() {

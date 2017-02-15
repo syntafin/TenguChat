@@ -26,6 +26,7 @@ import de.tengu.chat.Config;
 import de.tengu.chat.crypto.axolotl.AxolotlService;
 import de.tengu.chat.entities.Account;
 import de.tengu.chat.entities.Contact;
+import de.tengu.chat.entities.Conversation;
 import de.tengu.chat.services.XmppConnectionService;
 import de.tengu.chat.utils.Xmlns;
 import de.tengu.chat.xml.Element;
@@ -139,7 +140,11 @@ public class IqParser extends AbstractParser implements OnIqPacketReceived {
 		if(signedPreKeyPublic == null) {
 			return null;
 		}
-		return Integer.valueOf(signedPreKeyPublic.getAttribute("signedPreKeyId"));
+		try {
+			return Integer.valueOf(signedPreKeyPublic.getAttribute("signedPreKeyId"));
+		} catch (NumberFormatException e) {
+			return null;
+		}
 	}
 
 	public ECPublicKey signedPreKeyPublic(final Element bundle) {
@@ -204,13 +209,15 @@ public class IqParser extends AbstractParser implements OnIqPacketReceived {
 				Log.d(Config.LOGTAG, AxolotlService.LOGPREFIX+" : "+"Encountered unexpected tag in prekeys list: " + preKeyPublicElement);
 				continue;
 			}
-			Integer preKeyId = Integer.valueOf(preKeyPublicElement.getAttribute("preKeyId"));
+			Integer preKeyId = null;
 			try {
-				ECPublicKey preKeyPublic = Curve.decodePoint(Base64.decode(preKeyPublicElement.getContent(), Base64.DEFAULT), 0);
+				preKeyId = Integer.valueOf(preKeyPublicElement.getAttribute("preKeyId"));
+				final ECPublicKey preKeyPublic = Curve.decodePoint(Base64.decode(preKeyPublicElement.getContent(), Base64.DEFAULT), 0);
 				preKeyRecords.put(preKeyId, preKeyPublic);
+			} catch (NumberFormatException e) {
+				Log.e(Config.LOGTAG, AxolotlService.LOGPREFIX+" : "+"could not parse preKeyId from preKey "+preKeyPublicElement.toString());
 			} catch (Throwable e) {
 				Log.e(Config.LOGTAG, AxolotlService.LOGPREFIX+" : "+"Invalid preKeyPublic (ID="+preKeyId+") in PEP: "+ e.getMessage()+", skipping...");
-				continue;
 			}
 		}
 		return preKeyRecords;
@@ -253,7 +260,7 @@ public class IqParser extends AbstractParser implements OnIqPacketReceived {
 		Integer signedPreKeyId = signedPreKeyId(bundleElement);
 		byte[] signedPreKeySignature = signedPreKeySignature(bundleElement);
 		IdentityKey identityKey = identityKey(bundleElement);
-		if(signedPreKeyPublic == null || identityKey == null) {
+		if(signedPreKeyId == null || signedPreKeyPublic == null || identityKey == null) {
 			return null;
 		}
 
@@ -277,6 +284,7 @@ public class IqParser extends AbstractParser implements OnIqPacketReceived {
 
 	@Override
 	public void onIqPacketReceived(final Account account, final IqPacket packet) {
+		final boolean isGet = packet.getType() == IqPacket.TYPE.GET;
 		if (packet.getType() == IqPacket.TYPE.ERROR || packet.getType() == IqPacket.TYPE.TIMEOUT) {
 			return;
 		} else if (packet.hasChild("query", Xmlns.ROSTER) && packet.fromServer(account)) {
@@ -312,6 +320,14 @@ public class IqParser extends AbstractParser implements OnIqPacketReceived {
 					}
 				}
 				account.getBlocklist().addAll(jids);
+				if (packet.getType() == IqPacket.TYPE.SET) {
+					for(Jid jid : jids) {
+						Conversation conversation = mXmppConnectionService.find(account,jid);
+						if (conversation != null) {
+							mXmppConnectionService.markRead(conversation);
+						}
+					}
+				}
 			}
 			// Update the UI
 			mXmppConnectionService.updateBlocklistUi(OnUpdateBlocklist.Status.BLOCKED);
@@ -348,12 +364,23 @@ public class IqParser extends AbstractParser implements OnIqPacketReceived {
 		} else if (packet.hasChild("query", "http://jabber.org/protocol/disco#info")) {
 			final IqPacket response = mXmppConnectionService.getIqGenerator().discoResponse(packet);
 			mXmppConnectionService.sendIqPacket(account, response, null);
-		} else if (packet.hasChild("query","jabber:iq:version")) {
+		} else if (packet.hasChild("query","jabber:iq:version") && isGet) {
 			final IqPacket response = mXmppConnectionService.getIqGenerator().versionResponse(packet);
 			mXmppConnectionService.sendIqPacket(account,response,null);
-		} else if (packet.hasChild("ping", "urn:xmpp:ping")) {
+		} else if (packet.hasChild("ping", "urn:xmpp:ping") && isGet) {
 			final IqPacket response = packet.generateResponse(IqPacket.TYPE.RESULT);
 			mXmppConnectionService.sendIqPacket(account, response, null);
+		} else if (packet.hasChild("time","urn:xmpp:time") && isGet) {
+			final IqPacket response;
+			if (mXmppConnectionService.useTorToConnect()) {
+				response = packet.generateResponse(IqPacket.TYPE.ERROR);
+				final Element error = response.addChild("error");
+				error.setAttribute("type","cancel");
+				error.addChild("not-allowed","urn:ietf:params:xml:ns:xmpp-stanzas");
+			} else {
+				response = mXmppConnectionService.getIqGenerator().entityTimeResponse(packet);
+			}
+			mXmppConnectionService.sendIqPacket(account,response, null);
 		} else {
 			if (packet.getType() == IqPacket.TYPE.GET || packet.getType() == IqPacket.TYPE.SET) {
 				final IqPacket response = packet.generateResponse(IqPacket.TYPE.ERROR);

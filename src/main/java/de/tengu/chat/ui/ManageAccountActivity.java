@@ -103,6 +103,15 @@ public class ManageAccountActivity extends XmppActivity implements OnAccountUpda
 	}
 
 	@Override
+	protected void onStart() {
+		super.onStart();
+		final int theme = findTheme();
+		if (this.mTheme != theme) {
+			recreate();
+		}
+	}
+
+	@Override
 	public void onSaveInstanceState(final Bundle savedInstanceState) {
 		if (selectedAccount != null) {
 			savedInstanceState.putString(STATE_SELECTED_ACCOUNT, selectedAccount.getJid().toBareJid().toString());
@@ -318,12 +327,16 @@ public class ManageAccountActivity extends XmppActivity implements OnAccountUpda
 
 	private void disableAccount(Account account) {
 		account.setOption(Account.OPTION_DISABLED, true);
-		xmppConnectionService.updateAccount(account);
+		if (!xmppConnectionService.updateAccount(account)) {
+			Toast.makeText(this,R.string.unable_to_update_account,Toast.LENGTH_SHORT).show();
+		}
 	}
 
 	private void enableAccount(Account account) {
 		account.setOption(Account.OPTION_DISABLED, false);
-		xmppConnectionService.updateAccount(account);
+		if (!xmppConnectionService.updateAccount(account)) {
+			Toast.makeText(this,R.string.unable_to_update_account,Toast.LENGTH_SHORT).show();
+		}
 	}
 
 	private void publishOpenPGPPublicKey(Account account) {

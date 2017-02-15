@@ -22,8 +22,10 @@ import de.tengu.chat.entities.Conversation;
 import de.tengu.chat.entities.DownloadableFile;
 import de.tengu.chat.entities.Message;
 import de.tengu.chat.entities.Presence;
+import de.tengu.chat.entities.ServiceDiscoveryResult;
 import de.tengu.chat.entities.Transferable;
 import de.tengu.chat.entities.TransferablePlaceholder;
+import de.tengu.chat.parser.IqParser;
 import de.tengu.chat.persistance.FileBackend;
 import de.tengu.chat.services.AbstractConnectionManager;
 import de.tengu.chat.services.XmppConnectionService;
@@ -86,7 +88,7 @@ public class JingleConnection implements Transferable {
 		@Override
 		public void onIqPacketReceived(Account account, IqPacket packet) {
 			if (packet.getType() != IqPacket.TYPE.RESULT) {
-				fail();
+				fail(IqParser.extractErrorMessage(packet));
 			}
 		}
 	};
@@ -297,8 +299,9 @@ public class JingleConnection implements Transferable {
 		String resource = jid != null ?jid.getResourcepart() : null;
 		if (resource != null) {
 			Presence presence = this.account.getRoster().getContact(jid).getPresences().getPresences().get(resource);
-			if (presence != null) {
-				List<String> features = presence.getServiceDiscoveryResult().getFeatures();
+			ServiceDiscoveryResult result = presence != null ? presence.getServiceDiscoveryResult() : null;
+			if (result != null) {
+				List<String> features = result.getFeatures();
 				if (features.contains(Content.Version.FT_4.getNamespace())) {
 					this.ftVersion = Content.Version.FT_4;
 				}
@@ -387,7 +390,8 @@ public class JingleConnection implements Transferable {
 				conversation.add(message);
 				mXmppConnectionService.updateConversationUi();
 				if (mJingleConnectionManager.hasStoragePermission()
-						&& size < this.mJingleConnectionManager.getAutoAcceptFileSize()) {
+						&& size < this.mJingleConnectionManager.getAutoAcceptFileSize()
+						&& mXmppConnectionService.isDataSaverDisabled()) {
 					Log.d(Config.LOGTAG, "auto accepting file from "+ packet.getFrom());
 					this.acceptedAutomatically = true;
 					this.sendAccept();
@@ -485,7 +489,7 @@ public class JingleConnection implements Transferable {
 						mJingleStatus = JINGLE_STATUS_INITIATED;
 						mXmppConnectionService.markMessage(message, Message.STATUS_OFFERED);
 					} else {
-						fail();
+						fail(IqParser.extractErrorMessage(packet));
 					}
 				}
 			});
@@ -616,6 +620,10 @@ public class JingleConnection implements Transferable {
 				if (cid != null) {
 					Log.d(Config.LOGTAG, "candidate used by counterpart:" + cid);
 					JingleCandidate candidate = getCandidate(cid);
+					if (candidate == null) {
+						Log.d(Config.LOGTAG,"could not find candidate with cid="+cid);
+						return false;
+					}
 					candidate.flagAsUsedByCounterpart();
 					this.receivedCandidate = true;
 					if ((mJingleStatus == JINGLE_STATUS_ACCEPTED)
@@ -843,6 +851,10 @@ public class JingleConnection implements Transferable {
 	}
 
 	private void fail() {
+		fail(null);
+	}
+
+	private void fail(String errorMessage) {
 		this.mJingleStatus = JINGLE_STATUS_FAILED;
 		this.disconnectSocks5Connections();
 		if (this.transport != null && this.transport instanceof JingleInbandTransport) {
@@ -859,7 +871,8 @@ public class JingleConnection implements Transferable {
 				this.mXmppConnectionService.updateConversationUi();
 			} else {
 				this.mXmppConnectionService.markMessage(this.message,
-						Message.STATUS_SEND_FAILED);
+						Message.STATUS_SEND_FAILED,
+						errorMessage);
 				this.message.setTransferable(null);
 			}
 		}

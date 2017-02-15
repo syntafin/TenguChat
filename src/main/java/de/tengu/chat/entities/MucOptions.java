@@ -3,7 +3,6 @@ package de.tengu.chat.entities;
 import android.annotation.SuppressLint;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -116,6 +115,7 @@ public class MucOptions {
 
 	public enum Error {
 		NO_RESPONSE,
+		SERVER_NOT_FOUND,
 		NONE,
 		NICK_IN_USE,
 		PASSWORD_REQUIRED,
@@ -126,7 +126,6 @@ public class MucOptions {
 		UNKNOWN
 	}
 
-	public static final String STATUS_CODE_ROOM_CONFIG_CHANGED = "104";
 	public static final String STATUS_CODE_SELF_PRESENCE = "110";
 	public static final String STATUS_CODE_ROOM_CREATED = "201";
 	public static final String STATUS_CODE_BANNED = "301";
@@ -301,17 +300,18 @@ public class MucOptions {
 			} else if (getAffiliation().outranks(another.getAffiliation())) {
 				return -1;
 			} else {
-				Contact ourContact = getContact();
-				Contact anotherContact = another.getContact();
-				if (ourContact != null && anotherContact != null) {
-					return ourContact.compareTo(anotherContact);
-				} else if (ourContact == null && anotherContact != null) {
-					return getName().compareToIgnoreCase(anotherContact.getDisplayName());
-				} else if (ourContact != null) {
-					return ourContact.getDisplayName().compareToIgnoreCase(another.getName());
-				} else {
-					return getName().compareToIgnoreCase(another.getName());
-				}
+				return getComparableName().compareToIgnoreCase(another.getComparableName());
+			}
+		}
+
+
+		private String getComparableName() {
+			Contact contact = getContact();
+			if (contact != null) {
+				return contact.getDisplayName();
+			} else {
+				String name = getName();
+				return name == null ? "" : name;
 			}
 		}
 
@@ -394,10 +394,20 @@ public class MucOptions {
 		if (user != null) {
 			synchronized (users) {
 				users.remove(user);
-				if (membersOnly() &&
-						nonanonymous() &&
-						user.affiliation.ranks(Affiliation.MEMBER) &&
-						user.realJid != null) {
+				boolean realJidInMuc = false;
+				for (User u : users) {
+					if (user.realJid != null && user.realJid.equals(u.realJid)) {
+						realJidInMuc = true;
+						break;
+					}
+				}
+				boolean self = user.realJid != null && user.realJid.equals(account.getJid().toBareJid());
+				if (membersOnly()
+						&& nonanonymous()
+						&& user.affiliation.ranks(Affiliation.MEMBER)
+						&& user.realJid != null
+						&& !realJidInMuc
+						&& !self) {
 					user.role = Role.NONE;
 					user.avatar = null;
 					user.fullJid = null;
@@ -408,7 +418,7 @@ public class MucOptions {
 		return user;
 	}
 
-	public void addUser(User user) {
+	public void updateUser(User user) {
 		User old;
 		if (user.fullJid == null && user.realJid != null) {
 			old = findUserByRealJid(user.realJid);
@@ -434,7 +444,10 @@ public class MucOptions {
 			if (old != null) {
 				users.remove(old);
 			}
-			this.users.add(user);
+			if ((!membersOnly() || user.getAffiliation().ranks(Affiliation.MEMBER))
+					&& user.getAffiliation().outranks(Affiliation.OUTCAST)){
+				this.users.add(user);
+			}
 		}
 	}
 
@@ -504,8 +517,20 @@ public class MucOptions {
 	}
 
 	public List<User> getUsers(int max) {
-		ArrayList<User> users = getUsers();
-		return users.subList(0, Math.min(max, users.size()));
+		ArrayList<User> subset = new ArrayList<>();
+		HashSet<Jid> jids = new HashSet<>();
+		jids.add(account.getJid().toBareJid());
+		synchronized (users) {
+			for(User user : users) {
+				if (user.getRealJid() == null || jids.add(user.getRealJid())) {
+					subset.add(user);
+				}
+				if (subset.size() >= max) {
+					break;
+				}
+			}
+		}
+		return subset;
 	}
 
 	public int getUserCount() {

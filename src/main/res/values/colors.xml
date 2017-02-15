@@ -2,8 +2,8 @@
 <resources>
 	<color name="primary500">#2196f3</color>
 	<color name="primary700">#1565c0</color>
-	<color name="primary800">#ff026100</color>
-	<color name="primary900">#ff024500</color>
+	<color name="primary800">#1565c0</color>
+	<color name="primary900">#1565c0</color>
 	<color name="accent">#00b0ff</color>
 	<color name="black87">#de000000</color>
 	<color name="black54">#8a000000</color>

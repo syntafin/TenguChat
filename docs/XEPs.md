@@ -2,6 +2,7 @@
 * XEP-0030: Service Discovery
 * XEP-0045: Multi-User Chat
 * XEP-0048: Bookmarks
+* XEP-0084: User Avatar
 * XEP-0085: Chat State Notifications
 * XEP-0092: Software Version
 * XEP-0115: Entity Capabilities
@@ -27,3 +28,4 @@
 * XEP-0357: Push Notifications
 * XEP-0363: HTTP File Upload
 * XEP-0368: SRV records for XMPP over TLS
+* XEP-0377: Spam Reporting 

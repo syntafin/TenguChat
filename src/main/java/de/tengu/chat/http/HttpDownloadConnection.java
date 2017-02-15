@@ -25,6 +25,7 @@ import de.tengu.chat.persistance.FileBackend;
 import de.tengu.chat.services.AbstractConnectionManager;
 import de.tengu.chat.services.XmppConnectionService;
 import de.tengu.chat.utils.CryptoHelper;
+import de.tengu.chat.utils.FileWriterException;
 
 public class HttpDownloadConnection implements Transferable {
 
@@ -141,17 +142,12 @@ public class HttpDownloadConnection implements Transferable {
 		mXmppConnectionService.updateConversationUi();
 	}
 
-	private class WriteException extends IOException {
-
-	}
-
 	private void showToastForException(Exception e) {
-		e.printStackTrace();
 		if (e instanceof java.net.UnknownHostException) {
 			mXmppConnectionService.showErrorToastInUi(R.string.download_failed_server_not_found);
 		} else if (e instanceof java.net.ConnectException) {
 			mXmppConnectionService.showErrorToastInUi(R.string.download_failed_could_not_connect);
-		} else if (e instanceof WriteException) {
+		} else if (e instanceof FileWriterException) {
 			mXmppConnectionService.showErrorToastInUi(R.string.download_failed_could_not_write_file);
 		} else if (!(e instanceof  CancellationException)) {
 			mXmppConnectionService.showErrorToastInUi(R.string.download_failed_file_not_found);
@@ -171,21 +167,22 @@ public class HttpDownloadConnection implements Transferable {
 			long size;
 			try {
 				size = retrieveFileSize();
-			} catch (SSLHandshakeException e) {
+			} catch (Exception e) {
 				changeStatus(STATUS_OFFER_CHECK_FILESIZE);
-				HttpDownloadConnection.this.acceptedAutomatically = false;
-				HttpDownloadConnection.this.mXmppConnectionService.getNotificationService().push(message);
-				return;
-			} catch (IOException e) {
 				Log.d(Config.LOGTAG, "io exception in http file size checker: " + e.getMessage());
 				if (interactive) {
 					showToastForException(e);
+				} else {
+					HttpDownloadConnection.this.acceptedAutomatically = false;
+					HttpDownloadConnection.this.mXmppConnectionService.getNotificationService().push(message);
 				}
 				cancel();
 				return;
 			}
 			file.setExpectedSize(size);
-			if (mHttpConnectionManager.hasStoragePermission() && size <= mHttpConnectionManager.getAutoAcceptFileSize()) {
+			if (mHttpConnectionManager.hasStoragePermission()
+					&& size <= mHttpConnectionManager.getAutoAcceptFileSize()
+					&& mXmppConnectionService.isDataSaverDisabled()) {
 				HttpDownloadConnection.this.acceptedAutomatically = true;
 				new Thread(new FileDownloader(interactive)).start();
 			} else {
@@ -212,6 +209,8 @@ public class HttpDownloadConnection implements Transferable {
 				if (connection instanceof HttpsURLConnection) {
 					mHttpConnectionManager.setupTrustManager((HttpsURLConnection) connection, interactive);
 				}
+				connection.setConnectTimeout(Config.SOCKET_TIMEOUT * 1000);
+				connection.setReadTimeout(Config.SOCKET_TIMEOUT * 1000);
 				connection.connect();
 				String contentLength = connection.getHeaderField("Content-Length");
 				connection.disconnect();
@@ -250,6 +249,9 @@ public class HttpDownloadConnection implements Transferable {
 			} catch (Exception e) {
 				if (interactive) {
 					showToastForException(e);
+				} else {
+					HttpDownloadConnection.this.acceptedAutomatically = false;
+					HttpDownloadConnection.this.mXmppConnectionService.getNotificationService().push(message);
 				}
 				cancel();
 			}
@@ -276,6 +278,8 @@ public class HttpDownloadConnection implements Transferable {
 					long size = file.getSize();
 					connection.setRequestProperty("Range", "bytes="+size+"-");
 				}
+				connection.setConnectTimeout(Config.SOCKET_TIMEOUT * 1000);
+				connection.setReadTimeout(Config.SOCKET_TIMEOUT * 1000);
 				connection.connect();
 				is = new BufferedInputStream(connection.getInputStream());
 				boolean serverResumed = "bytes".equals(connection.getHeaderField("Accept-Ranges"));
@@ -298,7 +302,7 @@ public class HttpDownloadConnection implements Transferable {
 					try {
 						os.write(buffer, 0, count);
 					} catch (IOException e) {
-						throw new WriteException();
+						throw new FileWriterException();
 					}
 					updateProgress((int) ((((double) transmitted) / expected) * 100));
 					if (canceled) {
@@ -308,7 +312,7 @@ public class HttpDownloadConnection implements Transferable {
 				try {
 					os.flush();
 				} catch (IOException e) {
-					throw new WriteException();
+					throw new FileWriterException();
 				}
 			} catch (CancellationException | IOException e) {
 				throw e;

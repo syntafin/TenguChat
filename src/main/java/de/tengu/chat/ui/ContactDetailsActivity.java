@@ -10,7 +10,6 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Intents;
@@ -29,31 +28,35 @@ import android.widget.QuickContactBadge;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.wefika.flowlayout.FlowLayout;
+
 import org.openintents.openpgp.util.OpenPgpUtils;
 
 import java.security.cert.X509Certificate;
 import java.util.List;
 
 import de.tengu.chat.Config;
+import de.tengu.chat.OmemoActivity;
 import de.tengu.chat.R;
 import de.tengu.chat.crypto.PgpEngine;
 import de.tengu.chat.crypto.axolotl.AxolotlService;
+import de.tengu.chat.crypto.axolotl.FingerprintStatus;
 import de.tengu.chat.crypto.axolotl.XmppAxolotlSession;
 import de.tengu.chat.entities.Account;
 import de.tengu.chat.entities.Contact;
 import de.tengu.chat.entities.ListItem;
-import de.tengu.chat.entities.Presence;
 import de.tengu.chat.services.XmppConnectionService.OnAccountUpdate;
 import de.tengu.chat.services.XmppConnectionService.OnRosterUpdate;
 import de.tengu.chat.utils.CryptoHelper;
 import de.tengu.chat.utils.UIHelper;
+import de.tengu.chat.utils.XmppUri;
 import de.tengu.chat.xmpp.OnKeyStatusUpdated;
 import de.tengu.chat.xmpp.OnUpdateBlocklist;
 import de.tengu.chat.xmpp.XmppConnection;
 import de.tengu.chat.xmpp.jid.InvalidJidException;
 import de.tengu.chat.xmpp.jid.Jid;
 
-public class ContactDetailsActivity extends XmppActivity implements OnAccountUpdate, OnRosterUpdate, OnUpdateBlocklist, OnKeyStatusUpdated {
+public class ContactDetailsActivity extends OmemoActivity implements OnAccountUpdate, OnRosterUpdate, OnUpdateBlocklist, OnKeyStatusUpdated {
 	public static final String ACTION_VIEW_CONTACT = "view_contact";
 
 	private Contact contact;
@@ -114,7 +117,7 @@ public class ContactDetailsActivity extends XmppActivity implements OnAccountUpd
 	private Button addContactButton;
 	private QuickContactBadge badge;
 	private LinearLayout keys;
-	private LinearLayout tags;
+	private FlowLayout tags;
 	private boolean showDynamicTags = false;
 	private boolean showLastSeen = false;
 	private String messageFingerprint;
@@ -137,7 +140,8 @@ public class ContactDetailsActivity extends XmppActivity implements OnAccountUpd
 
 		@Override
 		public void onClick(View v) {
-			if (contact.getSystemAccount() == null) {
+			Uri systemAccount = contact.getSystemAccount();
+			if (systemAccount == null) {
 				AlertDialog.Builder builder = new AlertDialog.Builder(
 						ContactDetailsActivity.this);
 				builder.setTitle(getString(R.string.action_add_phone_book));
@@ -147,12 +151,9 @@ public class ContactDetailsActivity extends XmppActivity implements OnAccountUpd
 				builder.setPositiveButton(getString(R.string.add), addToPhonebook);
 				builder.create().show();
 			} else {
-					String[] systemAccount = contact.getSystemAccount().split("#");
-					long id = Long.parseLong(systemAccount[0]);
-					Uri uri = ContactsContract.Contacts.getLookupUri(id, systemAccount[1]);
-					Intent intent = new Intent(Intent.ACTION_VIEW);
-					intent.setData(uri);
-					startActivity(intent);
+				Intent intent = new Intent(Intent.ACTION_VIEW);
+				intent.setData(systemAccount);
+				startActivity(intent);
 			}
 		}
 	};
@@ -218,7 +219,7 @@ public class ContactDetailsActivity extends XmppActivity implements OnAccountUpd
 			}
 		});
 		keys = (LinearLayout) findViewById(R.id.details_contact_keys);
-		tags = (LinearLayout) findViewById(R.id.tags);
+		tags = (FlowLayout) findViewById(R.id.tags);
 		if (getActionBar() != null) {
 			getActionBar().setHomeButtonEnabled(true);
 			getActionBar().setDisplayHomeAsUpEnabled(true);
@@ -228,9 +229,14 @@ public class ContactDetailsActivity extends XmppActivity implements OnAccountUpd
 	@Override
 	public void onStart() {
 		super.onStart();
-		final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-		this.showDynamicTags = preferences.getBoolean("show_dynamic_tags",false);
-		this.showLastSeen = preferences.getBoolean("last_activity", false);
+		final int theme = findTheme();
+		if (this.mTheme != theme) {
+			recreate();
+		} else {
+			final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+			this.showDynamicTags = preferences.getBoolean("show_dynamic_tags", false);
+			this.showLastSeen = preferences.getBoolean("last_activity", false);
+		}
 	}
 
 	@Override
@@ -253,7 +259,8 @@ public class ContactDetailsActivity extends XmppActivity implements OnAccountUpd
 							removeFromRoster).create().show();
 				break;
 			case R.id.action_edit_contact:
-				if (contact.getSystemAccount() == null) {
+				Uri systemAccount = contact.getSystemAccount();
+				if (systemAccount == null) {
 					quickEdit(contact.getDisplayName(), 0, new OnValueEdited() {
 
 						@Override
@@ -266,10 +273,7 @@ public class ContactDetailsActivity extends XmppActivity implements OnAccountUpd
 					});
 				} else {
 					Intent intent = new Intent(Intent.ACTION_EDIT);
-					String[] systemAccount = contact.getSystemAccount().split("#");
-					long id = Long.parseLong(systemAccount[0]);
-					Uri uri = Contacts.getLookupUri(id, systemAccount[1]);
-					intent.setDataAndType(uri, Contacts.CONTENT_ITEM_TYPE);
+					intent.setDataAndType(systemAccount, Contacts.CONTENT_ITEM_TYPE);
 					intent.putExtra("finishActivityOnSaveCompleted", true);
 					startActivity(intent);
 				}
@@ -313,6 +317,9 @@ public class ContactDetailsActivity extends XmppActivity implements OnAccountUpd
 	}
 
 	private void populateView() {
+		if (contact == null) {
+			return;
+		}
 		invalidateOptionsMenu();
 		setTitle(contact.getDisplayName());
 		if (contact.showInRoster()) {
@@ -440,14 +447,12 @@ public class ContactDetailsActivity extends XmppActivity implements OnAccountUpd
 			}
 		}
 		if (Config.supportOmemo()) {
-			for (final String fingerprint : contact.getAccount().getAxolotlService().getFingerprintsForContact(contact)) {
-				boolean highlight = fingerprint.equals(messageFingerprint);
-				hasKeys |= addFingerprintRow(keys, contact.getAccount(), fingerprint, highlight, new OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						onOmemoKeyClicked(contact.getAccount(), fingerprint);
-					}
-				});
+			for (final XmppAxolotlSession session : contact.getAccount().getAxolotlService().findSessionsForContact(contact)) {
+				if (!session.getTrust().isCompromised()) {
+					boolean highlight = session.getFingerprint().equals(messageFingerprint);
+					hasKeys = true;
+					addFingerprintRow(keys, session, highlight);
+				}
 			}
 		}
 		if (Config.supportOpenPgp() && contact.getPgpKeyId() != 0) {
@@ -503,40 +508,6 @@ public class ContactDetailsActivity extends XmppActivity implements OnAccountUpd
 		}
 	}
 
-	private void onOmemoKeyClicked(Account account, String fingerprint) {
-		final XmppAxolotlSession.Trust trust = account.getAxolotlService().getFingerprintTrust(fingerprint);
-		if (Config.X509_VERIFICATION && trust != null && trust == XmppAxolotlSession.Trust.TRUSTED_X509) {
-			X509Certificate x509Certificate = account.getAxolotlService().getFingerprintCertificate(fingerprint);
-			if (x509Certificate != null) {
-				showCertificateInformationDialog(CryptoHelper.extractCertificateInformation(x509Certificate));
-			} else {
-				Toast.makeText(this,R.string.certificate_not_found, Toast.LENGTH_SHORT).show();
-			}
-		}
-	}
-
-	private void showCertificateInformationDialog(Bundle bundle) {
-		View view = getLayoutInflater().inflate(R.layout.certificate_information, null);
-		final String not_available = getString(R.string.certicate_info_not_available);
-		TextView subject_cn = (TextView) view.findViewById(R.id.subject_cn);
-		TextView subject_o = (TextView) view.findViewById(R.id.subject_o);
-		TextView issuer_cn = (TextView) view.findViewById(R.id.issuer_cn);
-		TextView issuer_o = (TextView) view.findViewById(R.id.issuer_o);
-		TextView sha1 = (TextView) view.findViewById(R.id.sha1);
-
-		subject_cn.setText(bundle.getString("subject_cn", not_available));
-		subject_o.setText(bundle.getString("subject_o", not_available));
-		issuer_cn.setText(bundle.getString("issuer_cn", not_available));
-		issuer_o.setText(bundle.getString("issuer_o", not_available));
-		sha1.setText(bundle.getString("sha1", not_available));
-
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setTitle(R.string.certificate_information);
-		builder.setView(view);
-		builder.setPositiveButton(R.string.ok, null);
-		builder.create().show();
-	}
-
 	protected void confirmToDeleteFingerprint(final String fingerprint) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setTitle(R.string.delete_fingerprint);
@@ -557,15 +528,17 @@ public class ContactDetailsActivity extends XmppActivity implements OnAccountUpd
 		builder.create().show();
 	}
 
-	@Override
 	public void onBackendConnected() {
-		if ((accountJid != null) && (contactJid != null)) {
-			Account account = xmppConnectionService
-				.findAccountByJid(accountJid);
+		if (accountJid != null && contactJid != null) {
+			Account account = xmppConnectionService.findAccountByJid(accountJid);
 			if (account == null) {
 				return;
 			}
 			this.contact = account.getRoster().getContact(contactJid);
+			if (mPendingFingerprintVerificationUri != null) {
+				processFingerprintVerification(mPendingFingerprintVerificationUri);
+				mPendingFingerprintVerificationUri = null;
+			}
 			populateView();
 		}
 	}
@@ -573,5 +546,16 @@ public class ContactDetailsActivity extends XmppActivity implements OnAccountUpd
 	@Override
 	public void onKeyStatusUpdated(AxolotlService.FetchStatus report) {
 		refreshUi();
+	}
+
+	@Override
+	protected void processFingerprintVerification(XmppUri uri) {
+		if (contact != null && contact.getJid().toBareJid().equals(uri.getJid()) && uri.hasFingerprints()) {
+			if (xmppConnectionService.verifyFingerprints(contact,uri.getFingerprints())) {
+				Toast.makeText(this,R.string.verified_fingerprints,Toast.LENGTH_SHORT).show();
+			}
+		} else {
+			Toast.makeText(this,R.string.invalid_barcode,Toast.LENGTH_SHORT).show();
+		}
 	}
 }

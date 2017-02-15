@@ -79,8 +79,8 @@
 	<string name="clear_histor_msg">Do you want to delete all messages within this Conversation?\n\n<b>Warning:</b> This will not influence messages stored on other devices or servers.</string>
 	<string name="delete_messages">Delete messages</string>
 	<string name="also_end_conversation">End this conversation afterwards</string>
-	<string name="choose_presence">Choose presence to contact</string>
-	<string name="send_unencrypted_message">Write a message</string>
+	<string name="choose_presence">Choose device</string>
+	<string name="send_unencrypted_message">Send message</string>
 	<string name="send_message_to_x">Send message to %s</string>
 	<string name="send_otr_message">Send OTR encrypted message</string>
 	<string name="send_omemo_message">Send OMEMO encrypted message</string>
@@ -123,14 +123,14 @@
 	<string name="pref_never_send_crash">Never send crash reports</string>
 	<string name="pref_never_send_crash_summary">By sending in stack traces you are helping the ongoing development of TenguChat</string>
 	<string name="pref_confirm_messages">Confirm Messages</string>
-	<string name="pref_confirm_messages_summary">Let your contact know when you have received and read a message</string>
+	<string name="pref_confirm_messages_summary">Let your contacts know when you have received and read their messages</string>
 	<string name="pref_ui_options">UI</string>
 	<string name="openpgp_error">OpenKeychain reported an error</string>
 	<string name="error_decrypting_file">I/O Error decrypting file</string>
 	<string name="accept">Accept</string>
 	<string name="error">An error has occurred</string>
 	<string name="pref_grant_presence_updates">Grant presence updates</string>
-	<string name="pref_grant_presence_updates_summary">Preemptively grant and ask for presence subscription for contacts you created</string>
+	<string name="pref_grant_presence_updates_summary">Preemptively grant and request presence subscriptions for contacts you have created</string>
 	<string name="subscriptions">Subscriptions</string>
 	<string name="your_account">Your account</string>
 	<string name="keys">Keys</string>
@@ -157,9 +157,11 @@
 	<string name="account_status_regis_conflict">Username already in use</string>
 	<string name="account_status_regis_success">Registration completed</string>
 	<string name="account_status_regis_not_sup">Server does not support registration</string>
-	<string name="account_status_security_error">Encryption error</string>
+	<string name="account_status_security_error">Security error</string>
+	<string name="account_status_policy_violation">Policy violation</string>
 	<string name="account_status_incompatible_server">Incompatible server</string>
-	<string name="encryption_choice_unencrypted">Normal</string>
+	<string name="account_status_stream_error">Stream error</string>
+	<string name="encryption_choice_unencrypted">Unencrypted</string>
 	<string name="encryption_choice_otr">OTR</string>
 	<string name="encryption_choice_pgp">OpenPGP</string>
 	<string name="encryption_choice_omemo">OMEMO</string>
@@ -176,7 +178,7 @@
 	<string name="attach_record_voice">Record voice</string>
 	<string name="account_settings_jabber_id">Tengu ID</string>
 	<string name="account_settings_password">Password</string>
-	<string name="account_settings_example_jabber_id">username@example.com</string>
+	<string name="account_settings_example_jabber_id">username@tengu.chat</string>
 	<string name="account_settings_confirm_password">Confirm password</string>
 	<string name="password">Password</string>
 	<string name="confirm_password">Confirm password</string>
@@ -232,7 +234,7 @@
 	<string name="done">Done</string>
 	<string name="verify">Verify</string>
 	<string name="decrypt">Decrypt</string>
-	<string name="conferences">Groups</string>
+	<string name="conferences">Conferences</string>
 	<string name="search">Search</string>
 	<string name="create_contact">Create Contact</string>
 	<string name="enter_contact">Enter Contact</string>
@@ -246,7 +248,7 @@
 	<string name="contact_already_exists">The contact already exists</string>
 	<string name="join">Join</string>
 	<string name="conference_address">Conference address</string>
-	<string name="conference_address_example">room@groups.tengu.chat</string>
+	<string name="conference_address_example">room@conference.example.com/nick</string>
 	<string name="save_as_bookmark">Save as bookmark</string>
 	<string name="delete_bookmark">Delete bookmark</string>
 	<string name="bookmark_already_exists">This bookmark already exists</string>
@@ -279,9 +281,10 @@
 	<string name="disable_notifications">Disable notifications</string>
 	<string name="disable_notifications_for_this_conversation">Disable notifications for this conversation</string>
 	<string name="enable">Enable</string>
-	<string name="conference_requires_password">Group requires password</string>
+	<string name="conference_requires_password">Conference requires password</string>
 	<string name="enter_password">Enter password</string>
 	<string name="missing_presence_updates">Missing presence updates from contact</string>
+	<string name="missing_presence_subscription">Missing presence subscription</string>
 	<string name="request_presence_updates">Please request presence updates from your contact first.\n\n<small>This will be used to determine what client(s) your contact is using.</small></string>
 	<string name="request_now">Request now</string>
 	<string name="delete_fingerprint">Delete Fingerprint</string>
@@ -300,7 +303,7 @@
 	<string name="title_activity_about">About TenguChat</string>
 	<string name="pref_about_conversations_summary">Build and licensing information</string>
 	<string name="pref_about_message" translatable="false">
-			TenguChat • the very last word in instant messaging.
+			TenguChat • a new way of instant messaging.
 			\n\nCopyright © 2016 TenguSystems
 			\n\nThis program is free software: you can redistribute it and/or modify
 			it under the terms of the GNU General Public License as published by
@@ -348,10 +351,10 @@
 	<string name="pref_autojoin_summary">Respect the autojoin flag in conference bookmarks</string>
 	<string name="toast_message_otr_fingerprint">OTR fingerprint copied to clipboard!</string>
 	<string name="toast_message_omemo_fingerprint">OMEMO fingerprint copied to clipboard!</string>
-	<string name="conference_banned">You are banned from this group</string>
+	<string name="conference_banned">You are banned from this conference</string>
 	<string name="conference_members_only">This conference is members only</string>
 	<string name="conference_kicked">You have been kicked from this conference</string>
-	<string name="conference_shutdown">The group was shut down</string>
+	<string name="conference_shutdown">The conference was shut down</string>
 	<string name="conference_unknown_error">You are no longer in this conference</string>
 	<string name="using_account">using account %s</string>
 	<string name="checking_x">Checking %s on HTTP host</string>
@@ -360,6 +363,7 @@
 	<string name="check_x_filesize_on_host">Check %1$s size on %2$s</string>
 	<string name="message_options">Message options</string>
 	<string name="copy_text">Copy text</string>
+	<string name="select_text">Select text</string>
 	<string name="copy_original_url">Copy original URL</string>
 	<string name="send_again">Send again</string>
 	<string name="file_url">File URL</string>
@@ -367,8 +371,8 @@
 	<string name="url_copied_to_clipboard">URL copied to clipboard</string>
 	<string name="message_copied_to_clipboard">Message copied to clipboard</string>
 	<string name="image_transmission_failed">Image transmission failed</string>
-	<string name="scan_qr_code">Scan QR code</string>
-	<string name="show_qr_code">Show QR code</string>
+	<string name="scan_qr_code">Scan 2D Barcode</string>
+	<string name="show_qr_code">Show 2D Barcode</string>
 	<string name="show_block_list">Show block list</string>
 	<string name="account_details">Account details</string>
 	<string name="verify_otr">Verify OTR</string>
@@ -390,8 +394,8 @@
 	<string name="conversations_foreground_service">TenguChat</string>
 	<string name="pref_keep_foreground_service">Keep service in foreground</string>
 	<string name="pref_keep_foreground_service_summary">Prevents the operating system from killing your connection</string>
-	<string name="pref_export_logs">Export Logs</string>
-	<string name="pref_export_logs_summary">Write logs to SD card</string>
+	<string name="pref_export_logs">Export history</string>
+	<string name="pref_export_logs_summary">Write conversations history logs to SD card</string>
 	<string name="notification_export_logs_title">Writing logs to SD card</string>
 	<string name="choose_file">Choose file</string>
 	<string name="receiving_x_file">Receiving %1$s (%2$d%% completed)</string>
@@ -408,13 +412,13 @@
 	<string name="no_application_found_to_open_file">No application found to open file</string>
 	<string name="could_not_verify_fingerprint">Could not verify fingerprint</string>
 	<string name="manually_verify">Manually verify</string>
-	<string name="are_you_sure_verify_fingerprint">Are you sure that you want to verify your contacts OTR fingerprint?</string>
+	<string name="are_you_sure_verify_fingerprint">Are you sure that you want to verify your contact’s OTR fingerprint?</string>
 	<string name="pref_show_dynamic_tags">Show dynamic tags</string>
 	<string name="pref_show_dynamic_tags_summary">Display read-only tags underneath contacts</string>
 	<string name="enable_notifications">Enable notifications</string>
-	<string name="conference_with">Create group with…</string>
+	<string name="conference_with">Create conference with…</string>
 	<string name="no_conference_server_found">No conference server found</string>
-	<string name="conference_creation_failed">Group creation failed!</string>
+	<string name="conference_creation_failed">Conference creation failed!</string>
 	<string name="secret_accepted">Secret accepted!</string>
 	<string name="reset">Reset</string>
 	<string name="account_image_description">Account avatar</string>
@@ -466,7 +470,7 @@
 	<string name="could_not_change_role">Could not change role of %s</string>
 	<string name="public_conference">Publicly accessible conference</string>
 	<string name="private_conference">Private, members only conference</string>
-	<string name="conference_options">Group options</string>
+	<string name="conference_options">Conference options</string>
 	<string name="members_only">Private, members only</string>
 	<string name="non_anonymous">Non-anonymous</string>
 	<string name="moderated">Moderated</string>
@@ -501,7 +505,7 @@
 	<string name="contact_is_typing">%s is typing…</string>
 	<string name="contact_has_stopped_typing">%s has stopped typing</string>
 	<string name="pref_chat_states">Typing notifications</string>
-	<string name="pref_chat_states_summary">Let your contact know when you are writing a new message</string>
+	<string name="pref_chat_states_summary">Let your contacts know when you are writing messages to them</string>
 	<string name="send_location">Send location</string>
 	<string name="show_location">Show location</string>
 	<string name="no_application_found_to_display_location">No application found to display location</string>
@@ -536,7 +540,7 @@
 	<string name="username">Username</string>
 	<string name="username_hint">Username</string>
 	<string name="invalid_username">This is not a valid username</string>
-	<string name="conference_name">Group name</string>
+	<string name="conference_name">Conference name</string>
 	<string name="invalid_conference_name">This is not a valid conference name</string>
 	<string name="download_failed_server_not_found">Download failed: Server not found</string>
 	<string name="download_failed_file_not_found">Download failed: File not found</string>
@@ -546,7 +550,7 @@
 	<string name="pref_use_white_background_summary">Show received messages as black text on a white background</string>
 	<string name="account_status_tor_unavailable">Tor network unavailable</string>
 	<string name="account_status_bind_failure">Bind failure</string>
-	<string name="account_status_host_unknown">Host unknown</string>
+	<string name="account_status_host_unknown">Server not responsible for domain</string>
 	<string name="server_info_broken">Broken</string>
 	<string name="pref_presence_settings">Presence</string>
 	<string name="pref_away_when_screen_off">Away when screen is off</string>
@@ -625,12 +629,12 @@
 	<string name="security_error_invalid_file_access">Security error: Invalid file access</string>
 	<string name="no_application_to_share_uri">No application found to share URI</string>
 	<string name="share_uri_with">Share URI with…</string>
-	<string name="welcome_header">Welcome to TenguChat</string>
-	<string name="welcome_text">XMPP is a provider independent protocol.\nTenguChat was created, to help people join the world of free communication.\nPlese select how you want to continue.</string>
-	<string name="magic_create_text">We will guide you through the process of creating an account on TenguChat.im.\nWhen picking TenguChat.im as a provider you will be able to communicate with users of other providers by giving them your full Jabber ID.</string>
-	<string name="your_full_jid_will_be">Your full Tengu ID will be: %s</string>
+	<string translatable="false" name="welcome_header">Join the Conversation</string>
+	<string name="welcome_text">XMPP is a provider independent protocol. You can use this client with what ever XMPP server you choose.\nHowever for your convenience we made it easy to create an account on TenguChat¹</string>
+	<string name="magic_create_text">We will guide you through the process of creating an account on TenguChat.¹\nWhen picking TenguChat as a provider you will be able to communicate with users of other providers by giving them your full Jabber ID.</string>
+	<string name="your_full_jid_will_be">Your full Jabber ID will be: %s</string>
 	<string name="create_account">Create Account</string>
-	<string name="use_own_provider">Use exciting account</string>
+	<string name="use_own_provider">Use existing account</string>
 	<string name="pick_your_username">Pick your username</string>
 	<string name="pref_manually_change_presence">Manually change presence</string>
 	<string name="pref_manually_change_presence_summary">Touch your avatar to change your presence</string>
@@ -646,6 +650,7 @@
 	<string name="device_does_not_support_battery_op">Your device does not support opting out of battery optimization</string>
 	<string name="show_password">Show password</string>
 	<string name="registration_please_wait">Registration failed: Try again later</string>
+	<string name="registration_password_too_weak">Registration failed: Password too weak</string>
 	<string name="create_conference">Create conference</string>
 	<string name="join_or_create_conference">Join or create conference</string>
 	<string name="conference_subject">Subject</string>
@@ -662,7 +667,56 @@
 	<string name="pref_theme_options_summary">Select the color palette</string>
 	<string name="pref_theme_light">Light theme</string>
 	<string name="pref_theme_dark">Dark theme</string>
-	<string name="pref_use_green_background">Blue Background</string>
-	<string name="pref_use_green_background_summary">Use blue background for received messages</string>
+	<string name="pref_use_green_background">Green Background</string>
+	<string name="pref_use_green_background_summary">Use green background for received messages</string>
 	<string name="unable_to_connect_to_keychain">Unable to connect to OpenKeychain</string>
+	<string name="this_device_is_no_longer_in_use">This device is no longer in use</string>
+	<string name="type_pc">Computer</string>
+	<string name="type_phone">Mobile phone</string>
+	<string name="type_tablet">Tablet</string>
+	<string name="type_web">Web browser</string>
+	<string name="type_console">Console</string>
+	<string name="payment_required">Payment required</string>
+	<string name="missing_internet_permission">Missing internet permission</string>
+	<string name="me">Me</string>
+	<string name="contact_asks_for_presence_subscription">Contact asks for presence subscription</string>
+	<string name="allow">Allow</string>
+	<string name="no_permission_to_access_x">No permission to access %s</string>
+	<string name="remote_server_not_found">Remote server not found</string>
+	<string name="unable_to_update_account">Unable to update account</string>
+	<string name="missing_presence_subscription_with_x">Missing presence subscription with %s.</string>
+	<string name="missing_keys_from_x">Missing OMEMO keys from %s.</string>
+	<string name="missing_omemo_keys">Missing OMEMO keys</string>
+	<string name="wrong_conference_configuration">This is not a private, non-anonymous conference.</string>
+	<string name="this_conference_has_no_members">There are no members in this conference.</string>
+	<string name="report_jid_as_spammer">Report this JID as sending unwanted messages.</string>
+	<string name="pref_delete_omemo_identities">Delete OMEMO identities</string>
+	<string name="pref_delete_omemo_identities_summary">Regenerate your OMEMO keys. All your contacts will have to verify you again. Use this only as a last resort.</string>
+	<string name="delete_selected_keys">Delete selected keys</string>
+	<string name="error_publish_avatar_offline">You need to be connected to publish your avatar.</string>
+	<string name="show_error_message">Show error message</string>
+	<string name="error_message">Error Message</string>
+	<string name="data_saver_enabled">Data saver enabled</string>
+	<string name="data_saver_enabled_explained">Your operating system is restricting TenguChat from accessing the Internet when in background. To receive notifications of new messages you should allow TenguChat unrestricted access when Data saver is on.\nTenguChat will still make an effort to save data when possible.</string>
+	<string name="device_does_not_support_data_saver">Your device does not support disabling Data saver for TenguChat.</string>
+	<string name="error_unable_to_create_temporary_file">Unable to create temporary file</string>
+	<string name="this_device_has_been_verified">This device has been verified</string>
+	<string name="copy_fingerprint">Copy fingerprint</string>
+	<string name="all_omemo_keys_have_been_verified">All OMEMO keys have been verified</string>
+	<string name="barcode_does_not_contain_fingerprints_for_this_conversation">Barcode does not contain fingerprints for this conversation.</string>
+	<string name="verified_fingerprints">Verified fingerprints</string>
+	<string name="use_camera_icon_to_scan_barcode">Use the camera to scan a contact’s barcode</string>
+	<string name="please_wait_for_keys_to_be_fetched">Please wait for keys to be fetched</string>
+	<string name="share_as_barcode">Share as Barcode</string>
+	<string name="share_as_uri">Share as XMPP URI</string>
+	<string name="share_as_http">Share as HTTP link</string>
+	<string name="pref_blind_trust_before_verification">Blind Trust Before Verification</string>
+	<string name="pref_blind_trust_before_verification_summary">Automatically trust all new devices of contacts that haven’t been verified before, and prompt for manual confirmation each time a verified contact adds a new device.</string>
+	<string name="blindly_trusted_omemo_keys">Blindly trusted OMEMO keys</string>
+	<string name="not_trusted">Untrusted</string>
+	<string name="invalid_barcode">Invalid 2D barcode</string>
+	<string name="pref_clean_cache_summary">Clean cache folder (used by Camera Application)</string>
+	<string name="pref_clean_cache">Clean cache</string>
+	<string name="pref_clean_private_storage">Clean private storage</string>
+	<string name="pref_clean_private_storage_summary">Clean private storage where files are kept (They can be re-downloaded from the server)</string>
 </resources>

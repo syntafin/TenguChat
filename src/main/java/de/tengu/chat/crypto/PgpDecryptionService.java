@@ -115,7 +115,11 @@ public class PgpDecryptionService {
                     case OpenPgpApi.RESULT_CODE_SUCCESS:
                         try {
                             os.flush();
-                            message.setBody(os.toString());
+                            final String body = os.toString();
+                            if (body == null) {
+                                throw new IOException("body was null");
+                            }
+                            message.setBody(body);
                             message.setEncryption(Message.ENCRYPTION_DECRYPTED);
                             final HttpConnectionManager manager = mXmppConnectionService.getHttpConnectionManager();
                             if (message.trusted()
@@ -130,9 +134,10 @@ public class PgpDecryptionService {
                         break;
                     case OpenPgpApi.RESULT_CODE_USER_INTERACTION_REQUIRED:
                         synchronized (PgpDecryptionService.this) {
+                            PendingIntent pendingIntent = result.getParcelableExtra(OpenPgpApi.RESULT_INTENT);
                             messages.addFirst(message);
                             currentMessage = null;
-                            storePendingIntent((PendingIntent) result.getParcelableExtra(OpenPgpApi.RESULT_INTENT));
+                            storePendingIntent(pendingIntent);
                         }
                         break;
                     case OpenPgpApi.RESULT_CODE_ERROR:
@@ -160,9 +165,10 @@ public class PgpDecryptionService {
                             break;
                         case OpenPgpApi.RESULT_CODE_USER_INTERACTION_REQUIRED:
                             synchronized (PgpDecryptionService.this) {
+                                PendingIntent pendingIntent = result.getParcelableExtra(OpenPgpApi.RESULT_INTENT);
                                 messages.addFirst(message);
                                 currentMessage = null;
-                                storePendingIntent((PendingIntent) result.getParcelableExtra(OpenPgpApi.RESULT_INTENT));
+                                storePendingIntent(pendingIntent);
                             }
                             break;
                         case OpenPgpApi.RESULT_CODE_ERROR:

@@ -11,13 +11,16 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import de.tengu.chat.Config;
 import de.tengu.chat.R;
+import de.tengu.chat.crypto.axolotl.AxolotlService;
 import de.tengu.chat.entities.Contact;
 import de.tengu.chat.entities.Conversation;
 import de.tengu.chat.entities.ListItem;
 import de.tengu.chat.entities.Message;
 import de.tengu.chat.entities.Presence;
 import de.tengu.chat.entities.Transferable;
+import de.tengu.chat.ui.XmppActivity;
 import de.tengu.chat.xmpp.jid.Jid;
 
 public class UIHelper {
@@ -73,8 +76,7 @@ public class UIHelper {
 		} else if (difference < 60 * 2) {
 			return context.getString(R.string.minute_ago);
 		} else if (difference < 60 * 15) {
-			return context.getString(R.string.minutes_ago,
-					Math.round(difference / 60.0));
+			return context.getString(R.string.minutes_ago,Math.round(difference / 60.0));
 		} else if (today(date)) {
 			java.text.DateFormat df = DateFormat.getTimeFormat(context);
 			return df.format(date);
@@ -91,10 +93,6 @@ public class UIHelper {
 
 	private static boolean today(Date date) {
 		return sameDay(date,new Date(System.currentTimeMillis()));
-	}
-
-	public static boolean sameDay(long timestamp1, long timestamp2) {
-		return sameDay(new Date(timestamp1),new Date(timestamp2));
 	}
 
 	private static boolean sameDay(Date a, Date b) {
@@ -251,6 +249,30 @@ public class UIHelper {
 		}
 	}
 
+	public static String getMessageHint(Context context, Conversation conversation) {
+		switch (conversation.getNextEncryption()) {
+			case Message.ENCRYPTION_NONE:
+				if (Config.multipleEncryptionChoices()) {
+					return context.getString(R.string.send_unencrypted_message);
+				} else {
+					return context.getString(R.string.send_message_to_x,conversation.getName());
+				}
+			case Message.ENCRYPTION_OTR:
+				return context.getString(R.string.send_otr_message);
+			case Message.ENCRYPTION_AXOLOTL:
+				AxolotlService axolotlService = conversation.getAccount().getAxolotlService();
+				if (axolotlService != null && axolotlService.trustedSessionVerified(conversation)) {
+					return context.getString(R.string.send_omemo_x509_message);
+				} else {
+					return context.getString(R.string.send_omemo_message);
+				}
+			case Message.ENCRYPTION_PGP:
+				return context.getString(R.string.send_pgp_message);
+			default:
+				return "";
+		}
+	}
+
 	public static String getDisplayedMucCounterpart(final Jid counterpart) {
 		if (counterpart==null) {
 			return "";
@@ -284,6 +306,23 @@ public class UIHelper {
 				return new ListItem.Tag(context.getString(R.string.presence_dnd), 0xfff44336);
 			default:
 				return new ListItem.Tag(context.getString(R.string.presence_online), 0xff259b24);
+		}
+	}
+
+	public static String tranlasteType(Context context, String type) {
+		switch (type.toLowerCase()) {
+			case "pc":
+				return context.getString(R.string.type_pc);
+			case "phone":
+				return context.getString(R.string.type_phone);
+			case "tablet":
+				return context.getString(R.string.type_tablet);
+			case "web":
+				return context.getString(R.string.type_web);
+			case "console":
+				return context.getString(R.string.type_console);
+			default:
+				return type;
 		}
 	}
 }

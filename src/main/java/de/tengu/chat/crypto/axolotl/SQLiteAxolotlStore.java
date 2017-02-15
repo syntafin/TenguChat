@@ -21,7 +21,10 @@ import java.util.Set;
 
 import de.tengu.chat.Config;
 import de.tengu.chat.entities.Account;
+import de.tengu.chat.entities.Contact;
 import de.tengu.chat.services.XmppConnectionService;
+import de.tengu.chat.xmpp.jid.InvalidJidException;
+import de.tengu.chat.xmpp.jid.Jid;
 
 public class SQLiteAxolotlStore implements AxolotlStore {
 
@@ -35,7 +38,10 @@ public class SQLiteAxolotlStore implements AxolotlStore {
 	public static final String KEY = "key";
 	public static final String FINGERPRINT = "fingerprint";
 	public static final String NAME = "name";
-	public static final String TRUSTED = "trusted";
+	public static final String TRUSTED = "trusted"; //no longer used
+	public static final String TRUST = "trust";
+	public static final String ACTIVE = "active";
+	public static final String LAST_ACTIVATION = "last_activation";
 	public static final String OWN = "ownkey";
 	public static final String CERTIFICATE = "certificate";
 
@@ -51,11 +57,11 @@ public class SQLiteAxolotlStore implements AxolotlStore {
 	private int localRegistrationId;
 	private int currentPreKeyId = 0;
 
-	private final LruCache<String, XmppAxolotlSession.Trust> trustCache =
-			new LruCache<String, XmppAxolotlSession.Trust>(NUM_TRUSTS_TO_CACHE) {
+	private final LruCache<String, FingerprintStatus> trustCache =
+			new LruCache<String, FingerprintStatus>(NUM_TRUSTS_TO_CACHE) {
 				@Override
-				protected XmppAxolotlSession.Trust create(String fingerprint) {
-					return mXmppConnectionService.databaseBackend.isIdentityKeyTrusted(account, fingerprint);
+				protected FingerprintStatus create(String fingerprint) {
+					return mXmppConnectionService.databaseBackend.getFingerprintStatus(account, fingerprint);
 				}
 			};
 
@@ -185,7 +191,20 @@ public class SQLiteAxolotlStore implements AxolotlStore {
 	@Override
 	public void saveIdentity(String name, IdentityKey identityKey) {
 		if (!mXmppConnectionService.databaseBackend.loadIdentityKeys(account, name).contains(identityKey)) {
-			mXmppConnectionService.databaseBackend.storeIdentityKey(account, name, identityKey);
+			String fingerprint = identityKey.getFingerprint().replaceAll("\\s", "");
+			FingerprintStatus status = getFingerprintStatus(fingerprint);
+			if (status == null) {
+				if (mXmppConnectionService.blindTrustBeforeVerification() && !account.getAxolotlService().hasVerifiedKeys(name)) {
+					Log.d(Config.LOGTAG,account.getJid().toBareJid()+": blindly trusted "+fingerprint+" of "+name);
+					status = FingerprintStatus.createActiveTrusted();
+				} else {
+					status = FingerprintStatus.createActiveUndecided();
+				}
+			} else {
+				status = status.toActive();
+			}
+			mXmppConnectionService.databaseBackend.storeIdentityKey(account, name, identityKey, status);
+			trustCache.remove(fingerprint);
 		}
 	}
 
@@ -208,12 +227,12 @@ public class SQLiteAxolotlStore implements AxolotlStore {
 		return true;
 	}
 
-	public XmppAxolotlSession.Trust getFingerprintTrust(String fingerprint) {
+	public FingerprintStatus getFingerprintStatus(String fingerprint) {
 		return (fingerprint == null)? null : trustCache.get(fingerprint);
 	}
 
-	public void setFingerprintTrust(String fingerprint, XmppAxolotlSession.Trust trust) {
-		mXmppConnectionService.databaseBackend.setIdentityKeyTrust(account, fingerprint, trust);
+	public void setFingerprintStatus(String fingerprint, FingerprintStatus status) {
+		mXmppConnectionService.databaseBackend.setIdentityKeyTrust(account, fingerprint, status);
 		trustCache.remove(fingerprint);
 	}
 
@@ -225,8 +244,8 @@ public class SQLiteAxolotlStore implements AxolotlStore {
 		return mXmppConnectionService.databaseBackend.getIdentityKeyCertifcate(account, fingerprint);
 	}
 
-	public Set<IdentityKey> getContactKeysWithTrust(String bareJid, XmppAxolotlSession.Trust trust) {
-		return mXmppConnectionService.databaseBackend.loadIdentityKeys(account, bareJid, trust);
+	public Set<IdentityKey> getContactKeysWithTrust(String bareJid, FingerprintStatus status) {
+		return mXmppConnectionService.databaseBackend.loadIdentityKeys(account, bareJid, status);
 	}
 
 	public long getContactNumTrustedKeys(String bareJid) {
@@ -427,5 +446,9 @@ public class SQLiteAxolotlStore implements AxolotlStore {
 	@Override
 	public void removeSignedPreKey(int signedPreKeyId) {
 		mXmppConnectionService.databaseBackend.deleteSignedPreKey(account, signedPreKeyId);
+	}
+
+	public void preVerifyFingerprint(Account account, String name, String fingerprint) {
+		mXmppConnectionService.databaseBackend.storePreVerification(account,name,fingerprint,FingerprintStatus.createInactiveVerified());
 	}
 }

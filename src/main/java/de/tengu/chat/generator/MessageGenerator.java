@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
+import de.tengu.chat.Config;
 import de.tengu.chat.crypto.axolotl.AxolotlService;
 import de.tengu.chat.crypto.axolotl.XmppAxolotlMessage;
 import de.tengu.chat.entities.Account;
@@ -74,7 +75,7 @@ public class MessageGenerator extends AbstractGenerator {
 			return null;
 		}
 		packet.setAxolotlMessage(axolotlMessage.toElement());
-		if (!recipientSupportsOmemo(message)) {
+		if (Config.supportUnencrypted() && !recipientSupportsOmemo(message)) {
 			packet.setBody(OMEMO_FALLBACK_MESSAGE);
 		}
 		packet.addChild("store", "urn:xmpp:hints");
@@ -130,7 +131,9 @@ public class MessageGenerator extends AbstractGenerator {
 
 	public MessagePacket generatePgpChat(Message message) {
 		MessagePacket packet = preparePacket(message);
-		packet.setBody(PGP_FALLBACK_MESSAGE);
+		if (Config.supportUnencrypted()) {
+			packet.setBody(PGP_FALLBACK_MESSAGE);
+		}
 		if (message.getEncryption() == Message.ENCRYPTION_DECRYPTED) {
 			packet.addChild("x", "jabber:x:encrypted").setContent(message.getEncryptedBody());
 		} else if (message.getEncryption() == Message.ENCRYPTION_PGP) {
@@ -180,6 +183,10 @@ public class MessageGenerator extends AbstractGenerator {
 		packet.setFrom(conversation.getAccount().getJid());
 		Element x = packet.addChild("x", "jabber:x:conference");
 		x.setAttribute("jid", conversation.getJid().toBareJid().toString());
+		String password = conversation.getMucOptions().getPassword();
+		if (password != null) {
+			x.setAttribute("password",password);
+		}
 		return packet;
 	}
 

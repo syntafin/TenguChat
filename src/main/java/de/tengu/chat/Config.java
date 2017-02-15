@@ -18,13 +18,13 @@ public final class Config {
 		return (ENCRYPTION_MASK & UNENCRYPTED) != 0;
 	}
 
-    public static boolean supportOpenPgp() {
-        return (ENCRYPTION_MASK & OPENPGP) != 0;
-    }
+	public static boolean supportOpenPgp() {
+		return (ENCRYPTION_MASK & OPENPGP) != 0;
+	}
 
-    public static boolean supportOtr() {
-        return (ENCRYPTION_MASK & OTR) != 0;
-    }
+	public static boolean supportOtr() {
+		return (ENCRYPTION_MASK & OTR) != 0;
+	}
 
 	public static boolean supportOmemo() {
 		return (ENCRYPTION_MASK & OMEMO) != 0;
@@ -54,13 +54,12 @@ public final class Config {
 	public static final int PING_MAX_INTERVAL = 300;
 	public static final int IDLE_PING_INTERVAL = 600; //540 is minimum according to docs;
 	public static final int PING_MIN_INTERVAL = 30;
+	public static final int LOW_PING_TIMEOUT = 1; // used after push received
 	public static final int PING_TIMEOUT = 15;
 	public static final int SOCKET_TIMEOUT = 15;
 	public static final int CONNECT_TIMEOUT = 90;
 	public static final int CONNECT_DISCO_TIMEOUT = 20;
 	public static final int MINI_GRACE_PERIOD = 750;
-
-	public static final boolean CLOSE_TCP_WHEN_SWITCHING_TO_BACKGROUND = false;
 
 	public static final int AVATAR_SIZE = 192;
 	public static final Bitmap.CompressFormat AVATAR_FORMAT = Bitmap.CompressFormat.WEBP;
@@ -79,6 +78,10 @@ public final class Config {
 
 	public static final int MAX_DISPLAY_MESSAGE_CHARS = 4096;
 
+	public static final long MILLISECONDS_IN_DAY = 24 * 60 * 60 * 1000;
+
+	public static final long OMEMO_AUTO_EXPIRY = 7 * MILLISECONDS_IN_DAY;
+
 	public static final boolean DISABLE_PROXY_LOOKUP = false; //useful to debug ibb
 	public static final boolean DISABLE_HTTP_UPLOAD = false;
 	public static final boolean DISABLE_STRING_PREP = false; // setting to true might increase startup performance
@@ -90,17 +93,21 @@ public final class Config {
 
 	public static final boolean REPORT_WRONG_FILESIZE_IN_OTR_JINGLE = true;
 
-	public static final boolean SHOW_REGENERATE_AXOLOTL_KEYS_BUTTON = true;
+	public static final boolean SHOW_REGENERATE_AXOLOTL_KEYS_BUTTON = false;
 
 	public static final boolean X509_VERIFICATION = false; //use x509 certificates to verify OMEMO keys
+
+	public static final boolean ONLY_INTERNAL_STORAGE = false; //use internal storage instead of sdcard to save attachments
 
 	public static final boolean IGNORE_ID_REWRITE_IN_MUC = true;
 
 	public static final boolean PARSE_REAL_JID_FROM_MUC_MAM = false; //dangerous if server doesn’t filter
 
-	public static final long MILLISECONDS_IN_DAY = 24 * 60 * 60 * 1000;
 	public static final long MAM_MAX_CATCHUP =  MILLISECONDS_IN_DAY / 2;
 	public static final int MAM_MAX_MESSAGES = 500;
+
+	public static final long FREQUENT_RESTARTS_DETECTION_WINDOW = 12 * 60 * 60 * 1000; // 10 hours
+	public static final long FREQUENT_RESTARTS_THRESHOLD = 16;
 
 	public static final ChatState DEFAULT_CHATSTATE = ChatState.ACTIVE;
 	public static final int TYPING_TIMEOUT = 8;

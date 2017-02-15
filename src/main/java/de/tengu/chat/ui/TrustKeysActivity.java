@@ -1,7 +1,12 @@
 package de.tengu.chat.ui;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -10,24 +15,31 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
+
 import org.whispersystems.libaxolotl.IdentityKey;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import de.tengu.chat.Config;
+import de.tengu.chat.OmemoActivity;
 import de.tengu.chat.R;
 import de.tengu.chat.crypto.axolotl.AxolotlService;
-import de.tengu.chat.crypto.axolotl.XmppAxolotlSession;
+import de.tengu.chat.crypto.axolotl.FingerprintStatus;
 import de.tengu.chat.entities.Account;
 import de.tengu.chat.entities.Conversation;
+import de.tengu.chat.utils.XmppUri;
 import de.tengu.chat.xmpp.OnKeyStatusUpdated;
 import de.tengu.chat.xmpp.jid.InvalidJidException;
 import de.tengu.chat.xmpp.jid.Jid;
 
-public class TrustKeysActivity extends XmppActivity implements OnKeyStatusUpdated {
+public class TrustKeysActivity extends OmemoActivity implements OnKeyStatusUpdated {
 	private List<Jid> contactJids;
 
 	private Account mAccount;
@@ -61,6 +73,7 @@ public class TrustKeysActivity extends XmppActivity implements OnKeyStatusUpdate
 			finish();
 		}
 	};
+	private Toast mUseCameraHintToast = null;
 
 	@Override
 	protected void refreshUiReal() {
@@ -99,6 +112,61 @@ public class TrustKeysActivity extends XmppActivity implements OnKeyStatusUpdate
 		}
 	}
 
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.trust_keys, menu);
+		mUseCameraHintToast = Toast.makeText(this,R.string.use_camera_icon_to_scan_barcode,Toast.LENGTH_LONG);
+		ActionBar actionBar = getActionBar();
+		mUseCameraHintToast.setGravity(Gravity.TOP | Gravity.END, 0 ,actionBar == null ? 0 : actionBar.getHeight());
+		mUseCameraHintToast.show();
+		return super.onCreateOptionsMenu(menu);
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+			case R.id.action_scan_qr_code:
+				if (hasPendingKeyFetches()) {
+					Toast.makeText(this, R.string.please_wait_for_keys_to_be_fetched, Toast.LENGTH_SHORT).show();
+				} else {
+					new IntentIntegrator(this).initiateScan(Arrays.asList("AZTEC","QR_CODE"));
+					return true;
+				}
+		}
+		return super.onOptionsItemSelected(item);
+	}
+
+	@Override
+	protected void onStop() {
+		super.onStop();
+		if (mUseCameraHintToast != null) {
+			mUseCameraHintToast.cancel();
+		}
+	}
+
+	@Override
+	protected void processFingerprintVerification(XmppUri uri) {
+		if (mConversation != null
+				&& mAccount != null
+				&& uri.hasFingerprints()
+				&& mAccount.getAxolotlService().getCryptoTargets(mConversation).contains(uri.getJid())) {
+			boolean performedVerification = xmppConnectionService.verifyFingerprints(mAccount.getRoster().getContact(uri.getJid()),uri.getFingerprints());
+			boolean keys = reloadFingerprints();
+			if (performedVerification && !keys && !hasNoOtherTrustedKeys() && !hasPendingKeyFetches()) {
+				Toast.makeText(this,R.string.all_omemo_keys_have_been_verified, Toast.LENGTH_SHORT).show();
+				finishOk();
+				return;
+			} else if (performedVerification) {
+				Toast.makeText(this,R.string.verified_fingerprints,Toast.LENGTH_SHORT).show();
+			}
+		} else {
+			reloadFingerprints();
+			Log.d(Config.LOGTAG,"xmpp uri was: "+uri.getJid()+" has Fingerprints: "+Boolean.toString(uri.hasFingerprints()));
+			Toast.makeText(this,R.string.barcode_does_not_contain_fingerprints_for_this_conversation,Toast.LENGTH_SHORT).show();
+		}
+		populateView();
+	}
+
 	private void populateView() {
 		setTitle(getString(R.string.trust_omemo_fingerprints));
 		ownKeys.removeAllViews();
@@ -108,16 +176,14 @@ public class TrustKeysActivity extends XmppActivity implements OnKeyStatusUpdate
 		for(final String fingerprint : ownKeysToTrust.keySet()) {
 			hasOwnKeys = true;
 			addFingerprintRowWithListeners(ownKeys, mAccount, fingerprint, false,
-					XmppAxolotlSession.Trust.fromBoolean(ownKeysToTrust.get(fingerprint)), false,
+					FingerprintStatus.createActive(ownKeysToTrust.get(fingerprint)), false, false,
 					new CompoundButton.OnCheckedChangeListener() {
 						@Override
 						public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 							ownKeysToTrust.put(fingerprint, isChecked);
 							// own fingerprints have no impact on locked status.
 						}
-					},
-					null,
-					null
+					}
 			);
 		}
 
@@ -133,16 +199,14 @@ public class TrustKeysActivity extends XmppActivity implements OnKeyStatusUpdate
 				final Map<String, Boolean> fingerprints = entry.getValue();
 				for (final String fingerprint : fingerprints.keySet()) {
 					addFingerprintRowWithListeners(keysContainer, mAccount, fingerprint, false,
-							XmppAxolotlSession.Trust.fromBoolean(fingerprints.get(fingerprint)), false,
+							FingerprintStatus.createActive(fingerprints.get(fingerprint)), false, false,
 							new CompoundButton.OnCheckedChangeListener() {
 								@Override
 								public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 									fingerprints.put(fingerprint, isChecked);
 									lockOrUnlockAsNeeded();
 								}
-							},
-							null,
-							null
+							}
 					);
 				}
 				if (fingerprints.size() == 0) {
@@ -184,7 +248,7 @@ public class TrustKeysActivity extends XmppActivity implements OnKeyStatusUpdate
 		List<Jid> acceptedTargets = mConversation == null ? new ArrayList<Jid>() : mConversation.getAcceptedCryptoTargets();
 		ownKeysToTrust.clear();
 		AxolotlService service = this.mAccount.getAxolotlService();
-		Set<IdentityKey> ownKeysSet = service.getKeysWithTrust(XmppAxolotlSession.Trust.UNDECIDED);
+		Set<IdentityKey> ownKeysSet = service.getKeysWithTrust(FingerprintStatus.createActiveUndecided());
 		for(final IdentityKey identityKey : ownKeysSet) {
 			if(!ownKeysToTrust.containsKey(identityKey)) {
 				ownKeysToTrust.put(identityKey.getFingerprint().replaceAll("\\s", ""), false);
@@ -193,9 +257,9 @@ public class TrustKeysActivity extends XmppActivity implements OnKeyStatusUpdate
 		synchronized (this.foreignKeysToTrust) {
 			foreignKeysToTrust.clear();
 			for (Jid jid : contactJids) {
-				Set<IdentityKey> foreignKeysSet = service.getKeysWithTrust(XmppAxolotlSession.Trust.UNDECIDED, jid);
+				Set<IdentityKey> foreignKeysSet = service.getKeysWithTrust(FingerprintStatus.createActiveUndecided(), jid);
 				if (hasNoOtherTrustedKeys(jid) && ownKeysSet.size() == 0) {
-					foreignKeysSet.addAll(service.getKeysWithTrust(XmppAxolotlSession.Trust.UNTRUSTED, jid));
+					foreignKeysSet.addAll(service.getKeysWithTrust(FingerprintStatus.createActive(false), jid));
 				}
 				Map<String, Boolean> foreignFingerprints = new HashMap<>();
 				for (final IdentityKey identityKey : foreignKeysSet) {
@@ -211,15 +275,19 @@ public class TrustKeysActivity extends XmppActivity implements OnKeyStatusUpdate
 		return ownKeysSet.size() + foreignKeysToTrust.size() > 0;
 	}
 
-	@Override
 	public void onBackendConnected() {
 		Intent intent = getIntent();
 		this.mAccount = extractAccount(intent);
 		if (this.mAccount != null && intent != null) {
 			String uuid = intent.getStringExtra("conversation");
 			this.mConversation = xmppConnectionService.findConversationByUuid(uuid);
-			reloadFingerprints();
-			populateView();
+			if (this.mPendingFingerprintVerificationUri != null) {
+				processFingerprintVerification(this.mPendingFingerprintVerificationUri);
+				this.mPendingFingerprintVerificationUri = null;
+			} else {
+				reloadFingerprints();
+				populateView();
+			}
 		}
 	}
 
@@ -238,24 +306,32 @@ public class TrustKeysActivity extends XmppActivity implements OnKeyStatusUpdate
 
 	@Override
 	public void onKeyStatusUpdated(final AxolotlService.FetchStatus report) {
+		final boolean keysToTrust = reloadFingerprints();
 		if (report != null) {
 			lastFetchReport = report;
 			runOnUiThread(new Runnable() {
 				@Override
 				public void run() {
+					if (mUseCameraHintToast != null && !keysToTrust) {
+						mUseCameraHintToast.cancel();
+					}
 					switch (report) {
 						case ERROR:
 							Toast.makeText(TrustKeysActivity.this,R.string.error_fetching_omemo_key,Toast.LENGTH_SHORT).show();
 							break;
+						case SUCCESS_TRUSTED:
+							Toast.makeText(TrustKeysActivity.this,R.string.blindly_trusted_omemo_keys,Toast.LENGTH_LONG).show();
+							break;
 						case SUCCESS_VERIFIED:
-							Toast.makeText(TrustKeysActivity.this,R.string.verified_omemo_key_with_certificate,Toast.LENGTH_LONG).show();
+							Toast.makeText(TrustKeysActivity.this,
+									Config.X509_VERIFICATION ? R.string.verified_omemo_key_with_certificate : R.string.all_omemo_keys_have_been_verified,
+									Toast.LENGTH_LONG).show();
 							break;
 					}
 				}
 			});
 
 		}
-		boolean keysToTrust = reloadFingerprints();
 		if (keysToTrust || hasPendingKeyFetches() || hasNoOtherTrustedKeys()) {
 			refreshUi();
 		} else {
@@ -280,7 +356,7 @@ public class TrustKeysActivity extends XmppActivity implements OnKeyStatusUpdate
 		for(final String fingerprint :ownKeysToTrust.keySet()) {
 			mAccount.getAxolotlService().setFingerprintTrust(
 					fingerprint,
-					XmppAxolotlSession.Trust.fromBoolean(ownKeysToTrust.get(fingerprint)));
+					FingerprintStatus.createActive(ownKeysToTrust.get(fingerprint)));
 		}
 		List<Jid> acceptedTargets = mConversation == null ? new ArrayList<Jid>() : mConversation.getAcceptedCryptoTargets();
 		synchronized (this.foreignKeysToTrust) {
@@ -293,7 +369,7 @@ public class TrustKeysActivity extends XmppActivity implements OnKeyStatusUpdate
 				for (final String fingerprint : value.keySet()) {
 					mAccount.getAxolotlService().setFingerprintTrust(
 							fingerprint,
-							XmppAxolotlSession.Trust.fromBoolean(value.get(fingerprint)));
+							FingerprintStatus.createActive(value.get(fingerprint)));
 				}
 			}
 		}

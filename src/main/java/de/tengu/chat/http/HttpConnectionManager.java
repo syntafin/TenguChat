@@ -24,6 +24,7 @@ import de.tengu.chat.services.AbstractConnectionManager;
 import de.tengu.chat.services.XmppConnectionService;
 import de.tengu.chat.utils.CryptoHelper;
 import de.tengu.chat.utils.SSLSocketHelper;
+import de.tengu.chat.utils.TLSSocketFactory;
 
 public class HttpConnectionManager extends AbstractConnectionManager {
 
@@ -77,18 +78,7 @@ public class HttpConnectionManager extends AbstractConnectionManager {
 							new StrictHostnameVerifier());
 		}
 		try {
-			final SSLContext sc = SSLSocketHelper.getSSLContext();
-			sc.init(null, new X509TrustManager[]{trustManager},
-					mXmppConnectionService.getRNG());
-
-			final SSLSocketFactory sf = sc.getSocketFactory();
-			final String[] cipherSuites = CryptoHelper.getOrderedCipherSuites(
-					sf.getSupportedCipherSuites());
-			if (cipherSuites.length > 0) {
-				sc.getDefaultSSLParameters().setCipherSuites(cipherSuites);
-
-			}
-
+			final SSLSocketFactory sf = new TLSSocketFactory(new X509TrustManager[]{trustManager}, mXmppConnectionService.getRNG());
 			connection.setSSLSocketFactory(sf);
 			connection.setHostnameVerifier(hostnameVerifier);
 		} catch (final KeyManagementException | NoSuchAlgorithmException ignored) {
@@ -96,6 +86,6 @@ public class HttpConnectionManager extends AbstractConnectionManager {
 	}
 
 	public Proxy getProxy() throws IOException {
-		return new Proxy(Proxy.Type.HTTP, new InetSocketAddress(InetAddress.getLocalHost(), 8118));
+		return new Proxy(Proxy.Type.HTTP, new InetSocketAddress(InetAddress.getByAddress(new byte[]{127,0,0,1}), 8118));
 	}
 }

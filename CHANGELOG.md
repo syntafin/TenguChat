@@ -1,6 +1,74 @@
 ###Changelog
 
-###Version 1.13.4
+####Version 1.15.0
+* New [Blind Trust Before Verification](https://gultsch.de/trust.html) mode
+* Easily share Barcode and XMPP uri from Account details
+* Automatically deactivate own devices after 7 day of inactivity
+* Improvements fo doze/push mode
+* bug fixes
+
+####Version 1.14.9
+* warn in account details when data saver is enabled
+* automatically enable foreground service after detecting frequent restarts
+* bug fixes
+
+####Version 1.14.8
+* bug fixes
+
+####Version 1.14.7
+* error message accessible via context menu for failed messages
+* don't include pgp signature in anonymous mucs
+* bug fixes
+
+####Version 1.14.6
+* make error notification dismissable
+* bug fixes
+
+
+####Version 1.14.5
+* expert setting to delete OMEMO identities
+* bug fixes
+
+####Version 1.14.4
+* bug fixes
+
+####Version 1.14.3
+* XEP-0377: Spam Reporting
+* fix rare start up crashes
+
+####Version 1.14.2
+* support ANONYMOUS SASL
+* bug fixes
+
+####Version 1.14.1
+* Press lock icon to see why OMEMO is deactivated
+* bug fixes
+
+####Version 1.14.0
+* Improvments for N
+* Quick Reply to Notifications on N
+* Don't download avatars and files when data saver is on
+* bug fixes
+
+####Version 1.13.9
+* bug fixes
+
+####Version 1.13.8
+* show identities instead of resources in selection dialog
+* allow TLS direct connect when port is set to 5223
+* bug fixes
+
+####Version 1.13.7
+* bug fixes
+
+####Version 1.13.6
+* thumbnails for videos
+* bug fixes
+
+####Version 1.13.5
+* bug fixes
+
+####Version 1.13.4
 * support jingle ft:4
 * show contact as DND if one resource is
 * bug fixes
@@ -239,7 +307,7 @@
 * bug fixes
 
 ####Version 1.2.0
-* Send current location. (requires [plugin](https://play.google.com/store/apps/details?id=eu.siacs.conversations.sharelocation))
+* Send current location. (requires [plugin](https://play.google.com/store/apps/details?id=de.tengu.chat.sharelocation))
 * Invite multiple contacts at once
 * performance improvements
 * bug fixes

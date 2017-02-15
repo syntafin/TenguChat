@@ -31,6 +31,7 @@ import de.tengu.chat.http.HttpConnectionManager;
 import de.tengu.chat.services.MessageArchiveService;
 import de.tengu.chat.services.XmppConnectionService;
 import de.tengu.chat.utils.CryptoHelper;
+import de.tengu.chat.utils.Xmlns;
 import de.tengu.chat.xml.Element;
 import de.tengu.chat.xmpp.OnMessagePacketReceived;
 import de.tengu.chat.xmpp.chatstate.ChatState;
@@ -40,7 +41,7 @@ import de.tengu.chat.xmpp.stanzas.MessagePacket;
 
 public class MessageParser extends AbstractParser implements OnMessagePacketReceived {
 
-	private static final List<String> CLIENTS_SENDING_HTML_IN_OTR = Arrays.asList(new String[]{"Pidgin","Adium"});
+	private static final List<String> CLIENTS_SENDING_HTML_IN_OTR = Arrays.asList("Pidgin","Adium","Trillian");
 
 	public MessageParser(XmppConnectionService service) {
 		super(service);
@@ -208,7 +209,7 @@ public class MessageParser extends AbstractParser implements OnMessagePacketRece
 	private static String extractStanzaId(Element packet, Jid by) {
 		for(Element child : packet.getChildren()) {
 			if (child.getName().equals("stanza-id")
-					&& "urn:xmpp:sid:0".equals(child.getNamespace())
+					&& Xmlns.STANZA_IDS.equals(child.getNamespace())
 					&& by.equals(child.getAttributeAsJid("by"))) {
 				return child.getAttribute("id");
 			}
@@ -238,7 +239,7 @@ public class MessageParser extends AbstractParser implements OnMessagePacketRece
 						mXmppConnectionService.updateConversationUi();
 						mXmppConnectionService.updateRosterUi();
 					}
-				} else {
+				} else if (mXmppConnectionService.isDataSaverDisabled()) {
 					mXmppConnectionService.fetchAvatar(account, avatar);
 				}
 			}
@@ -266,19 +267,15 @@ public class MessageParser extends AbstractParser implements OnMessagePacketRece
 		if (packet.getType() == MessagePacket.TYPE_ERROR) {
 			Jid from = packet.getFrom();
 			if (from != null) {
-				Element error = packet.findChild("error");
-				String text = error == null ? null : error.findChildContent("text");
-				if (text != null) {
-					Log.d(Config.LOGTAG, account.getJid().toBareJid() + ": sending message to "+ from+ " failed - " + text);
-				} else if (error != null) {
-					Log.d(Config.LOGTAG, account.getJid().toBareJid() + ": sending message to "+ from+ " failed - " + error);
-				}
 				Message message = mXmppConnectionService.markMessage(account,
 						from.toBareJid(),
 						packet.getId(),
-						Message.STATUS_SEND_FAILED);
-				if (message != null && message.getEncryption() == Message.ENCRYPTION_OTR) {
-					message.getConversation().endOtrIfNeeded();
+						Message.STATUS_SEND_FAILED,
+						extractErrorMessage(packet));
+				if (message != null) {
+					if (message.getEncryption() == Message.ENCRYPTION_OTR) {
+						message.getConversation().endOtrIfNeeded();
+					}
 				}
 			}
 			return true;
@@ -333,7 +330,7 @@ public class MessageParser extends AbstractParser implements OnMessagePacketRece
 		}
 
 		if (timestamp == null) {
-			timestamp = AbstractParser.parseTimestamp(packet);
+			timestamp = AbstractParser.parseTimestamp(original,AbstractParser.parseTimestamp(packet));
 		}
 		final String body = packet.getBody();
 		final Element mucUserElement = packet.findChild("x", "http://jabber.org/protocol/muc#user");
@@ -434,7 +431,18 @@ public class MessageParser extends AbstractParser implements OnMessagePacketRece
 			}
 
 			if (serverMsgId == null) {
-				serverMsgId = extractStanzaId(packet, isTypeGroupChat ? conversation.getJid().toBareJid() : account.getServer());
+				final Jid by;
+				final boolean safeToExtract;
+				if (isTypeGroupChat) {
+					by = conversation.getJid().toBareJid();
+					safeToExtract = true; //conversation.getMucOptions().hasFeature(Xmlns.STANZA_IDS);
+				} else {
+					by = account.getJid().toBareJid();
+					safeToExtract = true; //account.getXmppConnection().getFeatures().stanzaIds();
+				}
+				if (safeToExtract) {
+					serverMsgId = extractStanzaId(packet, by);
+				}
 			}
 
 			message.setCounterpart(counterpart);
@@ -539,7 +547,11 @@ public class MessageParser extends AbstractParser implements OnMessagePacketRece
 				mXmppConnectionService.updateConversationUi();
 			}
 
-			if (mXmppConnectionService.confirmMessages() && remoteMsgId != null && !isForwarded && !isTypeGroupChat) {
+			if (mXmppConnectionService.confirmMessages()
+					&& message.trusted()
+					&& remoteMsgId != null
+					&& !isForwarded
+					&& !isTypeGroupChat) {
 				sendMessageReceipts(account, packet);
 			}
 
@@ -583,26 +595,27 @@ public class MessageParser extends AbstractParser implements OnMessagePacketRece
 				}
 			}
 			if (conversation != null && mucUserElement != null && from.isBareJid()) {
-				if (mucUserElement.hasChild("status")) {
-					for (Element child : mucUserElement.getChildren()) {
-						if (child.getName().equals("status")
-								&& MucOptions.STATUS_CODE_ROOM_CONFIG_CHANGED.equals(child.getAttribute("code"))) {
-							mXmppConnectionService.fetchConferenceConfiguration(conversation);
-						}
-					}
-				} else if (mucUserElement.hasChild("item")) {
-					for(Element child : mucUserElement.getChildren()) {
-						if ("item".equals(child.getName())) {
-							MucOptions.User user = AbstractParser.parseItem(conversation,child);
-							Log.d(Config.LOGTAG,account.getJid()+": changing affiliation for "
-									+user.getRealJid()+" to "+user.getAffiliation()+" in "
-									+conversation.getJid().toBareJid());
-							if (!user.realJidMatchesAccount()) {
-								conversation.getMucOptions().addUser(user);
-								mXmppConnectionService.getAvatarService().clear(conversation);
-								mXmppConnectionService.updateMucRosterUi();
-								mXmppConnectionService.updateConversationUi();
+				for (Element child : mucUserElement.getChildren()) {
+					if ("status".equals(child.getName())) {
+						try {
+							int code = Integer.parseInt(child.getAttribute("code"));
+							if ((code >= 170 && code <= 174) || (code >= 102 && code <= 104)) {
+								mXmppConnectionService.fetchConferenceConfiguration(conversation);
+								break;
 							}
+						} catch (Exception e) {
+							//ignored
+						}
+					} else if ("item".equals(child.getName())) {
+						MucOptions.User user = AbstractParser.parseItem(conversation,child);
+						Log.d(Config.LOGTAG,account.getJid()+": changing affiliation for "
+								+user.getRealJid()+" to "+user.getAffiliation()+" in "
+								+conversation.getJid().toBareJid());
+						if (!user.realJidMatchesAccount()) {
+							conversation.getMucOptions().updateUser(user);
+							mXmppConnectionService.getAvatarService().clear(conversation);
+							mXmppConnectionService.updateMucRosterUi();
+							mXmppConnectionService.updateConversationUi();
 						}
 					}
 				}

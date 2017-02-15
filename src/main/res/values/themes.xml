@@ -43,6 +43,9 @@
 
         <item name="attr/icon_alpha">1.0</item>
 
+        <item name="attr/dialog_horizontal_padding">16dp</item>
+        <item name="attr/dialog_vertical_padding">16dp</item>
+
         <item name="attr/icon_group">@drawable/ic_action_group</item>
         <item name="attr/icon_new">@drawable/ic_action_new</item>
         <item name="attr/icon_new_attachment">@drawable/ic_action_new_attachment</item>
@@ -54,6 +57,7 @@
         <item name="attr/icon_settings">@drawable/ic_action_settings</item>
         <item name="attr/icon_import_export">@drawable/ic_stat_communication_import_export</item>
         <item name="attr/icon_share">@drawable/ic_action_share</item>
+        <item name="attr/icon_scan_qr_code">@drawable/ic_action_camera</item>
 
         <item name="attr/icon_notifications">@drawable/ic_notifications_black54_24dp</item>
         <item name="attr/icon_notifications_off">@drawable/ic_notifications_off_black54_24dp</item>
@@ -93,6 +97,9 @@
 
         <item name="attr/icon_alpha">1.0</item>
 
+        <item name="attr/dialog_horizontal_padding">16dp</item>
+        <item name="attr/dialog_vertical_padding">16dp</item>
+
         <item name="attr/icon_add_group">@drawable/ic_action_add_group</item>
         <item name="attr/icon_add_person">@drawable/ic_action_add_person</item>
         <item name="attr/icon_cancel">@drawable/ic_action_cancel</item>
@@ -114,6 +121,7 @@
         <item name="attr/icon_settings">@drawable/ic_action_settings_white</item>
         <item name="attr/icon_import_export">@drawable/ic_stat_communication_import_export</item>
         <item name="attr/icon_share">@drawable/ic_action_share</item>
+        <item name="attr/icon_scan_qr_code">@drawable/ic_action_camera</item>
 
         <item name="attr/icon_notifications">@drawable/ic_notifications_white80</item>
         <item name="attr/icon_notifications_off">@drawable/ic_notifications_off_white80</item>

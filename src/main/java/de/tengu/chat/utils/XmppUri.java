@@ -4,7 +4,9 @@ import android.net.Uri;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import de.tengu.chat.xmpp.jid.InvalidJidException;
 import de.tengu.chat.xmpp.jid.Jid;
@@ -13,7 +15,11 @@ public class XmppUri {
 
 	protected String jid;
 	protected boolean muc;
-	protected String fingerprint;
+	protected List<Fingerprint> fingerprints = new ArrayList<>();
+	private String body;
+
+	public static final String OMEMO_URI_PARAM = "omemo-sid-";
+	public static final String OTR_URI_PARAM = "otr-fingerprint";
 
 	public XmppUri(String uri) {
 		try {
@@ -50,13 +56,14 @@ public class XmppUri {
 			muc = segments.size() > 1 && "j".equalsIgnoreCase(segments.get(0));
 		} else if ("xmpp".equalsIgnoreCase(scheme)) {
 			// sample: xmpp:foo@bar.com
-			muc = "join".equalsIgnoreCase(uri.getQuery());
+			muc = isMuc(uri.getQuery());
 			if (uri.getAuthority() != null) {
 				jid = uri.getAuthority();
 			} else {
 				jid = uri.getSchemeSpecificPart().split("\\?")[0];
 			}
-			fingerprint = parseFingerprint(uri.getQuery());
+			this.fingerprints = parseFingerprints(uri.getQuery());
+			this.body = parseBody(uri.getQuery());
 		} else if ("imto".equalsIgnoreCase(scheme)) {
 			// sample: imto://xmpp/foo@bar.com
 			try {
@@ -73,18 +80,52 @@ public class XmppUri {
 		}
 	}
 
-	protected  String parseFingerprint(String query) {
-		if (query == null) {
-			return null;
-		} else {
-			final String NEEDLE = "otr-fingerprint=";
-			int index = query.indexOf(NEEDLE);
-			if (index >= 0 && query.length() >= (NEEDLE.length() + index + 40)) {
-				return query.substring(index + NEEDLE.length(), index + NEEDLE.length() + 40);
-			} else {
-				return null;
+	protected List<Fingerprint> parseFingerprints(String query) {
+		List<Fingerprint> fingerprints = new ArrayList<>();
+		String[] pairs = query == null ? new String[0] : query.split(";");
+		for(String pair : pairs) {
+			String[] parts = pair.split("=",2);
+			if (parts.length == 2) {
+				String key = parts[0].toLowerCase(Locale.US);
+				String value = parts[1].toLowerCase(Locale.US);
+				if (OTR_URI_PARAM.equals(key)) {
+					fingerprints.add(new Fingerprint(FingerprintType.OTR,value));
+				}
+				if (key.startsWith(OMEMO_URI_PARAM)) {
+					try {
+						int id = Integer.parseInt(key.substring(OMEMO_URI_PARAM.length()));
+						fingerprints.add(new Fingerprint(FingerprintType.OMEMO,value,id));
+					} catch (Exception e) {
+						//ignoring invalid device id
+					}
+				}
 			}
 		}
+		return fingerprints;
+	}
+
+	protected String parseBody(String query) {
+		for(String pair : query == null ? new String[0] : query.split(";")) {
+			final String[] parts = pair.split("=",2);
+			if (parts.length == 2 && "body".equals(parts[0].toLowerCase(Locale.US))) {
+				try {
+					return URLDecoder.decode(parts[1],"UTF-8");
+				} catch (UnsupportedEncodingException e) {
+					return null;
+				}
+			}
+		}
+		return null;
+	}
+
+	protected boolean isMuc(String query) {
+		for(String pair : query == null ? new String[0] : query.split(";")) {
+			final String[] parts = pair.split("=",2);
+			if (parts.length == 1 && "join".equals(parts[0])) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public Jid getJid() {
@@ -95,7 +136,40 @@ public class XmppUri {
 		}
 	}
 
-	public String getFingerprint() {
-		return this.fingerprint;
+	public String getBody() {
+		return body;
+	}
+
+	public List<Fingerprint> getFingerprints() {
+		return this.fingerprints;
+	}
+
+	public boolean hasFingerprints() {
+		return fingerprints.size() > 0;
+	}
+	public enum FingerprintType {
+		OMEMO,
+		OTR
+	}
+
+	public static class Fingerprint {
+		public final FingerprintType type;
+		public final String fingerprint;
+		public final int deviceId;
+
+		public Fingerprint(FingerprintType type, String fingerprint) {
+			this(type, fingerprint, 0);
+		}
+
+		public Fingerprint(FingerprintType type, String fingerprint, int deviceId) {
+			this.type = type;
+			this.fingerprint = fingerprint;
+			this.deviceId = deviceId;
+		}
+
+		@Override
+		public String toString() {
+			return type.toString()+": "+fingerprint+(deviceId != 0 ? " "+String.valueOf(deviceId) : "");
+		}
 	}
 }

@@ -23,7 +23,7 @@ import de.tengu.chat.xmpp.stanzas.IqPacket;
 
 public class PushManagementService {
 
-	private static final String APP_SERVER = "push.tengu.chat";
+	private static final String APP_SERVER = "push.siacs.eu";
 
 	protected final XmppConnectionService mXmppConnectionService;
 
@@ -92,7 +92,8 @@ public class PushManagementService {
 				try {
 					String token = instanceID.getToken(mXmppConnectionService.getString(R.string.gcm_defaultSenderId), GoogleCloudMessaging.INSTANCE_ID_SCOPE, null);
 					instanceTokenRetrieved.onGcmInstanceTokenRetrieved(token);
-				} catch (IOException e) {
+				} catch (Exception e) {
+					Log.d(Config.LOGTAG,"unable to get push token");
 				}
 			}
 		}).start();
