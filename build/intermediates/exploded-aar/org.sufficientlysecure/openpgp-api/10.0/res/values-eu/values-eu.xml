@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <!-- From: file:/home/schuerm/Projekte/openpgp-api/openpgp-api/src/main/res/values-eu/strings.xml -->
-    <eat-comment/>
-    <string name="openpgp_install_openkeychain_via">Ezarri OpenKeychain %s bidez</string>
-    <string name="openpgp_key_selected">Giltza hautatu da</string>
-    <string name="openpgp_list_preference_none">Ezer ez</string>
-    <string name="openpgp_no_key_selected">Ez da giltzarik hautatu</string>
-</resources>

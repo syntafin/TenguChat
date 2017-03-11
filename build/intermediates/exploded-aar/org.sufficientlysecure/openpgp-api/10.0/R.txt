@@ -1,6 +1,0 @@
-int drawable ic_action_cancel_launchersize 0x7f020000
-int drawable ic_action_cancel_launchersize_light 0x7f020001
-int string openpgp_install_openkeychain_via 0x7f030000
-int string openpgp_key_selected 0x7f030002
-int string openpgp_list_preference_none 0x7f030001
-int string openpgp_no_key_selected 0x7f030003

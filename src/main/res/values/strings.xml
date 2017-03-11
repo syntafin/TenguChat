@@ -27,7 +27,7 @@
 	<string name="just_now">just now</string>
 	<string name="minute_ago">1 min ago</string>
 	<string name="minutes_ago">%d mins ago</string>
-	<string name="unread_conversations">unread Conversations</string>
+	<string name="unread_conversations">unread TenguChat</string>
 	<string name="sending">sending…</string>
 	<string name="message_decrypting">Decrypting message. Please wait…</string>
 	<string name="pgp_message">OpenPGP encrypted message</string>
@@ -80,14 +80,14 @@
 	<string name="delete_messages">Delete messages</string>
 	<string name="also_end_conversation">End this conversation afterwards</string>
 	<string name="choose_presence">Choose device</string>
-	<string name="send_unencrypted_message">Send message</string>
+	<string name="send_unencrypted_message">Send unencrypted message</string>
 	<string name="send_message_to_x">Send message to %s</string>
 	<string name="send_otr_message">Send OTR encrypted message</string>
 	<string name="send_omemo_message">Send OMEMO encrypted message</string>
 	<string name="send_omemo_x509_message">Send v\\OMEMO encrypted message</string>
 	<string name="send_pgp_message">Send OpenPGP encrypted message</string>
 	<string name="your_nick_has_been_changed">Your nickname has been changed</string>
-	<string name="send_unencrypted">Send message</string>
+	<string name="send_unencrypted">Send unencrypted</string>
 	<string name="decryption_failed">Decryption failed. Maybe you don’t have the proper private key.</string>
 	<string name="openkeychain_required">OpenKeychain</string>
 	<string name="openkeychain_required_long">TenguChat utilizes a third party app called <b>OpenKeychain</b> to encrypt and decrypt messages and to manage your public keys.\n\nOpenKeychain is licensed under GPLv3 and available on F-Droid and Google Play.\n\n<small>(Please restart TenguChat afterwards.)</small></string>
@@ -176,9 +176,10 @@
 	<string name="mgmt_account_are_you_sure">Are you sure?</string>
 	<string name="mgmt_account_delete_confirm_text">If you delete your account your entire conversation history will be lost</string>
 	<string name="attach_record_voice">Record voice</string>
-	<string name="account_settings_jabber_id">Tengu ID</string>
+	<string name="account_settings_jabber_id">Jabber ID</string>
+	<string name="block_jabber_id">Block Jabber ID</string>
 	<string name="account_settings_password">Password</string>
-	<string name="account_settings_example_jabber_id">username@tengu.chat</string>
+	<string name="account_settings_example_jabber_id">username@example.com</string>
 	<string name="account_settings_confirm_password">Confirm password</string>
 	<string name="password">Password</string>
 	<string name="confirm_password">Confirm password</string>
@@ -303,8 +304,8 @@
 	<string name="title_activity_about">About TenguChat</string>
 	<string name="pref_about_conversations_summary">Build and licensing information</string>
 	<string name="pref_about_message" translatable="false">
-			TenguChat • a new way of instant messaging.
-			\n\nCopyright © 2016 TenguSystems
+			TenguChat • the very last word in instant messaging.
+			\n\nCopyright © 2014-2017 Daniel Gultsch
 			\n\nThis program is free software: you can redistribute it and/or modify
 			it under the terms of the GNU General Public License as published by
 			the Free Software Foundation, either version 3 of the License, or
@@ -315,7 +316,7 @@
 			GNU General Public License for more details.
 			\n\nYou should have received a copy of the GNU General Public License
 			along with this program. If not, see https://www.gnu.org/licenses
-			\n\nDownload the full source code at https://github.com/syntafin/TenguChat
+			\n\nDownload the full source code at https://github.com/siacs/TenguChat
 			\n\n\nLibraries
 			\n\nhttps://www.bouncycastle.org\n(The MIT License (MIT))
 			\n\nhttps://www.gnu.org/software/libidn\n(Apache License, Version 2.0)
@@ -364,6 +365,7 @@
 	<string name="message_options">Message options</string>
 	<string name="copy_text">Copy text</string>
 	<string name="select_text">Select text</string>
+	<string name="quote">Quote</string>
 	<string name="copy_original_url">Copy original URL</string>
 	<string name="send_again">Send again</string>
 	<string name="file_url">File URL</string>
@@ -428,9 +430,6 @@
 	<string name="wipe_omemo_pep">Wipe other devices from PEP</string>
 	<string name="clear_other_devices">Clear devices</string>
 	<string name="clear_other_devices_desc">Are you sure you want to clear all other devices from the OMEMO announcement? The next time your devices connect, they will reannounce themselves, but they might not receive messages sent in the meantime.</string>
-	<string name="purge_key">Purge key</string>
-	<string name="purge_key_desc_part1">Are you sure you want to purge this key?</string>
-	<string name="purge_key_desc_part2">It will irreversibly be considered compromised, and you can never build a session with it again.</string>
 	<string name="error_no_keys_to_trust_server_error">There are no usable keys available for this contact.\nFetching new keys from the server has been unsuccessful. Maybe there is something wrong with your contacts server.</string>
 	<string name="error_no_keys_to_trust">There are no usable keys available for this contact. If you have purged any of their keys, they need to generate new ones.</string>
 	<string name="error_trustkeys_title">Error</string>
@@ -504,6 +503,8 @@
 	<string name="disable_account">Disable Account</string>
 	<string name="contact_is_typing">%s is typing…</string>
 	<string name="contact_has_stopped_typing">%s has stopped typing</string>
+	<string name="contacts_are_typing">%s are typing…</string>
+	<string name="contacts_have_stopped_typing">%s have stopped typing</string>
 	<string name="pref_chat_states">Typing notifications</string>
 	<string name="pref_chat_states_summary">Let your contacts know when you are writing messages to them</string>
 	<string name="send_location">Send location</string>
@@ -629,12 +630,12 @@
 	<string name="security_error_invalid_file_access">Security error: Invalid file access</string>
 	<string name="no_application_to_share_uri">No application found to share URI</string>
 	<string name="share_uri_with">Share URI with…</string>
-	<string translatable="false" name="welcome_header">Join the Conversation</string>
-	<string name="welcome_text">XMPP is a provider independent protocol. You can use this client with what ever XMPP server you choose.\nHowever for your convenience we made it easy to create an account on TenguChat¹</string>
-	<string name="magic_create_text">We will guide you through the process of creating an account on TenguChat.¹\nWhen picking TenguChat as a provider you will be able to communicate with users of other providers by giving them your full Jabber ID.</string>
+	<string translatable="false" name="welcome_header">TenguChat</string>
+	<string name="welcome_text">XMPP is a provider independent protocol. You can use this client with what ever XMPP server you choose.\nHowever for your convenience we made it easy to create an account on TenguChat¹; a provider specially suited for the use with TenguChat.</string>
+	<string name="magic_create_text">We will guide you through the process of creating an account on conversations.im.¹\nWhen picking conversations.im as a provider you will be able to communicate with users of other providers by giving them your full Jabber ID.</string>
 	<string name="your_full_jid_will_be">Your full Jabber ID will be: %s</string>
 	<string name="create_account">Create Account</string>
-	<string name="use_own_provider">Use existing account</string>
+	<string name="use_own_provider">Use my own provider</string>
 	<string name="pick_your_username">Pick your username</string>
 	<string name="pref_manually_change_presence">Manually change presence</string>
 	<string name="pref_manually_change_presence_summary">Touch your avatar to change your presence</string>
@@ -719,4 +720,25 @@
 	<string name="pref_clean_cache">Clean cache</string>
 	<string name="pref_clean_private_storage">Clean private storage</string>
 	<string name="pref_clean_private_storage_summary">Clean private storage where files are kept (They can be re-downloaded from the server)</string>
+	<string name="i_followed_this_link_from_a_trusted_source">I followed this link from a trusted source</string>
+	<string name="verifying_omemo_keys_trusted_source">You are about to verify the OMEMO keys of %1$s after clicking a link. This is only secure if you followed this link from a trusted source where only %2$s could have published this link.</string>
+	<string name="verify_omemo_keys">Verify OMEMO keys</string>
+	<string name="show_inactive_devices">Show inactive devices</string>
+	<string name="hide_inactive_devices">Hide inactive devices</string>
+	<string name="distrust_omemo_key">Distrust device</string>
+	<string name="distrust_omemo_key_text">Are you sure you want to remove the verification for this device?\nThis device and messages coming from that device will be marked as untrusted.</string>
+	<string name="timeout_24_hours">24 hours</string>
+	<string name="timeout_7_days">7 days</string>
+	<string name="timeout_30_days">30 days</string>
+	<string name="timeout_6_months">6 months</string>
+	<string name="pref_automatically_delete_messages">Automatic message deletion</string>
+	<string name="pref_automatically_delete_messages_description">Automatically delete messages from this device that are older than the configured time frame.</string>
+	<string name="encrypting_message">Encrypting message</string>
+	<string name="not_fetching_history_retention_period">Not fetching messages due to local retention period.</string>
+	<string name="transcoding_video_progress">Compressing video (%s%% completed)</string>
+	<string name="corresponding_conversations_closed">Corresponding conversations closed.</string>
+	<string name="contact_blocked_past_tense">Contact blocked.</string>
+	<string name="pref_notifications_from_strangers">Notifications from strangers</string>
+	<string name="pref_notifications_from_strangers_summary">Notify for messages received from strangers.</string>
+	<string name="received_message_from_stranger">Received message from stranger</string>
 </resources>

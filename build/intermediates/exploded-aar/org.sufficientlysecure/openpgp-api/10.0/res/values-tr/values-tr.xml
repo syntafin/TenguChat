@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <!-- From: file:/home/schuerm/Projekte/openpgp-api/openpgp-api/src/main/res/values-tr/strings.xml -->
-    <eat-comment/>
-    <string name="openpgp_install_openkeychain_via">%s aracılığıyla OpenKeychain\'i yükle</string>
-    <string name="openpgp_list_preference_none">Hiç</string>
-</resources>

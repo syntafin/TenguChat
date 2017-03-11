@@ -1,5 +1,47 @@
 ###Changelog
 
+####Version 1.17.0
+* Do not notify for messages from strangers by default
+* Blocking a JID closes the corresponding conversation
+* Show message sender in conversation overview
+* Show unread counter for every conversation
+* Send typing notifications in private, non-anonymous MUCs
+* Support for the latest MAM namespace
+* Icons for attach menu
+
+####Version 1.16.2
+* change mam catchup strategie. support mam:1
+* bug fixes
+
+
+####Version 1.16.1
+* UI performance fixes
+* bug fixes
+
+####Version 1.16.0
+* configurable client side message retention period
+* compress videos before sending them
+
+####Version 1.15.5
+* show nick as bold text when mentioned in conference
+* bug fixes
+
+####Version 1.15.4
+* bug fixes
+
+####Version 1.15.3
+* show offline contacts in MUC as grayed-out
+* don't transcode gifs. add overlay indication to gifs
+* bug fixes
+
+####Version 1.15.2
+* bug fixes
+
+####Version 1.15.1
+* support for POSH (RFC7711)
+* support for quoting messages (via select text)
+* verified messages show shield icon. unverified messages show lock
+
 ####Version 1.15.0
 * New [Blind Trust Before Verification](https://gultsch.de/trust.html) mode
 * Easily share Barcode and XMPP uri from Account details
@@ -152,7 +194,7 @@
 * various bug fixes
 
 ####Version 1.11.1
-* fixed some bugs when sharing files with Conversations
+* fixed some bugs when sharing files with TenguChat
 
 ####Version 1.11.0
 * OMEMO encrypted conferences
@@ -167,7 +209,7 @@
 * introduced build flavors to make dependence on play-services optional
 
 ####Version 1.9.4
-* prevent cleared Conversations from reloading history with MAM
+* prevent cleared TenguChat from reloading history with MAM
 * various MAM fixes
 
 ####Version 1.9.3
@@ -187,7 +229,7 @@
 * Per conference notification settings
 * Let user decide whether to compress pictures
 * Support for XEP-0368
-* Ask user to exclude Conversations from battery optimizations
+* Ask user to exclude TenguChat from battery optimizations
 
 ####Version 1.8.4
 * prompt to trust own OMEMO devices
@@ -356,7 +398,7 @@
 * more bug fixes
 
 ####Version 0.9.1
-* bug fixes including some that caused Conversations to crash on start
+* bug fixes including some that caused TenguChat to crash on start
 
 ####Version 0.9
 * arbitrary file transfer

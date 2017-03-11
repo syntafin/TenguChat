@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<color name="primary500">#2196f3</color>
-	<color name="primary700">#1565c0</color>
-	<color name="primary800">#1565c0</color>
-	<color name="primary900">#1565c0</color>
-	<color name="accent">#00b0ff</color>
+	<color name="primary500">#ff259b24</color>
+	<color name="primary700">#ff0a7e07</color>
+	<color name="primary800">#ff026100</color>
+	<color name="primary900">#ff024500</color>
+	<color name="accent">#ff0091ea</color>
 	<color name="black87">#de000000</color>
 	<color name="black54">#8a000000</color>
 	<color name="black26">#42000000</color>
@@ -21,4 +21,7 @@
 	<color name="red800">#ffc62828</color>
 	<color name="orange500">#ffff9800</color>
 	<color name="green500">#ff259b24</color>
+	<color name="bubble">#ff4b9b4a</color>
+	<color name="unreadcountlight">#ff4b9b4a</color>
+	<color name="unreadcountdark">#ff326130</color>
 </resources>

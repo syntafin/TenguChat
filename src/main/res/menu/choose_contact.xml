@@ -14,4 +14,11 @@
         android:showAsAction="always"
         android:title="@string/create_contact"
         android:visible="false"/>
+
+    <item
+        android:id="@+id/action_block_jid"
+        android:icon="?attr/icon_add_person"
+        android:showAsAction="always"
+        android:title="@string/block_jabber_id"
+        android:visible="false"/>
 </menu>
