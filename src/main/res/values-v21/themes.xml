@@ -17,6 +17,8 @@
 
         <item name="TextSizeInfo">12sp</item>
         <item name="TextSizeBody">14sp</item>
+        <item name="TextSeparation">5sp</item>
+        <item name="IconSize">18sp</item>
         <item name="TextSizeHeadline">20sp</item>
 
         <item name="attr/infocard_border">@drawable/infocard_border</item>
@@ -27,11 +29,21 @@
         <item name="attr/ic_send_photo_offline">@drawable/ic_send_photo_offline</item>
         <item name="attr/ic_send_picture_offline">@drawable/ic_send_picture_offline</item>
         <item name="attr/ic_send_text_offline">@drawable/ic_send_text_offline</item>
+        <item name="attr/ic_send_videocam_offline">@drawable/ic_send_videocam_offline</item>
         <item name="attr/ic_send_voice_offline">@drawable/ic_send_voice_offline</item>
+
+        <item name="attr/ic_attach_camera">@drawable/ic_attach_camera</item>
+        <item name="attr/ic_attach_videocam">@drawable/ic_attach_videocam</item>
+        <item name="attr/ic_attach_document">@drawable/ic_attach_document</item>
+        <item name="attr/ic_attach_location">@drawable/ic_attach_location</item>
+        <item name="attr/ic_attach_photo">@drawable/ic_attach_photo</item>
+        <item name="attr/ic_attach_record">@drawable/ic_attach_record</item>
 
         <item name="attr/message_bubble_received_monochrome">@drawable/message_bubble_received_white</item>
         <item name="attr/message_bubble_sent">@drawable/message_bubble_sent</item>
         <item name="attr/message_bubble_received_green">@drawable/message_bubble_received</item>
+
+        <item name="attr/unread_count">@color/unreadcountlight</item>
 
         <item name="attr/conversations_overview_background">@color/primary700</item>
 
@@ -51,6 +63,7 @@
         <item name="attr/icon_done">@drawable/ic_done_black_24dp</item>
         <item name="attr/icon_group">@drawable/ic_group_white_24dp</item>
         <item name="attr/icon_new">@drawable/ic_add_white_24dp</item>
+        <item name="attr/icon_quote">@drawable/ic_reply_white_24dp</item>
         <item name="attr/icon_refresh">@drawable/ic_refresh_black_24dp</item>
         <item name="attr/icon_new_attachment">@drawable/ic_attach_file_white_24dp</item>
         <item name="attr/icon_not_secure">@drawable/ic_lock_open_white_24dp</item>
@@ -62,15 +75,15 @@
         <item name="attr/icon_share">@drawable/ic_share_white_24dp</item>
         <item name="attr/icon_scan_qr_code">@drawable/ic_camera_alt_white_24dp</item>
 
-        <item name="attr/icon_notifications">@drawable/ic_notifications_black54_24dp</item>
-        <item name="attr/icon_notifications_off">@drawable/ic_notifications_off_black54_24dp</item>
-        <item name="attr/icon_notifications_paused">@drawable/ic_notifications_paused_black54_24dp</item>
-        <item name="attr/icon_notifications_none">@drawable/ic_notifications_none_black54_24dp</item>
+        <item name="attr/icon_notifications">@drawable/ic_notifications_black_24dp</item>
+        <item name="attr/icon_notifications_off">@drawable/ic_notifications_off_black_24dp</item>
+        <item name="attr/icon_notifications_paused">@drawable/ic_notifications_paused_black_24dp</item>
+        <item name="attr/icon_notifications_none">@drawable/ic_notifications_none_black_24dp</item>
     </style>
 
     <style name="ConversationsTheme.Dark" parent="android:Theme.Material">
         <item name="android:colorPrimary">@color/primary800</item>
-        <item name="android:colorPrimaryDark">@color/primary900</item>
+        <item name="android:colorPrimaryDark">@color/primary800</item>
         <item name="android:colorAccent">@color/accent</item>
 
         <item name="attr/color_text_primary">@color/white</item>
@@ -84,6 +97,8 @@
 
         <item name="TextSizeInfo">12sp</item>
         <item name="TextSizeBody">14sp</item>
+        <item name="TextSeparation">5sp</item>
+        <item name="IconSize">18sp</item>
         <item name="TextSizeHeadline">20sp</item>
 
         <item name="attr/infocard_border">@drawable/infocard_border_dark</item>
@@ -94,15 +109,25 @@
         <item name="attr/ic_send_photo_offline">@drawable/ic_send_photo_offline_white</item>
         <item name="attr/ic_send_picture_offline">@drawable/ic_send_picture_offline_white</item>
         <item name="attr/ic_send_text_offline">@drawable/ic_send_text_offline_white</item>
+        <item name="attr/ic_send_videocam_offline">@drawable/ic_send_videocam_offline_white</item>
         <item name="attr/ic_send_voice_offline">@drawable/ic_send_voice_offline_white</item>
+
+        <item name="attr/ic_attach_camera">@drawable/ic_attach_camera_white</item>
+        <item name="attr/ic_attach_videocam">@drawable/ic_attach_videocam_white</item>
+        <item name="attr/ic_attach_document">@drawable/ic_attach_document_white</item>
+        <item name="attr/ic_attach_location">@drawable/ic_attach_location_white</item>
+        <item name="attr/ic_attach_photo">@drawable/ic_attach_photo_white</item>
+        <item name="attr/ic_attach_record">@drawable/ic_attach_record_white</item>
 
         <item name="attr/message_bubble_received_monochrome">@drawable/message_bubble_received_grey</item>
         <item name="attr/message_bubble_sent">@drawable/message_bubble_sent_grey</item>
         <item name="attr/message_bubble_received_green">@drawable/message_bubble_received_dark</item>
 
+        <item name="attr/unread_count">@color/unreadcountdark</item>
+
         <item name="attr/conversations_overview_background">@color/primary900</item>
 
-        <item name="attr/icon_alpha">1.0</item>
+        <item name="attr/icon_alpha">0.7</item>
 
         <item name="attr/dialog_horizontal_padding">24dp</item>
         <item name="attr/dialog_vertical_padding">16dp</item>
@@ -118,6 +143,7 @@
         <item name="attr/icon_done">@drawable/ic_done_black_24dp</item>
         <item name="attr/icon_group">@drawable/ic_group_white_24dp</item>
         <item name="attr/icon_new">@drawable/ic_add_white_24dp</item>
+        <item name="attr/icon_quote">@drawable/ic_reply_white_24dp</item>
         <item name="attr/icon_refresh">@drawable/ic_refresh_white_24dp</item>
         <item name="attr/icon_new_attachment">@drawable/ic_attach_file_white_24dp</item>
         <item name="attr/icon_not_secure">@drawable/ic_lock_open_white_24dp</item>
