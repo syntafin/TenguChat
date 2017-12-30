@@ -22,7 +22,7 @@
       </configuration>
     </facet>
   </component>
-  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_7" inherit-compiler-output="false">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_7">
     <output url="file://$MODULE_DIR$/build/intermediates/classes/free/debug" />
     <output-test url="file://$MODULE_DIR$/build/intermediates/classes/test/free/debug" />
     <content url="file://$MODULE_DIR$">
@@ -40,13 +40,6 @@
       <sourceFolder url="file://$MODULE_DIR$/src/freeDebug/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/freeDebug/rs" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/freeDebug/shaders" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testFreeDebug/res" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testFreeDebug/resources" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testFreeDebug/assets" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testFreeDebug/aidl" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testFreeDebug/java" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testFreeDebug/rs" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testFreeDebug/shaders" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/build/generated/source/r/androidTest/free/debug" isTestSource="true" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/build/generated/source/aidl/androidTest/free/debug" isTestSource="true" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/build/generated/source/buildConfig/androidTest/free/debug" isTestSource="true" generated="true" />
@@ -54,6 +47,13 @@
       <sourceFolder url="file://$MODULE_DIR$/build/generated/source/apt/androidTest/free/debug" isTestSource="true" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/build/generated/res/rs/androidTest/free/debug" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/build/generated/res/resValues/androidTest/free/debug" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testFreeDebug/res" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testFreeDebug/resources" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testFreeDebug/assets" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testFreeDebug/aidl" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testFreeDebug/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testFreeDebug/rs" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testFreeDebug/shaders" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/free/res" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/free/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/free/assets" type="java-resource" />
@@ -138,40 +138,48 @@
       <excludeFolder url="file://$MODULE_DIR$/build/reports" />
       <excludeFolder url="file://$MODULE_DIR$/build/tmp" />
     </content>
-    <orderEntry type="jdk" jdkName="Android API 25 Platform" jdkType="Android SDK" />
+    <orderEntry type="jdk" jdkName="Android API 26 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" exported="" name="bcprov-jdk15on-1.52" level="project" />
-    <orderEntry type="library" exported="" name="bcpkix-jdk15on-1.52" level="project" />
-    <orderEntry type="library" exported="" name="android-integration-3.2.1" level="project" />
-    <orderEntry type="library" exported="" name="openpgp-api-10.0" level="project" />
-    <orderEntry type="library" exported="" name="core-3.2.1" level="project" />
-    <orderEntry type="library" exported="" name="EnhancedListView-0.3.4" level="project" />
-    <orderEntry type="library" exported="" name="library-1.2.8" level="project" />
-    <orderEntry type="library" exported="" name="bcmail-jdk15on-1.52" level="project" />
-    <orderEntry type="library" exported="" name="android-crop-1.0.1" level="project" />
-    <orderEntry type="library" exported="" name="support-v13-25.1.1" level="project" />
-    <orderEntry type="library" exported="" name="support-core-ui-25.1.1" level="project" />
-    <orderEntry type="library" exported="" name="org.otr4j-0.22" level="project" />
-    <orderEntry type="library" exported="" name="minidns-0.1.7" level="project" />
-    <orderEntry type="library" exported="" name="axolotl-java-1.3.4" level="project" />
-    <orderEntry type="library" exported="" name="support-core-utils-25.1.1" level="project" />
-    <orderEntry type="library" exported="" name="support-fragment-25.1.1" level="project" />
-    <orderEntry type="library" exported="" name="library-2.4.0" level="project" />
-    <orderEntry type="library" exported="" name="roundedimageview-2.2.0" level="project" />
-    <orderEntry type="library" exported="" name="annotations-12.0" level="project" />
-    <orderEntry type="library" exported="" name="curve25519-android-0.2.4" level="project" />
-    <orderEntry type="library" exported="" name="appcompat-v7-21.0.3" level="project" />
-    <orderEntry type="library" exported="" name="support-v4-25.1.1" level="project" />
-    <orderEntry type="library" exported="" name="support-compat-25.1.1" level="project" />
-    <orderEntry type="library" exported="" name="protobuf-java-2.5.0" level="project" />
-    <orderEntry type="library" exported="" name="support-media-compat-25.1.1" level="project" />
-    <orderEntry type="library" exported="" name="ShortcutBadger-1.1.12" level="project" />
-    <orderEntry type="library" exported="" name="flowlayout-0.4.1" level="project" />
-    <orderEntry type="library" exported="" name="android-transcoder-0.2.0" level="project" />
-    <orderEntry type="library" exported="" name="curve25519-java-0.2.4" level="project" />
-    <orderEntry type="library" exported="" name="axolotl-android-1.3.4" level="project" />
-    <orderEntry type="library" exported="" name="support-annotations-25.1.1" level="project" />
-    <orderEntry type="library" exported="" name="libidn-1.15" level="project" />
+    <orderEntry type="library" exported="" name="org.bouncycastle:bcprov-jdk15on:1.52@jar" level="project" />
+    <orderEntry type="library" exported="" name="com.android.support:support-media-compat-26.1.0" level="project" />
+    <orderEntry type="library" exported="" name="com.wefika:flowlayout-0.4.1" level="project" />
+    <orderEntry type="library" exported="" name="net.ypresto.androidtranscoder:android-transcoder-0.2.0" level="project" />
+    <orderEntry type="library" exported="" name="com.makeramen:roundedimageview-2.3.0" level="project" />
+    <orderEntry type="library" exported="" name="android.arch.lifecycle:common:1.0.0@jar" level="project" />
+    <orderEntry type="library" exported="" name="com.google.protobuf:protobuf-java:2.5.0@jar" level="project" />
+    <orderEntry type="library" exported="" name="com.google.zxing:core:3.2.1@jar" level="project" />
+    <orderEntry type="library" exported="" name="com.android.support:support-fragment-26.1.0" level="project" />
+    <orderEntry type="library" exported="" name="org.gnu.inet:libidn:1.15@jar" level="project" />
+    <orderEntry type="library" exported="" name="com.android.support:support-vector-drawable-26.1.0" level="project" />
+    <orderEntry type="library" exported="" name="android.arch.lifecycle:runtime-1.0.0" level="project" />
+    <orderEntry type="library" exported="" name="de.measite.minidns:minidns-hla:0.2.4@jar" level="project" />
+    <orderEntry type="library" exported="" name="de.measite.minidns:minidns-dnssec:0.2.4@jar" level="project" />
+    <orderEntry type="library" exported="" name="com.nineoldandroids:library:2.4.0@jar" level="project" />
+    <orderEntry type="library" exported="" name="com.android.support:appcompat-v7-26.1.0" level="project" />
+    <orderEntry type="library" exported="" name="com.android.support:support-annotations:26.1.0@jar" level="project" />
+    <orderEntry type="library" exported="" name="com.google.zxing:android-integration:3.2.1@jar" level="project" />
+    <orderEntry type="library" exported="" name="org.whispersystems:signal-protocol-java:2.6.2@jar" level="project" />
+    <orderEntry type="library" exported="" name="org.bouncycastle:bcpkix-jdk15on:1.52@jar" level="project" />
+    <orderEntry type="library" exported="" name="com.kyleduo.switchbutton:library-1.2.8" level="project" />
+    <orderEntry type="library" exported="" name="com.android.support:support-core-utils-26.1.0" level="project" />
+    <orderEntry type="library" exported="" name="com.android.support:support-core-ui-26.1.0" level="project" />
+    <orderEntry type="library" exported="" name="com.android.support:support-emoji-bundled-26.1.0" level="project" />
+    <orderEntry type="library" exported="" name="org.sufficientlysecure:openpgp-api-10.0" level="project" />
+    <orderEntry type="library" exported="" name="org.jitsi:org.otr4j:0.22@jar" level="project" />
+    <orderEntry type="library" exported="" name="com.intellij:annotations:12.0@jar" level="project" />
+    <orderEntry type="library" exported="" name="com.android.support:support-compat-26.1.0" level="project" />
+    <orderEntry type="library" exported="" name="de.measite.minidns:minidns-core:0.2.4@jar" level="project" />
+    <orderEntry type="library" exported="" name="me.leolin:ShortcutBadger-1.1.17" level="project" />
+    <orderEntry type="library" exported="" name="android.arch.core:common:1.0.0@jar" level="project" />
+    <orderEntry type="library" exported="" name="de.timroes.android:EnhancedListView-0.3.4" level="project" />
+    <orderEntry type="library" exported="" name="de.measite.minidns:minidns-iterative-resolver:0.2.4@jar" level="project" />
+    <orderEntry type="library" exported="" name="com.android.support:support-v4-26.1.0" level="project" />
+    <orderEntry type="library" exported="" name="org.bouncycastle:bcmail-jdk15on:1.52@jar" level="project" />
+    <orderEntry type="library" exported="" name="org.whispersystems:curve25519-java:0.4.1@jar" level="project" />
+    <orderEntry type="library" exported="" name="com.android.support:support-emoji-26.1.0" level="project" />
+    <orderEntry type="library" exported="" name="com.android.support:animated-vector-drawable-26.1.0" level="project" />
+    <orderEntry type="library" exported="" name="com.android.support:support-v13-26.1.0" level="project" />
+    <orderEntry type="library" exported="" name="com.soundcloud.android:android-crop-1.0.1" level="project" />
     <orderEntry type="module" module-name="MemorizingTrustManager" exported="" />
   </component>
 </module>
