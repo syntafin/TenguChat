@@ -5,24 +5,26 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-import de.tengu.chat.xmpp.jid.Jid;
+import de.tengu.chat.android.AbstractPhoneContact;
+import rocks.xmpp.addr.Jid;
+
 
 public class Roster {
-	final Account account;
-	final HashMap<Jid, Contact> contacts = new HashMap<>();
+	private final Account account;
+	private final HashMap<Jid, Contact> contacts = new HashMap<>();
 	private String version = null;
 
 	public Roster(Account account) {
 		this.account = account;
 	}
 
-	public Contact getContactFromRoster(Jid jid) {
+	public Contact getContactFromContactList(Jid jid) {
 		if (jid == null) {
 			return null;
 		}
 		synchronized (this.contacts) {
-			Contact contact = contacts.get(jid.toBareJid());
-			if (contact != null && contact.showInRoster()) {
+			Contact contact = contacts.get(jid.asBareJid());
+			if (contact != null && contact.showInContactList()) {
 				return contact;
 			} else {
 				return null;
@@ -32,13 +34,13 @@ public class Roster {
 
 	public Contact getContact(final Jid jid) {
 		synchronized (this.contacts) {
-			if (!contacts.containsKey(jid.toBareJid())) {
-				Contact contact = new Contact(jid.toBareJid());
+			if (!contacts.containsKey(jid.asBareJid())) {
+				Contact contact = new Contact(jid.asBareJid());
 				contact.setAccount(account);
-				contacts.put(contact.getJid().toBareJid(), contact);
+				contacts.put(contact.getJid().asBareJid(), contact);
 				return contact;
 			}
-			return contacts.get(jid.toBareJid());
+			return contacts.get(jid.asBareJid());
 		}
 	}
 
@@ -54,11 +56,12 @@ public class Roster {
 		}
 	}
 
-	public List<Contact> getWithSystemAccounts() {
+	public List<Contact> getWithSystemAccounts(Class<?extends AbstractPhoneContact> clazz) {
+		int option = Contact.getOption(clazz);
 		List<Contact> with = getContacts();
 		for(Iterator<Contact> iterator = with.iterator(); iterator.hasNext();) {
 			Contact contact = iterator.next();
-			if (contact.getSystemAccount() == null) {
+			if (!contact.getOption(option)) {
 				iterator.remove();
 			}
 		}
@@ -76,9 +79,8 @@ public class Roster {
 			return;
 		}
 		contact.setAccount(account);
-		contact.setOption(Contact.Options.IN_ROSTER);
 		synchronized (this.contacts) {
-			contacts.put(contact.getJid().toBareJid(), contact);
+			contacts.put(contact.getJid().asBareJid(), contact);
 		}
 	}
 

@@ -1,8 +1,8 @@
 package de.tengu.chat.ui.adapter;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.databinding.DataBindingUtil;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -22,73 +22,79 @@ import java.util.List;
 import java.util.concurrent.RejectedExecutionException;
 
 import de.tengu.chat.R;
+import de.tengu.chat.databinding.ContactBinding;
 import de.tengu.chat.entities.ListItem;
 import de.tengu.chat.ui.SettingsActivity;
 import de.tengu.chat.ui.XmppActivity;
+import de.tengu.chat.ui.util.AvatarWorkerTask;
+import de.tengu.chat.ui.util.StyledAttributes;
+import de.tengu.chat.utils.EmojiWrapper;
+import de.tengu.chat.utils.IrregularUnicodeDetector;
+import de.tengu.chat.utils.ThemeHelper;
 import de.tengu.chat.utils.UIHelper;
+import rocks.xmpp.addr.Jid;
 
 public class ListItemAdapter extends ArrayAdapter<ListItem> {
 
 	protected XmppActivity activity;
-	protected boolean showDynamicTags = false;
-	private View.OnClickListener onTagTvClick = new View.OnClickListener() {
-		@Override
-		public void onClick(View view) {
-			if (view instanceof  TextView && mOnTagClickedListener != null) {
-				TextView tv = (TextView) view;
-				final String tag = tv.getText().toString();
-				mOnTagClickedListener.onTagClicked(tag);
-			}
+	private boolean showDynamicTags = false;
+	private OnTagClickedListener mOnTagClickedListener = null;
+	private View.OnClickListener onTagTvClick = view -> {
+		if (view instanceof TextView && mOnTagClickedListener != null) {
+			TextView tv = (TextView) view;
+			final String tag = tv.getText().toString();
+			mOnTagClickedListener.onTagClicked(tag);
 		}
 	};
-	private OnTagClickedListener mOnTagClickedListener = null;
 
 	public ListItemAdapter(XmppActivity activity, List<ListItem> objects) {
 		super(activity, 0, objects);
 		this.activity = activity;
 	}
 
+
 	public void refreshSettings() {
 		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(activity);
-		this.showDynamicTags = preferences.getBoolean(SettingsActivity.SHOW_DYNAMIC_TAGS,false);
+		this.showDynamicTags = preferences.getBoolean(SettingsActivity.SHOW_DYNAMIC_TAGS, false);
 	}
 
 	@Override
 	public View getView(int position, View view, ViewGroup parent) {
-		LayoutInflater inflater = (LayoutInflater) getContext()
-				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		LayoutInflater inflater = activity.getLayoutInflater();
 		ListItem item = getItem(position);
+		ViewHolder viewHolder;
 		if (view == null) {
-			view = inflater.inflate(R.layout.contact, parent, false);
+			ContactBinding binding = DataBindingUtil.inflate(inflater,R.layout.contact,parent,false);
+			viewHolder = ViewHolder.get(binding);
+			view = binding.getRoot();
+		} else {
+			viewHolder = (ViewHolder) view.getTag();
 		}
-		TextView tvName = (TextView) view.findViewById(R.id.contact_display_name);
-		TextView tvJid = (TextView) view.findViewById(R.id.contact_jid);
-		ImageView picture = (ImageView) view.findViewById(R.id.contact_photo);
-		FlowLayout tagLayout = (FlowLayout) view.findViewById(R.id.tags);
+		view.setBackground(StyledAttributes.getDrawable(view.getContext(),R.attr.list_item_background));
 
 		List<ListItem.Tag> tags = item.getTags(activity);
 		if (tags.size() == 0 || !this.showDynamicTags) {
-			tagLayout.setVisibility(View.GONE);
+			viewHolder.tags.setVisibility(View.GONE);
 		} else {
-			tagLayout.setVisibility(View.VISIBLE);
-			tagLayout.removeAllViewsInLayout();
-			for(ListItem.Tag tag : tags) {
-				TextView tv = (TextView) inflater.inflate(R.layout.list_item_tag,tagLayout,false);
+			viewHolder.tags.setVisibility(View.VISIBLE);
+			viewHolder.tags.removeAllViewsInLayout();
+			for (ListItem.Tag tag : tags) {
+				TextView tv = (TextView) inflater.inflate(R.layout.list_item_tag, viewHolder.tags, false);
 				tv.setText(tag.getName());
 				tv.setBackgroundColor(tag.getColor());
 				tv.setOnClickListener(this.onTagTvClick);
-				tagLayout.addView(tv);
+				viewHolder.tags.addView(tv);
 			}
 		}
-		final String jid = item.getDisplayJid();
+		final Jid jid = item.getJid();
 		if (jid != null) {
-			tvJid.setVisibility(View.VISIBLE);
-			tvJid.setText(jid);
+			viewHolder.jid.setVisibility(View.VISIBLE);
+			viewHolder.jid.setText(IrregularUnicodeDetector.style(activity, jid));
 		} else {
-			tvJid.setVisibility(View.GONE);
+			viewHolder.jid.setVisibility(View.GONE);
 		}
-		tvName.setText(item.getDisplayName());
-		loadAvatar(item,picture);
+		viewHolder.name.setText(EmojiWrapper.transform(item.getDisplayName()));
+		AvatarWorkerTask.loadAvatar(item, viewHolder.avatar, R.dimen.avatar);
 		return view;
 	}
 
@@ -96,91 +102,29 @@ public class ListItemAdapter extends ArrayAdapter<ListItem> {
 		this.mOnTagClickedListener = listener;
 	}
 
+
 	public interface OnTagClickedListener {
 		void onTagClicked(String tag);
 	}
 
-	class BitmapWorkerTask extends AsyncTask<ListItem, Void, Bitmap> {
-		private final WeakReference<ImageView> imageViewReference;
-		private ListItem item = null;
+	private static class ViewHolder {
+		private TextView name;
+		private TextView jid;
+		private ImageView avatar;
+		private FlowLayout tags;
 
-		public BitmapWorkerTask(ImageView imageView) {
-			imageViewReference = new WeakReference<>(imageView);
+		private ViewHolder() {
+
 		}
 
-		@Override
-		protected Bitmap doInBackground(ListItem... params) {
-			return activity.avatarService().get(params[0], activity.getPixel(48), isCancelled());
-		}
-
-		@Override
-		protected void onPostExecute(Bitmap bitmap) {
-			if (bitmap != null && !isCancelled()) {
-				final ImageView imageView = imageViewReference.get();
-				if (imageView != null) {
-					imageView.setImageBitmap(bitmap);
-					imageView.setBackgroundColor(0x00000000);
-				}
-			}
-		}
-	}
-
-	public void loadAvatar(ListItem item, ImageView imageView) {
-		if (cancelPotentialWork(item, imageView)) {
-			final Bitmap bm = activity.avatarService().get(item,activity.getPixel(48),true);
-			if (bm != null) {
-				cancelPotentialWork(item, imageView);
-				imageView.setImageBitmap(bm);
-				imageView.setBackgroundColor(0x00000000);
-			} else {
-				imageView.setBackgroundColor(UIHelper.getColorForName(item.getDisplayName()));
-				imageView.setImageDrawable(null);
-				final BitmapWorkerTask task = new BitmapWorkerTask(imageView);
-				final AsyncDrawable asyncDrawable = new AsyncDrawable(activity.getResources(), null, task);
-				imageView.setImageDrawable(asyncDrawable);
-				try {
-					task.execute(item);
-				} catch (final RejectedExecutionException ignored) {
-				}
-			}
-		}
-	}
-
-	public static boolean cancelPotentialWork(ListItem item, ImageView imageView) {
-		final BitmapWorkerTask bitmapWorkerTask = getBitmapWorkerTask(imageView);
-
-		if (bitmapWorkerTask != null) {
-			final ListItem oldItem = bitmapWorkerTask.item;
-			if (oldItem == null || item != oldItem) {
-				bitmapWorkerTask.cancel(true);
-			} else {
-				return false;
-			}
-		}
-		return true;
-	}
-
-	private static BitmapWorkerTask getBitmapWorkerTask(ImageView imageView) {
-		if (imageView != null) {
-			final Drawable drawable = imageView.getDrawable();
-			if (drawable instanceof AsyncDrawable) {
-				final AsyncDrawable asyncDrawable = (AsyncDrawable) drawable;
-				return asyncDrawable.getBitmapWorkerTask();
-			}
-		}
-		return null;
-	}
-
-	static class AsyncDrawable extends BitmapDrawable {
-		private final WeakReference<BitmapWorkerTask> bitmapWorkerTaskReference;
-
-		public AsyncDrawable(Resources res, Bitmap bitmap, BitmapWorkerTask bitmapWorkerTask) {
-			super(res, bitmap);
-			bitmapWorkerTaskReference = new WeakReference<>(bitmapWorkerTask);
-		}
-
-		public BitmapWorkerTask getBitmapWorkerTask() {
-			return bitmapWorkerTaskReference.get();
+		public static ViewHolder get(ContactBinding binding) {
+			ViewHolder viewHolder = new ViewHolder();
+			viewHolder.name = binding.contactDisplayName;
+			viewHolder.jid = binding.contactJid;
+			viewHolder.avatar = binding.contactPhoto;
+			viewHolder.tags = binding.tags;
+			binding.getRoot().setTag(viewHolder);
+			return viewHolder;
 		}
 	}
 

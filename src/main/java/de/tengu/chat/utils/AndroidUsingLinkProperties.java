@@ -39,24 +39,32 @@ public class AndroidUsingLinkProperties extends AbstractDNSServerLookupMechanism
         if (networks == null) {
             return new String[0];
         }
+        final Network activeNetwork = getActiveNetwork(connectivityManager);
         List<String> servers = new ArrayList<>();
         int vpnOffset = 0;
         for(Network network : networks) {
             LinkProperties linkProperties = connectivityManager.getLinkProperties(network);
+            if (linkProperties == null) {
+                continue;
+            }
             NetworkInfo networkInfo = connectivityManager.getNetworkInfo(network);
-            if (linkProperties != null) {
-                if (networkInfo != null && networkInfo.getType() == ConnectivityManager.TYPE_VPN) {
-                    final List<String> tmp = getIPv4First(linkProperties.getDnsServers());
-                    servers.addAll(0, tmp);
-                    vpnOffset += tmp.size();
-                } else if (hasDefaultRoute(linkProperties)) {
-                    servers.addAll(vpnOffset, getIPv4First(linkProperties.getDnsServers()));
-                } else {
-                    servers.addAll(getIPv4First(linkProperties.getDnsServers()));
-                }
+            final boolean isActiveNetwork = network.equals(activeNetwork);
+            if (networkInfo != null && isActiveNetwork && networkInfo.getType() == ConnectivityManager.TYPE_VPN) {
+                final List<String> tmp = getIPv4First(linkProperties.getDnsServers());
+                servers.addAll(0, tmp);
+                vpnOffset += tmp.size();
+            } else if (hasDefaultRoute(linkProperties) || isActiveNetwork) {
+                servers.addAll(vpnOffset, getIPv4First(linkProperties.getDnsServers()));
+            } else {
+                servers.addAll(getIPv4First(linkProperties.getDnsServers()));
             }
         }
         return servers.toArray(new String[servers.size()]);
+    }
+
+    @TargetApi(23)
+    private static Network getActiveNetwork(ConnectivityManager cm) {
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ? cm.getActiveNetwork() : null;
     }
 
     private static List<String> getIPv4First(List<InetAddress> in) {

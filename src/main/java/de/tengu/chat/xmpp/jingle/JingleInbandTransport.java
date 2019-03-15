@@ -14,11 +14,12 @@ import de.tengu.chat.Config;
 import de.tengu.chat.entities.Account;
 import de.tengu.chat.entities.DownloadableFile;
 import de.tengu.chat.persistance.FileBackend;
+import de.tengu.chat.services.AbstractConnectionManager;
 import de.tengu.chat.utils.CryptoHelper;
 import de.tengu.chat.xml.Element;
 import de.tengu.chat.xmpp.OnIqPacketReceived;
-import de.tengu.chat.xmpp.jid.Jid;
 import de.tengu.chat.xmpp.stanzas.IqPacket;
+import rocks.xmpp.addr.Jid;
 
 public class JingleInbandTransport extends JingleTransport {
 
@@ -36,6 +37,7 @@ public class JingleInbandTransport extends JingleTransport {
 	private JingleConnection connection;
 
 	private InputStream fileInputStream = null;
+	private InputStream innerInputStream = null;
 	private OutputStream fileOutputStream = null;
 	private long remainingSize = 0;
 	private long fileSize = 0;
@@ -94,31 +96,27 @@ public class JingleInbandTransport extends JingleTransport {
 	}
 
 	@Override
-	public void receive(DownloadableFile file,
-			OnFileTransmissionStatusChanged callback) {
+	public void receive(DownloadableFile file, OnFileTransmissionStatusChanged callback) {
 		this.onFileTransmissionStatusChanged = callback;
 		this.file = file;
 		try {
 			this.digest = MessageDigest.getInstance("SHA-1");
 			digest.reset();
-			file.getParentFile().mkdirs();
-			file.createNewFile();
 			this.fileOutputStream = connection.getFileOutputStream();
 			if (this.fileOutputStream == null) {
-				Log.d(Config.LOGTAG,account.getJid().toBareJid()+": could not create output stream");
+				Log.d(Config.LOGTAG,account.getJid().asBareJid()+": could not create output stream");
 				callback.onFileTransferAborted();
 				return;
 			}
 			this.remainingSize = this.fileSize = file.getExpectedSize();
 		} catch (final NoSuchAlgorithmException | IOException e) {
-			Log.d(Config.LOGTAG,account.getJid().toBareJid()+" "+e.getMessage());
+			Log.d(Config.LOGTAG,account.getJid().asBareJid()+" "+e.getMessage());
 			callback.onFileTransferAborted();
 		}
     }
 
 	@Override
-	public void send(DownloadableFile file,
-			OnFileTransmissionStatusChanged callback) {
+	public void send(DownloadableFile file, OnFileTransmissionStatusChanged callback) {
 		this.onFileTransmissionStatusChanged = callback;
 		this.file = file;
 		try {
@@ -128,42 +126,31 @@ public class JingleInbandTransport extends JingleTransport {
 			this.digest.reset();
 			fileInputStream = connection.getFileInputStream();
 			if (fileInputStream == null) {
-				Log.d(Config.LOGTAG,account.getJid().toBareJid()+": could no create input stream");
+				Log.d(Config.LOGTAG,account.getJid().asBareJid()+": could no create input stream");
 				callback.onFileTransferAborted();
 				return;
 			}
+			innerInputStream  = AbstractConnectionManager.upgrade(file, fileInputStream);
 			if (this.connected) {
 				this.sendNextBlock();
 			}
-		} catch (NoSuchAlgorithmException e) {
+		} catch (Exception e) {
 			callback.onFileTransferAborted();
-			Log.d(Config.LOGTAG,account.getJid().toBareJid()+": "+e.getMessage());
+			Log.d(Config.LOGTAG,account.getJid().asBareJid()+": "+e.getMessage());
 		}
 	}
 
 	@Override
 	public void disconnect() {
 		this.connected = false;
-		if (this.fileOutputStream != null) {
-			try {
-				this.fileOutputStream.close();
-			} catch (IOException e) {
-
-			}
-		}
-		if (this.fileInputStream != null) {
-			try {
-				this.fileInputStream.close();
-			} catch (IOException e) {
-
-			}
-		}
+		FileBackend.close(fileOutputStream);
+		FileBackend.close(fileInputStream);
 	}
 
 	private void sendNextBlock() {
 		byte[] buffer = new byte[this.blockSize];
 		try {
-			int count = fileInputStream.read(buffer);
+			int count = innerInputStream.read(buffer);
 			if (count == -1) {
 				sendClose();
 				file.setSha1Sum(digest.digest());
@@ -171,7 +158,7 @@ public class JingleInbandTransport extends JingleTransport {
 				fileInputStream.close();
 				return;
 			} else if (count != buffer.length) {
-				int rem = fileInputStream.read(buffer,count,buffer.length-count);
+				int rem = innerInputStream.read(buffer,count,buffer.length-count);
 				if (rem > 0) {
 					count += rem;
 				}
@@ -198,7 +185,7 @@ public class JingleInbandTransport extends JingleTransport {
 				fileInputStream.close();
 			}
 		} catch (IOException e) {
-			Log.d(Config.LOGTAG,account.getJid().toBareJid()+": io exception during sendNextBlock() "+e.getMessage());
+			Log.d(Config.LOGTAG,account.getJid().asBareJid()+": io exception during sendNextBlock() "+e.getMessage());
 			FileBackend.close(fileInputStream);
 			this.onFileTransmissionStatusChanged.onFileTransferAborted();
 		}
@@ -222,7 +209,7 @@ public class JingleInbandTransport extends JingleTransport {
 				connection.updateProgress((int) ((((double) (this.fileSize - this.remainingSize)) / this.fileSize) * 100));
 			}
 		} catch (Exception e) {
-			Log.d(Config.LOGTAG,account.getJid().toBareJid()+": "+e.getMessage());
+			Log.d(Config.LOGTAG,account.getJid().asBareJid()+": "+e.getMessage());
 			FileBackend.close(fileOutputStream);
 			this.onFileTransmissionStatusChanged.onFileTransferAborted();
 		}
@@ -248,7 +235,7 @@ public class JingleInbandTransport extends JingleTransport {
 			this.connected = false;
 			this.account.getXmppConnection().sendIqPacket(
 					packet.generateResponse(IqPacket.TYPE.RESULT), null);
-			Log.d(Config.LOGTAG,account.getJid().toBareJid()+": received ibb close");
+			Log.d(Config.LOGTAG,account.getJid().asBareJid()+": received ibb close");
 		} else {
 			Log.d(Config.LOGTAG,payload.toString());
 			// TODO some sort of exception

@@ -26,6 +26,13 @@ import java.util.regex.Pattern;
  * Commonly used regular expression patterns.
  */
 public class Patterns {
+
+    public static final Pattern XMPP_PATTERN = Pattern
+            .compile("xmpp\\:(?:(?:["
+                    + Patterns.GOOD_IRI_CHAR
+                    + "\\;\\/\\?\\@\\&\\=\\#\\~\\-\\.\\+\\!\\*\\'\\(\\)\\,\\_])"
+                    + "|(?:\\%[a-fA-F0-9]{2}))+");
+
     /**
      *  Regular expression to match all IANA top-level domains.
      *  List accurate as of 2011/07/18.  List taken from:
@@ -346,7 +353,6 @@ public class Patterns {
             + "(?:" + PORT_NUMBER + ")?"
             + ")"
             + "(?:" + PATH_AND_QUERY + ")?"
-            + WORD_BOUNDARY
             + ")";
     /**
      * Regular expression to match strings that start with a supported protocol. Rules for domain
@@ -360,7 +366,6 @@ public class Patterns {
             + "(?:" + PORT_NUMBER + ")?"
             + ")"
             + "(?:" + PATH_AND_QUERY + ")?"
-            + WORD_BOUNDARY
             + ")";
     /**
      * Regular expression pattern to match IRIs. If a string starts with http(s):// the expression

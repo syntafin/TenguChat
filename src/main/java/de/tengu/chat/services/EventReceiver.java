@@ -3,35 +3,36 @@ package de.tengu.chat.services;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
 import de.tengu.chat.Config;
-import de.tengu.chat.persistance.DatabaseBackend;
+import de.tengu.chat.utils.Compatibility;
 
 public class EventReceiver extends BroadcastReceiver {
 
-	public static final String SETTING_ENABLED_ACCOUNTS = "enabled_accounts";
+    public static final String SETTING_ENABLED_ACCOUNTS = "enabled_accounts";
+    public static final String EXTRA_NEEDS_FOREGROUND_SERVICE = "needs_foreground_service";
 
-	@Override
-	public void onReceive(Context context, Intent intent) {
-		Intent mIntentForService = new Intent(context, XmppConnectionService.class);
-		if (intent.getAction() != null) {
-			mIntentForService.setAction(intent.getAction());
-		} else {
-			mIntentForService.setAction("other");
-		}
-		final String action = intent.getAction();
-		if (action.equals("ui") || hasEnabledAccounts(context)) {
-			context.startService(mIntentForService);
-		} else {
-			Log.d(Config.LOGTAG,"EventReceiver ignored action "+mIntentForService.getAction());
-		}
-	}
+    @Override
+    public void onReceive(final Context context, final Intent originalIntent) {
+        final Intent intentForService = new Intent(context, XmppConnectionService.class);
+        if (originalIntent.getAction() != null) {
+            intentForService.setAction(originalIntent.getAction());
+        } else {
+            intentForService.setAction("other");
+        }
+        final String action = originalIntent.getAction();
+        if (action.equals("ui") || hasEnabledAccounts(context)) {
+            Compatibility.startService(context, intentForService);
+        } else {
+            Log.d(Config.LOGTAG, "EventReceiver ignored action " + intentForService.getAction());
+        }
+    }
 
-	public boolean hasEnabledAccounts(Context context) {
-		return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(SETTING_ENABLED_ACCOUNTS,true);
-	}
+    public static boolean hasEnabledAccounts(final Context context) {
+        return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(SETTING_ENABLED_ACCOUNTS, true);
+    }
 
 }

@@ -1,20 +1,41 @@
 package de.tengu.chat.services;
 
 import android.content.Intent;
-import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
-import com.google.android.gms.gcm.GcmListenerService;
+import com.google.firebase.messaging.FirebaseMessagingService;
+import com.google.firebase.messaging.RemoteMessage;
+
+import java.util.Map;
 
 import de.tengu.chat.Config;
+import de.tengu.chat.utils.Compatibility;
 
-public class PushMessageReceiver extends GcmListenerService {
+public class PushMessageReceiver extends FirebaseMessagingService {
 
 	@Override
-	public void onMessageReceived(String from, Bundle data) {
-		Intent intent = new Intent(this, XmppConnectionService.class);
-		intent.setAction(XmppConnectionService.ACTION_GCM_MESSAGE_RECEIVED);
-		intent.replaceExtras(data);
-		startService(intent);
+	public void onMessageReceived(RemoteMessage message) {
+		if (!EventReceiver.hasEnabledAccounts(this)) {
+			Log.d(Config.LOGTAG,"PushMessageReceiver ignored message because no accounts are enabled");
+			return;
+		}
+		final Map<String, String> data = message.getData();
+		final Intent intent = new Intent(this, XmppConnectionService.class);
+		intent.setAction(XmppConnectionService.ACTION_FCM_MESSAGE_RECEIVED);
+		intent.putExtra("account", data.get("account"));
+		Compatibility.startService(this, intent);
 	}
+
+	@Override
+	public void onNewToken(String token) {
+		if (!EventReceiver.hasEnabledAccounts(this)) {
+			Log.d(Config.LOGTAG,"PushMessageReceiver ignored new token because no accounts are enabled");
+			return;
+		}
+		final Intent intent = new Intent(this, XmppConnectionService.class);
+		intent.setAction(XmppConnectionService.ACTION_FCM_TOKEN_REFRESH);
+		Compatibility.startService(this, intent);
+	}
+
 }

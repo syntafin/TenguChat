@@ -1,71 +1,58 @@
 package de.tengu.chat.ui;
 
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
+import android.databinding.DataBindingUtil;
+import android.support.annotation.StringRes;
+import android.support.v7.app.AlertDialog;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.TypefaceSpan;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.CheckBox;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import de.tengu.chat.R;
+import de.tengu.chat.databinding.DialogBlockContactBinding;
 import de.tengu.chat.entities.Blockable;
 import de.tengu.chat.entities.Conversation;
+import de.tengu.chat.ui.util.JidDialog;
+import rocks.xmpp.addr.Jid;
 
 public final class BlockContactDialog {
-	public static void show(final XmppActivity xmppActivity,
-			final Blockable blockable) {
+	public static void show(final XmppActivity xmppActivity, final Blockable blockable) {
 		final AlertDialog.Builder builder = new AlertDialog.Builder(xmppActivity);
 		final boolean isBlocked = blockable.isBlocked();
 		builder.setNegativeButton(R.string.cancel, null);
-		LayoutInflater inflater = (LayoutInflater) xmppActivity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		LinearLayout view = (LinearLayout) inflater.inflate(R.layout.dialog_block_contact,null);
-		TextView message = (TextView) view.findViewById(R.id.text);
-		final CheckBox report = (CheckBox) view.findViewById(R.id.report_spam);
+		DialogBlockContactBinding binding = DataBindingUtil.inflate(xmppActivity.getLayoutInflater(), R.layout.dialog_block_contact, null, false);
 		final boolean reporting = blockable.getAccount().getXmppConnection().getFeatures().spamReporting();
-		report.setVisibility(!isBlocked && reporting ? View.VISIBLE : View.GONE);
-		builder.setView(view);
+		binding.reportSpam.setVisibility(!isBlocked && reporting ? View.VISIBLE : View.GONE);
+		builder.setView(binding.getRoot());
 
-		String value;
-		SpannableString spannable;
-		if (blockable.getJid().isDomainJid() || blockable.getAccount().isBlocked(blockable.getJid().toDomainJid())) {
+		final String value;
+		@StringRes int res;
+		if (blockable.getJid().getLocal() == null || blockable.getAccount().isBlocked(Jid.ofDomain(blockable.getJid().getDomain()))) {
 			builder.setTitle(isBlocked ? R.string.action_unblock_domain : R.string.action_block_domain);
-			value = blockable.getJid().toDomainJid().toString();
-			spannable = new SpannableString(xmppActivity.getString(isBlocked ? R.string.unblock_domain_text : R.string.block_domain_text, value));
+			value = Jid.ofDomain(blockable.getJid().getDomain()).toString();
+			res = isBlocked ? R.string.unblock_domain_text : R.string.block_domain_text;
 		} else {
 			int resBlockAction = blockable instanceof Conversation && ((Conversation) blockable).isWithStranger() ? R.string.block_stranger : R.string.action_block_contact;
 			builder.setTitle(isBlocked ? R.string.action_unblock_contact : resBlockAction);
-			value = blockable.getJid().toBareJid().toString();
-			spannable = new SpannableString(xmppActivity.getString(isBlocked ? R.string.unblock_contact_text : R.string.block_contact_text, value));
+			value = blockable.getJid().asBareJid().toString();
+			res = isBlocked ? R.string.unblock_contact_text : R.string.block_contact_text;
 		}
-		int start = spannable.toString().indexOf(value);
-		if (start >= 0) {
-			spannable.setSpan(new TypefaceSpan("monospace"),start,start + value.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-		}
-		message.setText(spannable);
-		builder.setPositiveButton(isBlocked ? R.string.unblock : R.string.block, new DialogInterface.OnClickListener() {
-
-			@Override
-			public void onClick(final DialogInterface dialog, final int which) {
-				if (isBlocked) {
-					xmppActivity.xmppConnectionService.sendUnblockRequest(blockable);
-				} else {
-					boolean toastShown = false;
-					if (xmppActivity.xmppConnectionService.sendBlockRequest(blockable, report.isChecked())) {
-						Toast.makeText(xmppActivity,R.string.corresponding_conversations_closed,Toast.LENGTH_SHORT).show();
-						toastShown = true;
+		binding.text.setText(JidDialog.style(xmppActivity, res, value));
+		builder.setPositiveButton(isBlocked ? R.string.unblock : R.string.block, (dialog, which) -> {
+			if (isBlocked) {
+				xmppActivity.xmppConnectionService.sendUnblockRequest(blockable);
+			} else {
+				boolean toastShown = false;
+				if (xmppActivity.xmppConnectionService.sendBlockRequest(blockable, binding.reportSpam.isChecked())) {
+					Toast.makeText(xmppActivity, R.string.corresponding_conversations_closed, Toast.LENGTH_SHORT).show();
+					toastShown = true;
+				}
+				if (xmppActivity instanceof ContactDetailsActivity) {
+					if (!toastShown) {
+						Toast.makeText(xmppActivity, R.string.contact_blocked_past_tense, Toast.LENGTH_SHORT).show();
 					}
-					if (xmppActivity instanceof ContactDetailsActivity) {
-						if (!toastShown) {
-							Toast.makeText(xmppActivity,R.string.contact_blocked_past_tense,Toast.LENGTH_SHORT).show();
-						}
-						xmppActivity.finish();
-					}
+					xmppActivity.finish();
 				}
 			}
 		});

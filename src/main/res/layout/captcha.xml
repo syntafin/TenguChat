@@ -16,10 +16,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textNoSuggestions"
-        android:textColor="?attr/color_text_primary"
-        android:textColorHint="?attr/color_text_secondary"
-        android:textSize="?attr/TextSizeBody"
-        android:hint="@string/captcha_hint">
+        android:hint="@string/captcha_hint"
+        style="@style/Widget.Conversations.EditText">
 
         <requestFocus />
     </EditText>

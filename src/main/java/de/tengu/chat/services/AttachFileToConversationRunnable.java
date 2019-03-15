@@ -1,14 +1,18 @@
 package de.tengu.chat.services;
 
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
 import android.os.ParcelFileDescriptor;
+import android.preference.PreferenceManager;
+import android.support.annotation.RequiresApi;
 import android.util.Log;
 
 import net.ypresto.androidtranscoder.MediaTranscoder;
 import net.ypresto.androidtranscoder.format.MediaFormatStrategy;
 import net.ypresto.androidtranscoder.format.MediaFormatStrategyPresets;
 
+import java.io.File;
 import java.io.FileDescriptor;
 import java.io.FileNotFoundException;
 import java.util.concurrent.ExecutionException;
@@ -22,6 +26,8 @@ import de.tengu.chat.entities.DownloadableFile;
 import de.tengu.chat.entities.Message;
 import de.tengu.chat.persistance.FileBackend;
 import de.tengu.chat.ui.UiCallback;
+import de.tengu.chat.utils.Android360pFormatStrategy;
+import de.tengu.chat.utils.Android720pFormatStrategy;
 import de.tengu.chat.utils.MimeUtils;
 
 public class AttachFileToConversationRunnable implements Runnable, MediaTranscoder.Listener {
@@ -29,36 +35,42 @@ public class AttachFileToConversationRunnable implements Runnable, MediaTranscod
 	private final XmppConnectionService mXmppConnectionService;
 	private final Message message;
 	private final Uri uri;
+	private final String type;
 	private final UiCallback<Message> callback;
 	private final boolean isVideoMessage;
+	private final long originalFileSize;
 	private int currentProgress = -1;
 
-	public AttachFileToConversationRunnable(XmppConnectionService xmppConnectionService, Uri uri, Message message, UiCallback<Message> callback) {
+	AttachFileToConversationRunnable(XmppConnectionService xmppConnectionService, Uri uri, String type, Message message, UiCallback<Message> callback) {
 		this.uri = uri;
+		this.type = type;
 		this.mXmppConnectionService = xmppConnectionService;
 		this.message = message;
 		this.callback = callback;
-		final String mimeType = MimeUtils.guessMimeTypeFromUri(mXmppConnectionService, uri);
-		this.isVideoMessage = (mimeType != null && mimeType.startsWith("video/") && Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2);
+		final String mimeType = MimeUtils.guessMimeTypeFromUriAndMime(mXmppConnectionService, uri, type);
+		final int autoAcceptFileSize = mXmppConnectionService.getResources().getInteger(R.integer.auto_accept_filesize);
+		this.originalFileSize = FileBackend.getFileSize(mXmppConnectionService,uri);
+		this.isVideoMessage = (mimeType != null && mimeType.startsWith("video/")) && originalFileSize > autoAcceptFileSize && !"uncompressed".equals(getVideoCompression());
 	}
 
-	public boolean isVideoMessage() {
-		return this.isVideoMessage;
+	boolean isVideoMessage() {
+		return this.isVideoMessage && Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2;
 	}
 
 	private void processAsFile() {
 		final String path = mXmppConnectionService.getFileBackend().getOriginalPath(uri);
-		if (path != null) {
+		if (path != null && !FileBackend.isPathBlacklisted(path)) {
 			message.setRelativeFilePath(path);
 			mXmppConnectionService.getFileBackend().updateFileParams(message);
 			if (message.getEncryption() == Message.ENCRYPTION_DECRYPTED) {
 				mXmppConnectionService.getPgpEngine().encrypt(message, callback);
 			} else {
+				mXmppConnectionService.sendMessage(message);
 				callback.success(message);
 			}
 		} else {
 			try {
-				mXmppConnectionService.getFileBackend().copyFileToPrivateStorage(message, uri);
+				mXmppConnectionService.getFileBackend().copyFileToPrivateStorage(message, uri, type);
 				mXmppConnectionService.getFileBackend().updateFileParams(message);
 				if (message.getEncryption() == Message.ENCRYPTION_DECRYPTED) {
 					final PgpEngine pgpEngine = mXmppConnectionService.getPgpEngine();
@@ -68,6 +80,7 @@ public class AttachFileToConversationRunnable implements Runnable, MediaTranscod
 						callback.error(R.string.unable_to_connect_to_keychain, null);
 					}
 				} else {
+					mXmppConnectionService.sendMessage(message);
 					callback.success(message);
 				}
 			} catch (FileBackend.FileCopyException e) {
@@ -76,21 +89,31 @@ public class AttachFileToConversationRunnable implements Runnable, MediaTranscod
 		}
 	}
 
+	@RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
 	private void processAsVideo() throws FileNotFoundException {
 		Log.d(Config.LOGTAG,"processing file as video");
 		mXmppConnectionService.startForcingForegroundNotification();
 		message.setRelativeFilePath(message.getUuid() + ".mp4");
 		final DownloadableFile file = mXmppConnectionService.getFileBackend().getFile(message);
-		final int runtime = mXmppConnectionService.getFileBackend().getMediaRuntime(uri);
-		MediaFormatStrategy formatStrategy = runtime >= 8000 ? MediaFormatStrategyPresets.createExportPreset960x540Strategy() : MediaFormatStrategyPresets.createAndroid720pStrategy();
+		final MediaFormatStrategy formatStrategy = "720".equals(getVideoCompression()) ? new Android720pFormatStrategy() : new Android360pFormatStrategy();
 		file.getParentFile().mkdirs();
-		ParcelFileDescriptor parcelFileDescriptor = mXmppConnectionService.getContentResolver().openFileDescriptor(uri, "r");
+		final ParcelFileDescriptor parcelFileDescriptor = mXmppConnectionService.getContentResolver().openFileDescriptor(uri, "r");
+		if (parcelFileDescriptor == null) {
+			throw new FileNotFoundException("Parcel File Descriptor was null");
+		}
 		FileDescriptor fileDescriptor = parcelFileDescriptor.getFileDescriptor();
 		Future<Void> future = MediaTranscoder.getInstance().transcodeVideo(fileDescriptor, file.getAbsolutePath(), formatStrategy, this);
 		try {
 			future.get();
-		} catch (Exception e) {
+		} catch (InterruptedException e) {
 			throw new AssertionError(e);
+		} catch (ExecutionException e) {
+			if (e.getCause() instanceof Error) {
+				mXmppConnectionService.stopForcingForegroundNotification();
+				processAsFile();
+			} else {
+				Log.d(Config.LOGTAG, "ignoring execution exception. Should get handled by onTranscodeFiled() instead", e);
+			}
 		}
 	}
 
@@ -106,10 +129,23 @@ public class AttachFileToConversationRunnable implements Runnable, MediaTranscod
 	@Override
 	public void onTranscodeCompleted() {
 		mXmppConnectionService.stopForcingForegroundNotification();
+		final File file = mXmppConnectionService.getFileBackend().getFile(message);
+		long convertedFileSize = mXmppConnectionService.getFileBackend().getFile(message).getSize();
+		Log.d(Config.LOGTAG,"originalFileSize="+originalFileSize+" convertedFileSize="+convertedFileSize);
+		if (originalFileSize != 0 && convertedFileSize >= originalFileSize) {
+			if (file.delete()) {
+				Log.d(Config.LOGTAG,"original file size was smaller. deleting and processing as file");
+				processAsFile();
+				return;
+			} else {
+				Log.d(Config.LOGTAG,"unable to delete converted file");
+			}
+		}
 		mXmppConnectionService.getFileBackend().updateFileParams(message);
 		if (message.getEncryption() == Message.ENCRYPTION_DECRYPTED) {
 			mXmppConnectionService.getPgpEngine().encrypt(message, callback);
 		} else {
+			mXmppConnectionService.sendMessage(message);
 			callback.success(message);
 		}
 	}
@@ -129,10 +165,10 @@ public class AttachFileToConversationRunnable implements Runnable, MediaTranscod
 
 	@Override
 	public void run() {
-		if (isVideoMessage) {
+		if (this.isVideoMessage()) {
 			try {
 				processAsVideo();
-			} catch (Throwable e) {
+			} catch (FileNotFoundException e) {
 				processAsFile();
 			}
 		} else {
@@ -140,4 +176,8 @@ public class AttachFileToConversationRunnable implements Runnable, MediaTranscod
 		}
 	}
 
+	private String getVideoCompression() {
+		final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(mXmppConnectionService);
+		return preferences.getString("video_compression", mXmppConnectionService.getResources().getString(R.string.video_compression));
+	}
 }

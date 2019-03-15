@@ -29,10 +29,11 @@ import de.tengu.chat.entities.Contact;
 import de.tengu.chat.services.XmppConnectionService;
 import de.tengu.chat.xml.Namespace;
 import de.tengu.chat.xml.Element;
+import de.tengu.chat.xmpp.InvalidJid;
 import de.tengu.chat.xmpp.OnIqPacketReceived;
 import de.tengu.chat.xmpp.OnUpdateBlocklist;
-import de.tengu.chat.xmpp.jid.Jid;
 import de.tengu.chat.xmpp.stanzas.IqPacket;
+import rocks.xmpp.addr.Jid;
 
 public class IqParser extends AbstractParser implements OnIqPacketReceived {
 
@@ -47,7 +48,7 @@ public class IqParser extends AbstractParser implements OnIqPacketReceived {
 		}
 		for (final Element item : query.getChildren()) {
 			if (item.getName().equals("item")) {
-				final Jid jid = item.getAttributeAsJid("jid");
+				final Jid jid = InvalidJid.getNullForInvalid(item.getAttributeAsJid("jid"));
 				if (jid == null) {
 					continue;
 				}
@@ -70,7 +71,7 @@ public class IqParser extends AbstractParser implements OnIqPacketReceived {
 				}
 				boolean both = contact.getOption(Contact.Options.TO) && contact.getOption(Contact.Options.FROM);
 				if ((both != bothPre) && both) {
-					Log.d(Config.LOGTAG,account.getJid().toBareJid()+": gained mutual presence subscription with "+contact.getJid());
+					Log.d(Config.LOGTAG,account.getJid().asBareJid()+": gained mutual presence subscription with "+contact.getJid());
 					AxolotlService axolotlService = account.getAxolotlService();
 					if (axolotlService != null) {
 						axolotlService.clearErrorsInFetchStatusMap(contact.getJid());
@@ -82,11 +83,11 @@ public class IqParser extends AbstractParser implements OnIqPacketReceived {
 		mXmppConnectionService.updateConversationUi();
 		mXmppConnectionService.updateRosterUi();
 		mXmppConnectionService.getShortcutService().refresh();
+		mXmppConnectionService.syncRoster(account);
 	}
 
 	public String avatarData(final IqPacket packet) {
-		final Element pubsub = packet.findChild("pubsub",
-				"http://jabber.org/protocol/pubsub");
+		final Element pubsub = packet.findChild("pubsub", Namespace.PUBSUB);
 		if (pubsub == null) {
 			return null;
 		}
@@ -98,8 +99,7 @@ public class IqParser extends AbstractParser implements OnIqPacketReceived {
 	}
 
 	public Element getItem(final IqPacket packet) {
-		final Element pubsub = packet.findChild("pubsub",
-				"http://jabber.org/protocol/pubsub");
+		final Element pubsub = packet.findChild("pubsub", Namespace.PUBSUB);
 		if (pubsub == null) {
 			return null;
 		}
@@ -285,7 +285,8 @@ public class IqParser extends AbstractParser implements OnIqPacketReceived {
 		final boolean isGet = packet.getType() == IqPacket.TYPE.GET;
 		if (packet.getType() == IqPacket.TYPE.ERROR || packet.getType() == IqPacket.TYPE.TIMEOUT) {
 			return;
-		} else if (packet.hasChild("query", Namespace.ROSTER) && packet.fromServer(account)) {
+		}
+		if (packet.hasChild("query", Namespace.ROSTER) && packet.fromServer(account)) {
 			final Element query = packet.findChild("query");
 			// If this is in response to a query for the whole roster:
 			if (packet.getType() == IqPacket.TYPE.RESULT) {
@@ -311,7 +312,7 @@ public class IqParser extends AbstractParser implements OnIqPacketReceived {
 				// Create a collection of Jids from the packet
 				for (final Element item : items) {
 					if (item.getName().equals("item")) {
-						final Jid jid = item.getAttributeAsJid("jid");
+						final Jid jid = InvalidJid.getNullForInvalid(item.getAttributeAsJid("jid"));
 						if (jid != null) {
 							jids.add(jid);
 						}
@@ -345,7 +346,7 @@ public class IqParser extends AbstractParser implements OnIqPacketReceived {
 				final Collection<Jid> jids = new ArrayList<>(items.size());
 				for (final Element item : items) {
 					if (item.getName().equals("item")) {
-						final Jid jid = item.getAttributeAsJid("jid");
+						final Jid jid = InvalidJid.getNullForInvalid(item.getAttributeAsJid("jid"));
 						if (jid != null) {
 							jids.add(jid);
 						}
@@ -362,7 +363,7 @@ public class IqParser extends AbstractParser implements OnIqPacketReceived {
 			mXmppConnectionService.getJingleConnectionManager()
 				.deliverIbbPacket(account, packet);
 		} else if (packet.hasChild("query", "http://jabber.org/protocol/disco#info")) {
-			final IqPacket response = mXmppConnectionService.getIqGenerator().discoResponse(packet);
+			final IqPacket response = mXmppConnectionService.getIqGenerator().discoResponse(account, packet);
 			mXmppConnectionService.sendIqPacket(account, response, null);
 		} else if (packet.hasChild("query","jabber:iq:version") && isGet) {
 			final IqPacket response = mXmppConnectionService.getIqGenerator().versionResponse(packet);
@@ -372,7 +373,7 @@ public class IqParser extends AbstractParser implements OnIqPacketReceived {
 			mXmppConnectionService.sendIqPacket(account, response, null);
 		} else if (packet.hasChild("time","urn:xmpp:time") && isGet) {
 			final IqPacket response;
-			if (mXmppConnectionService.useTorToConnect()) {
+			if (mXmppConnectionService.useTorToConnect() || account.isOnion()) {
 				response = packet.generateResponse(IqPacket.TYPE.ERROR);
 				final Element error = response.addChild("error");
 				error.setAttribute("type","cancel");

@@ -1,707 +1,637 @@
 package de.tengu.chat.ui;
 
-import android.app.AlertDialog;
 import android.app.PendingIntent;
 import android.content.Context;
-import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.IntentSender.SendIntentException;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.view.ContextMenu;
-import android.view.LayoutInflater;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.SpannableStringBuilder;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TableLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import org.openintents.openpgp.util.OpenPgpUtils;
-
-import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import de.tengu.chat.Config;
 import de.tengu.chat.R;
 import de.tengu.chat.crypto.PgpEngine;
+import de.tengu.chat.databinding.ActivityMucDetailsBinding;
 import de.tengu.chat.entities.Account;
 import de.tengu.chat.entities.Bookmark;
-import de.tengu.chat.entities.Contact;
 import de.tengu.chat.entities.Conversation;
 import de.tengu.chat.entities.MucOptions;
 import de.tengu.chat.entities.MucOptions.User;
 import de.tengu.chat.services.XmppConnectionService;
 import de.tengu.chat.services.XmppConnectionService.OnConversationUpdate;
 import de.tengu.chat.services.XmppConnectionService.OnMucRosterUpdate;
-import de.tengu.chat.xmpp.jid.Jid;
+import de.tengu.chat.ui.adapter.MediaAdapter;
+import de.tengu.chat.ui.adapter.UserPreviewAdapter;
+import de.tengu.chat.ui.interfaces.OnMediaLoaded;
+import de.tengu.chat.ui.util.Attachment;
+import de.tengu.chat.ui.util.AvatarWorkerTask;
+import de.tengu.chat.ui.util.GridManager;
+import de.tengu.chat.ui.util.MenuDoubleTabUtil;
+import de.tengu.chat.ui.util.MucConfiguration;
+import de.tengu.chat.ui.util.MucDetailsContextMenuHelper;
+import de.tengu.chat.ui.util.MyLinkify;
+import de.tengu.chat.ui.util.SoftKeyboardUtils;
+import de.tengu.chat.utils.AccountUtils;
+import de.tengu.chat.utils.Compatibility;
+import de.tengu.chat.utils.EmojiWrapper;
+import de.tengu.chat.utils.StringUtils;
+import de.tengu.chat.utils.StylingHelper;
+import de.tengu.chat.utils.XmppUri;
+import me.drakeet.support.toast.ToastCompat;
+import rocks.xmpp.addr.Jid;
 
-public class ConferenceDetailsActivity extends XmppActivity implements OnConversationUpdate, OnMucRosterUpdate, XmppConnectionService.OnAffiliationChanged, XmppConnectionService.OnRoleChanged, XmppConnectionService.OnConfigurationPushed {
-	public static final String ACTION_VIEW_MUC = "view_muc";
+import static de.tengu.chat.entities.Bookmark.printableValue;
+import static de.tengu.chat.utils.StringUtils.changed;
 
-	private static final float INACTIVE_ALPHA = 0.4684f; //compromise between dark and light theme
+public class ConferenceDetailsActivity extends XmppActivity implements OnConversationUpdate, OnMucRosterUpdate, XmppConnectionService.OnAffiliationChanged, XmppConnectionService.OnConfigurationPushed, XmppConnectionService.OnRoomDestroy, TextWatcher, OnMediaLoaded {
+    public static final String ACTION_VIEW_MUC = "view_muc";
 
-	private Conversation mConversation;
-	private OnClickListener inviteListener = new OnClickListener() {
+    private Conversation mConversation;
+    private ActivityMucDetailsBinding binding;
+    private MediaAdapter mMediaAdapter;
+    private UserPreviewAdapter mUserPreviewAdapter;
+    private String uuid = null;
 
-		@Override
-		public void onClick(View v) {
-			inviteToConversation(mConversation);
-		}
-	};
-	private TextView mYourNick;
-	private ImageView mYourPhoto;
-	private TextView mFullJid;
-	private TextView mAccountJid;
-	private LinearLayout membersView;
-	private LinearLayout mMoreDetails;
-	private TextView mConferenceType;
-	private TableLayout mConferenceInfoTable;
-	private TextView mConferenceInfoMam;
-	private TextView mNotifyStatusText;
-	private ImageButton mChangeConferenceSettingsButton;
-	private ImageButton mNotifyStatusButton;
-	private Button mInviteButton;
-	private String uuid = null;
-	private User mSelectedUser = null;
+    private boolean mAdvancedMode = false;
 
-	private boolean mAdvancedMode = false;
+    private UiCallback<Conversation> renameCallback = new UiCallback<Conversation>() {
+        @Override
+        public void success(Conversation object) {
+            displayToast(getString(R.string.your_nick_has_been_changed));
+            runOnUiThread(() -> {
+                updateView();
+            });
 
-	private UiCallback<Conversation> renameCallback = new UiCallback<Conversation>() {
-		@Override
-		public void success(Conversation object) {
-			runOnUiThread(new Runnable() {
-				@Override
-				public void run() {
-					Toast.makeText(ConferenceDetailsActivity.this,getString(R.string.your_nick_has_been_changed),Toast.LENGTH_SHORT).show();
-					updateView();
-				}
-			});
+        }
 
-		}
+        @Override
+        public void error(final int errorCode, Conversation object) {
+            displayToast(getString(errorCode));
+        }
 
-		@Override
-		public void error(final int errorCode, Conversation object) {
-			runOnUiThread(new Runnable() {
-				@Override
-				public void run() {
-					Toast.makeText(ConferenceDetailsActivity.this,getString(errorCode),Toast.LENGTH_SHORT).show();
-				}
-			});
-		}
+        @Override
+        public void userInputRequried(PendingIntent pi, Conversation object) {
 
-		@Override
-		public void userInputRequried(PendingIntent pi, Conversation object) {
+        }
+    };
 
-		}
-	};
+    private OnClickListener mNotifyStatusClickListener = new OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(ConferenceDetailsActivity.this);
+            builder.setTitle(R.string.pref_notification_settings);
+            String[] choices = {
+                    getString(R.string.notify_on_all_messages),
+                    getString(R.string.notify_only_when_highlighted),
+                    getString(R.string.notify_never)
+            };
+            final AtomicInteger choice;
+            if (mConversation.getLongAttribute(Conversation.ATTRIBUTE_MUTED_TILL, 0) == Long.MAX_VALUE) {
+                choice = new AtomicInteger(2);
+            } else {
+                choice = new AtomicInteger(mConversation.alwaysNotify() ? 0 : 1);
+            }
+            builder.setSingleChoiceItems(choices, choice.get(), (dialog, which) -> choice.set(which));
+            builder.setNegativeButton(R.string.cancel, null);
+            builder.setPositiveButton(R.string.ok, (dialog, which) -> {
+                if (choice.get() == 2) {
+                    mConversation.setMutedTill(Long.MAX_VALUE);
+                } else {
+                    mConversation.setMutedTill(0);
+                    mConversation.setAttribute(Conversation.ATTRIBUTE_ALWAYS_NOTIFY, String.valueOf(choice.get() == 0));
+                }
+                xmppConnectionService.updateConversation(mConversation);
+                updateView();
+            });
+            builder.create().show();
+        }
+    };
 
-	private OnClickListener mNotifyStatusClickListener = new OnClickListener() {
-		@Override
-		public void onClick(View v) {
-			AlertDialog.Builder builder = new AlertDialog.Builder(ConferenceDetailsActivity.this);
-			builder.setTitle(R.string.pref_notification_settings);
-			String[] choices = {
-					getString(R.string.notify_on_all_messages),
-					getString(R.string.notify_only_when_highlighted),
-					getString(R.string.notify_never)
-			};
-			final AtomicInteger choice;
-			if (mConversation.getLongAttribute(Conversation.ATTRIBUTE_MUTED_TILL,0) == Long.MAX_VALUE) {
-				choice = new AtomicInteger(2);
-			} else {
-				choice = new AtomicInteger(mConversation.alwaysNotify() ? 0 : 1);
-			}
-			builder.setSingleChoiceItems(choices, choice.get(), new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					choice.set(which);
-				}
-			});
-			builder.setNegativeButton(R.string.cancel, null);
-			builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					if (choice.get() == 2) {
-						mConversation.setMutedTill(Long.MAX_VALUE);
-					} else {
-						mConversation.setMutedTill(0);
-						mConversation.setAttribute(Conversation.ATTRIBUTE_ALWAYS_NOTIFY,String.valueOf(choice.get() == 0));
-					}
-					xmppConnectionService.updateConversation(mConversation);
-					updateView();
-				}
-			});
-			builder.create().show();
-		}
-	};
+    private OnClickListener mChangeConferenceSettings = new OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            final MucOptions mucOptions = mConversation.getMucOptions();
+            AlertDialog.Builder builder = new AlertDialog.Builder(ConferenceDetailsActivity.this);
+            MucConfiguration configuration = MucConfiguration.get(ConferenceDetailsActivity.this, mAdvancedMode, mucOptions);
+            builder.setTitle(configuration.title);
+            final boolean[] values = configuration.values;
+            builder.setMultiChoiceItems(configuration.names, values, (dialog, which, isChecked) -> values[which] = isChecked);
+            builder.setNegativeButton(R.string.cancel, null);
+            builder.setPositiveButton(R.string.confirm, (dialog, which) -> {
+                Bundle options = configuration.toBundle(values);
+                options.putString("muc#roomconfig_persistentroom", "1");
+                xmppConnectionService.pushConferenceConfiguration(mConversation,
+                        options,
+                        ConferenceDetailsActivity.this);
+            });
+            builder.create().show();
+        }
+    };
 
-	private OnClickListener mChangeConferenceSettings = new OnClickListener() {
-		@Override
-		public void onClick(View v) {
-			final MucOptions mucOptions = mConversation.getMucOptions();
-			AlertDialog.Builder builder = new AlertDialog.Builder(ConferenceDetailsActivity.this);
-			builder.setTitle(R.string.conference_options);
-			final String[] options;
-			final boolean[] values;
-			if (mAdvancedMode) {
-				options = new String[]{
-						getString(R.string.members_only),
-						getString(R.string.moderated),
-						getString(R.string.non_anonymous)
-				};
-				values = new boolean[]{
-						mucOptions.membersOnly(),
-						mucOptions.moderated(),
-						mucOptions.nonanonymous()
-				};
-			} else {
-				options = new String[]{
-						getString(R.string.members_only),
-						getString(R.string.non_anonymous)
-				};
-				values = new boolean[]{
-						mucOptions.membersOnly(),
-						mucOptions.nonanonymous()
-				};
-			}
-			builder.setMultiChoiceItems(options,values,new DialogInterface.OnMultiChoiceClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-					values[which] = isChecked;
-				}
-			});
-			builder.setNegativeButton(R.string.cancel, null);
-			builder.setPositiveButton(R.string.confirm,new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					if (!mucOptions.membersOnly() && values[0]) {
-						xmppConnectionService.changeAffiliationsInConference(mConversation,
-								MucOptions.Affiliation.NONE,
-								MucOptions.Affiliation.MEMBER);
-					}
-					Bundle options = new Bundle();
-					options.putString("muc#roomconfig_membersonly", values[0] ? "1" : "0");
-					if (values.length == 2) {
-						options.putString("muc#roomconfig_whois", values[1] ? "anyone" : "moderators");
-					} else if (values.length == 3) {
-						options.putString("muc#roomconfig_moderatedroom", values[1] ? "1" : "0");
-						options.putString("muc#roomconfig_whois", values[2] ? "anyone" : "moderators");
-					}
-					options.putString("muc#roomconfig_persistentroom", "1");
-					xmppConnectionService.pushConferenceConfiguration(mConversation,
-							options,
-							ConferenceDetailsActivity.this);
-				}
-			});
-			builder.create().show();
-		}
-	};
-	private OnValueEdited onSubjectEdited = new OnValueEdited() {
 
-		@Override
-		public void onValueEdited(String value) {
-			xmppConnectionService.pushSubjectToConference(mConversation,value);
-		}
-	};
+    @Override
+    public void onConversationUpdate() {
+        refreshUi();
+    }
 
-	@Override
-	public void onConversationUpdate() {
-		refreshUi();
-	}
+    @Override
+    public void onMucRosterUpdate() {
+        refreshUi();
+    }
 
-	@Override
-	public void onMucRosterUpdate() {
-		refreshUi();
-	}
+    @Override
+    protected void refreshUiReal() {
+        updateView();
+    }
 
-	@Override
-	protected void refreshUiReal() {
-		updateView();
-	}
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        this.binding = DataBindingUtil.setContentView(this, R.layout.activity_muc_details);
+        this.binding.changeConferenceButton.setOnClickListener(this.mChangeConferenceSettings);
+        setSupportActionBar((Toolbar) binding.toolbar);
+        configureActionBar(getSupportActionBar());
+        this.binding.editNickButton.setOnClickListener(v -> quickEdit(mConversation.getMucOptions().getActualNick(),
+                R.string.nickname,
+                value -> {
+                    if (xmppConnectionService.renameInMuc(mConversation, value, renameCallback)) {
+                        return null;
+                    } else {
+                        return getString(R.string.invalid_muc_nick);
+                    }
+                }));
+        this.mAdvancedMode = getPreferences().getBoolean("advanced_muc_mode", false);
+        this.binding.mucInfoMore.setVisibility(this.mAdvancedMode ? View.VISIBLE : View.GONE);
+        this.binding.notificationStatusButton.setOnClickListener(this.mNotifyStatusClickListener);
+        this.binding.yourPhoto.setOnClickListener(v -> {
+            final MucOptions mucOptions = mConversation.getMucOptions();
+            if (!mucOptions.hasVCards()) {
+                Toast.makeText(this, R.string.host_does_not_support_group_chat_avatars, Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if (!mucOptions.getSelf().getAffiliation().ranks(MucOptions.Affiliation.OWNER)) {
+                Toast.makeText(this, R.string.only_the_owner_can_change_group_chat_avatar, Toast.LENGTH_SHORT).show();
+                return;
+            }
+            final Intent intent = new Intent(this, PublishGroupChatProfilePictureActivity.class);
+            intent.putExtra("uuid", mConversation.getUuid());
+            startActivity(intent);
+        });
+        this.binding.editMucNameButton.setOnClickListener(this::onMucEditButtonClicked);
+        this.binding.mucEditTitle.addTextChangedListener(this);
+        this.binding.mucEditSubject.addTextChangedListener(this);
+        this.binding.mucEditSubject.addTextChangedListener(new StylingHelper.MessageEditorStyler(this.binding.mucEditSubject));
+        this.mMediaAdapter = new MediaAdapter(this, R.dimen.media_size);
+        this.mUserPreviewAdapter = new UserPreviewAdapter();
+        this.binding.media.setAdapter(mMediaAdapter);
+        this.binding.users.setAdapter(mUserPreviewAdapter);
+        GridManager.setupLayoutManager(this, this.binding.media, R.dimen.media_size);
+        GridManager.setupLayoutManager(this, this.binding.users, R.dimen.media_size);
+        this.binding.invite.setOnClickListener(v -> inviteToConversation(mConversation));
+        this.binding.showUsers.setOnClickListener(v -> {
+            Intent intent = new Intent(this, MucUsersActivity.class);
+            intent.putExtra("uuid", mConversation.getUuid());
+            startActivity(intent);
+        });
+    }
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_muc_details);
-		mYourNick = (TextView) findViewById(R.id.muc_your_nick);
-		mYourPhoto = (ImageView) findViewById(R.id.your_photo);
-		ImageButton mEditNickButton = (ImageButton) findViewById(R.id.edit_nick_button);
-		mFullJid = (TextView) findViewById(R.id.muc_jabberid);
-		membersView = (LinearLayout) findViewById(R.id.muc_members);
-		mAccountJid = (TextView) findViewById(R.id.details_account);
-		mMoreDetails = (LinearLayout) findViewById(R.id.muc_more_details);
-		mMoreDetails.setVisibility(View.GONE);
-		mChangeConferenceSettingsButton = (ImageButton) findViewById(R.id.change_conference_button);
-		mChangeConferenceSettingsButton.setOnClickListener(this.mChangeConferenceSettings);
-		mInviteButton = (Button) findViewById(R.id.invite);
-		mInviteButton.setOnClickListener(inviteListener);
-		mConferenceType = (TextView) findViewById(R.id.muc_conference_type);
-		if (getActionBar() != null) {
-			getActionBar().setHomeButtonEnabled(true);
-			getActionBar().setDisplayHomeAsUpEnabled(true);
-		}
-		mEditNickButton.setOnClickListener(new OnClickListener() {
+    @Override
+    protected void onStart() {
+        super.onStart();
+        final int theme = findTheme();
+        if (this.mTheme != theme) {
+            recreate();
+        }
+        binding.mediaWrapper.setVisibility(Compatibility.hasStoragePermission(this) ? View.VISIBLE : View.GONE);
+    }
 
-			@Override
-			public void onClick(View v) {
-				quickEdit(mConversation.getMucOptions().getActualNick(),
-						0,
-						new OnValueEdited() {
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem) {
+        if (MenuDoubleTabUtil.shouldIgnoreTap()) {
+            return false;
+        }
+        switch (menuItem.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
+            case R.id.action_share_http:
+                shareLink(true);
+                break;
+            case R.id.action_share_uri:
+                shareLink(false);
+                break;
+            case R.id.action_save_as_bookmark:
+                saveAsBookmark();
+                break;
+            case R.id.action_delete_bookmark:
+                deleteBookmark();
+                break;
+            case R.id.action_destroy_room:
+                destroyRoom();
+                break;
+            case R.id.action_advanced_mode:
+                this.mAdvancedMode = !menuItem.isChecked();
+                menuItem.setChecked(this.mAdvancedMode);
+                getPreferences().edit().putBoolean("advanced_muc_mode", mAdvancedMode).apply();
+                final boolean online = mConversation != null && mConversation.getMucOptions().online();
+                this.binding.mucInfoMore.setVisibility(this.mAdvancedMode && online ? View.VISIBLE : View.GONE);
+                invalidateOptionsMenu();
+                updateView();
+                break;
+        }
+        return super.onOptionsItemSelected(menuItem);
+    }
 
-							@Override
-							public void onValueEdited(String value) {
-								xmppConnectionService.renameInMuc(mConversation,value,renameCallback);
-							}
-						});
-			}
-		});
-		this.mAdvancedMode = getPreferences().getBoolean("advanced_muc_mode", false);
-		this.mConferenceInfoTable = (TableLayout) findViewById(R.id.muc_info_more);
-		mConferenceInfoTable.setVisibility(this.mAdvancedMode ? View.VISIBLE : View.GONE);
-		this.mConferenceInfoMam = (TextView) findViewById(R.id.muc_info_mam);
-		this.mNotifyStatusButton = (ImageButton) findViewById(R.id.notification_status_button);
-		this.mNotifyStatusButton.setOnClickListener(this.mNotifyStatusClickListener);
-		this.mNotifyStatusText = (TextView) findViewById(R.id.notification_status_text);
-	}
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        if (!MucDetailsContextMenuHelper.onContextItemSelected(item, mUserPreviewAdapter.getSelectedUser(), this)) {
+            return super.onContextItemSelected(item);
+        }
+        return true;
+    }
 
-	@Override
-	protected void onStart() {
-		super.onStart();
-		final int theme = findTheme();
-		if (this.mTheme != theme) {
-			recreate();
-		}
-	}
+    public void onMucEditButtonClicked(View v) {
+        if (this.binding.mucEditor.getVisibility() == View.GONE) {
+            final MucOptions mucOptions = mConversation.getMucOptions();
+            this.binding.mucEditor.setVisibility(View.VISIBLE);
+            this.binding.mucDisplay.setVisibility(View.GONE);
+            this.binding.editMucNameButton.setImageResource(getThemeResource(R.attr.icon_cancel, R.drawable.ic_cancel_black_24dp));
+            final String name = mucOptions.getName();
+            this.binding.mucEditTitle.setText("");
+            final boolean owner = mucOptions.getSelf().getAffiliation().ranks(MucOptions.Affiliation.OWNER);
+            if (owner || printableValue(name)) {
+                this.binding.mucEditTitle.setVisibility(View.VISIBLE);
+                if (name != null) {
+                    this.binding.mucEditTitle.append(name);
+                }
+            } else {
+                this.binding.mucEditTitle.setVisibility(View.GONE);
+            }
+            this.binding.mucEditTitle.setEnabled(owner);
+            final String subject = mucOptions.getSubject();
+            this.binding.mucEditSubject.setText("");
+            if (subject != null) {
+                this.binding.mucEditSubject.append(subject);
+            }
+            this.binding.mucEditSubject.setEnabled(mucOptions.canChangeSubject());
+            if (!owner) {
+                this.binding.mucEditSubject.requestFocus();
+            }
+        } else {
+            String subject = this.binding.mucEditSubject.isEnabled() ? this.binding.mucEditSubject.getEditableText().toString().trim() : null;
+            String name = this.binding.mucEditTitle.isEnabled() ? this.binding.mucEditTitle.getEditableText().toString().trim() : null;
+            onMucInfoUpdated(subject, name);
+            SoftKeyboardUtils.hideSoftKeyboard(this);
+            hideEditor();
+        }
+    }
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem menuItem) {
-		switch (menuItem.getItemId()) {
-			case android.R.id.home:
-				finish();
-				break;
-			case R.id.action_edit_subject:
-				if (mConversation != null) {
-					quickEdit(mConversation.getMucOptions().getSubject(),
-							R.string.edit_subject_hint,
-							this.onSubjectEdited);
-				}
-				break;
-			case R.id.action_share_http:
-				shareLink(true);
-				break;
-			case R.id.action_share_uri:
-				shareLink(false);
-				break;
-			case R.id.action_save_as_bookmark:
-				saveAsBookmark();
-				break;
-			case R.id.action_delete_bookmark:
-				deleteBookmark();
-				break;
-			case R.id.action_advanced_mode:
-				this.mAdvancedMode = !menuItem.isChecked();
-				menuItem.setChecked(this.mAdvancedMode);
-				getPreferences().edit().putBoolean("advanced_muc_mode", mAdvancedMode).apply();
-				mConferenceInfoTable.setVisibility(this.mAdvancedMode ? View.VISIBLE : View.GONE);
-				invalidateOptionsMenu();
-				updateView();
-				break;
-		}
-		return super.onOptionsItemSelected(menuItem);
-	}
+    private void hideEditor() {
+        this.binding.mucEditor.setVisibility(View.GONE);
+        this.binding.mucDisplay.setVisibility(View.VISIBLE);
+        this.binding.editMucNameButton.setImageResource(getThemeResource(R.attr.icon_edit_body, R.drawable.ic_edit_black_24dp));
+    }
 
-	@Override
-	protected String getShareableUri(boolean http) {
-		if (mConversation != null) {
-			if (http) {
-				return "https://conversations.im/j/"+ mConversation.getJid().toBareJid();
-			} else {
-				return "xmpp:"+mConversation.getJid().toBareJid()+"?join";
-			}
-		} else {
-			return null;
-		}
-	}
+    private void onMucInfoUpdated(String subject, String name) {
+        final MucOptions mucOptions = mConversation.getMucOptions();
+        if (mucOptions.canChangeSubject() && changed(mucOptions.getSubject(), subject)) {
+            xmppConnectionService.pushSubjectToConference(mConversation, subject);
+        }
+        if (mucOptions.getSelf().getAffiliation().ranks(MucOptions.Affiliation.OWNER) && changed(mucOptions.getName(), name)) {
+            Bundle options = new Bundle();
+            options.putString("muc#roomconfig_persistentroom", "1");
+            options.putString("muc#roomconfig_roomname", StringUtils.nullOnEmpty(name));
+            xmppConnectionService.pushConferenceConfiguration(mConversation, options, this);
+        }
+    }
 
-	@Override
-	public boolean onPrepareOptionsMenu(Menu menu) {
-		MenuItem menuItemSaveBookmark = menu.findItem(R.id.action_save_as_bookmark);
-		MenuItem menuItemDeleteBookmark = menu.findItem(R.id.action_delete_bookmark);
-		MenuItem menuItemAdvancedMode = menu.findItem(R.id.action_advanced_mode);
-		MenuItem menuItemChangeSubject = menu.findItem(R.id.action_edit_subject);
-		menuItemAdvancedMode.setChecked(mAdvancedMode);
-		if (mConversation == null) {
-			return true;
-		}
-		Account account = mConversation.getAccount();
-		if (account.hasBookmarkFor(mConversation.getJid().toBareJid())) {
-			menuItemSaveBookmark.setVisible(false);
-			menuItemDeleteBookmark.setVisible(true);
-		} else {
-			menuItemDeleteBookmark.setVisible(false);
-			menuItemSaveBookmark.setVisible(true);
-		}
-		menuItemChangeSubject.setVisible(mConversation.getMucOptions().canChangeSubject());
-		return true;
-	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.muc_details, menu);
-		return super.onCreateOptionsMenu(menu);
-	}
+    @Override
+    protected String getShareableUri(boolean http) {
+        if (mConversation != null) {
+            if (http) {
+                return "https://conversations.im/j/" + XmppUri.lameUrlEncode(mConversation.getJid().asBareJid().toEscapedString());
+            } else {
+                return "xmpp:" + mConversation.getJid().asBareJid() + "?join";
+            }
+        } else {
+            return null;
+        }
+    }
 
-	@Override
-	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-		Object tag = v.getTag();
-		if (tag instanceof User) {
-			getMenuInflater().inflate(R.menu.muc_details_context,menu);
-			final User user = (User) tag;
-			final User self = mConversation.getMucOptions().getSelf();
-			this.mSelectedUser = user;
-			String name;
-			final Contact contact = user.getContact();
-			if (contact != null) {
-				name = contact.getDisplayName();
-			} else if (user.getRealJid() != null){
-				name = user.getRealJid().toBareJid().toString();
-			} else {
-				name = user.getName();
-			}
-			menu.setHeaderTitle(name);
-			if (user.getRealJid() != null) {
-				MenuItem showContactDetails = menu.findItem(R.id.action_contact_details);
-				MenuItem startConversation = menu.findItem(R.id.start_conversation);
-				MenuItem giveMembership = menu.findItem(R.id.give_membership);
-				MenuItem removeMembership = menu.findItem(R.id.remove_membership);
-				MenuItem giveAdminPrivileges = menu.findItem(R.id.give_admin_privileges);
-				MenuItem removeAdminPrivileges = menu.findItem(R.id.remove_admin_privileges);
-				MenuItem removeFromRoom = menu.findItem(R.id.remove_from_room);
-				MenuItem banFromConference = menu.findItem(R.id.ban_from_conference);
-				MenuItem invite = menu.findItem(R.id.invite);
-				startConversation.setVisible(true);
-				if (contact != null) {
-					showContactDetails.setVisible(!contact.isSelf());
-				}
-				if (user.getRole() == MucOptions.Role.NONE) {
-					invite.setVisible(true);
-				}
-				if (self.getAffiliation().ranks(MucOptions.Affiliation.ADMIN) &&
-						self.getAffiliation().outranks(user.getAffiliation())) {
-					if (mAdvancedMode) {
-						if (user.getAffiliation() == MucOptions.Affiliation.NONE) {
-							giveMembership.setVisible(true);
-						} else {
-							removeMembership.setVisible(true);
-						}
-						banFromConference.setVisible(true);
-					} else {
-						removeFromRoom.setVisible(true);
-					}
-					if (user.getAffiliation() != MucOptions.Affiliation.ADMIN) {
-						giveAdminPrivileges.setVisible(true);
-					} else {
-						removeAdminPrivileges.setVisible(true);
-					}
-				}
-			} else {
-				MenuItem sendPrivateMessage = menu.findItem(R.id.send_private_message);
-				sendPrivateMessage.setVisible(user.getRole().ranks(MucOptions.Role.PARTICIPANT));
-			}
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        MenuItem menuItemSaveBookmark = menu.findItem(R.id.action_save_as_bookmark);
+        MenuItem menuItemDeleteBookmark = menu.findItem(R.id.action_delete_bookmark);
+        MenuItem menuItemAdvancedMode = menu.findItem(R.id.action_advanced_mode);
+        MenuItem menuItemDestroyRoom = menu.findItem(R.id.action_destroy_room);
+        menuItemAdvancedMode.setChecked(mAdvancedMode);
+        if (mConversation == null) {
+            return true;
+        }
+        if (mConversation.getBookmark() != null) {
+            menuItemSaveBookmark.setVisible(false);
+            menuItemDeleteBookmark.setVisible(true);
+        } else {
+            menuItemDeleteBookmark.setVisible(false);
+            menuItemSaveBookmark.setVisible(true);
+        }
+        menuItemDestroyRoom.setVisible(mConversation.getMucOptions().getSelf().getAffiliation().ranks(MucOptions.Affiliation.OWNER));
+        return true;
+    }
 
-		}
-		super.onCreateContextMenu(menu, v, menuInfo);
-	}
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        final boolean groupChat = mConversation != null && mConversation.isPrivateAndNonAnonymous();
+        getMenuInflater().inflate(R.menu.muc_details, menu);
+        final MenuItem share = menu.findItem(R.id.action_share);
+        share.setVisible(!groupChat);
+        final MenuItem destroy = menu.findItem(R.id.action_destroy_room);
+        destroy.setTitle(groupChat ? R.string.destroy_room : R.string.destroy_channel);
+        AccountUtils.showHideMenuItems(menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 
-	@Override
-	public boolean onContextItemSelected(MenuItem item) {
-		Jid jid = mSelectedUser.getRealJid();
-		switch (item.getItemId()) {
-			case R.id.action_contact_details:
-				Contact contact = mSelectedUser.getContact();
-				if (contact != null) {
-					switchToContactDetails(contact);
-				}
-				return true;
-			case R.id.start_conversation:
-				startConversation(mSelectedUser);
-				return true;
-			case R.id.give_admin_privileges:
-				xmppConnectionService.changeAffiliationInConference(mConversation, jid, MucOptions.Affiliation.ADMIN,this);
-				return true;
-			case R.id.give_membership:
-				xmppConnectionService.changeAffiliationInConference(mConversation, jid, MucOptions.Affiliation.MEMBER,this);
-				return true;
-			case R.id.remove_membership:
-				xmppConnectionService.changeAffiliationInConference(mConversation, jid, MucOptions.Affiliation.NONE,this);
-				return true;
-			case R.id.remove_admin_privileges:
-				xmppConnectionService.changeAffiliationInConference(mConversation, jid, MucOptions.Affiliation.MEMBER,this);
-				return true;
-			case R.id.remove_from_room:
-				removeFromRoom(mSelectedUser);
-				return true;
-			case R.id.ban_from_conference:
-				xmppConnectionService.changeAffiliationInConference(mConversation,jid, MucOptions.Affiliation.OUTCAST,this);
-				if (mSelectedUser.getRole() != MucOptions.Role.NONE) {
-					xmppConnectionService.changeRoleInConference(mConversation, mSelectedUser.getName(), MucOptions.Role.NONE, this);
-				}
-				return true;
-			case R.id.send_private_message:
-				privateMsgInMuc(mConversation,mSelectedUser.getName());
-				return true;
-			case R.id.invite:
-				xmppConnectionService.directInvite(mConversation, jid);
-				return true;
-			default:
-				return super.onContextItemSelected(item);
-		}
-	}
+    @Override
+    public void onMediaLoaded(List<Attachment> attachments) {
+        runOnUiThread(() -> {
+            int limit = GridManager.getCurrentColumnCount(binding.media);
+            mMediaAdapter.setAttachments(attachments.subList(0, Math.min(limit, attachments.size())));
+            binding.mediaWrapper.setVisibility(attachments.size() > 0 ? View.VISIBLE : View.GONE);
+        });
 
-	private void removeFromRoom(final User user) {
-		if (mConversation.getMucOptions().membersOnly()) {
-			xmppConnectionService.changeAffiliationInConference(mConversation,user.getRealJid(), MucOptions.Affiliation.NONE,this);
-			if (user.getRole() != MucOptions.Role.NONE) {
-				xmppConnectionService.changeRoleInConference(mConversation, mSelectedUser.getName(), MucOptions.Role.NONE, ConferenceDetailsActivity.this);
-			}
-		} else {
-			AlertDialog.Builder builder = new AlertDialog.Builder(this);
-			builder.setTitle(R.string.ban_from_conference);
-			builder.setMessage(getString(R.string.removing_from_public_conference,user.getName()));
-			builder.setNegativeButton(R.string.cancel,null);
-			builder.setPositiveButton(R.string.ban_now,new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					xmppConnectionService.changeAffiliationInConference(mConversation,user.getRealJid(), MucOptions.Affiliation.OUTCAST,ConferenceDetailsActivity.this);
-					if (user.getRole() != MucOptions.Role.NONE) {
-						xmppConnectionService.changeRoleInConference(mConversation, mSelectedUser.getName(), MucOptions.Role.NONE, ConferenceDetailsActivity.this);
-					}
-				}
-			});
-			builder.create().show();
-		}
-	}
+    }
 
-	protected void startConversation(User user) {
-		if (user.getRealJid() != null) {
-			Conversation conversation = xmppConnectionService.findOrCreateConversation(this.mConversation.getAccount(),user.getRealJid().toBareJid(),false,true);
-			switchToConversation(conversation);
-		}
-	}
 
-	protected void saveAsBookmark() {
-		xmppConnectionService.saveConversationAsBookmark(mConversation,
-				mConversation.getMucOptions().getSubject());
-	}
+    protected void saveAsBookmark() {
+        xmppConnectionService.saveConversationAsBookmark(mConversation, mConversation.getMucOptions().getName());
+    }
 
-	protected void deleteBookmark() {
-		Account account = mConversation.getAccount();
-		Bookmark bookmark = mConversation.getBookmark();
-		mConversation.deregisterWithBookmark();
-		account.getBookmarks().remove(bookmark);
-		xmppConnectionService.pushBookmarks(account);
-		updateView();
-	}
+    protected void deleteBookmark() {
+        Account account = mConversation.getAccount();
+        Bookmark bookmark = mConversation.getBookmark();
+        account.getBookmarks().remove(bookmark);
+        bookmark.setConversation(null);
+        xmppConnectionService.pushBookmarks(account);
+        updateView();
+    }
 
-	@Override
-	void onBackendConnected() {
-		if (mPendingConferenceInvite != null) {
-			mPendingConferenceInvite.execute(this);
-			mPendingConferenceInvite = null;
-		}
-		if (getIntent().getAction().equals(ACTION_VIEW_MUC)) {
-			this.uuid = getIntent().getExtras().getString("uuid");
-		}
-		if (uuid != null) {
-			this.mConversation = xmppConnectionService.findConversationByUuid(uuid);
-			if (this.mConversation != null) {
-				updateView();
-			}
-		}
-	}
+    protected void destroyRoom() {
+        final boolean groupChat = mConversation != null && mConversation.isPrivateAndNonAnonymous();
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(groupChat ? R.string.destroy_room : R.string.destroy_channel);
+        builder.setMessage(groupChat ? R.string.destroy_room_dialog : R.string.destroy_channel_dialog);
+        builder.setPositiveButton(R.string.ok, (dialog, which) -> {
+            xmppConnectionService.destroyRoom(mConversation, ConferenceDetailsActivity.this);
+        });
+        builder.setNegativeButton(R.string.cancel, null);
+        final AlertDialog dialog = builder.create();
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
+    }
 
-	private void updateView() {
-		invalidateOptionsMenu();
-		final MucOptions mucOptions = mConversation.getMucOptions();
-		final User self = mucOptions.getSelf();
-		String account;
-		if (Config.DOMAIN_LOCK != null) {
-			account = mConversation.getAccount().getJid().getLocalpart();
-		} else {
-			account = mConversation.getAccount().getJid().toBareJid().toString();
-		}
-		mAccountJid.setText(getString(R.string.using_account, account));
-		mYourPhoto.setImageBitmap(avatarService().get(mConversation.getAccount(), getPixel(48)));
-		setTitle(mConversation.getName());
-		mFullJid.setText(mConversation.getJid().toBareJid().toString());
-		mYourNick.setText(mucOptions.getActualNick());
-		TextView mRoleAffiliaton = (TextView) findViewById(R.id.muc_role);
-		if (mucOptions.online()) {
-			mMoreDetails.setVisibility(View.VISIBLE);
-			final String status = getStatus(self);
-			if (status != null) {
-				mRoleAffiliaton.setVisibility(View.VISIBLE);
-				mRoleAffiliaton.setText(status);
-			} else {
-				mRoleAffiliaton.setVisibility(View.GONE);
-			}
-			if (mucOptions.membersOnly()) {
-				mConferenceType.setText(R.string.private_conference);
-			} else {
-				mConferenceType.setText(R.string.public_conference);
-			}
-			if (mucOptions.mamSupport()) {
-				mConferenceInfoMam.setText(R.string.server_info_available);
-			} else {
-				mConferenceInfoMam.setText(R.string.server_info_unavailable);
-			}
-			if (self.getAffiliation().ranks(MucOptions.Affiliation.OWNER)) {
-				mChangeConferenceSettingsButton.setVisibility(View.VISIBLE);
-			} else {
-				mChangeConferenceSettingsButton.setVisibility(View.GONE);
-			}
-		}
+    @Override
+    void onBackendConnected() {
+        if (mPendingConferenceInvite != null) {
+            mPendingConferenceInvite.execute(this);
+            mPendingConferenceInvite = null;
+        }
+        if (getIntent().getAction().equals(ACTION_VIEW_MUC)) {
+            this.uuid = getIntent().getExtras().getString("uuid");
+        }
+        if (uuid != null) {
+            this.mConversation = xmppConnectionService.findConversationByUuid(uuid);
+            if (this.mConversation != null) {
+                if (Compatibility.hasStoragePermission(this)) {
+                    final int limit = GridManager.getCurrentColumnCount(this.binding.media);
+                    xmppConnectionService.getAttachments(this.mConversation, limit, this);
+                    this.binding.showMedia.setOnClickListener((v) -> MediaBrowserActivity.launch(this, mConversation));
+                }
+                updateView();
+            }
+        }
+    }
 
-		int ic_notifications = 		  getThemeResource(R.attr.icon_notifications, R.drawable.ic_notifications_black_24dp);
-		int ic_notifications_off = 	  getThemeResource(R.attr.icon_notifications_off, R.drawable.ic_notifications_off_black_24dp);
-		int ic_notifications_paused = getThemeResource(R.attr.icon_notifications_paused, R.drawable.ic_notifications_paused_black_24dp);
-		int ic_notifications_none =	  getThemeResource(R.attr.icon_notifications_none, R.drawable.ic_notifications_none_black_24dp);
+    @Override
+    public void onBackPressed() {
+        if (this.binding.mucEditor.getVisibility() == View.VISIBLE) {
+            hideEditor();
+        } else {
+            super.onBackPressed();
+        }
+    }
 
-		long mutedTill = mConversation.getLongAttribute(Conversation.ATTRIBUTE_MUTED_TILL,0);
-		if (mutedTill == Long.MAX_VALUE) {
-			mNotifyStatusText.setText(R.string.notify_never);
-			mNotifyStatusButton.setImageResource(ic_notifications_off);
-		} else if (System.currentTimeMillis() < mutedTill) {
-			mNotifyStatusText.setText(R.string.notify_paused);
-			mNotifyStatusButton.setImageResource(ic_notifications_paused);
-		} else if (mConversation.alwaysNotify()) {
-			mNotifyStatusButton.setImageResource(ic_notifications);
-			mNotifyStatusText.setText(R.string.notify_on_all_messages);
-		} else {
-			mNotifyStatusButton.setImageResource(ic_notifications_none);
-			mNotifyStatusText.setText(R.string.notify_only_when_highlighted);
-		}
+    private void updateView() {
+        invalidateOptionsMenu();
+        final MucOptions mucOptions = mConversation.getMucOptions();
+        final User self = mucOptions.getSelf();
+        String account;
+        if (Config.DOMAIN_LOCK != null) {
+            account = mConversation.getAccount().getJid().getLocal();
+        } else {
+            account = mConversation.getAccount().getJid().asBareJid().toString();
+        }
+        setTitle(mucOptions.isPrivateAndNonAnonymous() ? R.string.action_muc_details : R.string.channel_details);
+        this.binding.editMucNameButton.setVisibility((self.getAffiliation().ranks(MucOptions.Affiliation.OWNER) || mucOptions.canChangeSubject()) ? View.VISIBLE : View.GONE);
+        this.binding.detailsAccount.setText(getString(R.string.using_account, account));
+        this.binding.jid.setText(mConversation.getJid().asBareJid().toEscapedString());
+        AvatarWorkerTask.loadAvatar(mConversation, binding.yourPhoto, R.dimen.avatar_on_details_screen_size);
+        String roomName = mucOptions.getName();
+        String subject = mucOptions.getSubject();
+        final boolean hasTitle;
+        if (printableValue(roomName)) {
+            this.binding.mucTitle.setText(EmojiWrapper.transform(roomName));
+            this.binding.mucTitle.setVisibility(View.VISIBLE);
+            hasTitle = true;
+        } else if (!printableValue(subject)) {
+            this.binding.mucTitle.setText(EmojiWrapper.transform(mConversation.getName()));
+            hasTitle = true;
+            this.binding.mucTitle.setVisibility(View.VISIBLE);
+        } else {
+            hasTitle = false;
+            this.binding.mucTitle.setVisibility(View.GONE);
+        }
+        if (printableValue(subject)) {
+            SpannableStringBuilder spannable = new SpannableStringBuilder(subject);
+            StylingHelper.format(spannable, this.binding.mucSubject.getCurrentTextColor());
+            MyLinkify.addLinks(spannable, false);
+            this.binding.mucSubject.setText(EmojiWrapper.transform(spannable));
+            this.binding.mucSubject.setTextAppearance(this, subject.length() > (hasTitle ? 128 : 196) ? R.style.TextAppearance_Conversations_Body1_Linkified : R.style.TextAppearance_Conversations_Subhead);
+            this.binding.mucSubject.setAutoLinkMask(0);
+            this.binding.mucSubject.setVisibility(View.VISIBLE);
+        } else {
+            this.binding.mucSubject.setVisibility(View.GONE);
+        }
+        this.binding.mucYourNick.setText(mucOptions.getActualNick());
+        if (mucOptions.online()) {
+            this.binding.usersWrapper.setVisibility(View.VISIBLE);
+            this.binding.mucInfoMore.setVisibility(this.mAdvancedMode ? View.VISIBLE : View.GONE);
+            this.binding.mucRole.setVisibility(View.VISIBLE);
+            this.binding.mucRole.setText(getStatus(self));
+            if (mucOptions.getSelf().getAffiliation().ranks(MucOptions.Affiliation.OWNER)) {
+                this.binding.mucSettings.setVisibility(View.VISIBLE);
+                this.binding.mucConferenceType.setText(MucConfiguration.describe(this,mucOptions));
+            } else if (!mucOptions.isPrivateAndNonAnonymous() && mucOptions.nonanonymous()) {
+                this.binding.mucSettings.setVisibility(View.VISIBLE);
+                this.binding.mucConferenceType.setText(R.string.group_chat_will_make_your_jabber_id_public);
+            } else {
+                this.binding.mucSettings.setVisibility(View.GONE);
+            }
+            if (mucOptions.mamSupport()) {
+                this.binding.mucInfoMam.setText(R.string.server_info_available);
+            } else {
+                this.binding.mucInfoMam.setText(R.string.server_info_unavailable);
+            }
+            if (self.getAffiliation().ranks(MucOptions.Affiliation.OWNER)) {
+                this.binding.changeConferenceButton.setVisibility(View.VISIBLE);
+            } else {
+                this.binding.changeConferenceButton.setVisibility(View.INVISIBLE);
+            }
+        } else {
+            this.binding.usersWrapper.setVisibility(View.GONE);
+            this.binding.mucInfoMore.setVisibility(View.GONE);
+            this.binding.mucSettings.setVisibility(View.GONE);
+        }
 
-		LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		membersView.removeAllViews();
-		final ArrayList<User> users = mucOptions.getUsers();
-		Collections.sort(users);
-		for (final User user : users) {
-			View view = inflater.inflate(R.layout.contact, membersView,false);
-			this.setListItemBackgroundOnView(view);
-			view.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					highlightInMuc(mConversation, user.getName());
-				}
-			});
-			registerForContextMenu(view);
-			view.setTag(user);
-			TextView tvDisplayName = (TextView) view.findViewById(R.id.contact_display_name);
-			TextView tvKey = (TextView) view.findViewById(R.id.key);
-			TextView tvStatus = (TextView) view.findViewById(R.id.contact_jid);
-			if (mAdvancedMode && user.getPgpKeyId() != 0) {
-				tvKey.setVisibility(View.VISIBLE);
-				tvKey.setOnClickListener(new OnClickListener() {
+        int ic_notifications = getThemeResource(R.attr.icon_notifications, R.drawable.ic_notifications_black_24dp);
+        int ic_notifications_off = getThemeResource(R.attr.icon_notifications_off, R.drawable.ic_notifications_off_black_24dp);
+        int ic_notifications_paused = getThemeResource(R.attr.icon_notifications_paused, R.drawable.ic_notifications_paused_black_24dp);
+        int ic_notifications_none = getThemeResource(R.attr.icon_notifications_none, R.drawable.ic_notifications_none_black_24dp);
 
-					@Override
-					public void onClick(View v) {
-						viewPgpKey(user);
-					}
-				});
-				tvKey.setText(OpenPgpUtils.convertKeyIdToHex(user.getPgpKeyId()));
-			}
-			Contact contact = user.getContact();
-			String name = user.getName();
-			if (contact != null) {
-				tvDisplayName.setText(contact.getDisplayName());
-				tvStatus.setText((name != null ? name+ " \u2022 " : "") + getStatus(user));
-			} else {
-				tvDisplayName.setText(name == null ? "" : name);
-				tvStatus.setText(getStatus(user));
+        long mutedTill = mConversation.getLongAttribute(Conversation.ATTRIBUTE_MUTED_TILL, 0);
+        if (mutedTill == Long.MAX_VALUE) {
+            this.binding.notificationStatusText.setText(R.string.notify_never);
+            this.binding.notificationStatusButton.setImageResource(ic_notifications_off);
+        } else if (System.currentTimeMillis() < mutedTill) {
+            this.binding.notificationStatusText.setText(R.string.notify_paused);
+            this.binding.notificationStatusButton.setImageResource(ic_notifications_paused);
+        } else if (mConversation.alwaysNotify()) {
+            this.binding.notificationStatusText.setText(R.string.notify_on_all_messages);
+            this.binding.notificationStatusButton.setImageResource(ic_notifications);
+        } else {
+            this.binding.notificationStatusText.setText(R.string.notify_only_when_highlighted);
+            this.binding.notificationStatusButton.setImageResource(ic_notifications_none);
+        }
+        final List<User> users = mucOptions.getUsers();
+        Collections.sort(users, (a, b) -> {
+            if (b.getAffiliation().outranks(a.getAffiliation())) {
+                return 1;
+            } else if (a.getAffiliation().outranks(b.getAffiliation())) {
+                return -1;
+            } else {
+                if (a.getAvatar() != null && b.getAvatar() == null) {
+                    return -1;
+                } else if (a.getAvatar() == null && b.getAvatar() != null) {
+                    return 1;
+                } else {
+                    return a.getComparableName().compareToIgnoreCase(b.getComparableName());
+                }
+            }
+        });
+        this.mUserPreviewAdapter.submitList(MucOptions.sub(users, GridManager.getCurrentColumnCount(binding.users)));
+        this.binding.invite.setVisibility(mucOptions.canInvite() ? View.VISIBLE : View.GONE);
+        this.binding.showUsers.setVisibility(users.size() > 0 ? View.VISIBLE : View.GONE);
+        this.binding.usersWrapper.setVisibility(users.size() > 0 || mucOptions.canInvite() ? View.VISIBLE : View.GONE);
+        if (users.size() == 0) {
+            this.binding.noUsersHints.setText(mucOptions.isPrivateAndNonAnonymous() ? R.string.no_users_hint_group_chat : R.string.no_users_hint_channel);
+            this.binding.noUsersHints.setVisibility(View.VISIBLE);
+        } else {
+            this.binding.noUsersHints.setVisibility(View.GONE);
+        }
 
-			}
-			ImageView iv = (ImageView) view.findViewById(R.id.contact_photo);
-			iv.setImageBitmap(avatarService().get(user, getPixel(48), false));
-			if (user.getRole() == MucOptions.Role.NONE) {
-				tvDisplayName.setAlpha(INACTIVE_ALPHA);
-				tvKey.setAlpha(INACTIVE_ALPHA);
-				tvStatus.setAlpha(INACTIVE_ALPHA);
-				iv.setAlpha(INACTIVE_ALPHA);
-			}
-			membersView.addView(view);
-			if (mConversation.getMucOptions().canInvite()) {
-				mInviteButton.setVisibility(View.VISIBLE);
-			} else {
-				mInviteButton.setVisibility(View.GONE);
-			}
-		}
-	}
+    }
 
-	private String getStatus(User user) {
-		if (mAdvancedMode) {
-			return getString(user.getAffiliation().getResId()) +
-					" (" + getString(user.getRole().getResId()) + ')';
-		} else {
-			return getString(user.getAffiliation().getResId());
-		}
-	}
+    public static String getStatus(Context context, User user, final boolean advanced) {
+        if (advanced) {
+            return String.format("%s (%s)", context.getString(user.getAffiliation().getResId()), context.getString(user.getRole().getResId()));
+        } else {
+            return context.getString(user.getAffiliation().getResId());
+        }
+    }
 
-	private void viewPgpKey(User user) {
-		PgpEngine pgp = xmppConnectionService.getPgpEngine();
-		if (pgp != null) {
-			PendingIntent intent = pgp.getIntentForKey(user.getPgpKeyId());
-			if (intent != null) {
-				try {
-					startIntentSenderForResult(intent.getIntentSender(), 0, null, 0, 0, 0);
-				} catch (SendIntentException ignored) {
+    private String getStatus(User user) {
+        return getStatus(this, user, mAdvancedMode);
+    }
 
-				}
-			}
-		}
-	}
 
-	@Override
-	public void onAffiliationChangedSuccessful(Jid jid) {
-		refreshUi();
-	}
+    @Override
+    public void onAffiliationChangedSuccessful(Jid jid) {
+        refreshUi();
+    }
 
-	@Override
-	public void onAffiliationChangeFailed(Jid jid, int resId) {
-		displayToast(getString(resId,jid.toBareJid().toString()));
-	}
+    @Override
+    public void onAffiliationChangeFailed(Jid jid, int resId) {
+        displayToast(getString(resId, jid.asBareJid().toString()));
+    }
 
-	@Override
-	public void onRoleChangedSuccessful(String nick) {
+    @Override
+    public void onRoomDestroySucceeded() {
+        finish();
+    }
 
-	}
+    @Override
+    public void onRoomDestroyFailed() {
+        final boolean groupChat = mConversation != null && mConversation.isPrivateAndNonAnonymous();
+        displayToast(getString(groupChat ? R.string.could_not_destroy_room : R.string.could_not_destroy_channel));
+    }
 
-	@Override
-	public void onRoleChangeFailed(String nick, int resId) {
-		displayToast(getString(resId,nick));
-	}
+    @Override
+    public void onPushSucceeded() {
+        displayToast(getString(R.string.modified_conference_options));
+    }
 
-	@Override
-	public void onPushSucceeded() {
-		displayToast(getString(R.string.modified_conference_options));
-	}
+    @Override
+    public void onPushFailed() {
+        displayToast(getString(R.string.could_not_modify_conference_options));
+    }
 
-	@Override
-	public void onPushFailed() {
-		displayToast(getString(R.string.could_not_modify_conference_options));
-	}
+    private void displayToast(final String msg) {
+        runOnUiThread(() -> {
+            if (isFinishing()) {
+                return;
+            }
+            ToastCompat.makeText(this, msg, Toast.LENGTH_SHORT).show();
+        });
+    }
 
-	private void displayToast(final String msg) {
-		runOnUiThread(new Runnable() {
-			@Override
-			public void run() {
-				Toast.makeText(ConferenceDetailsActivity.this,msg,Toast.LENGTH_SHORT).show();
-			}
-		});
-	}
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+        if (mConversation == null) {
+            return;
+        }
+        final MucOptions mucOptions = mConversation.getMucOptions();
+        if (this.binding.mucEditor.getVisibility() == View.VISIBLE) {
+            boolean subjectChanged = changed(binding.mucEditSubject.getEditableText().toString(), mucOptions.getSubject());
+            boolean nameChanged = changed(binding.mucEditTitle.getEditableText().toString(), mucOptions.getName());
+            if (subjectChanged || nameChanged) {
+                this.binding.editMucNameButton.setImageResource(getThemeResource(R.attr.icon_save, R.drawable.ic_save_black_24dp));
+            } else {
+                this.binding.editMucNameButton.setImageResource(getThemeResource(R.attr.icon_cancel, R.drawable.ic_cancel_black_24dp));
+            }
+        }
+    }
+
 }

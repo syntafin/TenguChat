@@ -1,22 +1,26 @@
 package de.tengu.chat.ui;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v7.app.AppCompatActivity;
 
 import de.tengu.chat.R;
+import de.tengu.chat.utils.ThemeHelper;
 
-public class AboutActivity extends Activity {
+import static de.tengu.chat.ui.XmppActivity.configureActionBar;
+
+public class AboutActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Boolean dark = PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
-                        .getString("theme", "light").equals("dark");
-        int mTheme = dark ? R.style.ConversationsTheme_Dark : R.style.ConversationsTheme;
-        setTheme(mTheme);
+        setTheme(ThemeHelper.find(this));
 
         setContentView(R.layout.activity_about);
+        setSupportActionBar(findViewById(R.id.toolbar));
+        configureActionBar(getSupportActionBar());
+        setTitle(getString(R.string.title_activity_about_x, getString(R.string.app_name
+        )));
     }
 }

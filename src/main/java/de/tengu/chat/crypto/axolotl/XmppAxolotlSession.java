@@ -2,6 +2,7 @@ package de.tengu.chat.crypto.axolotl;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import org.whispersystems.libsignal.SignalProtocolAddress;
 import org.whispersystems.libsignal.DuplicateMessageException;
@@ -19,6 +20,10 @@ import org.whispersystems.libsignal.protocol.PreKeySignalMessage;
 import org.whispersystems.libsignal.protocol.SignalMessage;
 import org.whispersystems.libsignal.util.guava.Optional;
 
+import java.util.Iterator;
+import java.util.List;
+
+import de.tengu.chat.Config;
 import de.tengu.chat.entities.Account;
 import de.tengu.chat.utils.CryptoHelper;
 
@@ -43,13 +48,10 @@ public class XmppAxolotlSession implements Comparable<XmppAxolotlSession> {
 		this.account = account;
 	}
 
-	public Integer getPreKeyId() {
+	public Integer getPreKeyIdAndReset() {
+		final Integer preKeyId = this.preKeyId;
+		this.preKeyId = null;
 		return preKeyId;
-	}
-
-	public void resetPreKeyId() {
-
-		preKeyId = null;
 	}
 
 	public String getFingerprint() {
@@ -82,40 +84,60 @@ public class XmppAxolotlSession implements Comparable<XmppAxolotlSession> {
 	}
 
 	@Nullable
-	public byte[] processReceiving(AxolotlKey encryptedKey) throws CryptoFailedException {
-		byte[] plaintext;
+	byte[] processReceiving(List<AxolotlKey> possibleKeys) throws CryptoFailedException {
+		byte[] plaintext = null;
 		FingerprintStatus status = getTrust();
 		if (!status.isCompromised()) {
-			try {
-				CiphertextMessage ciphertextMessage;
+			Iterator<AxolotlKey> iterator = possibleKeys.iterator();
+			while (iterator.hasNext()) {
+				AxolotlKey encryptedKey = iterator.next();
 				try {
-					ciphertextMessage = new PreKeySignalMessage(encryptedKey.key);
-					Optional<Integer> optionalPreKeyId = ((PreKeySignalMessage) ciphertextMessage).getPreKeyId();
-					IdentityKey identityKey = ((PreKeySignalMessage) ciphertextMessage).getIdentityKey();
-					if (!optionalPreKeyId.isPresent()) {
-						throw new CryptoFailedException("PreKeyWhisperMessage did not contain a PreKeyId");
+					if (encryptedKey.prekey) {
+						PreKeySignalMessage preKeySignalMessage = new PreKeySignalMessage(encryptedKey.key);
+						Optional<Integer> optionalPreKeyId = preKeySignalMessage.getPreKeyId();
+						IdentityKey identityKey = preKeySignalMessage.getIdentityKey();
+						if (!optionalPreKeyId.isPresent()) {
+							if (iterator.hasNext()) {
+								continue;
+							}
+							throw new CryptoFailedException("PreKeyWhisperMessage did not contain a PreKeyId");
+						}
+						preKeyId = optionalPreKeyId.get();
+						if (this.identityKey != null && !this.identityKey.equals(identityKey)) {
+							if (iterator.hasNext()) {
+								continue;
+							}
+							throw new CryptoFailedException("Received PreKeyWhisperMessage but preexisting identity key changed.");
+						}
+						this.identityKey = identityKey;
+						plaintext = cipher.decrypt(preKeySignalMessage);
+					} else {
+						SignalMessage signalMessage = new SignalMessage(encryptedKey.key);
+						try {
+							plaintext = cipher.decrypt(signalMessage);
+						} catch (InvalidMessageException | NoSessionException e) {
+							if (iterator.hasNext()) {
+								Log.w(Config.LOGTAG,account.getJid().asBareJid()+": ignoring crypto exception because possible keys left to try",e);
+								continue;
+							}
+							throw new BrokenSessionException(this.remoteAddress, e);
+						}
+						preKeyId = null; //better safe than sorry because we use that to do special after prekey handling
 					}
-					preKeyId = optionalPreKeyId.get();
-					if (this.identityKey != null && !this.identityKey.equals(identityKey)) {
-						throw new CryptoFailedException("Received PreKeyWhisperMessage but preexisting identity key changed.");
+				} catch (InvalidVersionException | InvalidKeyException | LegacyMessageException | InvalidMessageException | DuplicateMessageException | InvalidKeyIdException | UntrustedIdentityException e) {
+					if (iterator.hasNext()) {
+						Log.w(Config.LOGTAG,account.getJid().asBareJid()+": ignoring crypto exception because possible keys left to try",e);
+						continue;
 					}
-					this.identityKey = identityKey;
-				} catch (InvalidVersionException | InvalidMessageException e) {
-					ciphertextMessage = new SignalMessage(encryptedKey.key);
+					throw new CryptoFailedException("Error decrypting SignalMessage", e);
 				}
-				if (ciphertextMessage instanceof PreKeySignalMessage) {
-					plaintext = cipher.decrypt((PreKeySignalMessage) ciphertextMessage);
-				} else {
-					plaintext = cipher.decrypt((SignalMessage) ciphertextMessage);
+				if (iterator.hasNext()) {
+					break;
 				}
-			} catch (InvalidKeyException | LegacyMessageException | InvalidMessageException | DuplicateMessageException | NoSessionException | InvalidKeyIdException | UntrustedIdentityException e) {
-				if (!(e instanceof DuplicateMessageException)) {
-					e.printStackTrace();
-				}
-				throw new CryptoFailedException("Error decrypting WhisperMessage " + e.getClass().getSimpleName() + ": " + e.getMessage());
 			}
 			if (!status.isActive()) {
 				setTrust(status.toActive());
+				//TODO: also (re)add to device list?
 			}
 		} else {
 			throw new CryptoFailedException("not encrypting omemo message from fingerprint "+getFingerprint()+" because it was marked as compromised");
@@ -124,12 +146,12 @@ public class XmppAxolotlSession implements Comparable<XmppAxolotlSession> {
 	}
 
 	@Nullable
-	public AxolotlKey processSending(@NonNull byte[] outgoingMessage) {
+	public AxolotlKey processSending(@NonNull byte[] outgoingMessage, boolean ignoreSessionTrust) {
 		FingerprintStatus status = getTrust();
-		if (status.isTrustedAndActive()) {
+		if (ignoreSessionTrust || status.isTrustedAndActive()) {
 			try {
 				CiphertextMessage ciphertextMessage = cipher.encrypt(outgoingMessage);
-				return new AxolotlKey(ciphertextMessage.serialize(),ciphertextMessage.getType() == CiphertextMessage.PREKEY_TYPE);
+				return new AxolotlKey(getRemoteAddress().getDeviceId(), ciphertextMessage.serialize(),ciphertextMessage.getType() == CiphertextMessage.PREKEY_TYPE);
 			} catch (UntrustedIdentityException e) {
 				return null;
 			}
@@ -152,8 +174,10 @@ public class XmppAxolotlSession implements Comparable<XmppAxolotlSession> {
 
 		public final byte[] key;
 		public final boolean prekey;
+		public final int deviceId;
 
-		public AxolotlKey(byte[] key, boolean prekey) {
+		public AxolotlKey(int deviceId, byte[] key, boolean prekey) {
+			this.deviceId = deviceId;
 			this.key = key;
 			this.prekey = prekey;
 		}

@@ -1,20 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <attr name="TextSizeInfo" format="dimension" />
-    <attr name="TextSizeBody" format="dimension" />
-    <attr name="TextSizeHeadline" format="dimension" />
+    <attr name="TextSizeCaption" format="dimension"/>
+    <attr name="TextSizeTitle" format="dimension"/>
+    <attr name="TextSizeSubhead" format="dimension"/>
+    <attr name="TextSizeBody1" format="dimension"/>
+    <attr name="TextSizeBody2" format="dimension"/>
+    <attr name="TextSizeDisplay2" format="dimension"/>
+    <attr name="TextSizeInput" format="dimension"/>
     <attr name="TextSeparation" format="dimension"/>
 
     <attr name="IconSize" format="dimension"/>
 
-    <attr name="color_text_primary" format="reference|color" />
-    <attr name="color_text_secondary" format="reference|color" />
+    <attr name="color_background_tertiary" format="reference|color"/>
+    <attr name="color_background_secondary" format="reference|color"/>
+    <attr name="color_background_primary" format="reference|color"/>
+    <attr name="color_background_overlay" format="reference|color"/>
+    <attr name="edit_text_color" format="reference|color"/>
+    <attr name="color_warning" format="reference|color"/>
+    <attr name="EmojiColor" format="reference|color"/>
 
-    <attr name="color_background_secondary" format="reference|color" />
-    <attr name="color_background_primary" format="reference|color" />
+    <attr name="activity_background_search" format="reference"/>
+    <attr name="activity_background_no_results" format="reference"/>
 
-    <attr name="infocard_border" format="reference"/>
+    <attr name="list_item_background" format="reference"/>
+
+    <attr name="TextColorOnline" format="reference|color"/>
+    <attr name="TextColorError" format="reference|color"/>
+
     <attr name="ic_send_cancel_offline" format="reference"/>
     <attr name="ic_send_location_offline" format="reference"/>
     <attr name="ic_send_photo_offline" format="reference"/>
@@ -34,11 +47,24 @@
     <attr name="message_bubble_sent" format="reference"/>
     <attr name="message_bubble_received_green" format="reference"/>
 
-    <attr name="unread_count" format="reference|color" />
+    <attr name="unread_count" format="reference|color"/>
 
     <attr name="conversations_overview_background" format="reference|color"/>
 
     <attr name="icon_alpha" format="float"/>
+    <attr name="delete_icon_alpha" format="float"/>
+
+    <attr name="media_preview_document" format="reference"/>
+    <attr name="media_preview_recording" format="reference"/>
+    <attr name="media_preview_audio" format="reference"/>
+    <attr name="media_preview_location" format="reference"/>
+    <attr name="media_preview_contact" format="reference"/>
+    <attr name="media_preview_app" format="reference"/>
+    <attr name="media_preview_calendar" format="reference"/>
+    <attr name="media_preview_archive" format="reference" />
+    <attr name="media_preview_ebook" format="reference"/>
+    <attr name="media_preview_unknown" format="reference" />
+
 
     <attr name="icon_add_group" format="reference"/>
     <attr name="icon_add_person" format="reference"/>
@@ -48,6 +74,7 @@
     <attr name="icon_download" format="reference"/>
     <attr name="icon_edit" format="reference"/>
     <attr name="icon_edit_body" format="reference"/>
+    <attr name="icon_save" format="reference"/>
     <attr name="icon_done" format="reference"/>
     <attr name="icon_group" format="reference"/>
     <attr name="icon_new" format="reference"/>
@@ -62,6 +89,13 @@
     <attr name="icon_share" format="reference"/>
     <attr name="icon_import_export" format="reference"/>
     <attr name="icon_scan_qr_code" format="reference"/>
+    <attr name="icon_enable_undecided_device" format="reference"/>
+    <attr name="icon_scroll_down" format="reference"/>
+
+    <attr name="icon_gps_not_fixed" format="reference"/>
+    <attr name="icon_gps_fixed" format="reference"/>
+    <attr name="icon_directions" format="reference"/>
+    <attr name="icon_copy_bar" format="reference"/>
 
     <attr name="icon_notifications" format="reference"/>
     <attr name="icon_notifications_off" format="reference"/>
@@ -74,5 +108,7 @@
     <declare-styleable name="UnreadCountCustomView">
         <attr name="backgroundColor" format="reference|color"/>
     </declare-styleable>
+
+    <attr name="popupOverlayStyle" format="reference"/>
 
 </resources>

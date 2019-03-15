@@ -18,9 +18,9 @@ import de.tengu.chat.services.XmppConnectionService;
 import de.tengu.chat.xml.Namespace;
 import de.tengu.chat.xml.Element;
 import de.tengu.chat.xmpp.OnIqPacketReceived;
-import de.tengu.chat.xmpp.jid.Jid;
 import de.tengu.chat.xmpp.jingle.stanzas.JinglePacket;
 import de.tengu.chat.xmpp.stanzas.IqPacket;
+import rocks.xmpp.addr.Jid;
 
 public class JingleConnectionManager extends AbstractConnectionManager {
 	private List<JingleConnection> connections = new CopyOnWriteArrayList<>();
@@ -87,7 +87,7 @@ public class JingleConnectionManager extends AbstractConnectionManager {
 			listener.onPrimaryCandidateFound(false, null);
 			return;
 		}
-		if (!this.primaryCandidates.containsKey(account.getJid().toBareJid())) {
+		if (!this.primaryCandidates.containsKey(account.getJid().asBareJid())) {
 			final Jid proxy = account.getXmppConnection().findDiscoItemByFeature(Namespace.BYTE_STREAMS);
 			if (proxy != null) {
 				IqPacket iq = new IqPacket(IqPacket.TYPE.GET);
@@ -108,7 +108,7 @@ public class JingleConnectionManager extends AbstractConnectionManager {
 								candidate.setType(JingleCandidate.TYPE_PROXY);
 								candidate.setJid(proxy);
 								candidate.setPriority(655360 + 65535);
-								primaryCandidates.put(account.getJid().toBareJid(),candidate);
+								primaryCandidates.put(account.getJid().asBareJid(),candidate);
 								listener.onPrimaryCandidateFound(true,candidate);
 							} catch (final NumberFormatException e) {
 								listener.onPrimaryCandidateFound(false,null);
@@ -125,7 +125,7 @@ public class JingleConnectionManager extends AbstractConnectionManager {
 
 		} else {
 			listener.onPrimaryCandidateFound(true,
-					this.primaryCandidates.get(account.getJid().toBareJid()));
+					this.primaryCandidates.get(account.getJid().asBareJid()));
 		}
 	}
 
@@ -167,7 +167,7 @@ public class JingleConnectionManager extends AbstractConnectionManager {
 	public void cancelInTransmission() {
 		for (JingleConnection connection : this.connections) {
 			if (connection.getJingleStatus() == JingleConnection.JINGLE_STATUS_TRANSMITTING) {
-				connection.cancel();
+				connection.abort();
 			}
 		}
 	}

@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/libs/MemorizingTrustManager/MemorizingTrustManager.iml" filepath="$PROJECT_DIR$/libs/MemorizingTrustManager/MemorizingTrustManager.iml" />
       <module fileurl="file://$PROJECT_DIR$/TenguChat.iml" filepath="$PROJECT_DIR$/TenguChat.iml" />
       <module fileurl="file://$PROJECT_DIR$/libs/libs.iml" filepath="$PROJECT_DIR$/libs/libs.iml" />
+      <module fileurl="file://$PROJECT_DIR$/libs/xmpp-addr/xmpp-addr.iml" filepath="$PROJECT_DIR$/libs/xmpp-addr/xmpp-addr.iml" />
     </modules>
   </component>
 </project>

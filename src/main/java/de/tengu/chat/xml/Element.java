@@ -1,15 +1,19 @@
 package de.tengu.chat.xml;
 
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
+import java.util.Locale;
 
 import de.tengu.chat.Config;
 import de.tengu.chat.utils.XmlHelper;
-import de.tengu.chat.xmpp.jid.InvalidJidException;
-import de.tengu.chat.xmpp.jid.Jid;
+import de.tengu.chat.xmpp.InvalidJid;
+import de.tengu.chat.xmpp.stanzas.MessagePacket;
+import rocks.xmpp.addr.Jid;
 
 public class Element {
 	private final String name;
@@ -67,6 +71,33 @@ public class Element {
 		return element == null ? null : element.getContent();
 	}
 
+	public String findInternationalizedChildContent(String name) {
+		return findInternationalizedChildContent(name, Locale.getDefault().getLanguage());
+	}
+
+	private String findInternationalizedChildContent(String name, @NonNull String language) {
+		final HashMap<String,String> contents = new HashMap<>();
+		for(Element child : this.children) {
+			if (name.equals(child.getName())) {
+				String lang = child.getAttribute("xml:lang");
+				String content = child.getContent();
+				if (content != null) {
+					if (language.equals(lang)) {
+						return content;
+					} else {
+						contents.put(lang, content);
+					}
+				}
+			}
+		}
+		final String value = contents.get(null);
+		if (value != null) {
+			return value;
+		}
+		final String[] values = contents.values().toArray(new String[0]);
+		return values.length == 0 ? null : values[0];
+	}
+
 	public Element findChild(String name, String xmlns) {
 		for (Element child : this.children) {
 			if (name.equals(child.getName()) && xmlns.equals(child.getAttribute("xmlns"))) {
@@ -109,6 +140,11 @@ public class Element {
 		return this;
 	}
 
+	public Element removeAttribute(String name) {
+		this.attributes.remove(name);
+		return this;
+	}
+
 	public Element setAttributes(Hashtable<String, String> attributes) {
 		this.attributes = attributes;
 		return this;
@@ -126,10 +162,9 @@ public class Element {
 		final String jid = this.getAttribute(name);
 		if (jid != null && !jid.isEmpty()) {
 			try {
-				return Jid.fromString(jid);
-			} catch (final InvalidJidException e) {
-				Log.e(Config.LOGTAG, "could not parse jid " + jid);
-				return null;
+				return Jid.ofEscaped(jid);
+			} catch (final IllegalArgumentException e) {
+				return InvalidJid.of(jid, this instanceof MessagePacket);
 			}
 		}
 		return null;

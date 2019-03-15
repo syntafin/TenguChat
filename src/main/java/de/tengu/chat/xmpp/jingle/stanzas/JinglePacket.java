@@ -3,8 +3,8 @@ package de.tengu.chat.xmpp.jingle.stanzas;
 import android.util.Base64;
 
 import de.tengu.chat.xml.Element;
-import de.tengu.chat.xmpp.jid.Jid;
 import de.tengu.chat.xmpp.stanzas.IqPacket;
+import rocks.xmpp.addr.Jid;
 
 public class JinglePacket extends IqPacket {
 	Content content = null;

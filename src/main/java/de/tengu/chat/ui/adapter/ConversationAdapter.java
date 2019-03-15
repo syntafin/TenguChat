@@ -1,233 +1,224 @@
 package de.tengu.chat.ui.adapter;
 
-import android.content.Context;
-import android.content.res.Resources;
-import android.graphics.Bitmap;
+import android.databinding.DataBindingUtil;
 import android.graphics.Typeface;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import java.lang.ref.WeakReference;
 import java.util.List;
-import java.util.concurrent.RejectedExecutionException;
 
 import de.tengu.chat.R;
+import de.tengu.chat.databinding.ConversationListRowBinding;
 import de.tengu.chat.entities.Conversation;
 import de.tengu.chat.entities.Message;
-import de.tengu.chat.entities.Transferable;
-import de.tengu.chat.ui.ConversationActivity;
+import de.tengu.chat.ui.ConversationFragment;
 import de.tengu.chat.ui.XmppActivity;
-import de.tengu.chat.ui.widget.UnreadCountCustomView;
+import de.tengu.chat.ui.util.AvatarWorkerTask;
+import de.tengu.chat.ui.util.StyledAttributes;
+import de.tengu.chat.utils.EmojiWrapper;
+import de.tengu.chat.utils.IrregularUnicodeDetector;
 import de.tengu.chat.utils.UIHelper;
+import rocks.xmpp.addr.Jid;
 
-public class ConversationAdapter extends ArrayAdapter<Conversation> {
+public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapter.ConversationViewHolder> {
 
-	private XmppActivity activity;
+    private XmppActivity activity;
+    private List<Conversation> conversations;
+    private OnConversationClickListener listener;
 
-	public ConversationAdapter(XmppActivity activity,
-			List<Conversation> conversations) {
-		super(activity, 0, conversations);
-		this.activity = activity;
-	}
+    public ConversationAdapter(XmppActivity activity, List<Conversation> conversations) {
+        this.activity = activity;
+        this.conversations = conversations;
+    }
 
-	@Override
-	public View getView(int position, View view, ViewGroup parent) {
-		if (view == null) {
-			LayoutInflater inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			view = inflater.inflate(R.layout.conversation_list_row,parent, false);
-		}
-		Conversation conversation = getItem(position);
-		if (this.activity instanceof ConversationActivity) {
-			View swipeableItem = view.findViewById(R.id.swipeable_item);
-			ConversationActivity a = (ConversationActivity) this.activity;
-			int c = a.highlightSelectedConversations() && conversation == a.getSelectedConversation() ? a.getSecondaryBackgroundColor() : a.getPrimaryBackgroundColor();
-			swipeableItem.setBackgroundColor(c);
-		}
-		TextView convName = (TextView) view.findViewById(R.id.conversation_name);
-		if (conversation.getMode() == Conversation.MODE_SINGLE || activity.useSubjectToIdentifyConference()) {
-			convName.setText(conversation.getName());
-		} else {
-			convName.setText(conversation.getJid().toBareJid().toString());
-		}
-		TextView mLastMessage = (TextView) view.findViewById(R.id.conversation_lastmsg);
-		TextView mTimestamp = (TextView) view.findViewById(R.id.conversation_lastupdate);
-		TextView mSenderName = (TextView) view.findViewById(R.id.sender_name);
-		ImageView imagePreview = (ImageView) view.findViewById(R.id.conversation_lastimage);
-		ImageView notificationStatus = (ImageView) view.findViewById(R.id.notification_status);
-		UnreadCountCustomView unreadCountCustomView = (UnreadCountCustomView) view.findViewById(R.id.unread_count);
 
-		Message message = conversation.getLatestMessage();
-		int unreadCount = conversation.unreadCount();
-		if (unreadCount > 0) {
-			unreadCountCustomView.setVisibility(View.VISIBLE);
-			unreadCountCustomView.setUnreadCount(unreadCount);
-		} else {
-			unreadCountCustomView.setVisibility(View.GONE);
-		}
+    @NonNull
+    @Override
+    public ConversationViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return new ConversationViewHolder(DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.conversation_list_row, parent, false));
+    }
 
-		if (!conversation.isRead()) {
-			convName.setTypeface(null, Typeface.BOLD);
-		} else {
-			convName.setTypeface(null, Typeface.NORMAL);
-		}
+    @Override
+    public void onBindViewHolder(@NonNull ConversationViewHolder viewHolder, int position) {
+        Conversation conversation = conversations.get(position);
+        if (conversation == null) {
+            return;
+        }
+        CharSequence name = conversation.getName();
+        if (name instanceof Jid) {
+            viewHolder.binding.conversationName.setText(IrregularUnicodeDetector.style(activity, (Jid) name));
+        } else {
+            viewHolder.binding.conversationName.setText(EmojiWrapper.transform(name));
+        }
 
-		if (message.getFileParams().width > 0
-				&& (message.getTransferable() == null
-				|| message.getTransferable().getStatus() != Transferable.STATUS_DELETED)) {
-			mSenderName.setVisibility(View.GONE);
-			mLastMessage.setVisibility(View.GONE);
-			imagePreview.setVisibility(View.VISIBLE);
-			activity.loadBitmap(message, imagePreview);
-		} else {
-			Pair<String,Boolean> preview = UIHelper.getMessagePreview(activity,message);
-			mLastMessage.setVisibility(View.VISIBLE);
-			imagePreview.setVisibility(View.GONE);
-			mLastMessage.setText(preview.first);
-			if (preview.second) {
-				if (conversation.isRead()) {
-					mLastMessage.setTypeface(null, Typeface.ITALIC);
-					mSenderName.setTypeface(null, Typeface.NORMAL);
-				} else {
-					mLastMessage.setTypeface(null,Typeface.BOLD_ITALIC);
-					mSenderName.setTypeface(null,Typeface.BOLD);
-				}
-			} else {
-				if (conversation.isRead()) {
-					mLastMessage.setTypeface(null,Typeface.NORMAL);
-					mSenderName.setTypeface(null,Typeface.NORMAL);
-				} else {
-					mLastMessage.setTypeface(null,Typeface.BOLD);
-					mSenderName.setTypeface(null,Typeface.BOLD);
-				}
-			}
-			if (message.getStatus() == Message.STATUS_RECEIVED) {
-				if (conversation.getMode() == Conversation.MODE_MULTI) {
-					mSenderName.setVisibility(View.VISIBLE);
-					mSenderName.setText(UIHelper.getMessageDisplayName(message).split("\\s+")[0]+':');
-				} else {
-					mSenderName.setVisibility(View.GONE);
-				}
-			} else if (message.getType() != Message.TYPE_STATUS) {
-				mSenderName.setVisibility(View.VISIBLE);
-				mSenderName.setText(activity.getString(R.string.me)+':');
-			} else {
-				mSenderName.setVisibility(View.GONE);
-			}
-		}
+        if (conversation == ConversationFragment.getConversation(activity)) {
+            viewHolder.binding.frame.setBackgroundColor(StyledAttributes.getColor(activity, R.attr.color_background_tertiary));
+        } else {
+            viewHolder.binding.frame.setBackgroundColor(StyledAttributes.getColor(activity, R.attr.color_background_primary));
+        }
 
-		long muted_till = conversation.getLongAttribute(Conversation.ATTRIBUTE_MUTED_TILL,0);
-		if (muted_till == Long.MAX_VALUE) {
-			notificationStatus.setVisibility(View.VISIBLE);
-			int ic_notifications_off = 	  activity.getThemeResource(R.attr.icon_notifications_off, R.drawable.ic_notifications_off_black_24dp);
-			notificationStatus.setImageResource(ic_notifications_off);
-		} else if (muted_till >= System.currentTimeMillis()) {
-			notificationStatus.setVisibility(View.VISIBLE);
-			int ic_notifications_paused = activity.getThemeResource(R.attr.icon_notifications_paused, R.drawable.ic_notifications_paused_black_24dp);
-			notificationStatus.setImageResource(ic_notifications_paused);
-		} else if (conversation.alwaysNotify()) {
-			notificationStatus.setVisibility(View.GONE);
-		} else {
-			notificationStatus.setVisibility(View.VISIBLE);
-			int ic_notifications_none =	  activity.getThemeResource(R.attr.icon_notifications_none, R.drawable.ic_notifications_none_black_24dp);
-			notificationStatus.setImageResource(ic_notifications_none);
-		}
+        Message message = conversation.getLatestMessage();
+        final int unreadCount = conversation.unreadCount();
+        final boolean isRead = conversation.isRead();
+        final Conversation.Draft draft = isRead ? conversation.getDraft() : null;
+        if (unreadCount > 0) {
+            viewHolder.binding.unreadCount.setVisibility(View.VISIBLE);
+            viewHolder.binding.unreadCount.setUnreadCount(unreadCount);
+        } else {
+            viewHolder.binding.unreadCount.setVisibility(View.GONE);
+        }
 
-		mTimestamp.setText(UIHelper.readableTimeDifference(activity,conversation.getLatestMessage().getTimeSent()));
-		ImageView profilePicture = (ImageView) view.findViewById(R.id.conversation_image);
-		loadAvatar(conversation,profilePicture);
+        if (isRead) {
+            viewHolder.binding.conversationName.setTypeface(null, Typeface.NORMAL);
+        } else {
+            viewHolder.binding.conversationName.setTypeface(null, Typeface.BOLD);
+        }
 
-		return view;
-	}
+        if (draft != null) {
+            viewHolder.binding.conversationLastmsgImg.setVisibility(View.GONE);
+            viewHolder.binding.conversationLastmsg.setText(EmojiWrapper.transform(draft.getMessage()));
+            viewHolder.binding.senderName.setText(R.string.draft);
+            viewHolder.binding.senderName.setVisibility(View.VISIBLE);
+            viewHolder.binding.conversationLastmsg.setTypeface(null, Typeface.NORMAL);
+            viewHolder.binding.senderName.setTypeface(null, Typeface.ITALIC);
+        } else {
+            final boolean fileAvailable = !message.isDeleted();
+            final boolean showPreviewText;
+            if (fileAvailable && (message.isFileOrImage() || message.treatAsDownloadable() || message.isGeoUri())) {
+                final int imageResource;
+                if (message.isGeoUri()) {
+                    imageResource = activity.getThemeResource(R.attr.ic_attach_location, R.drawable.ic_attach_location);
+                    showPreviewText = false;
+                } else {
+                    final String mime = message.getMimeType();
+                    switch (mime == null ? "" : mime.split("/")[0]) {
+                        case "image":
+                            imageResource = activity.getThemeResource(R.attr.ic_attach_photo, R.drawable.ic_attach_photo);
+                            showPreviewText = false;
+                            break;
+                        case "video":
+                            imageResource = activity.getThemeResource(R.attr.ic_attach_videocam, R.drawable.ic_attach_videocam);
+                            showPreviewText = false;
+                            break;
+                        case "audio":
+                            imageResource = activity.getThemeResource(R.attr.ic_attach_record, R.drawable.ic_attach_record);
+                            showPreviewText = false;
+                            break;
+                        default:
+                            imageResource = activity.getThemeResource(R.attr.ic_attach_document, R.drawable.ic_attach_document);
+                            showPreviewText = true;
+                            break;
+                    }
+                }
+                viewHolder.binding.conversationLastmsgImg.setImageResource(imageResource);
+                viewHolder.binding.conversationLastmsgImg.setVisibility(View.VISIBLE);
+            } else {
+                viewHolder.binding.conversationLastmsgImg.setVisibility(View.GONE);
+                showPreviewText = true;
+            }
+            final Pair<CharSequence, Boolean> preview = UIHelper.getMessagePreview(activity, message, viewHolder.binding.conversationLastmsg.getCurrentTextColor());
+            if (showPreviewText) {
+                viewHolder.binding.conversationLastmsg.setText(EmojiWrapper.transform(UIHelper.shorten(preview.first)));
+            } else {
+                viewHolder.binding.conversationLastmsgImg.setContentDescription(preview.first);
+            }
+            viewHolder.binding.conversationLastmsg.setVisibility(showPreviewText ? View.VISIBLE : View.GONE);
+            if (preview.second) {
+                if (isRead) {
+                    viewHolder.binding.conversationLastmsg.setTypeface(null, Typeface.ITALIC);
+                    viewHolder.binding.senderName.setTypeface(null, Typeface.NORMAL);
+                } else {
+                    viewHolder.binding.conversationLastmsg.setTypeface(null, Typeface.BOLD_ITALIC);
+                    viewHolder.binding.senderName.setTypeface(null, Typeface.BOLD);
+                }
+            } else {
+                if (isRead) {
+                    viewHolder.binding.conversationLastmsg.setTypeface(null, Typeface.NORMAL);
+                    viewHolder.binding.senderName.setTypeface(null, Typeface.NORMAL);
+                } else {
+                    viewHolder.binding.conversationLastmsg.setTypeface(null, Typeface.BOLD);
+                    viewHolder.binding.senderName.setTypeface(null, Typeface.BOLD);
+                }
+            }
+            if (message.getStatus() == Message.STATUS_RECEIVED) {
+                if (conversation.getMode() == Conversation.MODE_MULTI) {
+                    viewHolder.binding.senderName.setVisibility(View.VISIBLE);
+                    viewHolder.binding.senderName.setText(UIHelper.getMessageDisplayName(message).split("\\s+")[0] + ':');
+                } else {
+                    viewHolder.binding.senderName.setVisibility(View.GONE);
+                }
+            } else if (message.getType() != Message.TYPE_STATUS) {
+                viewHolder.binding.senderName.setVisibility(View.VISIBLE);
+                viewHolder.binding.senderName.setText(activity.getString(R.string.me) + ':');
+            } else {
+                viewHolder.binding.senderName.setVisibility(View.GONE);
+            }
+        }
 
-	class BitmapWorkerTask extends AsyncTask<Conversation, Void, Bitmap> {
-		private final WeakReference<ImageView> imageViewReference;
-		private Conversation conversation = null;
+        long muted_till = conversation.getLongAttribute(Conversation.ATTRIBUTE_MUTED_TILL, 0);
+        if (muted_till == Long.MAX_VALUE) {
+            viewHolder.binding.notificationStatus.setVisibility(View.VISIBLE);
+            int ic_notifications_off = activity.getThemeResource(R.attr.icon_notifications_off, R.drawable.ic_notifications_off_black_24dp);
+            viewHolder.binding.notificationStatus.setImageResource(ic_notifications_off);
+        } else if (muted_till >= System.currentTimeMillis()) {
+            viewHolder.binding.notificationStatus.setVisibility(View.VISIBLE);
+            int ic_notifications_paused = activity.getThemeResource(R.attr.icon_notifications_paused, R.drawable.ic_notifications_paused_black_24dp);
+            viewHolder.binding.notificationStatus.setImageResource(ic_notifications_paused);
+        } else if (conversation.alwaysNotify()) {
+            viewHolder.binding.notificationStatus.setVisibility(View.GONE);
+        } else {
+            viewHolder.binding.notificationStatus.setVisibility(View.VISIBLE);
+            int ic_notifications_none = activity.getThemeResource(R.attr.icon_notifications_none, R.drawable.ic_notifications_none_black_24dp);
+            viewHolder.binding.notificationStatus.setImageResource(ic_notifications_none);
+        }
 
-		public BitmapWorkerTask(ImageView imageView) {
-			imageViewReference = new WeakReference<>(imageView);
-		}
+        long timestamp;
+        if (draft != null) {
+            timestamp = draft.getTimestamp();
+        } else {
+            timestamp = conversation.getLatestMessage().getTimeSent();
+        }
+        viewHolder.binding.conversationLastupdate.setText(UIHelper.readableTimeDifference(activity, timestamp));
+        AvatarWorkerTask.loadAvatar(conversation, viewHolder.binding.conversationImage, R.dimen.avatar_on_conversation_overview);
+        viewHolder.itemView.setOnClickListener(v -> listener.onConversationClick(v, conversation));
+    }
 
-		@Override
-		protected Bitmap doInBackground(Conversation... params) {
-			return activity.avatarService().get(params[0], activity.getPixel(56), isCancelled());
-		}
+    @Override
+    public int getItemCount() {
+        return conversations.size();
+    }
 
-		@Override
-		protected void onPostExecute(Bitmap bitmap) {
-			if (bitmap != null && !isCancelled()) {
-				final ImageView imageView = imageViewReference.get();
-				if (imageView != null) {
-					imageView.setImageBitmap(bitmap);
-					imageView.setBackgroundColor(0x00000000);
-				}
-			}
-		}
-	}
+    public void setConversationClickListener(OnConversationClickListener listener) {
+        this.listener = listener;
+    }
 
-	public void loadAvatar(Conversation conversation, ImageView imageView) {
-		if (cancelPotentialWork(conversation, imageView)) {
-			final Bitmap bm = activity.avatarService().get(conversation, activity.getPixel(56), true);
-			if (bm != null) {
-				cancelPotentialWork(conversation, imageView);
-				imageView.setImageBitmap(bm);
-				imageView.setBackgroundColor(0x00000000);
-			} else {
-				imageView.setBackgroundColor(UIHelper.getColorForName(conversation.getName()));
-				imageView.setImageDrawable(null);
-				final BitmapWorkerTask task = new BitmapWorkerTask(imageView);
-				final AsyncDrawable asyncDrawable = new AsyncDrawable(activity.getResources(), null, task);
-				imageView.setImageDrawable(asyncDrawable);
-				try {
-					task.execute(conversation);
-				} catch (final RejectedExecutionException ignored) {
-				}
-			}
-		}
-	}
 
-	public static boolean cancelPotentialWork(Conversation conversation, ImageView imageView) {
-		final BitmapWorkerTask bitmapWorkerTask = getBitmapWorkerTask(imageView);
+    public void insert(Conversation c, int position) {
+        conversations.add(position, c);
+        notifyDataSetChanged();
+    }
 
-		if (bitmapWorkerTask != null) {
-			final Conversation oldConversation = bitmapWorkerTask.conversation;
-			if (oldConversation == null || conversation != oldConversation) {
-				bitmapWorkerTask.cancel(true);
-			} else {
-				return false;
-			}
-		}
-		return true;
-	}
+    public void remove(Conversation conversation, int position) {
+        conversations.remove(conversation);
+        notifyItemRemoved(position);
+    }
 
-	private static BitmapWorkerTask getBitmapWorkerTask(ImageView imageView) {
-		if (imageView != null) {
-			final Drawable drawable = imageView.getDrawable();
-			if (drawable instanceof AsyncDrawable) {
-				final AsyncDrawable asyncDrawable = (AsyncDrawable) drawable;
-				return asyncDrawable.getBitmapWorkerTask();
-			}
-		}
-		return null;
-	}
+    public interface OnConversationClickListener {
+        void onConversationClick(View view, Conversation conversation);
+    }
 
-	static class AsyncDrawable extends BitmapDrawable {
-		private final WeakReference<BitmapWorkerTask> bitmapWorkerTaskReference;
+    static class ConversationViewHolder extends RecyclerView.ViewHolder {
+        private final ConversationListRowBinding binding;
 
-		public AsyncDrawable(Resources res, Bitmap bitmap, BitmapWorkerTask bitmapWorkerTask) {
-			super(res, bitmap);
-			bitmapWorkerTaskReference = new WeakReference<>(bitmapWorkerTask);
-		}
+        private ConversationViewHolder(ConversationListRowBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
+        }
 
-		public BitmapWorkerTask getBitmapWorkerTask() {
-			return bitmapWorkerTaskReference.get();
-		}
-	}
+    }
+
 }

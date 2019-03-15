@@ -3,7 +3,7 @@ package de.tengu.chat.xmpp.pep;
 import android.util.Base64;
 
 import de.tengu.chat.xml.Element;
-import de.tengu.chat.xmpp.jid.Jid;
+import rocks.xmpp.addr.Jid;
 
 public class Avatar {
 

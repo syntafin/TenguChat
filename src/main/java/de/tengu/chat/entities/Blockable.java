@@ -1,6 +1,6 @@
 package de.tengu.chat.entities;
 
-import de.tengu.chat.xmpp.jid.Jid;
+import rocks.xmpp.addr.Jid;
 
 public interface Blockable {
 	boolean isBlocked();

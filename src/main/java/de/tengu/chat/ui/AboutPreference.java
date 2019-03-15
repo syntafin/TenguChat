@@ -5,17 +5,22 @@ import android.content.Intent;
 import android.preference.Preference;
 import android.util.AttributeSet;
 
+import de.tengu.chat.R;
 import de.tengu.chat.utils.PhoneHelper;
 
 public class AboutPreference extends Preference {
 	public AboutPreference(final Context context, final AttributeSet attrs, final int defStyle) {
 		super(context, attrs, defStyle);
-		setSummary();
+        final String appName = context.getString(R.string.app_name);
+        setSummary(appName +' '+ PhoneHelper.getVersionName(context));
+        setTitle(context.getString(R.string.title_activity_about_x, appName));
 	}
 
 	public AboutPreference(final Context context, final AttributeSet attrs) {
 		super(context, attrs);
-		setSummary();
+		final String appName = context.getString(R.string.app_name);
+		setSummary(appName +' '+ PhoneHelper.getVersionName(context));
+		setTitle(context.getString(R.string.title_activity_about_x, appName));
 	}
 
     @Override
@@ -24,9 +29,5 @@ public class AboutPreference extends Preference {
         final Intent intent = new Intent(getContext(), AboutActivity.class);
         getContext().startActivity(intent);
     }
-
-    private void setSummary() {
-		setSummary("TenguChat " + PhoneHelper.getVersionName(getContext()));
-	}
 }
 

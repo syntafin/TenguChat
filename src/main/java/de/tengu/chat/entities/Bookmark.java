@@ -1,22 +1,29 @@
 package de.tengu.chat.entities;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import de.tengu.chat.utils.StringUtils;
 import de.tengu.chat.utils.UIHelper;
 import de.tengu.chat.xml.Element;
-import de.tengu.chat.xmpp.jid.Jid;
+import de.tengu.chat.xmpp.InvalidJid;
+import rocks.xmpp.addr.Jid;
 
 public class Bookmark extends Element implements ListItem {
 
 	private Account account;
-	private Conversation mJoinedConversation;
+	private WeakReference<Conversation> conversation;
+	private Jid jid;
 
 	public Bookmark(final Account account, final Jid jid) {
 		super("conference");
+		this.jid = jid;
 		this.setAttribute("jid", jid.toString());
 		this.account = account;
 	}
@@ -30,6 +37,7 @@ public class Bookmark extends Element implements ListItem {
 		Bookmark bookmark = new Bookmark(account);
 		bookmark.setAttributes(element.getAttributes());
 		bookmark.setChildren(element.getChildren());
+		bookmark.jid = InvalidJid.getNullForInvalid(bookmark.getAttributeAsJid("jid"));
 		return bookmark;
 	}
 
@@ -42,38 +50,41 @@ public class Bookmark extends Element implements ListItem {
 	}
 
 	@Override
-	public int compareTo(final ListItem another) {
+	public int compareTo(final @NonNull ListItem another) {
 		return this.getDisplayName().compareToIgnoreCase(
 				another.getDisplayName());
 	}
 
 	@Override
 	public String getDisplayName() {
-		if (this.mJoinedConversation != null) {
-			return this.mJoinedConversation.getName();
-		} else if (getBookmarkName() != null
-				&& !getBookmarkName().trim().isEmpty()) {
-			return getBookmarkName().trim();
+		final Conversation c = getConversation();
+		final String name = getBookmarkName();
+		if (c != null) {
+			return c.getName().toString();
+		} else if (printableValue(name, false)) {
+			return name.trim();
 		} else {
 			Jid jid = this.getJid();
-			String name = jid != null ? jid.getLocalpart() : getAttribute("jid");
-			return name != null ? name : "";
+			return jid != null && jid.getLocal() != null ? jid.getLocal() : "";
 		}
 	}
 
-	@Override
-	public String getDisplayJid() {
-		Jid jid = getJid();
-		if (jid != null) {
-			return jid.toString();
-		} else {
-			return getAttribute("jid"); //fallback if jid wasn't parsable
-		}
+	public static boolean printableValue(@Nullable String value, boolean permitNone) {
+		return value != null && !value.trim().isEmpty() && (permitNone || !"None".equals(value));
+	}
+
+	public static boolean printableValue(@Nullable String value) {
+		return printableValue(value, true);
 	}
 
 	@Override
 	public Jid getJid() {
-		return this.getAttributeAsJid("jid");
+		return this.jid;
+	}
+
+	public Jid getFullJid() {
+		final String nick = getNick();
+		return jid == null || nick == null || nick.trim().isEmpty() ? jid : jid.withResource(nick);
 	}
 
 	@Override
@@ -82,7 +93,7 @@ public class Bookmark extends Element implements ListItem {
 		for (Element element : getChildren()) {
 			if (element.getName().equals("group") && element.getContent() != null) {
 				String group = element.getContent();
-				tags.add(new Tag(group, UIHelper.getColorForName(group)));
+				tags.add(new Tag(group, UIHelper.getColorForName(group,true)));
 			}
 		}
 		return tags;
@@ -141,12 +152,20 @@ public class Bookmark extends Element implements ListItem {
 		return this.account;
 	}
 
-	public Conversation getConversation() {
-		return this.mJoinedConversation;
+	public synchronized Conversation getConversation() {
+		return this.conversation != null ? this.conversation.get() : null;
 	}
 
-	public void setConversation(Conversation conversation) {
-		this.mJoinedConversation = conversation;
+	public synchronized void setConversation(Conversation conversation) {
+		if (this.conversation != null) {
+			this.conversation.clear();
+		}
+		if (conversation == null) {
+			this.conversation = null;
+		} else {
+			this.conversation = new WeakReference<>(conversation);
+			conversation.getMucOptions().notifyOfBookmarkNick(getNick());
+		}
 	}
 
 	public String getBookmarkName() {
@@ -155,18 +174,16 @@ public class Bookmark extends Element implements ListItem {
 
 	public boolean setBookmarkName(String name) {
 		String before = getBookmarkName();
-		if (name != null && !name.equals(before)) {
+		if (name != null) {
 			this.setAttribute("name", name);
-			return true;
 		} else {
-			return false;
+			this.removeAttribute("name");
 		}
+		return StringUtils.changed(before, name);
 	}
 
-	public void unregisterConversation() {
-		if (this.mJoinedConversation != null) {
-			this.mJoinedConversation.deregisterWithBookmark();
-		}
-		this.mJoinedConversation = null;
+	@Override
+	public int getAvatarBackgroundColor() {
+		return UIHelper.getColorForName(jid != null ? jid.asBareJid().toString() : getDisplayName());
 	}
 }

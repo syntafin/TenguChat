@@ -2,7 +2,7 @@ package de.tengu.chat.xmpp.stanzas;
 
 import de.tengu.chat.entities.Account;
 import de.tengu.chat.xml.Element;
-import de.tengu.chat.xmpp.jid.Jid;
+import rocks.xmpp.addr.Jid;
 
 public class AbstractStanza extends Element {
 
@@ -20,31 +20,34 @@ public class AbstractStanza extends Element {
 
 	public void setTo(final Jid to) {
 		if (to != null) {
-			setAttribute("to", to.toString());
+			setAttribute("to", to.toEscapedString());
 		}
 	}
 
 	public void setFrom(final Jid from) {
 		if (from != null) {
-			setAttribute("from", from.toString());
+			setAttribute("from", from.toEscapedString());
 		}
 	}
 
 	public boolean fromServer(final Account account) {
-		return getFrom() == null
-			|| getFrom().equals(account.getServer())
-			|| getFrom().equals(account.getJid().toBareJid())
-			|| getFrom().equals(account.getJid());
+		final Jid from = getFrom();
+		return from == null
+			|| from.equals(Jid.of(account.getServer()))
+			|| from.equals(account.getJid().asBareJid())
+			|| from.equals(account.getJid());
 	}
 
 	public boolean toServer(final Account account) {
-		return getTo() == null
-			|| getTo().equals(account.getServer())
-			|| getTo().equals(account.getJid().toBareJid())
-			|| getTo().equals(account.getJid());
+		final Jid to = getTo();
+		return to == null
+			|| to.equals(Jid.of(account.getServer()))
+			|| to.equals(account.getJid().asBareJid())
+			|| to.equals(account.getJid());
 	}
 
 	public boolean fromAccount(final Account account) {
-		return getFrom() != null && getFrom().toBareJid().equals(account.getJid().toBareJid());
+		final Jid from = getFrom();
+		return from != null && from.asBareJid().equals(account.getJid().asBareJid());
 	}
 }

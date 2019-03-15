@@ -17,67 +17,84 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.tengu.chat.entities.Conversation;
-import de.tengu.chat.ui.ShareWithActivity;
+import de.tengu.chat.ui.ConversationsActivity;
+import de.tengu.chat.utils.Compatibility;
 
 @TargetApi(Build.VERSION_CODES.M)
 public class ContactChooserTargetService extends ChooserTargetService implements ServiceConnection {
 
-	private final Object lock = new Object();
+    private final Object lock = new Object();
+    private final int MAX_TARGETS = 5;
+    private XmppConnectionService mXmppConnectionService;
 
-	private XmppConnectionService mXmppConnectionService;
+    private static boolean textOnly(IntentFilter filter) {
+        for (int i = 0; i < filter.countDataTypes(); ++i) {
+            if (!"text/plain".equals(filter.getDataType(i))) {
+                return false;
+            }
+        }
+        return true;
+    }
 
-	private final int MAX_TARGETS = 5;
+    @Override
+    public List<ChooserTarget> onGetChooserTargets(ComponentName targetActivityName, IntentFilter matchedFilter) {
+        final ArrayList<ChooserTarget> chooserTargets = new ArrayList<>();
+        if (!EventReceiver.hasEnabledAccounts(this)) {
+            return chooserTargets;
+        }
+        final Intent intent = new Intent(this, XmppConnectionService.class);
+        intent.setAction("contact_chooser");
+        Compatibility.startService(this, intent);
+        bindService(intent, this, Context.BIND_AUTO_CREATE);
+        try {
+            waitForService();
+            final ArrayList<Conversation> conversations = new ArrayList<>();
+            if (!mXmppConnectionService.areMessagesInitialized()) {
+                return chooserTargets;
+            }
+            
+            mXmppConnectionService.populateWithOrderedConversations(conversations, textOnly(matchedFilter));
+            final ComponentName componentName = new ComponentName(this, ConversationsActivity.class);
+            final int pixel = AvatarService.getSystemUiAvatarSize(this);
+            for (Conversation conversation : conversations) {
+                if (conversation.sentMessagesCount() == 0) {
+                    continue;
+                }
+                final String name = conversation.getName().toString();
+                final Icon icon = Icon.createWithBitmap(mXmppConnectionService.getAvatarService().get(conversation, pixel));
+                final float score = 1 - (1.0f / MAX_TARGETS) * chooserTargets.size();
+                final Bundle extras = new Bundle();
+                extras.putString(ConversationsActivity.EXTRA_CONVERSATION, conversation.getUuid());
+                chooserTargets.add(new ChooserTarget(name, icon, score, componentName, extras));
+                if (chooserTargets.size() >= MAX_TARGETS) {
+                    break;
+                }
+            }
+        } catch (InterruptedException e) {
+        }
+        unbindService(this);
+        return chooserTargets;
+    }
 
-	@Override
-	public List<ChooserTarget> onGetChooserTargets(ComponentName targetActivityName, IntentFilter matchedFilter) {
-		Intent intent = new Intent(this, XmppConnectionService.class);
-		intent.setAction("contact_chooser");
-		startService(intent);
-		bindService(intent, this, Context.BIND_AUTO_CREATE);
-		ArrayList<ChooserTarget> chooserTargets = new ArrayList<>();
-		try {
-			waitForService();
-			final ArrayList<Conversation> conversations = new ArrayList<>();
-			if (!mXmppConnectionService.areMessagesInitialized()) {
-				return chooserTargets;
-			}
-			mXmppConnectionService.populateWithOrderedConversations(conversations, false);
-			final ComponentName componentName = new ComponentName(this, ShareWithActivity.class);
-			final int pixel = (int) (48 * getResources().getDisplayMetrics().density);
-			for(int i = 0; i < Math.min(conversations.size(),MAX_TARGETS); ++i) {
-				final Conversation conversation = conversations.get(i);
-				final String name = conversation.getName();
-				final Icon icon = Icon.createWithBitmap(mXmppConnectionService.getAvatarService().get(conversation, pixel));
-				final float score = 1 - (1.0f / MAX_TARGETS) * i;
-				final Bundle extras = new Bundle();
-				extras.putString("uuid", conversation.getUuid());
-				chooserTargets.add(new ChooserTarget(name, icon, score, componentName, extras));
-			}
-		} catch (InterruptedException e) {
-		}
-		unbindService(this);
-		return chooserTargets;
-	}
+    @Override
+    public void onServiceConnected(ComponentName name, IBinder service) {
+        XmppConnectionService.XmppConnectionBinder binder = (XmppConnectionService.XmppConnectionBinder) service;
+        mXmppConnectionService = binder.getService();
+        synchronized (this.lock) {
+            lock.notifyAll();
+        }
+    }
 
-	@Override
-	public void onServiceConnected(ComponentName name, IBinder service) {
-		XmppConnectionService.XmppConnectionBinder binder = (XmppConnectionService.XmppConnectionBinder) service;
-		mXmppConnectionService = binder.getService();
-		synchronized (this.lock) {
-			lock.notifyAll();
-		}
-	}
+    @Override
+    public void onServiceDisconnected(ComponentName name) {
+        mXmppConnectionService = null;
+    }
 
-	@Override
-	public void onServiceDisconnected(ComponentName name) {
-		mXmppConnectionService = null;
-	}
-
-	private void waitForService() throws InterruptedException {
-		if (mXmppConnectionService == null) {
-			synchronized (this.lock) {
-				lock.wait();
-			}
-		}
-	}
+    private void waitForService() throws InterruptedException {
+        if (mXmppConnectionService == null) {
+            synchronized (this.lock) {
+                lock.wait();
+            }
+        }
+    }
 }

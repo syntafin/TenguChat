@@ -9,24 +9,37 @@
                 android:paddingRight="8dp"
                 android:paddingTop="3dp">
 
-    <com.makeramen.roundedimageview.RoundedImageView
-        android:id="@+id/message_photo"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:scaleType="fitXY"
-        android:paddingBottom="3dp"
-        android:src="@drawable/ic_profile"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
+
+
+    <LinearLayout
+        android:id="@+id/message_photo_box"
+        android:orientation="vertical"
         android:layout_alignParentEnd="true"
-        app:riv_corner_radius="2dp" />
+        android:layout_alignParentBottom="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true">
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/message_photo"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:scaleType="fitXY"
+            app:riv_corner_radius="2dp" />
+        <View
+            android:id="@+id/placeholder"
+            android:layout_height="3dp"
+            android:layout_width="48dp"
+        />
+    </LinearLayout>
+
+
 
     <LinearLayout
         android:id="@+id/message_box"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_toLeftOf="@+id/message_photo"
+        android:layout_toLeftOf="@+id/message_photo_box"
         android:background="?attr/message_bubble_sent"
         android:minHeight="53dp"
         android:layout_marginLeft="-4dp"
@@ -55,13 +68,12 @@
                     android:layout_gravity="center_vertical"
                     android:gravity="center_vertical"
                     android:text="@string/sending"
-                    android:textColor="?attr/color_text_secondary"
-                    android:textSize="?attr/TextSizeInfo" />
+                    android:textAppearance="@style/TextAppearance.Conversations.Caption"/>
 
                 <ImageView
                     android:id="@+id/security_indicator"
-                    android:layout_width="?attr/TextSizeInfo"
-                    android:layout_height="?attr/TextSizeInfo"
+                    android:layout_width="?attr/TextSizeCaption"
+                    android:layout_height="?attr/TextSizeCaption"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="4sp"
                     android:alpha="0.54"
@@ -70,8 +82,8 @@
 
                 <ImageView
                     android:id="@+id/edit_indicator"
-                    android:layout_width="?attr/TextSizeInfo"
-                    android:layout_height="?attr/TextSizeInfo"
+                    android:layout_width="?attr/TextSizeCaption"
+                    android:layout_height="?attr/TextSizeCaption"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="4sp"
                     android:alpha="0.54"
@@ -80,8 +92,8 @@
 
                 <ImageView
                     android:id="@+id/indicator_received"
-                    android:layout_width="?attr/TextSizeInfo"
-                    android:layout_height="?attr/TextSizeInfo"
+                    android:layout_width="?attr/TextSizeCaption"
+                    android:layout_height="?attr/TextSizeCaption"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="4sp"
                     android:alpha="0.54"

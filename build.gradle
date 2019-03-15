@@ -2,55 +2,69 @@
 // sub-projects/modules.
 buildscript {
     repositories {
+        google()
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.3'
+        classpath 'com.android.tools.build:gradle:3.3.2'
     }
 }
 
 apply plugin: 'com.android.application'
 
 repositories {
+    google()
     jcenter()
     mavenCentral()
-    maven {
-        url 'https://maven.google.com'
-    }
 }
 
 configurations {
-    playstoreCompile
-    freeCompile
+    playstoreImplementation
+    compatImplementation
+    conversationsFreeCompatImplementation
+    quicksyFreeCompatImplementation
+    quicksyImplementation
 }
 
 ext {
-    supportLibVersion = '26.1.0'
+    supportLibVersion = '28.0.0'
 }
 
 dependencies {
-    compile project(':libs:MemorizingTrustManager')
-    playstoreCompile 'com.google.android.gms:play-services-gcm:11.0.4'
-    compile 'org.sufficientlysecure:openpgp-api:10.0'
-    compile 'com.soundcloud.android:android-crop:1.0.1@aar'
-    compile "com.android.support:support-v13:$supportLibVersion"
-    compile "com.android.support:appcompat-v7:$supportLibVersion"
-    compile "com.android.support:support-emoji:$supportLibVersion"
-    freeCompile "com.android.support:support-emoji-bundled:$supportLibVersion"
-    compile 'org.bouncycastle:bcprov-jdk15on:1.52'
-    compile 'org.bouncycastle:bcmail-jdk15on:1.52'
-    compile 'org.jitsi:org.otr4j:0.22'
-    compile 'org.gnu.inet:libidn:1.15'
-    compile 'com.google.zxing:core:3.2.1'
-    compile 'com.google.zxing:android-integration:3.2.1'
-    compile 'de.measite.minidns:minidns-hla:0.2.4'
-    compile 'de.timroes.android:EnhancedListView:0.3.4'
-    compile 'me.leolin:ShortcutBadger:1.1.17@aar'
-    compile 'com.kyleduo.switchbutton:library:1.2.8'
-    compile 'org.whispersystems:signal-protocol-java:2.6.2'
-    compile 'com.makeramen:roundedimageview:2.3.0'
-    compile "com.wefika:flowlayout:0.4.1"
-    compile 'net.ypresto.androidtranscoder:android-transcoder:0.2.0'
+    playstoreImplementation('com.google.firebase:firebase-messaging:17.3.4') {
+        exclude group: 'com.google.firebase', module: 'firebase-core'
+        exclude group: 'com.google.firebase', module: 'firebase-analytics'
+        exclude group: 'com.google.firebase', module: 'firebase-measurement-connector'
+    }
+    implementation 'org.sufficientlysecure:openpgp-api:10.0'
+    implementation ('com.theartofdev.edmodo:android-image-cropper:2.7.+') {
+        exclude group: 'com.android.support', module: 'appcompat-v7'
+        exclude group: 'com.android.support', module: 'exifinterface'
+    }
+    implementation "com.android.support:support-v13:$supportLibVersion"
+    implementation "com.android.support:appcompat-v7:$supportLibVersion"
+    implementation "com.android.support:exifinterface:$supportLibVersion"
+    implementation "com.android.support:cardview-v7:$supportLibVersion"
+    implementation "com.android.support:support-emoji:$supportLibVersion"
+    implementation "com.android.support:design:$supportLibVersion"
+    compatImplementation "com.android.support:support-emoji-appcompat:$supportLibVersion"
+    conversationsFreeCompatImplementation "com.android.support:support-emoji-bundled:$supportLibVersion"
+    quicksyFreeCompatImplementation "com.android.support:support-emoji-bundled:$supportLibVersion"
+    implementation 'org.bouncycastle:bcmail-jdk15on:1.58'
+    implementation 'com.google.zxing:core:3.3.3'
+    implementation 'de.measite.minidns:minidns-hla:0.2.4'
+    implementation 'me.leolin:ShortcutBadger:1.1.22@aar'
+    implementation 'org.whispersystems:signal-protocol-java:2.6.2'
+    implementation 'com.makeramen:roundedimageview:2.3.0'
+    implementation "com.wefika:flowlayout:0.4.1"
+    implementation 'net.ypresto.androidtranscoder:android-transcoder:0.3.0'
+    implementation project(':libs:xmpp-addr')
+    implementation 'org.osmdroid:osmdroid-android:6.0.3'
+    implementation 'org.hsluv:hsluv:0.2'
+    implementation 'org.conscrypt:conscrypt-android:1.3.0'
+    implementation 'me.drakeet.support:toastcompat:1.1.0'
+    implementation "com.leinardi.android:speed-dial:2.0.1"
+    quicksyImplementation 'io.michaelrocks:libphonenumber-android:8.10.1'
 }
 
 ext {
@@ -59,16 +73,22 @@ ext {
 }
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion "26.0.2"
+    compileSdkVersion 28
 
     defaultConfig {
-        minSdkVersion 14
-        targetSdkVersion 25
-        versionCode 236
-        versionName "1.21.0"
+        minSdkVersion 16
+        targetSdkVersion 28
+        versionCode 321
+        versionName "2.4.1"
         archivesBaseName += "-$versionName"
         applicationId "de.tengu.chat"
+        resValue "string", "applicationId", applicationId
+        resValue "string", "app_name", "TenguChat"
+        buildConfigField "String", "LOGTAG", "\"conversations\""
+    }
+
+    dataBinding {
+        enabled true
     }
 
     dexOptions {
@@ -78,33 +98,119 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_7
-        targetCompatibility JavaVersion.VERSION_1_7
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 
+    flavorDimensions("mode", "distribution", "emoji")
+
     productFlavors {
-        playstore
-        free
+
+        quicksy {
+            dimension "mode"
+            applicationId = "im.quicksy.client"
+            resValue "string", "app_name", "Quicksy"
+            resValue "string", "applicationId", applicationId
+            buildConfigField "String", "LOGTAG", "\"quicksy\""
+        }
+
+        conversations {
+            dimension "mode"
+        }
+
+        playstore {
+            dimension "distribution"
+            versionNameSuffix "+p"
+        }
+        free {
+            dimension "distribution"
+            versionNameSuffix "+f"
+        }
+        system {
+            dimension "emoji"
+            versionNameSuffix "s"
+        }
+        compat {
+            dimension "emoji"
+            versionNameSuffix "c"
+        }
     }
-    if (project.hasProperty('mStoreFile') &&
-            project.hasProperty('mStorePassword') &&
-            project.hasProperty('mKeyAlias') &&
-            project.hasProperty('mKeyPassword')) {
+
+    sourceSets {
+        quicksyFreeCompat {
+            java {
+                srcDirs 'src/freeCompat/java'
+            }
+        }
+        quicksyPlaystoreCompat {
+            java {
+                srcDirs 'src/playstoreCompat/java'
+            }
+            res {
+                srcDir 'src/playstoreCompat/res'
+                srcDir 'src/quicksyPlaystore/res'
+            }
+        }
+        quicksyPlaystoreSystem {
+            res {
+                srcDir 'src/quicksyPlaystore/res'
+            }
+        }
+        conversationsFreeCompat {
+            java {
+                srcDirs 'src/freeCompat/java'
+            }
+        }
+        conversationsPlaystoreCompat {
+            java {
+                srcDirs 'src/playstoreCompat/java'
+            }
+            res {
+                srcDir 'src/playstoreCompat/res'
+                srcDir 'src/conversationsPlaystore/res'
+            }
+        }
+        conversationsPlaystoreSystem {
+            res {
+                srcDir 'src/conversationsPlaystore/res'
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            shrinkResources true
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            versionNameSuffix "r"
+        }
+        debug {
+            shrinkResources true
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            versionNameSuffix "d"
+        }
+    }
+
+
+
+    if (new File("signing.properties").exists()) {
+        Properties props = new Properties()
+        props.load(new FileInputStream(file("signing.properties")))
+
         signingConfigs {
             release {
-                storeFile file(mStoreFile)
-                storePassword mStorePassword
-                keyAlias mKeyAlias
-                keyPassword mKeyPassword
+                storeFile file(props['keystore'])
+                storePassword props['keystore.password']
+                keyAlias props['keystore.alias']
+                keyPassword props['keystore.password']
             }
         }
         buildTypes.release.signingConfig = signingConfigs.release
-    } else {
-        buildTypes.release.signingConfig = null
     }
 
     lintOptions {
-        disable 'MissingTranslation', 'InvalidPackage', 'MissingQuantity', 'AppCompatResource'
+        disable 'ExtraTranslation', 'MissingTranslation', 'InvalidPackage', 'MissingQuantity', 'AppCompatResource'
     }
 
     subprojects {

@@ -1,6 +1,7 @@
 package de.tengu.chat.ui.widget;
 
-import android.support.text.emoji.widget.EmojiEditText;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v13.view.inputmethod.EditorInfoCompat;
 import android.support.v13.view.inputmethod.InputConnectionCompat;
 import android.support.v13.view.inputmethod.InputContentInfoCompat;
@@ -11,6 +12,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
 import android.text.InputFilter;
+import android.text.InputType;
 import android.text.Spanned;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
@@ -18,26 +20,16 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputConnection;
 
 import de.tengu.chat.Config;
+import de.tengu.chat.R;
 
-public class EditMessage extends EmojiEditText {
+public class EditMessage extends EmojiWrapperEditText {
 
-	public interface OnCommitContentListener {
-		boolean onCommitContent(InputContentInfoCompat inputContentInfo, int flags, Bundle opts, String[] mimeTypes);
-	}
-
+	private static final InputFilter SPAN_FILTER = (source, start, end, dest, dstart, dend) -> source instanceof Spanned ? source.toString() : source;
+	protected Handler mTypingHandler = new Handler();
+	protected KeyboardListener keyboardListener;
 	private OnCommitContentListener mCommitContentListener = null;
 	private String[] mimeTypes = null;
-
-	public EditMessage(Context context, AttributeSet attrs) {
-		super(context, attrs);
-	}
-
-	public EditMessage(Context context) {
-		super(context);
-	}
-
-	protected Handler mTypingHandler = new Handler();
-
+	private boolean isUserTyping = false;
 	protected Runnable mTypingTimeout = new Runnable() {
 		@Override
 		public void run() {
@@ -47,12 +39,15 @@ public class EditMessage extends EmojiEditText {
 			}
 		}
 	};
-
-	private boolean isUserTyping = false;
-
 	private boolean lastInputWasTab = false;
 
-	protected KeyboardListener keyboardListener;
+	public EditMessage(Context context, AttributeSet attrs) {
+		super(context, attrs);
+	}
+
+	public EditMessage(Context context) {
+		super(context);
+	}
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent e) {
@@ -73,8 +68,13 @@ public class EditMessage extends EmojiEditText {
 	}
 
 	@Override
+	public int getAutofillType() {
+		return AUTOFILL_TYPE_NONE;
+	}
+
+	@Override
 	public void onTextChanged(CharSequence text, int start, int lengthBefore, int lengthAfter) {
-		super.onTextChanged(text,start,lengthBefore,lengthAfter);
+		super.onTextChanged(text, start, lengthBefore, lengthAfter);
 		lastInputWasTab = false;
 		if (this.mTypingHandler != null && this.keyboardListener != null) {
 			this.mTypingHandler.removeCallbacks(mTypingTimeout);
@@ -97,23 +97,6 @@ public class EditMessage extends EmojiEditText {
 			this.isUserTyping = false;
 		}
 	}
-
-	public interface KeyboardListener {
-		boolean onEnterPressed();
-		void onTypingStarted();
-		void onTypingStopped();
-		void onTextDeleted();
-		void onTextChanged();
-		boolean onTabPressed(boolean repeated);
-	}
-
-	private static final InputFilter SPAN_FILTER = new InputFilter() {
-
-		@Override
-		public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
-			return source instanceof Spanned ? source.toString() : source;
-		}
-	};
 
 	@Override
 	public boolean onTextContextMenuItem(int id) {
@@ -145,21 +128,67 @@ public class EditMessage extends EmojiEditText {
 		this.mCommitContentListener = listener;
 	}
 
+	public void insertAsQuote(String text) {
+		text = text.replaceAll("(\n *){2,}", "\n").replaceAll("(^|\n)", "$1> ").replaceAll("\n$", "");
+		Editable editable = getEditableText();
+		int position = getSelectionEnd();
+		if (position == -1) position = editable.length();
+		if (position > 0 && editable.charAt(position - 1) != '\n') {
+			editable.insert(position++, "\n");
+		}
+		editable.insert(position, text);
+		position += text.length();
+		editable.insert(position++, "\n");
+		if (position < editable.length() && editable.charAt(position) != '\n') {
+			editable.insert(position, "\n");
+		}
+		setSelection(position);
+	}
+
 	@Override
 	public InputConnection onCreateInputConnection(EditorInfo editorInfo) {
 		final InputConnection ic = super.onCreateInputConnection(editorInfo);
 
-		if (mimeTypes != null && mCommitContentListener != null) {
+		if (mimeTypes != null && mCommitContentListener != null && ic != null) {
 			EditorInfoCompat.setContentMimeTypes(editorInfo, mimeTypes);
-			return InputConnectionCompat.createWrapper(ic, editorInfo, new InputConnectionCompat.OnCommitContentListener() {
-				@Override
-				public boolean onCommitContent(InputContentInfoCompat inputContentInfo, int flags, Bundle opts) {
-					return EditMessage.this.mCommitContentListener.onCommitContent(inputContentInfo, flags, opts, mimeTypes);
-				}
-			});
-		}
-		else {
+			return InputConnectionCompat.createWrapper(ic, editorInfo, (inputContentInfo, flags, opts) -> EditMessage.this.mCommitContentListener.onCommitContent(inputContentInfo, flags, opts, mimeTypes));
+		} else {
 			return ic;
 		}
+	}
+
+	public void refreshIme() {
+		SharedPreferences p = PreferenceManager.getDefaultSharedPreferences(getContext());
+		final boolean usingEnterKey = p.getBoolean("display_enter_key", getResources().getBoolean(R.bool.display_enter_key));
+		final boolean enterIsSend = p.getBoolean("enter_is_send", getResources().getBoolean(R.bool.enter_is_send));
+
+		if (usingEnterKey && enterIsSend) {
+			setInputType(getInputType() & (~InputType.TYPE_TEXT_FLAG_MULTI_LINE));
+			setInputType(getInputType() & (~InputType.TYPE_TEXT_VARIATION_SHORT_MESSAGE));
+		} else if (usingEnterKey) {
+			setInputType(getInputType() | InputType.TYPE_TEXT_FLAG_MULTI_LINE);
+			setInputType(getInputType() & (~InputType.TYPE_TEXT_VARIATION_SHORT_MESSAGE));
+		} else {
+			setInputType(getInputType() | InputType.TYPE_TEXT_FLAG_MULTI_LINE);
+			setInputType(getInputType() | InputType.TYPE_TEXT_VARIATION_SHORT_MESSAGE);
+		}
+	}
+
+	public interface OnCommitContentListener {
+		boolean onCommitContent(InputContentInfoCompat inputContentInfo, int flags, Bundle opts, String[] mimeTypes);
+	}
+
+	public interface KeyboardListener {
+		boolean onEnterPressed();
+
+		void onTypingStarted();
+
+		void onTypingStopped();
+
+		void onTextDeleted();
+
+		void onTextChanged();
+
+		boolean onTabPressed(boolean repeated);
 	}
 }

@@ -16,7 +16,6 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:scaleType="fitXY"
-        android:src="@drawable/ic_profile"
         app:riv_corner_radius="2dp" />
 
     <LinearLayout
@@ -54,14 +53,12 @@
                     android:layout_gravity="center_vertical"
                     android:gravity="center_vertical"
                     android:layout_marginRight="4sp"
-                    android:textColor="@color/white70"
-                    android:textStyle="bold"
-                    android:textSize="?attr/TextSizeInfo" />
+                    android:textAppearance="@style/TextAppearance.Conversations.Caption.OnDark.Bold"/>
 
                 <ImageView
                     android:id="@+id/security_indicator"
-                    android:layout_width="?attr/TextSizeInfo"
-                    android:layout_height="?attr/TextSizeInfo"
+                    android:layout_width="?attr/TextSizeCaption"
+                    android:layout_height="?attr/TextSizeCaption"
                     android:layout_gravity="center_vertical"
                     android:layout_marginRight="4sp"
                     android:alpha="0.70"
@@ -70,8 +67,8 @@
 
                 <ImageView
                     android:id="@+id/edit_indicator"
-                    android:layout_width="?attr/TextSizeInfo"
-                    android:layout_height="?attr/TextSizeInfo"
+                    android:layout_width="?attr/TextSizeCaption"
+                    android:layout_height="?attr/TextSizeCaption"
                     android:layout_gravity="center_vertical"
                     android:layout_marginRight="4sp"
                     android:alpha="0.70"
@@ -85,8 +82,7 @@
                     android:layout_gravity="center_vertical"
                     android:gravity="center_vertical"
                     android:text="@string/sending"
-                    android:textColor="@color/white70"
-                    android:textSize="?attr/TextSizeInfo" />
+                    android:textAppearance="@style/TextAppearance.Conversations.Caption"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

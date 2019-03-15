@@ -1,11 +1,14 @@
 package de.tengu.chat.generator;
 
+import android.text.TextUtils;
+
 import de.tengu.chat.entities.Account;
 import de.tengu.chat.entities.Contact;
 import de.tengu.chat.entities.MucOptions;
 import de.tengu.chat.entities.Presence;
 import de.tengu.chat.services.XmppConnectionService;
 import de.tengu.chat.xml.Element;
+import de.tengu.chat.xml.Namespace;
 import de.tengu.chat.xmpp.stanzas.PresencePacket;
 
 public class PresenceGenerator extends AbstractGenerator {
@@ -18,12 +21,17 @@ public class PresenceGenerator extends AbstractGenerator {
 		PresencePacket packet = new PresencePacket();
 		packet.setAttribute("type", type);
 		packet.setTo(contact.getJid());
-		packet.setFrom(contact.getAccount().getJid().toBareJid());
+		packet.setFrom(contact.getAccount().getJid().asBareJid());
 		return packet;
 	}
 
 	public PresencePacket requestPresenceUpdatesFrom(Contact contact) {
-		return subscription("subscribe", contact);
+		PresencePacket packet = subscription("subscribe", contact);
+		String displayName = contact.getAccount().getDisplayName();
+		if (!TextUtils.isEmpty(displayName)) {
+			packet.addChild("nick",Namespace.NICK).setContent(displayName);
+		}
+		return packet;
 	}
 
 	public PresencePacket stopPresenceUpdatesFrom(Contact contact) {
@@ -48,11 +56,11 @@ public class PresenceGenerator extends AbstractGenerator {
 			packet.addChild("show").setContent(status.toShowString());
 		}
 		packet.setFrom(account.getJid());
-		String sig = account.getPgpSignature();
+		final String sig = account.getPgpSignature();
 		if (includePgpAnnouncement && sig != null && mXmppConnectionService.getPgpEngine() != null) {
 			packet.addChild("x", "jabber:x:signed").setContent(sig);
 		}
-		String capHash = getCapHash();
+		final String capHash = getCapHash(account);
 		if (capHash != null) {
 			Element cap = packet.addChild("c",
 					"http://jabber.org/protocol/caps");

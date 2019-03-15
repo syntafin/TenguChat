@@ -16,21 +16,27 @@
 package de.tengu.chat.utils;
 import android.content.Context;
 import android.net.Uri;
+import android.util.Log;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
+
+import de.tengu.chat.Config;
+import de.tengu.chat.entities.Transferable;
+
 /**
  * Utilities for dealing with MIME types.
  * Used to implement java.net.URLConnection and android.webkit.MimeTypeMap.
  */
 public final class MimeUtils {
-    private static final Map<String, String> mimeTypeToExtensionMap = new HashMap<String, String>();
-    private static final Map<String, String> extensionToMimeTypeMap = new HashMap<String, String>();
+    private static final Map<String, String> mimeTypeToExtensionMap = new HashMap<>();
+    private static final Map<String, String> extensionToMimeTypeMap = new HashMap<>();
     static {
         // The following table is based on /etc/mime.types data minus
         // chemical/* MIME types and MIME types that don't map to any
@@ -45,13 +51,13 @@ public final class MimeUtils {
         // by guessExtensionFromMimeType.
         add("application/andrew-inset", "ez");
         add("application/dsptype", "tsp");
+        add("application/epub+zip","epub");
         add("application/hta", "hta");
         add("application/mac-binhex40", "hqx");
         add("application/mathematica", "nb");
         add("application/msaccess", "mdb");
         add("application/oda", "oda");
         add("application/ogg", "ogg");
-        add("application/ogg", "oga");
         add("application/pdf", "pdf");
         add("application/pgp-keys", "key");
         add("application/pgp-signature", "pgp");
@@ -61,6 +67,9 @@ public final class MimeUtils {
         add("application/rdf+xml", "rdf");
         add("application/rss+xml", "rss");
         add("application/zip", "zip");
+        add("application/vnd.amazon.mobi8-ebook","azw3");
+        add("application/vnd.amazon.mobi8-ebook","azw");
+        add("application/vnd.amazon.mobi8-ebook","kfx");
         add("application/vnd.android.package-archive", "apk");
         add("application/vnd.cinderella", "cdy");
         add("application/vnd.ms-pki.stl", "stl");
@@ -172,6 +181,7 @@ public final class MimeUtils {
         add("application/x-maker", "book");
         add("application/x-maker", "fbdoc");
         add("application/x-mif", "mif");
+        add("application/x-mobipocket-ebook","mobi");
         add("application/x-ms-wmd", "wmd");
         add("application/x-ms-wmz", "wmz");
         add("application/x-msi", "msi");
@@ -230,6 +240,7 @@ public final class MimeUtils {
         add("audio/mpeg", "mp2");
         add("audio/mpeg", "m4a");
         add("audio/mpegurl", "m3u");
+        add("audio/ogg","oga");
         add("audio/prs.sid", "sid");
         add("audio/x-aiff", "aif");
         add("audio/x-aiff", "aiff");
@@ -351,6 +362,7 @@ public final class MimeUtils {
         add("video/fli", "fli");
         add("video/m4v", "m4v");
         add("video/mp2ts", "ts");
+        add("video/ogg","ogv");
         add("video/mpeg", "mpeg");
         add("video/mpeg", "mpg");
         add("video/mpeg", "mpe");
@@ -485,7 +497,20 @@ public final class MimeUtils {
         if (mimeType == null || mimeType.isEmpty()) {
             return null;
         }
-        return mimeTypeToExtensionMap.get(mimeType);
+        return mimeTypeToExtensionMap.get(mimeType.split(";")[0]);
+    }
+
+    public static String guessMimeTypeFromUriAndMime(final Context context, final Uri uri, final String mime) {
+        Log.d(Config.LOGTAG,"guessMimeTypeFromUriAndMime "+uri+" and mime="+mime);
+        if (mime == null || mime.equals("application/octet-stream")) {
+            final String guess = guessMimeTypeFromUri(context, uri);
+            if (guess != null) {
+                return guess;
+            } else {
+                return mime;
+            }
+        }
+        return guessMimeTypeFromUri(context ,uri);
     }
 
     public static String guessMimeTypeFromUri(Context context, Uri uri) {
@@ -497,11 +522,14 @@ public final class MimeUtils {
             mimeType = null;
         }
         // try the extension
-        if (mimeType == null && uri.getPath() != null) {
+        if ((mimeType == null || mimeType.equals("application/octet-stream")) && uri.getPath() != null) {
             String path = uri.getPath();
             int start = path.lastIndexOf('.') + 1;
             if (start < path.length()) {
-                mimeType = MimeUtils.guessMimeTypeFromExtension(path.substring(start));
+                final String guess = MimeUtils.guessMimeTypeFromExtension(path.substring(start));
+                if (guess != null) {
+                    mimeType = guess;
+                }
             }
         }
         // sometimes this works (as with the commit content api)
@@ -509,5 +537,34 @@ public final class MimeUtils {
             mimeType = uri.getQueryParameter("mimeType");
         }
         return mimeType;
+    }
+
+    public static String extractRelevantExtension(URL url) {
+        String path = url.getPath();
+        return extractRelevantExtension(path, true);
+    }
+
+    public static String extractRelevantExtension(final String path) {
+        return extractRelevantExtension(path, false);
+    }
+
+    public static String extractRelevantExtension(final String path, final boolean ignoreCryptoExtension) {
+        if (path == null || path.isEmpty()) {
+            return null;
+        }
+
+        String filename = path.substring(path.lastIndexOf('/') + 1).toLowerCase();
+        int dotPosition = filename.lastIndexOf(".");
+
+        if (dotPosition != -1) {
+            String extension = filename.substring(dotPosition + 1);
+            // we want the real file extension, not the crypto one
+            if (ignoreCryptoExtension && Transferable.VALID_CRYPTO_EXTENSIONS.contains(extension)) {
+                return extractRelevantExtension(filename.substring(0,dotPosition));
+            } else {
+                return extension;
+            }
+        }
+        return null;
     }
 }

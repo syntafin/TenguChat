@@ -1,8 +1,42 @@
+/*
+ * Copyright (c) 2017, Daniel Gultsch All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification,
+ * are permitted provided that the following conditions are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright notice, this
+ * list of conditions and the following disclaimer.
+ *
+ * 2. Redistributions in binary form must reproduce the above copyright notice,
+ * this list of conditions and the following disclaimer in the documentation and/or
+ * other materials provided with the distribution.
+ *
+ * 3. Neither the name of the copyright holder nor the names of its contributors
+ * may be used to endorse or promote products derived from this software without
+ * specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR
+ * ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+ * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
 package de.tengu.chat.utils;
+
+import android.util.LruCache;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class Emoticons {
 
@@ -41,11 +75,15 @@ public class Emoticons {
 			ENCLOSED_IDEOGRAPHIC_SUPPLEMENT,
 			MISC_TECHNICAL);
 
+	private static final int MAX_EMOIJS = 42;
+
 	private static final int ZWJ = 0x200D;
 	private static final int VARIATION_16 = 0xFE0F;
 	private static final int COMBINING_ENCLOSING_KEYCAP = 0x20E3;
 	private static final int BLACK_FLAG = 0x1F3F4;
 	private static final UnicodeRange FITZPATRICK = new UnicodeRange(0x1F3FB,0x1F3FF);
+
+	private static final LruCache<CharSequence,Pattern> CACHE = new LruCache<>(256);
 
 	private static List<Symbol> parse(String input) {
 		List<Symbol> symbols = new ArrayList<>();
@@ -69,25 +107,94 @@ public class Emoticons {
 		return symbols;
 	}
 
+	public static Pattern getEmojiPattern(CharSequence input) {
+		Pattern pattern = CACHE.get(input);
+		if (pattern == null) {
+			pattern = generatePattern(input);
+			CACHE.put(input, pattern);
+		}
+		return pattern;
+	}
+
+	private static Pattern generatePattern(CharSequence input) {
+		final HashSet<String> emojis = new HashSet<>();
+		int i = 0;
+		for(Symbol symbol : parse(input.toString())) {
+			if (symbol instanceof Emoji) {
+				emojis.add(symbol.toString());
+				if (++i >= MAX_EMOIJS) {
+					return Pattern.compile("");
+				}
+			}
+		}
+		final StringBuilder pattern = new StringBuilder();
+		for(String emoji : emojis) {
+			if (pattern.length() != 0) {
+				pattern.append('|');
+			}
+			pattern.append(Pattern.quote(emoji));
+		}
+		return Pattern.compile(pattern.toString());
+	}
+
 	public static boolean isEmoji(String input) {
 		List<Symbol> symbols = parse(input);
-		return symbols.size() == 1 && symbols.get(0) == Symbol.EMOJI;
+		return symbols.size() == 1 && symbols.get(0).isEmoji();
 	}
 
 	public static boolean isOnlyEmoji(String input) {
 		List<Symbol> symbols = parse(input);
 		for(Symbol symbol : symbols) {
-			if (symbol == Symbol.NON_EMOJI) {
+			if (!symbol.isEmoji()) {
 				return false;
 			}
 		}
 		return symbols.size() > 0;
 	}
 
-	private enum Symbol {
-		EMOJI, NON_EMOJI
+	private static abstract class Symbol {
+
+		private final String value;
+
+		public Symbol(List<Integer> codepoints) {
+			StringBuilder builder = new StringBuilder();
+			for(Integer codepoint : codepoints) {
+				builder.appendCodePoint(codepoint);
+			}
+			this.value = builder.toString();
+		}
+
+		abstract boolean isEmoji();
+
+		@Override
+		public String toString() {
+			return value;
+		}
 	}
 
+	public static class Emoji extends Symbol {
+
+		public Emoji(List<Integer> codepoints) {
+			super(codepoints);
+		}
+
+		@Override
+		boolean isEmoji() {
+			return true;
+		}
+	}
+
+	public static class Other extends Symbol {
+
+		public Other(List<Integer> codepoints) {
+			super(codepoints);
+		}
+
+		@Override
+		boolean isEmoji() {
+			return false;
+		}
+	}
 
 	private static class Builder {
 		private final List<Integer> codepoints = new ArrayList<>();
@@ -139,11 +246,11 @@ public class Emoticons {
 
 		public Symbol build() {
 			if (codepoints.size() > 0 && SYMBOLIZE.contains(codepoints.get(codepoints.size() - 1))) {
-				return Symbol.NON_EMOJI;
+				return new Other(codepoints);
 			} else if (codepoints.size() > 1 && KEYCAP_COMBINEABLE.contains(codepoints.get(0)) && codepoints.get(codepoints.size() - 1) != COMBINING_ENCLOSING_KEYCAP) {
-				return Symbol.NON_EMOJI;
+				return new Other(codepoints);
 			}
-			return codepoints.size() == 0 ? Symbol.NON_EMOJI : Symbol.EMOJI;
+			return codepoints.size() == 0 ? new Other(codepoints): new Emoji(codepoints);
 		}
 	}
 

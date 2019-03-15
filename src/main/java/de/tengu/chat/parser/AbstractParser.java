@@ -1,8 +1,11 @@
 package de.tengu.chat.parser;
 
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import de.tengu.chat.entities.Account;
@@ -11,9 +14,9 @@ import de.tengu.chat.entities.Conversation;
 import de.tengu.chat.entities.MucOptions;
 import de.tengu.chat.services.XmppConnectionService;
 import de.tengu.chat.xml.Element;
-import de.tengu.chat.xmpp.jid.InvalidJidException;
-import de.tengu.chat.xmpp.jid.Jid;
+import de.tengu.chat.xmpp.InvalidJid;
 import de.tengu.chat.xmpp.stanzas.AbstractStanza;
+import rocks.xmpp.addr.Jid;
 
 public abstract class AbstractParser {
 
@@ -38,8 +41,8 @@ public abstract class AbstractParser {
 		}
 		for(Element child : element.getChildren()) {
 			if ("delay".equals(child.getName()) && "urn:xmpp:delay".equals(child.getNamespace())) {
-				final Jid f = to == null ? null : child.getAttributeAsJid("from");
-				if (f != null && (to.toBareJid().equals(f) || to.getDomainpart().equals(f.toString()))) {
+				final Jid f = to == null ? null : InvalidJid.getNullForInvalid(child.getAttributeAsJid("from"));
+				if (f != null && (to.asBareJid().equals(f) || to.getDomain().equals(f.toString()))) {
 					continue;
 				}
 				final String stamp = child.getAttribute("stamp");
@@ -47,7 +50,7 @@ public abstract class AbstractParser {
 					try {
 						min = Math.min(min,AbstractParser.parseTimestamp(stamp));
 						returnDefault = false;
-					} catch (ParseException e) {
+					} catch (Throwable t) {
 						//ignore
 					}
 				}
@@ -86,7 +89,7 @@ public abstract class AbstractParser {
 
 	protected void updateLastseen(final Account account, final Jid from) {
 		final Contact contact = account.getRoster().getContact(from);
-		contact.setLastResource(from.isBareJid() ? "" : from.getResourcepart());
+		contact.setLastResource(from.isBareJid() ? "" : from.getResource());
 	}
 
 	protected String avatarData(Element items) {
@@ -102,21 +105,23 @@ public abstract class AbstractParser {
 	}
 
 	public static MucOptions.User parseItem(Conversation conference, Element item, Jid fullJid) {
-		final String local = conference.getJid().getLocalpart();
-		final String domain = conference.getJid().getDomainpart();
+		final String local = conference.getJid().getLocal();
+		final String domain = conference.getJid().getDomain();
 		String affiliation = item.getAttribute("affiliation");
 		String role = item.getAttribute("role");
 		String nick = item.getAttribute("nick");
 		if (nick != null && fullJid == null) {
 			try {
-				fullJid = Jid.fromParts(local, domain, nick);
-			} catch (InvalidJidException e) {
+				fullJid = Jid.of(local, domain, nick);
+			} catch (IllegalArgumentException e) {
 				fullJid = null;
 			}
 		}
 		Jid realJid = item.getAttributeAsJid("jid");
 		MucOptions.User user = new MucOptions.User(conference.getMucOptions(), fullJid);
-		user.setRealJid(realJid);
+		if (InvalidJid.isValid(realJid)) {
+			user.setRealJid(realJid);
+		}
 		user.setAffiliation(affiliation);
 		user.setRole(role);
 		return user;
@@ -125,14 +130,36 @@ public abstract class AbstractParser {
 	public static String extractErrorMessage(Element packet) {
 		final Element error = packet.findChild("error");
 		if (error != null && error.getChildren().size() > 0) {
+			final List<String> errorNames = orderedElementNames(error.getChildren());
 			final String text = error.findChildContent("text");
 			if (text != null && !text.trim().isEmpty()) {
-				return text;
-			} else {
-				return error.getChildren().get(0).getName().replace("-"," ");
+				return prefixError(errorNames)+text;
+			} else if (errorNames.size() > 0){
+				return prefixError(errorNames)+errorNames.get(0).replace("-"," ");
 			}
-		} else {
-			return null;
 		}
+		return null;
+	}
+
+	private static String prefixError(List<String> errorNames) {
+		if (errorNames.size() > 0) {
+			return errorNames.get(0)+'\u001f';
+		}
+		return "";
+	}
+
+	private static List<String> orderedElementNames(List<Element> children) {
+		List<String> names = new ArrayList<>();
+		for(Element child : children) {
+			final String name = child.getName();
+			if (name != null && !name.equals("text")) {
+				if ("urn:ietf:params:xml:ns:xmpp-stanzas".equals(child.getNamespace())) {
+					names.add(name);
+				} else {
+					names.add(0, name);
+				}
+			}
+		}
+		return names;
 	}
 }
