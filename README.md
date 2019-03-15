@@ -1,18 +1,15 @@
-<h1 align="center">Conversations</h1>
+<h1 align="center">TenguChat</h1>
 
 <p align="center">Conversations: the very last word in instant messaging</p>
 
 <p align="center">
-    <a href="https://conversations.im/j/conversations@conference.siacs.eu">
-        <img src="https://inverse.chat/badge.svg?room=conversations@conference.siacs.eu"
+    <a href="xmpp://support@group.tengu.chat">
+        <img src="https://inverse.chat/badge.svg?room=support@group.tengu.chat"
              alt="chat on our conference room">
     </a>
     <a href="https://travis-ci.org/siacs/Conversations">
         <img src="https://travis-ci.org/siacs/Conversations.svg?branch=master"
              alt="build status">
-    </a>
-    <a href="https://bountysource.com/teams/siacs">
-        <img src="https://api.bountysource.com/badge/tracker?tracker_id=519483" alt="Bountysource">
     </a>
 </p>
 
@@ -20,11 +17,7 @@
     <a href="https://play.google.com/store/apps/details?id=de.tengu.chat&amp;referrer=utm_source%3Dgithub">
        <img src="https://conversations.im/images/en-play-badge.png"
             alt="Google Play">
-            </a>
-    <a href="http://www.amazon.com/dp/B00WD35AAC/">
-        <img src="https://images-na.ssl-images-amazon.com/images/G/01/AmazonMobileApps/amazon-apps-store-us-black.png"
-             alt="Amazon App Store">
-    </a>
+        </a>
 </p>
 
 ![screenshots](https://raw.githubusercontent.com/siacs/Conversations/master/screenshots.png)
