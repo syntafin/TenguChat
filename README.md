@@ -1,6 +1,6 @@
 <h1 align="center">TenguChat</h1>
 
-<p align="center">Conversations: the very last word in instant messaging</p>
+<p align="center">TenguChat: A new way of messaging</p>
 
 <p align="center">
     <a href="xmpp://support@group.tengu.chat">
