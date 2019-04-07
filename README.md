@@ -79,7 +79,7 @@ run your own XMPP server for you and your friends. These XEP's are:
 
 ### General
 
-#### How do I install Conversations?
+#### How do I install TenguChat?
 
 Conversations is entirely open source and licensed under GPLv3. So if you are a
 software developer you can check out the sources from GitHub and use Gradle to

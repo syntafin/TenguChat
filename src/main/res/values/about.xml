@@ -30,8 +30,8 @@
 
 <resources>
     <string name="pref_about_message" translatable="false">
-			Conversations • the very last word in instant messaging.
-			\n\nCopyright © 2014-2019 Daniel Gultsch
+			TenguChat • secure and free messenger.
+			\n\nCopyright © 2016-2019 TenguApps/Syntafin
 			\n\nThis program is free software: you can redistribute it and/or modify
 			it under the terms of the GNU General Public License as published by
 			the Free Software Foundation, either version 3 of the License, or
@@ -42,7 +42,7 @@
 			GNU General Public License for more details.
 			\n\nYou should have received a copy of the GNU General Public License
 			along with this program. If not, see https://www.gnu.org/licenses
-			\n\nDownload the full source code at https://github.com/siacs/Conversations
+			\n\nDownload the full source code at https://github.com/syntafin/TenguChat
 			\n\n\nLibraries
 			\n\nhttps://github.com/ypresto/android-transcoder\n(Apache License, Version 2.0)
 			\n\nhttps://www.bouncycastle.org\n(The MIT License (MIT))

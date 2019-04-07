@@ -78,8 +78,8 @@ android {
     defaultConfig {
         minSdkVersion 16
         targetSdkVersion 28
-        versionCode 321
-        versionName "2.4.1"
+        versionCode 323
+        versionName "2.4.2"
         archivesBaseName += "-$versionName"
         applicationId "de.tengu.chat"
         resValue "string", "applicationId", applicationId

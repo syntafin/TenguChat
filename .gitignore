@@ -29,6 +29,8 @@ gradle-app.setting
 # Generated files
 bin/
 gen/
+conversationsFreeCompat
+conversationsFreeSystem
 
 # Local configuration file (sdk path, etc)
 local.properties
