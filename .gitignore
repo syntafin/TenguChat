@@ -48,3 +48,6 @@ import-summary.txt
 .navigation/
 src/main/res/values/push.xml
 google-services.json
+src/playstoreCompat/res/values/push.xml
+conversationsPlaystoreCompat/release/output.json
+.idea/workspace.xml
