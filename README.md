@@ -7,8 +7,8 @@
         <img src="https://inverse.chat/badge.svg?room=support@group.tengu.chat"
              alt="chat on our conference room">
     </a>
-    <a href="https://travis-ci.org/siacs/Conversations">
-        <img src="https://travis-ci.org/siacs/Conversations.svg?branch=master"
+    <a href="https://travis-ci.org/syntafin/TenguChat">
+        <img src="https://travis-ci.org/syntafin/TenguChat.svg?branch=master"
              alt="build status">
     </a>
 </p>
