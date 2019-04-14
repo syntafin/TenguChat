@@ -84,7 +84,7 @@ android {
         applicationId "de.tengu.chat"
         resValue "string", "applicationId", applicationId
         resValue "string", "app_name", "TenguChat"
-        buildConfigField "String", "LOGTAG", "\"conversations\""
+        buildConfigField "String", "LOGTAG", "\"tenguchat\""
     }
 
     dataBinding {

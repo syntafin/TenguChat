@@ -46,3 +46,5 @@ proguard/
 
 import-summary.txt
 .navigation/
+src/main/res/values/push.xml
+google-services.json
