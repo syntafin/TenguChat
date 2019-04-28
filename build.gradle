@@ -6,7 +6,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.3.2'
+        classpath 'com.android.tools.build:gradle:3.4.0'
     }
 }
 
@@ -78,7 +78,7 @@ android {
     defaultConfig {
         minSdkVersion 16
         targetSdkVersion 28
-        versionCode 323
+        versionCode 324
         versionName "2.4.2"
         archivesBaseName += "-$versionName"
         applicationId "de.tengu.chat"
@@ -106,14 +106,6 @@ android {
 
     productFlavors {
 
-        quicksy {
-            dimension "mode"
-            applicationId = "im.quicksy.client"
-            resValue "string", "app_name", "Quicksy"
-            resValue "string", "applicationId", applicationId
-            buildConfigField "String", "LOGTAG", "\"quicksy\""
-        }
-
         conversations {
             dimension "mode"
         }
@@ -137,25 +129,6 @@ android {
     }
 
     sourceSets {
-        quicksyFreeCompat {
-            java {
-                srcDirs 'src/freeCompat/java'
-            }
-        }
-        quicksyPlaystoreCompat {
-            java {
-                srcDirs 'src/playstoreCompat/java'
-            }
-            res {
-                srcDir 'src/playstoreCompat/res'
-                srcDir 'src/quicksyPlaystore/res'
-            }
-        }
-        quicksyPlaystoreSystem {
-            res {
-                srcDir 'src/quicksyPlaystore/res'
-            }
-        }
         conversationsFreeCompat {
             java {
                 srcDirs 'src/freeCompat/java'

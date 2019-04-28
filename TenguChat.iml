@@ -8,82 +8,85 @@
     </facet>
     <facet type="android" name="Android">
       <configuration>
-        <option name="SELECTED_BUILD_VARIANT" value="conversationsFreeCompatDebug" />
-        <option name="ASSEMBLE_TASK_NAME" value="assembleConversationsFreeCompatDebug" />
-        <option name="COMPILE_JAVA_TASK_NAME" value="compileConversationsFreeCompatDebugSources" />
+        <option name="SELECTED_BUILD_VARIANT" value="conversationsPlaystoreCompatDebug" />
+        <option name="ASSEMBLE_TASK_NAME" value="assembleConversationsPlaystoreCompatDebug" />
+        <option name="COMPILE_JAVA_TASK_NAME" value="compileConversationsPlaystoreCompatDebugSources" />
         <afterSyncTasks>
-          <task>generateConversationsFreeCompatDebugSources</task>
+          <task>generateConversationsPlaystoreCompatDebugSources</task>
         </afterSyncTasks>
         <option name="ALLOW_USER_CONFIGURATION" value="false" />
         <option name="MANIFEST_FILE_RELATIVE_PATH" value="/src/main/AndroidManifest.xml" />
         <option name="RES_FOLDER_RELATIVE_PATH" value="/src/main/res" />
-        <option name="RES_FOLDERS_RELATIVE_PATH" value="file://$MODULE_DIR$/src/main/res;file://$MODULE_DIR$/src/conversations/res;file://$MODULE_DIR$/build/generated/res/rs/conversationsFreeCompat/debug;file://$MODULE_DIR$/build/generated/res/resValues/conversationsFreeCompat/debug" />
+        <option name="RES_FOLDERS_RELATIVE_PATH" value="file://$MODULE_DIR$/src/main/res;file://$MODULE_DIR$/src/conversations/res;file://$MODULE_DIR$/src/playstoreCompat/res;file://$MODULE_DIR$/build/generated/res/resValues/conversationsPlaystoreCompat/debug" />
+        <option name="TEST_RES_FOLDERS_RELATIVE_PATH" value="" />
         <option name="ASSETS_FOLDER_RELATIVE_PATH" value="/src/main/assets" />
       </configuration>
     </facet>
   </component>
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
-    <output url="file://$MODULE_DIR$/build/intermediates/javac/conversationsFreeCompatDebug/compileConversationsFreeCompatDebugJavaWithJavac/classes" />
-    <output-test url="file://$MODULE_DIR$/build/intermediates/javac/conversationsFreeCompatDebugUnitTest/compileConversationsFreeCompatDebugUnitTestJavaWithJavac/classes" />
+    <output url="file://$MODULE_DIR$/build/intermediates/javac/conversationsPlaystoreCompatDebug/compileConversationsPlaystoreCompatDebugJavaWithJavac/classes" />
+    <output-test url="file://$MODULE_DIR$/build/intermediates/javac/conversationsPlaystoreCompatDebugUnitTest/compileConversationsPlaystoreCompatDebugUnitTestJavaWithJavac/classes" />
     <exclude-output />
     <content url="file://$MODULE_DIR$">
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/apt/conversationsFreeCompat/debug" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/aidl_source_output_dir/conversationsFreeCompatDebug/compileConversationsFreeCompatDebugAidl/out" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/buildConfig/conversationsFreeCompat/debug" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/renderscript_source_output_dir/conversationsFreeCompatDebug/compileConversationsFreeCompatDebugRenderscript/out" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/data_binding_base_class_source_out/conversationsFreeCompatDebug/dataBindingGenBaseClassesConversationsFreeCompatDebug/out" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/rs/conversationsFreeCompat/debug" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/resValues/conversationsFreeCompat/debug" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/conversationsFreeCompatDebug/res" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/conversationsFreeCompatDebug/resources" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/conversationsFreeCompatDebug/assets" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/conversationsFreeCompatDebug/aidl" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/conversationsFreeCompatDebug/java" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/conversationsFreeCompatDebug/rs" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/conversationsFreeCompatDebug/shaders" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/conversationsFreeCompat/res" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/conversationsFreeCompat/resources" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/conversationsFreeCompat/assets" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/conversationsFreeCompat/aidl" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/conversationsFreeCompat/java" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/freeCompat/java" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/conversationsFreeCompat/rs" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/conversationsFreeCompat/shaders" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/apt/androidTest/conversationsFreeCompat/debug" isTestSource="true" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/aidl_source_output_dir/conversationsFreeCompatDebugAndroidTest/compileConversationsFreeCompatDebugAndroidTestAidl/out" isTestSource="true" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/buildConfig/androidTest/conversationsFreeCompat/debug" isTestSource="true" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/renderscript_source_output_dir/conversationsFreeCompatDebugAndroidTest/compileConversationsFreeCompatDebugAndroidTestRenderscript/out" isTestSource="true" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/rs/androidTest/conversationsFreeCompat/debug" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/resValues/androidTest/conversationsFreeCompat/debug" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestConversationsFreeCompatDebug/res" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestConversationsFreeCompatDebug/resources" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestConversationsFreeCompatDebug/assets" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestConversationsFreeCompatDebug/aidl" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestConversationsFreeCompatDebug/java" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestConversationsFreeCompatDebug/rs" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestConversationsFreeCompatDebug/shaders" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestConversationsFreeCompat/res" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestConversationsFreeCompat/resources" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestConversationsFreeCompat/assets" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestConversationsFreeCompat/aidl" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestConversationsFreeCompat/java" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestConversationsFreeCompat/rs" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestConversationsFreeCompat/shaders" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/apt/test/conversationsFreeCompat/debug" isTestSource="true" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testConversationsFreeCompatDebug/res" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testConversationsFreeCompatDebug/resources" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testConversationsFreeCompatDebug/assets" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testConversationsFreeCompatDebug/aidl" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testConversationsFreeCompatDebug/java" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testConversationsFreeCompatDebug/rs" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testConversationsFreeCompatDebug/shaders" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testConversationsFreeCompat/res" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testConversationsFreeCompat/resources" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testConversationsFreeCompat/assets" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testConversationsFreeCompat/aidl" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testConversationsFreeCompat/java" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testConversationsFreeCompat/rs" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testConversationsFreeCompat/shaders" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/apt/conversationsPlaystoreCompat/debug" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/aidl_source_output_dir/conversationsPlaystoreCompatDebug/compileConversationsPlaystoreCompatDebugAidl/out" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/buildConfig/conversationsPlaystoreCompat/debug" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/renderscript_source_output_dir/conversationsPlaystoreCompatDebug/compileConversationsPlaystoreCompatDebugRenderscript/out" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/data_binding_base_class_source_out/conversationsPlaystoreCompatDebug/dataBindingGenBaseClassesConversationsPlaystoreCompatDebug/out" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/rs/conversationsPlaystoreCompat/debug" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/resValues/conversationsPlaystoreCompat/debug" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/conversationsPlaystoreCompatDebug/res" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/conversationsPlaystoreCompatDebug/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/conversationsPlaystoreCompatDebug/assets" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/conversationsPlaystoreCompatDebug/aidl" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/conversationsPlaystoreCompatDebug/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/conversationsPlaystoreCompatDebug/rs" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/conversationsPlaystoreCompatDebug/shaders" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/conversationsPlaystoreCompat/res" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/playstoreCompat/res" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/conversationsPlaystore/res" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/conversationsPlaystoreCompat/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/conversationsPlaystoreCompat/assets" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/conversationsPlaystoreCompat/aidl" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/conversationsPlaystoreCompat/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/playstoreCompat/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/conversationsPlaystoreCompat/rs" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/conversationsPlaystoreCompat/shaders" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/apt/androidTest/conversationsPlaystoreCompat/debug" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/aidl_source_output_dir/conversationsPlaystoreCompatDebugAndroidTest/compileConversationsPlaystoreCompatDebugAndroidTestAidl/out" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/buildConfig/androidTest/conversationsPlaystoreCompat/debug" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/renderscript_source_output_dir/conversationsPlaystoreCompatDebugAndroidTest/compileConversationsPlaystoreCompatDebugAndroidTestRenderscript/out" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/rs/androidTest/conversationsPlaystoreCompat/debug" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/resValues/androidTest/conversationsPlaystoreCompat/debug" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestConversationsPlaystoreCompatDebug/res" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestConversationsPlaystoreCompatDebug/resources" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestConversationsPlaystoreCompatDebug/assets" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestConversationsPlaystoreCompatDebug/aidl" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestConversationsPlaystoreCompatDebug/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestConversationsPlaystoreCompatDebug/rs" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestConversationsPlaystoreCompatDebug/shaders" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestConversationsPlaystoreCompat/res" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestConversationsPlaystoreCompat/resources" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestConversationsPlaystoreCompat/assets" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestConversationsPlaystoreCompat/aidl" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestConversationsPlaystoreCompat/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestConversationsPlaystoreCompat/rs" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestConversationsPlaystoreCompat/shaders" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/apt/test/conversationsPlaystoreCompat/debug" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testConversationsPlaystoreCompatDebug/res" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testConversationsPlaystoreCompatDebug/resources" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testConversationsPlaystoreCompatDebug/assets" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testConversationsPlaystoreCompatDebug/aidl" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testConversationsPlaystoreCompatDebug/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testConversationsPlaystoreCompatDebug/rs" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testConversationsPlaystoreCompatDebug/shaders" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testConversationsPlaystoreCompat/res" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testConversationsPlaystoreCompat/resources" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testConversationsPlaystoreCompat/assets" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testConversationsPlaystoreCompat/aidl" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testConversationsPlaystoreCompat/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testConversationsPlaystoreCompat/rs" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testConversationsPlaystoreCompat/shaders" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/conversations/res" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/conversations/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/conversations/assets" type="java-resource" />
@@ -105,27 +108,27 @@
       <sourceFolder url="file://$MODULE_DIR$/src/testConversations/java" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/testConversations/rs" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/testConversations/shaders" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/free/res" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/free/resources" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/free/assets" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/free/aidl" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/free/java" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/free/rs" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/free/shaders" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestFree/res" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestFree/resources" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestFree/assets" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestFree/aidl" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestFree/java" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestFree/rs" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestFree/shaders" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testFree/res" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testFree/resources" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testFree/assets" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testFree/aidl" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testFree/java" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testFree/rs" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testFree/shaders" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/playstore/res" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/playstore/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/playstore/assets" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/playstore/aidl" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/playstore/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/playstore/rs" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/playstore/shaders" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestPlaystore/res" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestPlaystore/resources" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestPlaystore/assets" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestPlaystore/aidl" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestPlaystore/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestPlaystore/rs" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestPlaystore/shaders" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testPlaystore/res" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testPlaystore/resources" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testPlaystore/assets" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testPlaystore/aidl" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testPlaystore/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testPlaystore/rs" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testPlaystore/shaders" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/compat/res" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/compat/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/compat/assets" type="java-resource" />
@@ -204,6 +207,7 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/data_binding_base_class_logs_dependency_artifacts" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/data_binding_dependency_artifacts" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/data_binding_layout_info_type_merge" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/duplicate_classes_check" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/feature_data_binding_base_feature_info" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental-runtime-classes" />
@@ -222,7 +226,9 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/manifest-checker" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/merged-not-compiled-resources" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/merged_assets" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/merged_jni_libs" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/merged_manifests" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/merged_shaders" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/metadata_feature_manifest" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/module_bundle" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/prebuild" />
@@ -240,6 +246,7 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/signing_config" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/split-apk" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/symbols" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/tmp" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/transforms" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/validate_signing_config" />
       <excludeFolder url="file://$MODULE_DIR$/build/outputs" />
@@ -270,13 +277,14 @@
     <orderEntry type="library" name="Gradle: de.measite.minidns:minidns-hla:0.2.4@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:cardview-v7:28.0.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.zxing:core:3.3.3@jar" level="project" />
+    <orderEntry type="library" name="Gradle: com.android.databinding:baseLibrary:3.4.0@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.makeramen:roundedimageview:2.3.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.android.databinding:adapters:3.4.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.leinardi.android:speed-dial:2.0.1@aar" level="project" />
-    <orderEntry type="library" name="Gradle: com.android.databinding:baseLibrary:3.3.2@jar" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.firebase:firebase-iid:17.0.4@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:support-vector-drawable:28.0.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:support-core-utils:28.0.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:recyclerview-v7:28.0.0@aar" level="project" />
-    <orderEntry type="library" name="Gradle: com.android.databinding:adapters:3.3.2@aar" level="project" />
     <orderEntry type="library" name="Gradle: org.conscrypt:conscrypt-android:1.3.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:support-annotations:28.0.0@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:interpolator:28.0.0@aar" level="project" />
@@ -291,21 +299,26 @@
     <orderEntry type="library" name="Gradle: com.android.support:slidingpanelayout:28.0.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:appcompat-v7:28.0.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:exifinterface:28.0.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.firebase:firebase-messaging:17.3.4@aar" level="project" />
     <orderEntry type="library" name="Gradle: org.bouncycastle:bcmail-jdk15on:1.58@jar" level="project" />
-    <orderEntry type="library" name="Gradle: com.android.databinding:library:3.3.2@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:support-emoji:28.0.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.firebase:firebase-iid-interop:16.0.1@aar" level="project" />
     <orderEntry type="library" name="Gradle: me.leolin:ShortcutBadger:1.1.22@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:collections:28.0.0@jar" level="project" />
-    <orderEntry type="library" name="Gradle: com.android.support:support-emoji-bundled:28.0.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:support-core-ui:28.0.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:asynclayoutinflater:28.0.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:print:28.0.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-stats:16.0.1@aar" level="project" />
     <orderEntry type="library" name="Gradle: org.sufficientlysecure:openpgp-api:10.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: android.arch.core:common:1.1.1@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:versionedparcelable:28.0.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-base:16.0.1@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.firebase:firebase-common:16.0.3@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:viewpager:28.0.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: org.hsluv:hsluv:0.2@jar" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-basement:16.0.1@aar" level="project" />
     <orderEntry type="library" name="Gradle: me.drakeet.support:toastcompat:1.1.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.android.databinding:library:3.4.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:support-emoji-appcompat:28.0.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: android.arch.lifecycle:common:1.1.1@jar" level="project" />
     <orderEntry type="library" name="Gradle: de.measite.minidns:minidns-core:0.2.4@jar" level="project" />
@@ -315,6 +328,7 @@
     <orderEntry type="library" name="Gradle: de.measite.minidns:minidns-dnssec:0.2.4@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.theartofdev.edmodo:android-image-cropper:2.7.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:support-media-compat:28.0.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-tasks:16.0.1@aar" level="project" />
     <orderEntry type="module" module-name="xmpp-addr" />
   </component>
 </module>
